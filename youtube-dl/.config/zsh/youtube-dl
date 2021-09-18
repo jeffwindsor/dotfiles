@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+alias y='youtube-dl'
+alias ya='youtube-dl --extract-audio --audio-format m4a --audio-quality 0'

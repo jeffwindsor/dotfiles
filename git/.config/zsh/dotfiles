@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+dot () { git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"; }
+dot-add-all(){
+    dot add -u
+    dot add $XDG_CONFIG_HOME/_/*
+}
+dot-log-graph() { dot log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}; }
+
+alias da='dot add'
+alias daa='dot-add-all'
+alias dcm='dot commit -m'
+alias ddiff='dot diff --ignore-space-at-eol -b -w --ignore-blank-lines'
+alias dh='dot-log-graph'
+alias dl='dot ls-files'
+alias dph='dot push'
+alias dpl='dot pull'
+alias ds='dot status -sb --ignore-submodules'
