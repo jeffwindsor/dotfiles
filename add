@@ -8,5 +8,5 @@
 for folder in "$@"
 do
     echo "\033[0;34m==> stowing $folder\033[0m"
-    stow -n -d $source -t $target $folder
+    stow -d $source -t $target $folder
 done

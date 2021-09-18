@@ -1,6 +1,8 @@
 [user]
-    name = Jeff Windsor
-    email = jwindsor@cj.com
+	name = Windsor, Jeffrey
+	email = jwindsor@cj.com
+[credential]
+    helper = osxkeychain
 [core]
     excludesFile = ~/.gitignore
 [alias]
@@ -14,6 +16,4 @@
 [pull]
 	ff = only
 [init]
-    defaultBranch = main
-[credential]
-	helper = cache
+	defaultBranch = main
