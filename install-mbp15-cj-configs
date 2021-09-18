@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+configs=(
+mbp15-cj
+alacritty
+alfred
+data
+fd
+git
+nvim
+starship
+topgrade
+yabai
+youtube-dl 
+zsh
+)
+
+./remove "${configs[@]}"
+./add "${configs[@]}"

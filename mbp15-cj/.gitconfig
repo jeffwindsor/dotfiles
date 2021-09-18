@@ -1,0 +1,19 @@
+[user]
+    name = Jeff Windsor
+    email = jwindsor@cj.com
+[core]
+    excludesFile = ~/.gitignore
+[alias]
+    a  = add
+    aa = add --all
+    h  = log --graph --pretty=format:'%C(green)%h%C(auto)%d%C(reset) - %s | %C(cyan)%an %C(dim)%cr%C(reset)' --abbrev-commit --max-count=20
+    r  = remote -v
+    ph = push
+    pl = pull --rebase
+    s  = status -sb --ignore-submodules
+[pull]
+	ff = only
+[init]
+    defaultBranch = main
+[credential]
+	helper = cache
