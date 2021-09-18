@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-dotfiles=$HOME/dotfiles source ./add alacritty data nvim 
