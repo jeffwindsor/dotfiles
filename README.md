@@ -1,6 +1,6 @@
 # Personal Dotfiles using [stow](https://www.gnu.org/software/stow/manual/stow.html)
 
-The dotfiles are "packaged" by top level folder and are meant to be combined to get a config spefici to a machien or OS.
+The dotfiles are "packaged" by top level folder and are meant to be combined to get a config specific to a machien or OS.
 
 ## New Machine
 
