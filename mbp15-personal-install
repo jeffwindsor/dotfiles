@@ -4,6 +4,7 @@ configs=(
 mbp15-personal
 alacritty
 data
+fd
 nvim
 yabai
 youtube-dl 
