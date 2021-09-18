@@ -3,6 +3,7 @@
 configs=(
 mbp15-personal
 alacritty
+alfred
 data
 fd
 git

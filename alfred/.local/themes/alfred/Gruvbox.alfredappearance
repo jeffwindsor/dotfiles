@@ -1,0 +1,65 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 8,
+      "subtext" : {
+        "size" : 14,
+        "colorSelected" : "#D0931FFF",
+        "font" : "MicroSquare",
+        "color" : "#EADBB2FF"
+      },
+      "shortcut" : {
+        "size" : 14,
+        "colorSelected" : "#FFFFFFFF",
+        "font" : "MicroSquare",
+        "color" : "#D29520FF"
+      },
+      "backgroundSelected" : "#3C3736FF",
+      "text" : {
+        "size" : 16,
+        "colorSelected" : "#D29520FF",
+        "font" : "MicroSquare",
+        "color" : "#EADBB2FF"
+      },
+      "iconPaddingHorizontal" : 15,
+      "roundness" : 0,
+      "paddingVertical" : 8,
+      "iconSize" : 44
+    },
+    "search" : {
+      "paddingHorizontal" : 16,
+      "background" : "#272827FF",
+      "spacing" : 13,
+      "text" : {
+        "size" : 24,
+        "colorSelected" : "#000000FF",
+        "font" : "MicroSquare",
+        "color" : "#EADBB2FF"
+      },
+      "roundness" : 12,
+      "paddingVertical" : 0,
+      "backgroundSelected" : "#D0931FFF"
+    },
+    "window" : {
+      "color" : "#272827FF",
+      "paddingHorizontal" : 3,
+      "width" : 680,
+      "borderPadding" : 0,
+      "borderColor" : "#B2D7FFFF",
+      "blur" : 0,
+      "roundness" : 14,
+      "paddingVertical" : 16
+    },
+    "separator" : {
+      "color" : "#000000FF",
+      "thickness" : 0
+    },
+    "scrollbar" : {
+      "color" : "#D29520FF",
+      "thickness" : 5
+    },
+    "visualEffectMode" : 2,
+    "credit" : "Jeff Windsor",
+    "name" : "Gruvbox Wide"
+  }
+}
