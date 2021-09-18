@@ -1,0 +1,40 @@
+#
+colors:
+  # Default colors
+  primary:
+    background: '#202020'
+    foreground: '#eeeeee'
+
+  # Bright colors
+  bright:
+    black:   '#282828'
+    red:     '#f43753'
+    green:   '#c9d05c'
+    yellow:  '#ffc24b'
+    blue:    '#73cef4'
+    magenta: '#ada0d3'
+    cyan:    '#95c4ce'
+    white:   '#eeeeee'
+
+  # Normal colors
+  normal:
+    black:   '#202020'
+    red:     '#c32c42'
+    green:   '#a1a64a'
+    yellow:  '#cc9b3c'
+    blue:    '#5ca5c3'
+    magenta: '#8a80a9'
+    cyan:    '#779da5'
+    white:   '#bebebe'
+
+  # Dim colors
+  dim:
+    black:   '#181818'
+    red:     '#922132'
+    green:   '#797d37'
+    yellow:  '#99742d'
+    blue:    '#457c92'
+    magenta: '#68607f'
+    cyan:    '#59767c'
+    white:   '#8f8f8f'
+

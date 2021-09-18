@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+config=$XDG_CONFIG_HOME/alacritty
+themes=$XDG_CONFIG_HOME/_/themes/alacritty
+
+# select theme
+selected=$(fd . $themes | fzf)
+
+# merge base os and picked theme to over write alacrity config
+cat $config/os.yml "${selected}" > $config/alacritty.yml
+
