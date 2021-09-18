@@ -1,0 +1,22 @@
+format = """
+$directory$git_branch$git_status
+$time$character"""
+
+[character]
+success_symbol = "[:](dimmed yellow)"
+error_symbol   = "[:](red)"
+vicmd_symbol   = "[::](dimmed yellow)"
+
+[directory]
+style = "blue"
+
+[git_branch]
+symbol = ""
+style = "cyan"
+
+[git_status]
+style = "yellow"
+
+[time]
+disabled=false
+style="dimmed blue"
