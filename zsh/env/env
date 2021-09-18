@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+fi
+
+export EDITOR=nvim
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --ignore-file ~/.config/fdignore'
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --info=inline'
+export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(auto)%d%C(reset) - %s | %C(cyan)%an %C(dim)%cr%C(reset)'
+export HISTCONTROL=ignoreboth
+export HISTFILE=${XDG_CACHE_HOME}/zsh/zsh_history   # put history to cache, seperating it from the other ZDOT files
+export LESSHISTFILE="-"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'" # use bat as man pager
+export NVIM_LOG_FILE=$HOME/.cache/nvim-log/
+export NVM_DIR=$HOME/.config/nvim
+export PATH=$PATH:$HOME/.local/bin
+export SRC=$HOME/src
+export TERM='xterm-256color'
+export VSCODE_EXTENSIONS=$XDG_DATA_HOME/vscode-oss/extensions
+export ZSH_PLUGINS='/usr/local/share'
