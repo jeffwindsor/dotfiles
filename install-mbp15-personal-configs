@@ -11,6 +11,7 @@ starship
 topgrade
 yabai
 youtube-dl 
+zsh
 )
 
 ./remove "${configs[@]}"
