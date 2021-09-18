@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+if [ -z "$dotfiles" ]
+then
+    echo "set enviroment variable 'dotfiles' to location of dotfile repo"
+    exit 1
+fi
+
+# stow each folder passed in as an argument
+for folder in "$@"
+do
+    echo "\033[0;34m==> stowing $folder\033[0m"
+
+    # remove current references if any
+    stow -v -D -d $dotfiles -t $HOME $folder
+
+    # add stowed folder to HOME
+    stow -v -d $dotfiles -t $HOME $folder
+done
