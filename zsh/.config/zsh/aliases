@@ -43,5 +43,6 @@ alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 
 alias lx='nnn -de'
 
-alias tree='exa --tree'
-alias ll='exa -lF --all --color=always --group-directories-first'       #alias ll='ls -laLhG'
+alias tree='exa --all --color=always --tree --git-ignore'
+alias ll='exa -lF --all --color=always --group-directories-first --git-ignore'       #alias ll='ls -laLhG'
+alias lll='exa -lF --all --color=always --group-directories-first'       #alias ll='ls -laLhG'
