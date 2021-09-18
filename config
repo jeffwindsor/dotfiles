@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+echo $(dirname "$0")
+
+zmodload zsh/mapfile
+FNAME="$1.machine"
+FLINES=( "${(f)mapfile[$FNAME]}" )
+
+./remove "${FLINES[@]}"
+./add "${FLINES[@]}"

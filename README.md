@@ -5,4 +5,8 @@ The dotfiles are "packaged" by top level folder and are meant to be combined to 
 ## New Machine
 
 * clone the repo `git clone https://github.com/jeffwindsor/dotfiles.git $HOME/.dotfiles`
-* run one of the `config-*` scripts or `add` the config packages individually
+* run `config {file with list of configs}` 
+
+## Add and Remove 
+
+You can also use the add and remove command directly with a list of config folders as arguments
