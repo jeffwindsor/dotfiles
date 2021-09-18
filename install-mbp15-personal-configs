@@ -5,6 +5,7 @@ mbp15-personal
 alacritty
 data
 fd
+git
 nvim
 starship
 topgrade
