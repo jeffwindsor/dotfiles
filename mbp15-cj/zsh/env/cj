@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+#export PATH="$PATH:$JAVA_HOME/bin"
+#export PATH="$PATH:$SOFTWARE_HOME/bin"
+#export PATH="$PATH:$SOFTWARE_HOME/resin"
+export CLASSPATH="$SOFTWARE_HOME/bin:$CLASSPATH"
+export DEVDB_HOST=devdb.db.cj.com
+export DEVDB_PORT=1521
+export DEVDB_SID=devdb
+export DEVDB_USERNAME=spud
+export DYLD_LIBRARY_PATH="$SOFTWARE_HOME/sqlplus/darwin"
+export JAVA_HOME="/usr/libexec/java_home -v 11"
+export MAVEN_OPTS="-Xmx8G -Xss3m -XX:ReservedCodeCacheSize=256m"
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PROJECTS_DIR="$HOME/.local/cjdev"
+export SOFTWARE_HOME="$PROJECTS_DIR"
+export TNS_ADMIN="$SOFTWARE_HOME/ci/tns-admin/"
