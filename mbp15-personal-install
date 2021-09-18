@@ -1,3 +1,12 @@
 #!/usr/bin/env sh
 
-dotfiles=$HOME/dotfiles source ./add mbp15-personal alacritty data nvim yabai 
+configs=(
+mbp15-personal
+alacritty
+data
+nvim
+yabai
+youtube-dl 
+)
+
+dotfiles=$(dirname "$0") ./add "${configs[@]}"

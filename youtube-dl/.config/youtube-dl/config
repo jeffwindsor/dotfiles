@@ -1,0 +1,4 @@
+# target location: ~/.config/youtube-dl/config
+# 
+--prefer-free-formats
+-o ~/Downloads/youtube/%(title)s.%(ext)s
