@@ -15,6 +15,7 @@ youtube-dl
 zsh
 )
 
+cd $(dirname "$0")
 while (( "$#" )); do
   case "$1" in
     -a|--add)
