@@ -7,6 +7,7 @@ alfred
 data
 fd
 git
+npm
 nvim
 starship
 topgrade
@@ -14,6 +15,8 @@ yabai
 youtube-dl 
 zsh
 )
+
+cd $(dirname "$0")
 
 while (( "$#" )); do
   case "$1" in
