@@ -1,7 +1,8 @@
-# Usage
+# Personal Dotfiles using [stow](https://www.gnu.org/software/stow/manual/stow.html)
 
-```
-git clone https://github.com/jeffwindsor/dotfiles.git $HOME/.dotfiles
-cd $HOME/.dotfiles
-```
-then run the install script for the config you want, or create your own
+The dotfiles are "packaged" by top level folder and are meant to be combined to get a config spefici to a machien or OS.
+
+## New Machine
+
+* clone the repo `git clone https://github.com/jeffwindsor/dotfiles.git $HOME/.dotfiles`
+* run one of the `config-*` scripts or `add` the config packages individually
