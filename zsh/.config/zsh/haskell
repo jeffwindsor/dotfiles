@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+alias cb='cabal build'
+alias cg='cabal repl'
+alias cr='cabal -v0 run'
+alias sb='stack build'
+alias sc='stack clean'
+alias sg='ghcid --command "stack repl" --test ":main"'
+alias sinit='stack init'
+alias sn='stack-new'
+alias sr='stack repl'
+alias st='stack test'
+alias stt='stack ide targets'
+alias sup='stack upgrade --force-download'

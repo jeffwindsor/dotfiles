@@ -1,0 +1,64 @@
+#!/usr/bin/env zsh
+
+source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+brews() {
+    local result=$(brew formulae | fzf -m --preview="brew info {}" --preview-window=:hidden --bind=space:toggle-preview)
+    [ ! -z "$result" ] && brew install "$result"
+}
+casks() {
+    local result=$(brew search --casks | fzf -m --preview="brew cask info {}" --preview-window=:hidden --bind=space:toggle-preview)
+    [ ! -z "$result" ] && brew cask install "$result"
+}
+patch-update(){ ssh -t ${1} "sudo /usr/sbin/cnvr-patch update"; }
+patch-query() { ssh -t ${1} "sudo /usr/sbin/cnvr-patch query"; }
+sshkey(){ ssh-keygen -t ed25519 -C $1 -f $2; }
+sshadd(){ eval "$(ssh-agent -s)" && ssh-add -K ~/.ssh/${1}; }
+sha1-check()  { shasum -a 1 -c "$1.sha1"; }
+sha256-check(){ shasum -a 256 -c "$1.sha256"; }
+sha512-check(){ shasum -a 512 -c "$1.sha512"; }
+md5-check()  { md5 -r "$1" | diff "$1.md5" -; }
+
+alias acd="aws-cloudfront-describe"
+alias acd="aws-cloudfront-describe-status"
+alias aws1="alias aws='/usr/local/opt/awscli@1/bin/aws'"
+alias aws2="unalias aws"
+alias bc="brew cask"
+alias bi="brew info"
+alias bl="brew list && brew cask list && mas list"
+alias bs="brew search"
+alias bt="brew leaves | xargs brew deps --installed --for-each | sed \"s/^.*:/$(tput setaf 4)&$(tput sgr0)/\""
+alias bundle_name="osascript -e 'id of app"
+alias caskroom="cd /usr/local/Caskroom && l"
+alias cellar="cd /usr/local/Cellar && l"
+alias dbstart="nohup VBoxHeadless --startvm 'Oracle11g32' &> /dev/null &"
+alias dbstop="VBoxManage controlvm Oracle11g32 poweroff"
+alias java11='export JAVA_HOME=`/usr/libexec/java_home -v 11`'
+alias java15='export JAVA_HOME=`/usr/libexec/java_home -v 15`'
+alias java8='export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`'
+alias m5c="md5-check"
+alias mc='k && java8 && mvn clean && java11'
+alias mci='k && java8 && mvn clean install && java11'
+alias mf="mas info"
+alias mi="mas install"
+alias ml="mas list"
+alias mr="mas uninstall"
+alias ms="mas search"
+alias mup="mas upgrade"
+alias qb='java8 && mvn clean install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
+alias qqb='java8 && mvn install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
+alias s1="shasum -a 1"
+alias s1c="sha1-check"
+alias s2="shasum -a 256"
+alias s2c="sha256-check"
+alias s5="shasum -a 512"
+alias s5c="sha512-check"
+alias shopcart='sqlplus -L jwindsor@shopcart'
+alias shuttle-init="$XDG_CONFIG_HOME/scripts/cj/shuttle-init"
+alias t1='sqlplus -L cj@tcjoweb1'
+alias test-schemas='java -jar ./target/schemas-main-SNAPSHOT.one-jar.jar locator=T5 tnsnames=/USers/jwindsor/.local/cjdev/ci/tns-admin/tnsnames.ora'
+alias tns='v ~/.local/cjdev/ci/tns-admin/tnsnames.ora'
+alias uber='cd Library/Application\ Support/Übersicht/widgets/'

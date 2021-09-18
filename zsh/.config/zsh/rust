@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+alias rb='cargo build'
+alias rc='cargo check'
