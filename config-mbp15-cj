@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+configs=(
+mbp15-cj
+alacritty
+alfred
+data
+fd
+git
+nvim
+starship
+topgrade
+yabai
+youtube-dl 
+zsh
+)
+
+while (( "$#" )); do
+  case "$1" in
+    -a|--add)
+        ./add "${configs[@]}"
+        shift
+        ;;
+
+    -r|--remove)
+        ./remove "${configs[@]}"
+        shift
+        ;;
+  esac
+done
