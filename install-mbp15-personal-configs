@@ -12,4 +12,5 @@ yabai
 youtube-dl 
 )
 
-dotfiles=$(dirname "$0") ./add "${configs[@]}"
+./remove "${configs[@]}"
+./add "${configs[@]}"

@@ -1,14 +1,12 @@
 #!/usr/bin/env sh
 
-if [ -z "$dotfiles" ]
-then
-    echo "set enviroment variable 'dotfiles' to location of dotfile repo"
-    exit 1
-fi
+# default source and target if missing
+[ -z "$source" ] && source=$(dirname "$0") 
+[ -z "$target" ] && target=$HOME
 
-# unstow each folder passed in as a arg
+# unstow each folder passed in as an argument
 for folder in "$@"
 do
-    echo -e "\033[0;31m==> Removing Config Files from $folder\033[0m"
-    stow -vD -d $DOTFILES -t $HOME $folder
+    echo "\033[0;34m==> unstowing $folder\033[0m"
+    stow -D -d $source -t $target $folder
 done
