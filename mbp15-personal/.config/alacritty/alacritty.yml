@@ -15,45 +15,43 @@ font:
     family: 'JetBrainsMono Nerd Font Mono'
   size: 14.0
 
-# Base16 Gruvbox dark, hard 256 - alacritty color config
-# Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+#
 colors:
   # Default colors
   primary:
-    background: '0x1d2021'
-    foreground: '0xd5c4a1'
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x1d2021'
-    cursor: '0xd5c4a1'
-
-  # Normal colors
-  normal:
-    black:   '0x1d2021'
-    red:     '0xfb4934'
-    green:   '0xb8bb26'
-    yellow:  '0xfabd2f'
-    blue:    '0x83a598'
-    magenta: '0xd3869b'
-    cyan:    '0x8ec07c'
-    white:   '0xd5c4a1'
+    background: '#202020'
+    foreground: '#eeeeee'
 
   # Bright colors
   bright:
-    black:   '0x665c54'
-    red:     '0xfb4934'
-    green:   '0xb8bb26'
-    yellow:  '0xfabd2f'
-    blue:    '0x83a598'
-    magenta: '0xd3869b'
-    cyan:    '0x8ec07c'
-    white:   '0xfbf1c7'
+    black:   '#282828'
+    red:     '#f43753'
+    green:   '#c9d05c'
+    yellow:  '#ffc24b'
+    blue:    '#73cef4'
+    magenta: '#ada0d3'
+    cyan:    '#95c4ce'
+    white:   '#eeeeee'
 
-  indexed_colors:
-    - { index: 16, color: '0xfe8019' }
-    - { index: 17, color: '0xd65d0e' }
-    - { index: 18, color: '0x3c3836' }
-    - { index: 19, color: '0x504945' }
-    - { index: 20, color: '0xbdae93' }
-    - { index: 21, color: '0xebdbb2' }
+  # Normal colors
+  normal:
+    black:   '#202020'
+    red:     '#c32c42'
+    green:   '#a1a64a'
+    yellow:  '#cc9b3c'
+    blue:    '#5ca5c3'
+    magenta: '#8a80a9'
+    cyan:    '#779da5'
+    white:   '#bebebe'
+
+  # Dim colors
+  dim:
+    black:   '#181818'
+    red:     '#922132'
+    green:   '#797d37'
+    yellow:  '#99742d'
+    blue:    '#457c92'
+    magenta: '#68607f'
+    cyan:    '#59767c'
+    white:   '#8f8f8f'
+
