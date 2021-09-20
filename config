@@ -2,7 +2,7 @@
 echo $(dirname "$0")
 
 zmodload zsh/mapfile
-FNAME="$1.machine"
+FNAME="./$1/stows"
 FLINES=( "${(f)mapfile[$FNAME]}" )
 
 ./remove "${FLINES[@]}"
