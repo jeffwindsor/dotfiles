@@ -6,6 +6,7 @@ fd
 git
 npm
 nvim
+rust
 starship
 topgrade
 yabai

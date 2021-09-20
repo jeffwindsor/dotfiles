@@ -4,5 +4,6 @@ data
 fd
 git
 nvim
+rust
 starship
 zsh
