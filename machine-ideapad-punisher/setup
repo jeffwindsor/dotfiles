@@ -40,6 +40,8 @@ mkdir -p $HOME/.icons
 
 # Software
 install alacritty
+install bat
+install exa
 install fd-find
 install fzf
 install gnome-tweaks
