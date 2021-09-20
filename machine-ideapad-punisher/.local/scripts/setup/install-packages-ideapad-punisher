@@ -71,7 +71,7 @@ chsh -s "$(which zsh)"
 echo "==> Manual steps"
 xdg-open https://github.com/settings/keys
 xdg-open https://mega.nz/sync
-xdg-open https://extensions.gnome.org/extension/600/launch-new-instance/
+#xdg-open https://extensions.gnome.org/extension/600/launch-new-instance/
 #xdg-open https://extensions.gnome.org/extension/1488/gnome-fuzzy-search/
 xdg-open https://extensions.gnome.org/extension/906/sound-output-device-chooser/
 xdg-open https://extensions.gnome.org/extension/21/workspace-indicator/
