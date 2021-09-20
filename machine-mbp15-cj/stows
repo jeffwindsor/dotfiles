@@ -5,6 +5,7 @@ data
 fd
 git
 nvim
+rust
 starship
 topgrade
 yabai
