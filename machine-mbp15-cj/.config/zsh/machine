@@ -57,7 +57,7 @@ alias s2c="sha256-check"
 alias s5="shasum -a 512"
 alias s5c="sha512-check"
 alias shopcart='sqlplus -L jwindsor@shopcart'
-alias shuttle-init="$XDG_CONFIG_HOME/scripts/cj/shuttle-init"
+alias shuttle-init="$HOME/.local/scripts/cj/shuttle-init"
 alias t1='sqlplus -L cj@tcjoweb1'
 alias test-schemas='java -jar ./target/schemas-main-SNAPSHOT.one-jar.jar locator=T5 tnsnames=/USers/jwindsor/.local/cjdev/ci/tns-admin/tnsnames.ora'
 alias tns='v ~/.local/cjdev/ci/tns-admin/tnsnames.ora'
