@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+mkdir shuttle
+cd shuttle
+
+cat << EOF >> build.sh
+#!/bin/bash
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+cd "\$(dirname "\${0}")"
+
+
+# call build.sh in root directory
+../build.sh
+
+EOF
+
+chmod +x build.sh
+
+cat << EOF >> deploy.sh
+#!/bin/bash
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+cd "\$(dirname "\${0}")"
+
+# call deploy.sh in root directory
+../deploy.sh
+
+EOF
+
+chmod +x deploy.sh
+
+cat << EOF >> shuttle.json
+{
+  "environments": [
+    {
+      "name": "dev",
+      "account": "845290112482"
+    }
+  ],
+  "artifactFiles": [
+  ]
+}
+EOF
+    
