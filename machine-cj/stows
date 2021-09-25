@@ -1,10 +1,10 @@
-machine-mbp15-personal-macos
+machine-cj
+os-macos
 alacritty
 alfred
 data
 fd
 git
-npm
 nvim
 rust
 starship

@@ -1,9 +1,11 @@
-machine-mbp15-cj
+machine-tardis
+os-macos
 alacritty
 alfred
 data
 fd
 git
+npm
 nvim
 rust
 starship
