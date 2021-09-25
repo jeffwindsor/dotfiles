@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+alias acd="aws-cloudfront-describe"
+alias acd="aws-cloudfront-describe-status"
+alias dbstart="nohup VBoxHeadless --startvm 'Oracle11g32' &> /dev/null &"
+alias dbstop="VBoxManage controlvm Oracle11g32 poweroff"
+alias java11='export JAVA_HOME=`/usr/libexec/java_home -v 11`'
+alias java15='export JAVA_HOME=`/usr/libexec/java_home -v 15`'
+alias java8='export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_202`'
+alias qb='java8 && mvn clean install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
+alias qqb='java8 && mvn install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
+alias shopcart='sqlplus -L jwindsor@shopcart'
+alias shuttle-init="$HOME/.local/scripts/cj/shuttle-init"
+alias t1='sqlplus -L cj@tcjoweb1'
+alias test-schemas='java -jar ./target/schemas-main-SNAPSHOT.one-jar.jar locator=T5 tnsnames=/USers/jwindsor/.local/cjdev/ci/tns-admin/tnsnames.ora'
+alias tns='v ~/.local/cjdev/ci/tns-admin/tnsnames.ora'
+alias uber='cd Library/Application\ Support/Übersicht/widgets/'
