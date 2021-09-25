@@ -65,17 +65,20 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
   Plug 'justinmk/vim-sneak'
-  "Plug 'kyazdani42/nvim-web-devicons'
-  "Plug 'romgrk/barbar.nvim'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'romgrk/barbar.nvim'
 
   " files
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'                   
-  Plug 'mcchrish/nnn.vim'                   
-
+  Plug 'preservim/nerdtree'
+  
 call plug#end()
 
 source $HOME/.config/nvim/vim-sneak.vim
+source $HOME/.config/nvim/nerd-tree.vim
 source $HOME/.config/nvim/autosave.vim
 source $HOME/.config/nvim/fzf.vim
 
@@ -117,6 +120,7 @@ nnoremap <leader>pc :source $MYVIMRC<CR> :PlugClean<CR>
 nnoremap <leader>pi :source $MYVIMRC<CR> :PlugInstall<CR>
 nnoremap <leader>q  :quit<CR>
 nnoremap <leader>rr :source $MYVIMRC<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <leader>wc :close<CR> 
 nnoremap <leader>wh <C-W><left> 
 nnoremap <leader>wj <C-W><down> 
