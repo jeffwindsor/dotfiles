@@ -61,7 +61,8 @@ call plug#begin('~/.cache/nvim/plugged')
   " system
   Plug '907th/vim-auto-save'                        " Auto Save
   Plug 'airblade/vim-rooter'                        " current directory moves with file
-  Plug 'ap/vim-css-color'                           " highlight hex colors
+  "Plug 'ap/vim-css-color'                           " highlight hex colors
+  "Plug 'chrisbra/Colorizer'
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
   Plug 'justinmk/vim-sneak'
