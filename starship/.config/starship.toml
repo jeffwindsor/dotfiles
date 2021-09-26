@@ -9,6 +9,7 @@ vicmd_symbol   = "[::](dimmed yellow)"
 
 [directory]
 style = "blue"
+fish_style_pwd_dir_length = 1
 
 [git_branch]
 symbol = ""
