@@ -112,9 +112,9 @@ nnoremap <leader>bl :BufferMoveNext<CR>
 nnoremap <leader>bn :tabnew<CR>
 nnoremap <leader>bs :w<CR>
 nnoremap <leader>fc :Files $HOME/.config/<CR>
+nnoremap <leader>fd :Files $HOME/.dotfiles/<CR>
 nnoremap <leader>ff :Files %:p:h<CR>
 nnoremap <leader>fh :Files $HOME<CR>
-nnoremap <leader>fo :Files $HOME/.config/os/<CR>
 nnoremap <leader>fs :Files $HOME/src/<CR>
 nnoremap <leader>pc :source $MYVIMRC<CR> :PlugClean<CR>
 nnoremap <leader>pi :source $MYVIMRC<CR> :PlugInstall<CR>
