@@ -1,5 +1,6 @@
 machine-punisher
-os-arch
+arch
+xmonad
 alacritty
 data
 fd
