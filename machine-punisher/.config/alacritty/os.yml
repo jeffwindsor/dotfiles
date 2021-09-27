@@ -1,7 +1,7 @@
 window:
   decorations: none
 
-background_opacity: 0.9
+background_opacity: 0.77
 
 cursor: 
   style: Block
@@ -11,5 +11,5 @@ draw_bold_text_with_bright_colors: true
 font:
   normal:
     family: JetBrains Mono
-  size: 10.0
+  size: 8
 

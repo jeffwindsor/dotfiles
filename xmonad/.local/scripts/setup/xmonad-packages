@@ -1,3 +1,3 @@
 #!/usr/bin/sh
-
+paru -S nerd-fonts-jetbrains-mono ttf-jetbrains-mono  ttf-font-awesome  ttf-material-design-icons
 
