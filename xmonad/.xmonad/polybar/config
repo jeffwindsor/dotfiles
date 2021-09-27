@@ -35,7 +35,7 @@ module-margin-left = 0
 module-margin-right = 0
 modules-center = date
 modules-left = ewmh
-modules-right = bluetooth pavolume battery
+modules-right = bluetooth pavolume wlan battery
 monitor = ${env:MONITOR}
 monitor-strict = false
 override-redirect = false
@@ -154,3 +154,34 @@ scroll-down         = ~/.xmonad/polybar/scripts/pavolume.sh --down
 #format-underline    = ${colors.green}
 format-foreground   = ${colors.foreground}
 format-background   = ${colors.background}
+
+################################################################################
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 10
+
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+; Default: %ifname% %local_ip%
+label-connected = " 直 %essid% "
+label-disconnected = " 睊 "
+label-disconnected-foreground = ${colors.red}
+format-connected-font = 4
+format-disconnected-font = 4
+
+
