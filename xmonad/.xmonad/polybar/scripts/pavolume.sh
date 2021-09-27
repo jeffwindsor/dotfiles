@@ -150,9 +150,9 @@ function output() {
     volMuteStatus
     if [ "${curStatus}" = 'yes' ]
     then
-        echo " $curVol%"
+        echo " %{F#F07178}婢%{F-} "
     else
-        echo " $curVol%"
+        echo " $curVol% 墳 "
     fi
 } #}}}
 

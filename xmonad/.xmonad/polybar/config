@@ -35,14 +35,14 @@ module-margin-left = 0
 module-margin-right = 0
 modules-center = date
 modules-left = ewmh
-modules-right = bluetooth battery
+modules-right = bluetooth pavolume battery
 monitor = ${env:MONITOR}
 monitor-strict = false
 override-redirect = false
 padding-left = 1
 padding-right = 1
 radius = 0.0
-separator = 
+separator = : 
 tray-background = ${colors.background}
 tray-detached = false
 tray-maxsize = 20
@@ -65,7 +65,6 @@ throttle-output = 5
 throttle-output-for = 10
 
 #################################################################
-
 [module/ewmh]
 enable-click            = true
 enable-scroll           = true
@@ -143,17 +142,15 @@ time = %I:%M %p
 type = internal/date
 
 ################################################################################
-[module/pulseaudio]
-click-left = ~/.config/polybar/menus/audio.sh &
-click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
-click-right = pulseaudio-control togmute
-exec = pulseaudio-control --icons-volume " ,墳 , " --color-muted "F07178" --icon-muted "婢" --format '$VOL_ICON $VOL_LEVEL%'  listen
-label-background = ${colors.background}
-label-font = 4
-label-foreground = ${colors.foreground}
-scroll-down = pulseaudio-control --volume-max 100 down
-scroll-up = pulseaudio-control --volume-max 100 up
-tail = true
+[module/pavolume]
 type = custom/script
-
-
+tail = true
+label               = %output%
+exec                = ~/.xmonad/polybar/scripts/pavolume.sh --listen
+click-right         = exec pavucontrol
+click-left          = ~/.xmonad/polybar/scripts/pavolume.sh --togmute
+scroll-up           = ~/.xmonad/polybar/scripts/pavolume.sh --up
+scroll-down         = ~/.xmonad/polybar/scripts/pavolume.sh --down
+#format-underline    = ${colors.green}
+format-foreground   = ${colors.foreground}
+format-background   = ${colors.background}
