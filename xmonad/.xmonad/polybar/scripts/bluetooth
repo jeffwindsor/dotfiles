@@ -1,12 +1,15 @@
 #!/bin/sh
 if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]
 then
-  echo "  "
+    # NOT POWERED - RED
+    echo " %{F#F07178}%{F-} "
 else
   if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]
   then 
+    # POWERED NOT CONNECTED - FOREGROUND
     echo "  "
   fi
-  echo "  "
+    # POWERED AND CONNECTED - HIGHLIGHTED
+    echo " %{F#C2D94C}%{F-} "
 fi
 
