@@ -64,34 +64,6 @@ screenchange-reload     = false
 throttle-output = 5
 throttle-output-for = 10
 
-#################################################################
-[module/ewmh]
-enable-click            = true
-enable-scroll           = true
-format                  = <label-state>
-format-background       = ${colors.background}
-format-foreground       = ${colors.foreground}
-label-active            = %name%
-label-active-background = ${colors.background}
-label-active-foreground = ${colors.green}
-label-active-underline  = ${colors.green}
-label-active-padding    = 1
-label-empty             = %name%
-label-empty-foreground  = ${colors.foreground}
-label-empty-padding     = 1
-label-monitor           = %name%
-label-occupied            = %name%
-label-occupied-background = ${colors.background}
-label-occupied-foreground = ${colors.green}
-label-occupied-padding    = 1
-label-urgent            = %name%
-label-urgent-background = ${colors.red}
-label-urgent-foreground = ${colors.white}
-label-urgent-padding    = 1
-pin-workspaces          = false
-reverse-scroll          = true
-type                    = internal/xworkspaces
-
 ################################################################################
 [module/battery]
 ;label-charging = Charging %percentage%%
@@ -132,14 +104,42 @@ interval = 10
 type = custom/script
 
 ################################################################################
+[module/date]
 ; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
 ; NOTE: if you want to use syntax tags here you need to use %%{...}
-[module/date]
 date = %a, %b %d, %G
 interval = 5
 label = %date% - %time%
 time = %I:%M %p
 type = internal/date
+
+#################################################################
+[module/ewmh]
+enable-click            = true
+enable-scroll           = true
+format                  = <label-state>
+format-background       = ${colors.background}
+format-foreground       = ${colors.foreground}
+label-active            = %name%
+label-active-background = ${colors.background}
+label-active-foreground = ${colors.green}
+label-active-underline  = ${colors.green}
+label-active-padding    = 1
+label-empty             = %name%
+label-empty-foreground  = ${colors.foreground}
+label-empty-padding     = 1
+label-monitor           = %name%
+label-occupied            = %name%
+label-occupied-background = ${colors.background}
+label-occupied-foreground = ${colors.green}
+label-occupied-padding    = 1
+label-urgent            = %name%
+label-urgent-background = ${colors.red}
+label-urgent-foreground = ${colors.white}
+label-urgent-padding    = 1
+pin-workspaces          = false
+reverse-scroll          = true
+type                    = internal/xworkspaces
 
 ################################################################################
 [module/pavolume]
