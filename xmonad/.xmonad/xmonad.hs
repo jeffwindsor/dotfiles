@@ -1,70 +1,49 @@
-import System.IO
+import Control.Monad (liftM2)
+import Graphics.X11.ExtraTypes.XF86
 import System.Exit
-
+import System.IO
 import XMonad
-import XMonad.Hooks.SetWMName
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isFullscreen, isDialog)
-import XMonad.Config.Desktop
-import XMonad.Config.Azerty
-import XMonad.Util.Run(spawnPipe)
-import XMonad.Actions.SpawnOn
-import XMonad.Util.EZConfig (additionalKeys, additionalMouseBindings)
 import XMonad.Actions.CycleWS
+import XMonad.Actions.SpawnOn
+import XMonad.Config.Azerty
+import XMonad.Config.Desktop
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isFullscreen, isDialog)
+import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
-import qualified Codec.Binary.UTF8.String as UTF8
-
-import XMonad.Layout.Spacing
-import XMonad.Layout.Gaps
-import XMonad.Layout.ResizableTile
----import XMonad.Layout.NoBorders
-import XMonad.Layout.Fullscreen (fullscreenFull)
+import XMonad.Layout.CenteredMaster(centerMaster)
 import XMonad.Layout.Cross(simpleCross)
-import XMonad.Layout.Spiral(spiral)
-import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Fullscreen (fullscreenFull)
+import XMonad.Layout.Gaps
+import XMonad.Layout.IndependentScreens
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
-import XMonad.Layout.IndependentScreens
-
-
-import XMonad.Layout.CenteredMaster(centerMaster)
-
-import Graphics.X11.ExtraTypes.XF86
-import qualified XMonad.StackSet as W
-import qualified Data.Map as M
-import qualified Data.ByteString as B
-import Control.Monad (liftM2)
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Spacing
+import XMonad.Layout.Spiral(spiral)
+import XMonad.Layout.ThreeColumns
+import XMonad.Util.EZConfig (additionalKeys, additionalMouseBindings)
+import XMonad.Util.Run(spawnPipe)
+import qualified Codec.Binary.UTF8.String as UTF8
 import qualified DBus as D
 import qualified DBus.Client as D
+import qualified Data.ByteString as B
+import qualified Data.Map as M
+import qualified XMonad.StackSet as W
 
+myBorderColor       = "#01060e"  -- ayu
+myFocusedColor      = "#e6b450"  -- ayu
+myModMask           = mod4Mask
+myFocusFollowsMouse = True
+myBorderWidth       = 2
+myWorkspaces        = ["1","2","3","4","5","6","7","8","9","10"]
+myBaseConfig        = desktopConfig
 
 myStartupHook = do
     spawn "$HOME/.xmonad/scripts/autostart.sh"
     setWMName "LG3D"
-
--- colours
-normBord = "#2E3440"
-focdBord = "#8FBCBB"		--Nord Frost	   #8fbcbb #88c0d0 #81a1c1 #5e81ac
-fore     = "#D8DEE9"   		--Nord Snow Storm  #d8dee9 #e5e9f0 #yweceff4
-back     = "#2E3440"		--Nord Polar Night #2e3440 #3b4252 #434c5e #4c566a
-winType  = "#C678DD"		--Nord Aurora      #bf616a #d08770 #ebcb8b #a3be8c #b48ead
-
---mod4Mask= super key
---mod1Mask= alt key
---controlMask= ctrl key
---shiftMask= shift key
-
-myModMask = mod4Mask
-encodeCChar = map fromIntegral . B.unpack
-myFocusFollowsMouse = True
-myBorderWidth = 2
---myWorkspaces    = ["\61612","\61899","\61947","\61635","\61502","\61501","\61705","\61564","\62150","\61872"]
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9","10"]
---myWorkspaces    = ["I","II","III","IV","V","VI","VII","VIII","IX","X"]
-
-myBaseConfig = desktopConfig
 
 -- window manipulations
 myManageHook = composeAll . concat $
@@ -101,37 +80,22 @@ myManageHook = composeAll . concat $
     -- my9Shifts = []
     -- my10Shifts = ["discord"]
 
-
-
-
-myLayout = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True $ avoidStruts $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ tiled ||| Mirror tiled ||| spiral (6/7)  ||| ThreeColMid 1 (3/100) (1/2) ||| Full
+myLayout = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True $ avoidStruts $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) 
+    $ Tall nmaster delta tiled_ratio
+    ||| Mirror (Tall nmaster delta tiled_ratio) 
+    ||| spiral (6/7)  
+    ||| ThreeColMid nmaster delta tiled_ratio 
+    ||| Full
     where
-        tiled = Tall nmaster delta tiled_ratio
         nmaster = 1
         delta = 3/100
         tiled_ratio = 1/2
 
-
-myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
-
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modMask, 1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
-
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modMask, 2), (\w -> focus w >> windows W.shiftMaster))
-
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modMask, 3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
-
-    ]
-
-
--- keys config
-
+--mod4Mask= super key
+--mod1Mask= alt key
+--controlMask= ctrl key
+--shiftMask= shift key
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-  ----------------------------------------------------------------------
-  -- SUPER + FUNCTION KEYS
-
   [ ((modMask, xK_e), spawn $ "atom" )
   , ((modMask, xK_c), spawn $ "conky-toggle" )
   , ((modMask, xK_f), sendMessage $ Toggle NBFULL)
@@ -157,20 +121,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_F10), spawn $ "spotify" )
   , ((modMask, xK_F11), spawn $ "rofi -show drun -fullscreen" )
   , ((modMask, xK_F12), spawn $ "rofi -show drun" )
-
-  -- FUNCTION KEYS
   , ((0, xK_F12), spawn $ "xfce4-terminal --drop-down" )
-
-  -- SUPER + SHIFT KEYS
-
   , ((modMask .|. shiftMask , xK_Return ), spawn $ "thunar")
   , ((modMask .|. shiftMask , xK_d ), spawn $ "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'")
   , ((modMask .|. shiftMask , xK_r ), spawn $ "xmonad --recompile && xmonad --restart")
   , ((modMask .|. shiftMask , xK_q ), kill)
-  -- , ((modMask .|. shiftMask , xK_x ), io (exitWith ExitSuccess))
-
-  -- CONTROL + ALT KEYS
-
   , ((controlMask .|. mod1Mask , xK_Next ), spawn $ "conky-rotate -n")
   , ((controlMask .|. mod1Mask , xK_Prior ), spawn $ "conky-rotate -p")
   , ((controlMask .|. mod1Mask , xK_a ), spawn $ "xfce4-appfinder")
@@ -192,9 +147,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((controlMask .|. mod1Mask , xK_v ), spawn $ "vivaldi-stable")
   , ((controlMask .|. mod1Mask , xK_w ), spawn $ "arcolinux-welcome-app")
   , ((controlMask .|. mod1Mask , xK_Return ), spawn $ "urxvt")
-
-  -- ALT + ... KEYS
-
   , ((mod1Mask, xK_f), spawn $ "variety -f" )
   , ((mod1Mask, xK_n), spawn $ "variety -n" )
   , ((mod1Mask, xK_p), spawn $ "variety -p" )
@@ -206,27 +158,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((mod1Mask, xK_Right), spawn $ "variety -n" )
   , ((mod1Mask, xK_F2), spawn $ "xfce4-appfinder --collapsed" )
   , ((mod1Mask, xK_F3), spawn $ "xfce4-appfinder" )
-
-  --VARIETY KEYS WITH PYWAL
-
   , ((mod1Mask .|. shiftMask , xK_f ), spawn $ "variety -f && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
   , ((mod1Mask .|. shiftMask , xK_n ), spawn $ "variety -n && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
   , ((mod1Mask .|. shiftMask , xK_p ), spawn $ "variety -p && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
   , ((mod1Mask .|. shiftMask , xK_t ), spawn $ "variety -t && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
   , ((mod1Mask .|. shiftMask , xK_u ), spawn $ "wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&")
-
-  --CONTROL + SHIFT KEYS
-
   , ((controlMask .|. shiftMask , xK_Escape ), spawn $ "xfce4-taskmanager")
-
-  --SCREENSHOTS
-
   , ((0, xK_Print), spawn $ "scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")
   , ((controlMask, xK_Print), spawn $ "xfce4-screenshooter" )
   , ((controlMask .|. shiftMask , xK_Print ), spawn $ "gnome-screenshot -i")
-
-
-  --MULTIMEDIA KEYS
 
   -- Mute volume
   , ((0, xF86XK_AudioMute), spawn $ "amixer -q set Master toggle")
@@ -252,10 +192,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((0, xF86XK_AudioNext), spawn $ "playerctl next")
   , ((0, xF86XK_AudioPrev), spawn $ "playerctl previous")
   , ((0, xF86XK_AudioStop), spawn $ "playerctl stop")
-
-
-  --------------------------------------------------------------------
-  --  XMONAD LAYOUT KEYS
 
   -- Cycle through the available layout algorithms.
   , ((modMask, xK_space), sendMessage NextLayout)
@@ -339,6 +275,20 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
+myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
+
+    -- mod-button1, Set the window to floating mode and move by dragging
+    [ ((modMask, 1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
+
+    -- mod-button2, Raise the window to the top of the stack
+    , ((modMask, 2), (\w -> focus w >> windows W.shiftMaster))
+
+    -- mod-button3, Set the window to floating mode and resize by dragging
+    , ((modMask, 3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
+
+    ]
+
+
 main :: IO ()
 main = do
 
@@ -365,8 +315,8 @@ main = do
 , handleEventHook    = handleEventHook myBaseConfig <+> fullscreenEventHook
 , focusFollowsMouse = myFocusFollowsMouse
 , workspaces = myWorkspaces
-, focusedBorderColor = focdBord
-, normalBorderColor = normBord
+, focusedBorderColor = myFocusedColor
+, normalBorderColor = myBorderColor
 , keys = myKeys
-, mouseBindings = myMouseBindings
+--, mouseBindings = myMouseBindings
 }

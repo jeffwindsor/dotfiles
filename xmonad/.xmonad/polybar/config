@@ -1,0 +1,159 @@
+;; https://github.com/rototrash/dotfiles
+
+include-file = ~/.xmonad/polybar/colors.ini
+include-file = ~/.xmonad/polybar/fonts.ini
+ 
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[bar/topbar]
+background = ${colors.background}
+foreground = ${colors.foreground}
+bottom = false
+border-top-size = 6
+border-bottom-size = 6
+border-left-size = 0
+border-right-size = 0
+border-top-color    = ${colors.background}
+border-bottom-color = ${colors.background}
+border-left-color   = ${colors.transparent}
+border-right-color  = ${colors.transparent}
+enable-ipc = true
+fixed-center = true
+font-0 = ${fonts.0}
+font-1 = ${fonts.1}
+font-2 = ${fonts.2}
+font-3 = ${fonts.3}
+font-4 = ${fonts.4}
+font-5 = ${fonts.5}
+font-6 = ${fonts.6}
+height = 30
+line-size = 2
+line-color = ${colors.foreground}
+module-margin-left = 0
+module-margin-right = 0
+modules-center = date
+modules-left = ewmh
+modules-right = bluetooth battery
+monitor = ${env:MONITOR}
+monitor-strict = false
+override-redirect = false
+padding-left = 1
+padding-right = 1
+radius = 0.0
+separator = 
+tray-background = ${colors.background}
+tray-detached = false
+tray-maxsize = 20
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 0
+tray-position = right
+tray-scale = 1
+width = 100%
+
+[settings]
+compositing-background  = source
+compositing-border      = over
+compositing-foreground  = over
+compositing-overline    = over
+compositing-underline   = over
+pseudo-transparency     = false
+screenchange-reload     = false
+throttle-output = 5
+throttle-output-for = 10
+
+#################################################################
+
+[module/ewmh]
+enable-click            = true
+enable-scroll           = true
+format                  = <label-state>
+format-background       = ${colors.background}
+format-foreground       = ${colors.foreground}
+label-active            = %name%
+label-active-background = ${colors.background}
+label-active-foreground = ${colors.green}
+label-active-underline  = ${colors.green}
+label-active-padding    = 1
+label-empty             = %name%
+label-empty-foreground  = ${colors.foreground}
+label-empty-padding     = 1
+label-monitor           = %name%
+label-occupied            = %name%
+label-occupied-background = ${colors.background}
+label-occupied-foreground = ${colors.green}
+label-occupied-padding    = 1
+label-urgent            = %name%
+label-urgent-background = ${colors.red}
+label-urgent-foreground = ${colors.white}
+label-urgent-padding    = 1
+pin-workspaces          = false
+reverse-scroll          = true
+type                    = internal/xworkspaces
+
+################################################################################
+[module/battery]
+;label-charging = Charging %percentage%%
+adapter = ACAD
+battery = BAT1
+format-charging =  <label-charging> <ramp-capacity> 
+format-charging-background = ${colors.background}
+format-charging-foreground = ${colors.green}
+format-charging-padding = 1
+format-discharging =  <label-discharging> <ramp-capacity> 
+format-discharging-background = ${colors.background}
+format-discharging-foreground = ${colors.red}
+format-discharging-padding = 1
+format-full =  <label-full> <ramp-capacity> 
+format-full-background = ${colors.background}
+format-full-foreground = ${colors.foreground}
+format-full-padding = 1
+full-at = 99
+label-charging = %percentage%%
+label-discharging = Discharging %percentage%%
+label-full = 100%
+poll-interval = 1
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+ramp-capacity-4 = ""
+type = internal/battery
+
+################################################################################
+[module/bluetooth]
+;click-right = ~/.config/polybar/scripts/toggle_bluetooth
+;click-left = /home/sid/.config/polybar/menus/bluetooth 
+exec = ~/.xmonad/polybar/scripts/bluetooth
+format-background = ${colors.background}
+format-font = 4 
+interval = 10
+type = custom/script
+
+################################################################################
+; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+[module/date]
+date = %a, %b %d, %G
+interval = 5
+label = %date% - %time%
+time = %I:%M %p
+type = internal/date
+
+################################################################################
+[module/pulseaudio]
+click-left = ~/.config/polybar/menus/audio.sh &
+click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
+click-right = pulseaudio-control togmute
+exec = pulseaudio-control --icons-volume " ,墳 , " --color-muted "F07178" --icon-muted "婢" --format '$VOL_ICON $VOL_LEVEL%'  listen
+label-background = ${colors.background}
+label-font = 4
+label-foreground = ${colors.foreground}
+scroll-down = pulseaudio-control --volume-max 100 down
+scroll-up = pulseaudio-control --volume-max 100 up
+tail = true
+type = custom/script
+
+
