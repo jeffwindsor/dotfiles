@@ -1,7 +1,7 @@
 window:
   decorations: none
 
-background_opacity: 0.77
+background_opacity: 0.9
 
 cursor: 
   style: Block
