@@ -35,14 +35,14 @@ module-margin-left = 0
 module-margin-right = 0
 modules-center = date
 modules-left = ewmh
-modules-right = bluetooth pavolume wlan battery
+modules-right = arch-updates bluetooth pavolume wlan battery
 monitor = ${env:MONITOR}
 monitor-strict = false
 override-redirect = false
 padding-left = 1
 padding-right = 1
 radius = 0.0
-separator = : 
+separator = :  
 tray-background = ${colors.background}
 tray-detached = false
 tray-maxsize = 20
@@ -50,8 +50,8 @@ tray-offset-x = 0
 tray-offset-y = 0
 tray-padding = 0
 tray-position = right
-tray-scale = 1
-width = 100%
+tray-scale      = 1
+width           = 100%
 
 [settings]
 compositing-background  = source
@@ -63,6 +63,16 @@ pseudo-transparency     = false
 screenchange-reload     = false
 throttle-output = 5
 throttle-output-for = 10
+
+################################################################################
+[module/arch-updates]
+type              = custom/script
+exec              = ~/.xmonad/polybar/scripts/system-updates-check
+interval          = 1000
+label             = %output% 
+format-foreground = ${colors.background}
+format-background = ${colors.foreground}
+click-left        = ~/.xmonad/polybar/scripts/system-updates-open
 
 ################################################################################
 [module/battery]
@@ -77,22 +87,22 @@ format-discharging =  <label-discharging> <ramp-capacity>
 format-discharging-background = ${colors.background}
 format-discharging-foreground = ${colors.red}
 format-discharging-padding = 1
-format-full =  <label-full> <ramp-capacity> 
+format-full =<label-full> <ramp-capacity> 
 format-full-background = ${colors.background}
-format-full-foreground = ${colors.green}
+format-full-foreground = ${colors.foreground}
 format-full-padding = 1
-full-at = 99
+full-at = 98
 label-charging = %percentage%%
 label-discharging = Discharging %percentage%%
 label-full = 100%
 poll-interval = 1
-ramp-capacity-0 = ""
-ramp-capacity-1 = ""
-ramp-capacity-2 = ""
-ramp-capacity-3 = ""
-ramp-capacity-4 = ""
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
 type = internal/battery
-
+ 
 ################################################################################
 [module/bluetooth]
 ;click-right = ~/.config/polybar/scripts/toggle_bluetooth
@@ -121,9 +131,9 @@ format                  = <label-state>
 format-background       = ${colors.background}
 format-foreground       = ${colors.foreground}
 label-active            = %name%
-label-active-background = ${colors.background}
-label-active-foreground = ${colors.green}
-label-active-underline  = ${colors.green}
+label-active-background = ${colors.green}
+label-active-foreground = ${colors.background}
+#label-active-underline  = ${colors.foreground}
 label-active-padding    = 1
 label-empty             = %name%
 label-empty-foreground  = ${colors.foreground}
@@ -132,6 +142,7 @@ label-monitor           = %name%
 label-occupied            = %name%
 label-occupied-background = ${colors.background}
 label-occupied-foreground = ${colors.green}
+#label-occupied-underline  = ${colors.foreground}
 label-occupied-padding    = 1
 label-urgent            = %name%
 label-urgent-background = ${colors.red}
