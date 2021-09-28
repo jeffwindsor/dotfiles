@@ -22,7 +22,7 @@ feh --bg-fill /usr/share/backgrounds/arcolinux/arco-login-plasma.jpg &
 #starting utility applications at boot time
 #run variety &
 #run nm-applet &
-run pamac-tray &
+#run pamac-tray &
 run xfce4-power-manager &
 #run volumeicon &
 #numlockx on &
