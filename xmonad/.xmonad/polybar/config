@@ -106,9 +106,9 @@ type = internal/battery
 ################################################################################
 [module/bluetooth]
 ;click-right = ~/.config/polybar/scripts/toggle_bluetooth
-click-left = /usr/bin/blueberry 
-exec = ~/.xmonad/polybar/scripts/bluetooth
-format-background = ${colors.background}
+click-left          = /usr/bin/blueberry 
+exec                = ~/.xmonad/polybar/scripts/bluetooth
+format-background   = ${colors.background}
 format-font = 4 
 interval = 10
 type = custom/script
@@ -117,11 +117,11 @@ type = custom/script
 [module/date]
 ; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
 ; NOTE: if you want to use syntax tags here you need to use %%{...}
-date = %a, %b %d, %G
-interval = 5
-label = %date% - %time%
-time = %I:%M %p
-type = internal/date
+date    = %a, %b %d, %G
+interval= 5
+label   = %date% - %time%
+time    = %I:%M %p
+type    = internal/date
 
 #################################################################
 [module/ewmh]
@@ -131,18 +131,17 @@ format                  = <label-state>
 format-background       = ${colors.background}
 format-foreground       = ${colors.foreground}
 label-active            = %name%
-label-active-background = ${colors.green}
-label-active-foreground = ${colors.background}
-#label-active-underline  = ${colors.foreground}
+label-active-background = ${colors.background2}
+label-active-foreground = ${colors.foreground2}
 label-active-padding    = 1
 label-empty             = %name%
+label-empty-background  = ${colors.background} 
 label-empty-foreground  = ${colors.foreground}
 label-empty-padding     = 1
 label-monitor           = %name%
 label-occupied            = %name%
 label-occupied-background = ${colors.background}
-label-occupied-foreground = ${colors.green}
-#label-occupied-underline  = ${colors.foreground}
+label-occupied-foreground = ${colors.foreground2}
 label-occupied-padding    = 1
 label-urgent            = %name%
 label-urgent-background = ${colors.red}
@@ -162,14 +161,13 @@ click-right         = exec pavucontrol
 click-left          = ~/.xmonad/polybar/scripts/pavolume --togmute
 scroll-up           = ~/.xmonad/polybar/scripts/pavolume --up
 scroll-down         = ~/.xmonad/polybar/scripts/pavolume --down
-#format-underline    = ${colors.green}
 format-foreground   = ${colors.foreground}
 format-background   = ${colors.background}
 
 ################################################################################
 [module/wlan]
-type = internal/network
-interface = wlp3s0
+type        = internal/network
+interface   = wlp3s0
 interval = 10
 
 ; Available tags:
