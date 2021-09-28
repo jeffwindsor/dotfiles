@@ -1,6 +1,7 @@
 machine-punisher
 arch
 xmonad
+polybar
 alacritty
 data
 fd

@@ -1,7 +1,7 @@
 ;; https://github.com/rototrash/dotfiles
 
-include-file = ~/.xmonad/polybar/colors.ini
-include-file = ~/.xmonad/polybar/fonts.ini
+include-file = ~/.config/polybar/colors.ini
+include-file = ~/.config/polybar/fonts.ini
  
 [global/wm]
 margin-top = 0
@@ -67,12 +67,12 @@ throttle-output-for = 10
 ################################################################################
 [module/arch-updates]
 type              = custom/script
-exec              = ~/.xmonad/polybar/scripts/system-updates-check
+exec              = ~/.config/polybar/scripts/system-updates-check
 interval          = 1000
 label             = %output% 
 format-foreground = ${colors.background}
 format-background = ${colors.foreground}
-click-left        = ~/.xmonad/polybar/scripts/system-updates-open
+click-left        = ~/.config/polybar/scripts/system-updates-open
 
 ################################################################################
 [module/battery]
@@ -107,7 +107,7 @@ type = internal/battery
 [module/bluetooth]
 ;click-right = ~/.config/polybar/scripts/toggle_bluetooth
 click-left          = /usr/bin/blueberry 
-exec                = ~/.xmonad/polybar/scripts/bluetooth
+exec                = ~/.config/polybar/scripts/bluetooth
 format-background   = ${colors.background}
 format-font = 4 
 interval = 10
@@ -156,11 +156,11 @@ type                    = internal/xworkspaces
 type = custom/script
 tail = true
 label               = %output%
-exec                = ~/.xmonad/polybar/scripts/pavolume --listen
+exec                = ~/.config/polybar/scripts/pavolume --listen
 click-right         = exec pavucontrol
-click-left          = ~/.xmonad/polybar/scripts/pavolume --togmute
-scroll-up           = ~/.xmonad/polybar/scripts/pavolume --up
-scroll-down         = ~/.xmonad/polybar/scripts/pavolume --down
+click-left          = ~/.config/polybar/scripts/pavolume --togmute
+scroll-up           = ~/.config/polybar/scripts/pavolume --up
+scroll-down         = ~/.config/polybar/scripts/pavolume --down
 format-foreground   = ${colors.foreground}
 format-background   = ${colors.background}
 
