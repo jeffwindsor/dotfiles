@@ -65,7 +65,7 @@ myLayout = spacingRaw True (Border 0 5 5 5) True (Border 5 5 5 5) True $ avoidSt
         delta = 3/100
         tiled_ratio = 1/2
 
-myKeys conf@(XConfig {XMonad.modMask = modMask})
+myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $ 
   [
     ((s,    xK_space),      spawn $ "rofi -show drun" )
   , ((sc,   xK_space),      spawn $ "rofi -show run" )
