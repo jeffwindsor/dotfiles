@@ -1,9 +1,12 @@
 #!/usr/bin/env zsh
 echo $(dirname "$0")
 
+# load list of stow folders from raw text file
 zmodload zsh/mapfile
-FNAME="./$1/stows"
+FNAME="./$1/.local/stows/machine"
 FLINES=( "${(f)mapfile[$FNAME]}" )
 
+# first remove any current stows
 ./remove "${FLINES[@]}"
+# second add the list of stows
 ./add "${FLINES[@]}"
