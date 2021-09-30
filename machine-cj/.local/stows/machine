@@ -6,6 +6,7 @@ data
 fd
 git
 nvim
+nvm
 rust
 starship
 topgrade
