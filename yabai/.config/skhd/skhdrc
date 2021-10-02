@@ -10,8 +10,7 @@ ctrl + alt + cmd - 0x2A     : open -na 'Intellij IDEA'
 alt + cmd - 0x2A            : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
 
 # restart
-shift + cmd - r             : brew services stop yabai && brew services start yabai
-# ctrl + cmd - r              : brew services stop spacebar && brew services start spacebar
+ctrl + cmd - r             : brew services stop yabai && brew services start yabai
 alt + cmd - r               : skhd -r
 
 # layouts
