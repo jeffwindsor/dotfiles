@@ -12,7 +12,7 @@ fi
 #   
 if [ $updates_arch -gt 0 ] || [ $updates_aur -gt 0 ]
 then
-    echo "%{B#C2D94C}  %{B-}"
+    echo "%{B#C2D94C}   %{B-}"
 else
-    echo ""
+    echo "%{B#b3deef}   %{B-}"
 fi
