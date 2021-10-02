@@ -74,6 +74,7 @@ install zsh-syntax-highlighting
 # ZSH as DEFAULT shell
 chsh -s "$(which zsh)"
 
+paru -S nerd-fonts-jetbrains-mono
 ################################################################################
 header "Manual steps"
 xdg-open https://github.com/settings/keys
