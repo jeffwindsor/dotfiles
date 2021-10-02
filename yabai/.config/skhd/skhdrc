@@ -1,53 +1,58 @@
+#!/usr/bin/env sh
+
+#   
+#   /$$$$$$  /$$       /$$             /$$
+#  /$$__  $$| $$      | $$            | $$
+# | $$  \__/| $$   /$$| $$$$$$$   /$$$$$$$
+# |  $$$$$$ | $$  /$$/| $$__  $$ /$$__  $$
+#  \____  $$| $$$$$$/ | $$  \ $$| $$  | $$
+#  /$$  \ $$| $$_  $$ | $$  | $$| $$  | $$
+# |  $$$$$$/| $$ \  $$| $$  | $$|  $$$$$$$
+#  \______/ |__/  \__/|__/  |__/ \_______/
+                                        
+cmd - return                : open -na 'alacritty'              # launch terminal
+cmd + alt - return          : open -na 'firefox'                # launch browser 
+cmd + alt + ctrl  - return  : open -a  'Finder'                 # launch files
+cmd - 0x2A                  : open -na 'Intellij IDEA'          # launch ide
+#cmd + alt - 0x2A            : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
+
+cmd + alt - h               : yabai -m window --focus west      # window: move window focus left.
+cmd + alt - j               : yabai -m window --focus south     # window: move window focus down.
+cmd + alt - k               : yabai -m window --focus north     # window: move window focus up.
+cmd + alt - l               : yabai -m window --focus east      # window: move window focus right.
+cmd + alt + ctrl - h        : yabai -m window --warp west       # window: reinsert window by splitting window to the left.
+cmd + alt + ctrl - j        : yabai -m window --warp south      # window: reinsert window by splitting window below.
+cmd + alt + ctrl - k        : yabai -m window --warp north      # window: reinsert window by splitting window above.
+cmd + alt + ctrl - l        : yabai -m window --warp east       # window: reinsert window by splitting window to the right.
+cmd + shift - h             : yabai -m window --swap west       # window: swap window left.
+cmd + shift - j             : yabai -m window --swap south      # window: swap window down.
+cmd + shift - k             : yabai -m window --swap norths     # window: swap window up.
+cmd + shift - l             : yabai -m window --swap east       # window: swap window right.
+cmd + alt - 1               : yabai -m window --space 1 && yabai -m space --focus 1; # window: move to given space 1 with focus
+cmd + alt - 2               : yabai -m window --space 2 && yabai -m space --focus 2; # window: move to given space 2 with focus
+cmd + alt - 3               : yabai -m window --space 3 && yabai -m space --focus 3; # window: move to given space 3 with focus
+cmd + alt - 4               : yabai -m window --space 4 && yabai -m space --focus 4; # window: move to given space 4 with focus
+cmd + alt - 5               : yabai -m window --space 5 && yabai -m space --focus 5; # window: move to given space 5 with focus
+cmd + alt - 6               : yabai -m window --space 6 && yabai -m space --focus 6; # window: move to given space 6 with focus
+cmd + alt - 7               : yabai -m window --space 7 && yabai -m space --focus 7; # window: move to given space 7 with focus
+cmd + alt - 8               : yabai -m window --space 8 && yabai -m space --focus 8; # window: move to given space 8 with focus
+cmd + alt - 9               : yabai -m window --space 9 && yabai -m space --focus 9; # window: move to given space 9 with focus
+cmd + alt - 0               : yabai -m window --space 0 && yabai -m space --focus 0; # window: move to given space 0 with focus
+cmd + alt - c               : yabai -m window --toggle  &&float && yabai -m window --grid 4:4:1:1:2:2;  # window: center on screen - toggle
+cmd + alt - f               : yabai -m window --toggle zoom-fullscreen  # window: full screen - toggle
+cmd + alt - 0x1B            : yabai -m window --ratio rel:-0.01     # window: increase and decrease relative window ratios by 1% (minus) 
+cmd + alt - 0x18            : yabai -m window --ratio rel:0.01      # window: increase and decrease relative window ratios by 1% (plus) 
+cmd + alt - x               : yabai -m space --balance  # window ratios: Adjust the split ratios of the selected space so that all windows occupy the same area.
+cmd + alt + ctrl - 0x1B     : yabai -m space --padding rel:-2:-2:-2:-2 && yabai -m space --gap rel:-2;  # window gaps (minus)
+cmd + alt + ctrl - 0x18     : yabai -m space --padding rel:2:2:2:2 && yabai -m space --gap rel:2;       # window gaps (plus)
+cmd + alt - b               : yabai -m config layout bsp    # spaces: Set the layout of the selected space to bsp
+cmd + alt - s               : yabai -m config layout stack  # spaces: Set the layout of the selected space to stacking
+cmd + alt - r               : brew services stop yabai && brew services start yabai && skhd -r  # restart all
+cmd + alt + ctrl - r        : skhd -r                           # reload key bindings
+
 # keycode and key reference 
 #   https://github.com/koekeishiya/skhd/issues/1
-
-ctrl + cmd - return         : open -na 'alacritty'
-ctrl + alt + cmd - return   : open -na 'firefox'
-alt + cmd  - return         : open -a  'Finder'
-# backslash
-ctrl + cmd - 0x2A           : open -na 'emacs'        
-ctrl + alt + cmd - 0x2A     : open -na 'Intellij IDEA'
-alt + cmd - 0x2A            : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
-
-# restart
-ctrl + cmd - r             : brew services stop yabai && brew services start yabai
-alt + cmd - r               : skhd -r
-
-# layouts
-ctrl + cmd - x              : yabai -m space --balance 
-ctrl + cmd - b              : yabai -m config layout bsp
-ctrl + cmd - s              : yabai -m config layout stack
-ctrl + cmd - f              : yabai -m config layout float
-
-# windows
-ctrl + cmd - h              : yabai -m window --focus west
-ctrl + cmd - j              : yabai -m window --focus south
-ctrl + cmd - k              : yabai -m window --focus north
-ctrl + cmd - l              : yabai -m window --focus east
-ctrl + alt + cmd - h        : yabai -m window --warp west
-ctrl + alt + cmd - j        : yabai -m window --warp south
-ctrl + alt + cmd - k        : yabai -m window --warp north
-ctrl + alt + cmd - l        : yabai -m window --warp east
-alt + cmd - h               : yabai -m window --swap west
-alt + cmd - j               : yabai -m window --swap south
-alt + cmd - k               : yabai -m window --swap north
-alt + cmd - l               : yabai -m window --swap east
-
-# move
-ctrl + alt + cmd - 1        : yabai -m window --space 1; yabai -m space --focus 1;
-ctrl + alt + cmd - 2        : yabai -m window --space 2; yabai -m space --focus 2;
-ctrl + alt + cmd - 3        : yabai -m window --space 3; yabai -m space --focus 3;
-ctrl + alt + cmd - 4        : yabai -m window --space 4; yabai -m space --focus 4;
-ctrl + alt + cmd - 5        : yabai -m window --space 5; yabai -m space --focus 5;
-ctrl + alt + cmd - 6        : yabai -m window --space 6; yabai -m space --focus 6;
-ctrl + alt + cmd - 7        : yabai -m window --space 7; yabai -m space --focus 7;
-ctrl + alt + cmd - 8        : yabai -m window --space 8; yabai -m space --focus 8;
-ctrl + alt + cmd - 9        : yabai -m window --space 9; yabai -m space --focus 9;
-ctrl + alt + cmd - 0        : yabai -m window --space 0; yabai -m space --focus 0;
-
-# resize windows (minus, plus)
-ctrl + cmd - 0x1B           : yabai -m window --ratio rel:-0.01 
-ctrl + cmd - 0x18           : yabai -m window --ratio rel:0.01
-ctrl + alt + cmd - 0x1B     : yabai -m space --padding rel:-2:-2:-2:-2; yabai -m space --gap rel:-2;
-ctrl + alt + cmd - 0x18     : yabai -m space --padding rel:2:2:2:2;     yabai -m space --gap rel:2;
+#   backslash   = 0x2A
+#   minus       = 0x1B
+#   plus        = 0x18
 
