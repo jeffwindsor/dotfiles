@@ -23,5 +23,5 @@ SAVEHIST=10000
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
+compinit -u -i
 _comp_options+=(globdots)    #include hidden files
