@@ -4,22 +4,22 @@
       "textSpacing" : 8,
       "subtext" : {
         "size" : 14,
-        "colorSelected" : "#D0931FFF",
+        "colorSelected" : "#69E6F458",
         "font" : "MicroSquare",
-        "color" : "#EADBB2FF"
+        "color" : "#FF00C43F"
       },
       "shortcut" : {
         "size" : 14,
         "colorSelected" : "#FFFFFFFF",
-        "font" : "MicroSquare",
-        "color" : "#D29520FF"
+        "font" : "MicroSquareBold",
+        "color" : "#FF00C466"
       },
-      "backgroundSelected" : "#3C3736FF",
+      "backgroundSelected" : "#11002C66",
       "text" : {
         "size" : 16,
-        "colorSelected" : "#D29520FF",
-        "font" : "MicroSquare",
-        "color" : "#EADBB2FF"
+        "colorSelected" : "#00E2F7FF",
+        "font" : "MicroSquareBold",
+        "color" : "#FF00C4A5"
       },
       "iconPaddingHorizontal" : 15,
       "roundness" : 0,
@@ -27,39 +27,39 @@
       "iconSize" : 44
     },
     "search" : {
+      "backgroundSelected" : "#0E002A66",
       "paddingHorizontal" : 16,
-      "background" : "#272827FF",
       "spacing" : 13,
       "text" : {
         "size" : 24,
-        "colorSelected" : "#000000FF",
-        "font" : "MicroSquare",
-        "color" : "#EADBB2FF"
+        "colorSelected" : "#00E3F7FF",
+        "font" : "MicroSquareBold",
+        "color" : "#FEFFFEFF"
       },
+      "background" : "#2B203A00",
       "roundness" : 12,
-      "paddingVertical" : 0,
-      "backgroundSelected" : "#D0931FFF"
+      "paddingVertical" : 0
     },
     "window" : {
-      "color" : "#272827FF",
+      "color" : "#0F002AA6",
       "paddingHorizontal" : 3,
       "width" : 680,
       "borderPadding" : 0,
-      "borderColor" : "#B2D7FFFF",
+      "borderColor" : "#2B203BFF",
       "blur" : 0,
       "roundness" : 14,
       "paddingVertical" : 16
     },
+    "credit" : "Chris Messina",
+    "visualEffectMode" : 2,
     "separator" : {
-      "color" : "#000000FF",
-      "thickness" : 0
+      "color" : "#58C4E207",
+      "thickness" : 1
     },
     "scrollbar" : {
-      "color" : "#D29520FF",
+      "color" : "#FF9300D3",
       "thickness" : 5
     },
-    "visualEffectMode" : 2,
-    "credit" : "Jeff Windsor",
-    "name" : "Gruvbox Wide"
+    "name" : "Synthwave '85"
   }
 }
