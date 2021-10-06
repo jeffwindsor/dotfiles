@@ -24,7 +24,7 @@ import qualified DBus.Client as D
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 
-myBorderColor       = "#4c4c4c"  --tender bright black
+myBorderColor       = "#6a6b3f"  --tender dim green
 myFocusedColor      = "#9faa00"  --tender green
 myFocusFollowsMouse = True
 myBorderWidth       = 2
