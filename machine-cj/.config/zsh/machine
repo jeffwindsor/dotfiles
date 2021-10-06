@@ -4,8 +4,8 @@ alias acd="aws-cloudfront-describe"
 alias acd="aws-cloudfront-describe-status"
 alias dbstart="nohup VBoxHeadless --startvm 'Oracle11g32' &> /dev/null &"
 alias dbstop="VBoxManage controlvm Oracle11g32 poweroff"
-alias java11='sdk install java 11.0.12.7.2-amzn'
-alias java15='sdk install java 17.0.0.35.2-amzn'
+alias java11='sdk use java 11.0.12.7.2-amzn'
+alias java17='sdk use java 17.0.0.35.2-amzn'
 alias java8='sdk use java 8.302.08.1-amzn'
 alias qb='java8 && mvn clean install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
 alias qqb='java8 && mvn install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
