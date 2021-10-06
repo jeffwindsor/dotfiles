@@ -164,6 +164,10 @@ then
     source $HOME/.cargo/env
     install cargo-completions
     cargo install cargo-update
+
+    # java versioning tool
+    curl -s "https://get.sdkman.io" | bash
+    source "/Users/jefwinds/.sdkman/bin/sdkman-init.sh"
 fi
 
 ##########################################################
