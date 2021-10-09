@@ -115,6 +115,17 @@ echo "==> NVIM PLUGINS"
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim --headless +PlugInstall +qall
 
+################################################################
+echo "==> SDKMAN"
+curl -s "https://get.sdkman.io" | bash
+
+echo "==> initial source SDKMAN"
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java
+sdk install kotlin
+skd install scala
+
+
 ##########################################################
 read -r -p "Development Languages? [y/n] " response
 response=${response,,}    # tolower
