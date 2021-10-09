@@ -9,11 +9,14 @@
 #  /$$  \ $$| $$_  $$ | $$  | $$| $$  | $$
 # |  $$$$$$/| $$ \  $$| $$  | $$|  $$$$$$$
 #  \______/ |__/  \__/|__/  |__/ \_______/
-                                      
-cmd - 0x2A                  : open -na 'Intellij IDEA'          # launch ide
+                            
+
+cmd - 0x2A                  : open -a  'Finder'                 # launch files
+cmd + alt - 0x2A            : open -na 'Intellij IDEA'          # launch ide
 cmd - return                : open -na 'alacritty'              # launch terminal
 cmd + alt - return          : open -na 'firefox'                # launch browser 
-cmd + alt + ctrl  - return  : open -a  'Finder'                 # launch files
+cmd + alt + ctrl  - return  : open -na 'vivaldi'                # launch browser2
+
 
 cmd + alt - 0               : yabai -m window --space 0 && yabai -m space --focus 0;    # window: move to given space 0 with focus
 cmd + alt - 0x18            : yabai -m window --ratio rel:0.01                          # window: increase and decrease relative window ratios by 1% (plus) 
