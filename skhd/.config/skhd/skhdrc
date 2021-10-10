@@ -24,13 +24,13 @@ cmd + alt + ctrl  - return  : open -na 'vivaldi'                # launch browser
 ######################################################################################
 # amethyst window manager
 ######################################################################################
-# cmd + alt - plus            : Shrink Main Pane 
-# cmd + alt - minus           : Expand Main Pane
-# cmd + alt - k               : Move Focus Counter Clockwise 
-# cmd + alt - j               : Move Focus Clockwise
+# cmd + alt - minus           : Shrink Main Pane 
+# cmd + alt - plus            : Expand Main Pane
+# cmd + alt - j               : Move Focus Counter Clockwise 
+# cmd + alt - k               : Move Focus Clockwise
 # cmd + alt - h               : Move Focus to Main window
-# cmd + alt + ctrl - k        : Swap Focused Window Counter Clockwise
-# cmd + alt + ctrl - j        : Swap Focused Window Clockwise
+# cmd + alt + ctrl - j        : Swap Focused Window Counter Clockwise
+# cmd + alt + ctrl - k        : Swap Focused Window Clockwise
 # cmd + alt + ctrl - h        : Swap Focused Window to Main window
 # cmd + alt - x               : Force windows to be reevaluated
 # cmd + alt - 1               : Swap focused windows to space 1
@@ -47,7 +47,7 @@ cmd + alt + ctrl  - return  : open -na 'vivaldi'                # launch browser
 # cmd + alt - t               : Select Tall Layout
 # cmd + alt - w               : Select Wide Layout
 # cmd + alt - c               : Select 3Column Middle Layout
-# cmd + alt - r               : Relaunch Amethyst
+# cmd + shift - r             : Relaunch Amethyst
 
 
 
