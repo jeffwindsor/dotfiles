@@ -20,8 +20,10 @@ HISTSIZE=50000
 SAVEHIST=10000
 
 # auto/tab completion 
-autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit -u -i
 _comp_options+=(globdots)    #include hidden files
+
+autoload -Uz compinit
+compinit -i
+
