@@ -4,12 +4,8 @@
 [ -z "$source" ] && source=$(dirname "$0") 
 [ -z "$target" ] && target=$HOME
 
-# unstow each folder passed in as an argument
-for folder in "$@"
-do
-    if [ ! -z "$folder" ]
-    then
-        echo -e "\033[0;34m==> unstowing $folder\033[0m"
-        stow -D -d $source -t $target $folder
-    fi
-done
+if [ ! -z "$folder" ]
+then
+    echo -e "\033[0;34m==> unstowing $folder\033[0m"
+    stow -D -d $source -t $target $folder
+fi
