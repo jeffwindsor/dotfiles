@@ -15,7 +15,8 @@
 ######################################################################################
 cmd - 0x2A                  : open -a  'Finder'                 # launch files
 cmd + alt - 0x2A            : open -na 'Intellij IDEA'          # launch ide
-#cmd + alt - 0x2A            : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
+cmd + alt +ctrl - 0x2A      : open -na 'DBVisualizer'
+#                           : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
 cmd - return                : open -na 'alacritty'              # launch terminal
 cmd + alt - return          : open -na 'firefox'                # launch browser 
 cmd + alt + ctrl  - return  : open -na 'vivaldi'                # launch browser2
