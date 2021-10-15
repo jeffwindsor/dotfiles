@@ -1,9 +1,24 @@
 ![Dotfiles](dotfiles.png)
 
-Configuration files in \*nix systems usually start with a 'dot', such as the directory ~/.config or files like  ~/zshrc and ~/.gitconfig.
+## The Configuration (Dot) Files
+
+Configuration files in (\*)NIX systems usually start with a 'dot'.  Examples include directories and files like: ~/.config,  ~/.zshrc and ~/.gitconfig. These files can exist all over your drive but are usually found in your home directory `~/` and in the [XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) which is by convention usually `~/.config`.
+
+## Keeping a history of changes
+
+This portion is optional, but recommended so that you easily tag, comment and find past historical changes.  This repository uses [git](https://git-scm.com/), as such it utilises a central location for all my current configurations. These central files are linked to the home directory structure using a local dotfile management strategy discussed below.
+
+## Backing Up the files and sharing with multiple machines
+
+This repository uses github to keep a copy of my configuration and associated git repository, in a centrally accessable location for sharing between machines.
+
+## Local dotfile manangement strategy
+
+Given the configuration files are centrally located for backup, sharing and keeping a change history, the last step is to project these files into the home directory for actual use on a machine.
+
+
 Multiple methods have been devised to backup, share, and keep change history of these files.
-This repository uses the program [gnu-stow](https://www.gnu.org/software/stow/) for linking files from the repo to the system, and [git](https://git-scm.com/) for history and of system storage.  
-If that is not to your liking you can find alternative [tools](https://github.com/webpro/awesome-dotfiles#tools) and [articles](https://github.com/webpro/awesome-dotfiles#articles) to accomplish the same ends.
+This repository uses the program [gnu-stow](https://www.gnu.org/software/stow/) for linking files from the repo to the system, and [git](https://git-scm.com/) for history and of system storage. If that is not to your liking you can find alternative [tools](https://github.com/webpro/awesome-dotfiles#tools) and [articles](https://github.com/webpro/awesome-dotfiles#articles) to accomplish the same ends.
 
 ## Organization
 
