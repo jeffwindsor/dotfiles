@@ -10,11 +10,11 @@ This portion is optional, but recommended so that you easily tag, comment and fi
 
 ## Backing up and sharing
 
-This repository uses [github](www.github.com) to keep a central copy of my configuration and associated git repository.  This central location and git base accessable content, allows for easy sharing between machines.
+This repository uses [github](www.github.com) to keep a central copy of my configuration and associated git repository.  This central location allows for easy sharing between machines with a simple `git clone`.  I prefer to clone this repository locally into `~/.dotfiles`.
 
 ## Local dotfile manangement strategy
 
-Given the configuration files are centrally located for backup, sharing and keeping a change history, the last step is to project these files into the home directory for actual use on a machine.  This repo utilizes [gnu-stow](https://www.gnu.org/software/stow/) as a tool, and three script files for simplification / automation of the tools strategy.
+Given the configuration files are centrally located and not in expected locations in home directory, we need a tool and a strategy to make them useable on a machine.  Currently I utilize [gnu-stow](https://www.gnu.org/software/stow/) as a tool along with three script files for automation.  Gnu stow has a set of capabilities that leads to a strategy of composing the linkage of configuraiton files, and thus allows for more flexibility.
 
 ### How the strategy works
 
@@ -55,7 +55,6 @@ A machine configuration folder is a normal dot file folder plus
 * folder name prefixed with `machine-` (this is a convention of mine, not requirement)
 
 Most of the time I use add or remove to test configurations and config to setup a new machine or refresh my configuration once new content is pulled. 
-
 
 ## You have options to do this differently
 
