@@ -7,6 +7,6 @@
 folder="${1}"
 if [ ! -z "$folder" ]
 then
-    echo -e "\033[0;34m==> unstowing $folder\033[0m"
+    echo -e "\033[0;34m $folder (removing) \033[0m"
     stow -D -d $source -t $target $folder
 fi
