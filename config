@@ -10,20 +10,28 @@ cd $(dirname "$0")
 # |  $$$$$$/| $$ \  $$|  $$$$$$/      |  $$$$$$/   | $$  |  $$$$$$/| $$/   \  $$
 #  \______/ |__/  \__/ \______/        \______/    |__/   \______/ |__/     \__/
                                                                               
+# default source and target if missing
+[ -z "$source" ] && source=$(dirname "$0") 
+[ -z "$target" ] && target=$HOME
                                                                               
 # use input for root dotfile folder to point to file with list of stow config packages                                                                              
 LIST_OF_MACHINE_CONFIGS_FILE="./$1/.local/stows/machine"
 
 # load file lines into array of stow folders
 zmodload zsh/mapfile
-LIST_OF_MACHINE_CONFIGS_ARRAY=( "${(f)mapfile[$LIST_OF_MACHINE_CONFIGS_FILE]}" )
+LIST_OF_MACHINE_CONFIGS_ARRAY=("${(f)mapfile[$LIST_OF_MACHINE_CONFIGS_FILE]}")
 
 # unstow then stow each folder 
 for folder in "${LIST_OF_MACHINE_CONFIGS_ARRAY[@]}"
 do
-    # first remove any current stows
-    ./remove $folder
-    # second add the list of stows
-    ./add $folder
+    if [ ! -z "$folder" ]
+    then
+        echo -ne "  $folder"
+        stow -D -d "$source" -t "$target" "$folder"
+        echo -ne "\033[0;34m > cleaned\033[0;30m"
+
+        stow -d "$source" -t "$target" "$folder"
+        echo -e "\033[0;32m > added\033[0m"
+    fi
 done
 
