@@ -14,7 +14,7 @@
         "font" : "Noto Sans Bold",
         "color" : "#4B5160FF"
       },
-      "backgroundSelected" : "#5176A0FF",
+      "backgroundSelected" : "#444444FF",
       "text" : {
         "size" : 15,
         "colorSelected" : "#9faa00FF",
