@@ -17,9 +17,9 @@
       "backgroundSelected" : "#5176A0FF",
       "text" : {
         "size" : 15,
-        "colorSelected" : "#E7E8EBFF",
+        "colorSelected" : "#9faa00FF",
         "font" : "Noto Sans",
-        "color" : "#E7E8EBFF"
+        "color" : "#9faa00FF"
       },
       "iconPaddingHorizontal" : 16,
       "paddingVertical" : 15,
