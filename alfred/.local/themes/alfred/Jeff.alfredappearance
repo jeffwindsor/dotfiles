@@ -1,0 +1,64 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 12,
+      "subtext" : {
+        "size" : 12,
+        "colorSelected" : "#eeeeeeCC",
+        "font" : "Noto Sans",
+        "color" : "#bbbbbbFF"
+      },
+      "shortcut" : {
+        "size" : 14,
+        "colorSelected" : "#eeeeeeFF",
+        "font" : "Noto Sans Bold",
+        "color" : "#6a6b3fFF"
+      },
+      "backgroundSelected" : "#323232FF",
+      "text" : {
+        "size" : 15,
+        "colorSelected" : "#9FAA00FF",
+        "font" : "Noto Sans",
+        "color" : "#9FAA00FF"
+      },
+      "iconPaddingHorizontal" : 16,
+      "roundness" : 0,
+      "paddingVertical" : 15,
+      "iconSize" : 32
+    },
+    "search" : {
+      "backgroundSelected" : "#1d1d1dFF",
+      "paddingHorizontal" : 8,
+      "spacing" : 4,
+      "text" : {
+        "size" : 44,
+        "font" : "Noto Sans Bold",
+        "color" : "#9faa00FF",
+        "colorSelected" : "#eeeeeeFF"
+      },
+      "background" : "#1d1d1dFF",
+      "roundness" : 0,
+      "paddingVertical" : 10
+    },
+    "window" : {
+      "color" : "#1d1d1dFF",
+      "paddingHorizontal" : 0,
+      "width" : 777,
+      "borderPadding" : 11,
+      "borderColor" : "#1d1d1dFF",
+      "blur" : 5,
+      "roundness" : 0,
+      "paddingVertical" : 0
+    },
+    "credit" : "Jeff Windsor",
+    "separator" : {
+      "color" : "#444444FF",
+      "thickness" : 1
+    },
+    "scrollbar" : {
+      "color" : "#999999FF",
+      "thickness" : 2
+    },
+    "name" : "Tender"
+  }
+}
