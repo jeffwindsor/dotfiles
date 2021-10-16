@@ -152,7 +152,7 @@ function output() {
     then
         echo " %{F#F07178}婢%{F-} "
     else
-        echo " $curVol% 墳 "
+        echo " 墳 $curVol% "
     fi
 } #}}}
 
