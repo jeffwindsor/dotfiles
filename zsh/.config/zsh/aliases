@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-exec-on-git-repos () {
-    local result=`git-find-dirs $2 | cut -d '/' -f5- | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden --reverse --height 40% | awk -v path="$2/" '{print path $0}'`
-    [ ! -z "$result" ] && $1 $result
-}
 exec-on-file () {
     local result=`fd . "$2" -t f -H --ignore-file $XDG_CONFIG_HOME/fdignore | fzf`
     [ ! -z "$result" ] && $1 "$result"
@@ -34,8 +30,6 @@ alias kk='clear && reset'
 alias repo='cd $HOME/src'
 alias repos='exec-on-git-repos cd $SRC'
 alias saf='search-alias-functions'
-alias src='cd $HOME/src'
-alias srcs="exec-on-git-repos cd $SRC"
 alias theme="$HOME/.local/scripts/alacritty/change_theme"
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"

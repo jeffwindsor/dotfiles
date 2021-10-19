@@ -4,6 +4,10 @@ git-to-main() { git branch -m master main && git push -u origin main; }
 git-commit(){ git commit -m ${1:-'Refactor'}; }
 git-log-graph(){ git log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}; }
 git-find-dirs () { find $1 -type d \( -exec test -d "{}/.git" -a "{}" != "." \; -print -prune -o -name .git -prune \); }
+exec-on-git-repos () {
+    local result=`git-find-dirs $2 | cut -d '/' -f5- | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden --reverse --height 40% | awk -v path="$2/" '{print path $0}'`
+    [ ! -z "$result" ] && $1 $result
+}
 
 alias ga='git add'
 alias gaa='git add --all'
@@ -19,3 +23,5 @@ alias gpl='git pull'
 alias gr='git remote -vv'
 alias gs='git status -sb --ignore-submodules'
 alias gsync='git checkout master && git pull --rebase && git checkout - && git rebase master'
+alias src='cd $HOME/src'
+alias srcs="exec-on-git-repos cd $SRC"
