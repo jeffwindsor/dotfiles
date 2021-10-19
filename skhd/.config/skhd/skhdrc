@@ -23,35 +23,6 @@ cmd + alt + ctrl  - return  : open -na 'vivaldi'                # launch browser
 
 
 ######################################################################################
-# amethyst window manager
-######################################################################################
-# cmd + alt - minus           : Shrink Main Pane 
-# cmd + alt - plus            : Expand Main Pane
-# cmd + alt - j               : Move Focus Counter Clockwise 
-# cmd + alt - k               : Move Focus Clockwise
-# cmd + alt - h               : Move Focus to Main window
-# cmd + alt + ctrl - j        : Swap Focused Window Counter Clockwise
-# cmd + alt + ctrl - k        : Swap Focused Window Clockwise
-# cmd + alt + ctrl - h        : Swap Focused Window to Main window
-# cmd + alt - x               : Force windows to be reevaluated
-# cmd + alt - 1               : Swap focused windows to space 1
-# cmd + alt - 2               : Swap focused windows to space 2
-# cmd + alt - 3               : Swap focused windows to space 3
-# cmd + alt - 4               : Swap focused windows to space 4
-# cmd + alt - 5               : Swap focused windows to space 5
-# cmd + alt - 6               : Swap focused windows to space 6
-# cmd + alt - 7               : Swap focused windows to space 7
-# cmd + alt - 8               : Swap focused windows to space 8
-# cmd + alt - 9               : Swap focused windows to space 9
-# cmd + alt - 0               : Swap focused windows to space 0
-# cmd + alt + ctrl - t        : Select Tall Right Layout
-# cmd + alt - t               : Select Tall Layout
-# cmd + alt - w               : Select Wide Layout
-# cmd + alt - c               : Select 3Column Middle Layout
-# cmd + shift - r             : Relaunch Amethyst
-
-
-######################################################################################
 # yabai window manager
 ######################################################################################
 cmd + alt - 0               : yabai -m window --space 0 && yabai -m space --focus 0;    # window: move to given space 0 with focus
@@ -95,4 +66,33 @@ cmd + shift - l             : yabai -m window --swap east                       
 #   backslash   = 0x2A
 #   minus       = 0x1B
 #   plus        = 0x18
+
+
+######################################################################################
+# amethyst window manager
+######################################################################################
+# cmd + alt - minus           : Shrink Main Pane 
+# cmd + alt - plus            : Expand Main Pane
+# cmd + alt - j               : Move Focus Counter Clockwise 
+# cmd + alt - k               : Move Focus Clockwise
+# cmd + alt - h               : Move Focus to Main window
+# cmd + alt + ctrl - j        : Swap Focused Window Counter Clockwise
+# cmd + alt + ctrl - k        : Swap Focused Window Clockwise
+# cmd + alt + ctrl - h        : Swap Focused Window to Main window
+# cmd + alt - x               : Force windows to be reevaluated
+# cmd + alt - 1               : Swap focused windows to space 1
+# cmd + alt - 2               : Swap focused windows to space 2
+# cmd + alt - 3               : Swap focused windows to space 3
+# cmd + alt - 4               : Swap focused windows to space 4
+# cmd + alt - 5               : Swap focused windows to space 5
+# cmd + alt - 6               : Swap focused windows to space 6
+# cmd + alt - 7               : Swap focused windows to space 7
+# cmd + alt - 8               : Swap focused windows to space 8
+# cmd + alt - 9               : Swap focused windows to space 9
+# cmd + alt - 0               : Swap focused windows to space 0
+# cmd + alt + ctrl - t        : Select Tall Right Layout
+# cmd + alt - t               : Select Tall Layout
+# cmd + alt - w               : Select Wide Layout
+# cmd + alt - c               : Select 3Column Middle Layout
+# cmd + shift - r             : Relaunch Amethyst
 
