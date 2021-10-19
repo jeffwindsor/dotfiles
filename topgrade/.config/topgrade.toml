@@ -57,6 +57,8 @@ self_update = true
 
 # Custom commands
 [commands]
+"yabai" = "brew services stop yabai && brew services start yabai"
+"skhd" = "skhd -r"
 
 #[brew]
 #greedy_cask = true
