@@ -4,53 +4,52 @@
       "textSpacing" : 12,
       "subtext" : {
         "size" : 12,
-        "colorSelected" : "#eeeeeeCC",
+        "colorSelected" : "#999999FF",
         "font" : "Noto Sans",
-        "color" : "#bbbbbbFF"
+        "color" : "#999999FF"
       },
       "shortcut" : {
         "size" : 14,
-        "colorSelected" : "#eeeeeeFF",
+        "colorSelected" : "#73CEF4FF",
         "font" : "Noto Sans Bold",
-        "color" : "#6a6b3fFF"
+        "color" : "#44778dFF"
       },
       "backgroundSelected" : "#323232FF",
       "text" : {
         "size" : 15,
-        "colorSelected" : "#73cef4FF",
+        "colorSelected" : "#73CEF4FF",
         "font" : "Noto Sans",
-        "color" : "#73cef4FF"
+        "color" : "#73CEF4FF"
       },
       "iconPaddingHorizontal" : 16,
-      "roundness" : 0,
+      "roundness" : 4,
       "paddingVertical" : 15,
       "iconSize" : 32
     },
     "search" : {
-      "backgroundSelected" : "#1d1d1dFF",
+      "backgroundSelected" : "#1D1D1DFF",
       "paddingHorizontal" : 8,
       "spacing" : 4,
       "text" : {
         "size" : 44,
+        "colorSelected" : "#EEEEEEFF",
         "font" : "Noto Sans Bold",
-        "color" : "#73cef4FF",
-        "colorSelected" : "#eeeeeeFF"
+        "color" : "#73CEF4FF"
       },
-      "background" : "#1d1d1dFF",
-      "roundness" : 0,
+      "background" : "#1D1D1DFF",
+      "roundness" : 4,
       "paddingVertical" : 10
     },
     "window" : {
-      "color" : "#1d1d1dFF",
+      "color" : "#1D1D1DFF",
       "paddingHorizontal" : 0,
       "width" : 777,
-      "borderPadding" : 11,
-      "borderColor" : "#1d1d1dFF",
+      "borderPadding" : 4,
+      "borderColor" : "#44778dFF",
       "blur" : 5,
-      "roundness" : 0,
+      "roundness" : 4,
       "paddingVertical" : 0
     },
-    "credit" : "Jeff Windsor",
     "separator" : {
       "color" : "#444444FF",
       "thickness" : 1
@@ -59,6 +58,7 @@
       "color" : "#999999FF",
       "thickness" : 2
     },
-    "name" : "Tender"
+    "credit" : "Jeff Windsor",
+    "name" : "Tender Blue"
   }
 }
