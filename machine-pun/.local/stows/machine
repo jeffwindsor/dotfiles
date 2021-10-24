@@ -2,6 +2,7 @@ machine-pun
 os-arch
 xmonad
 polybar
+popshell
 alacritty
 data
 fd

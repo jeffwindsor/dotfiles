@@ -7,24 +7,33 @@ set -e
 cd "$(dirname "${0}")"
 
 echo-color(){ printf "\033[0;32m==> $1 \033[0m \n"; }
-MEDIA_KEYS='/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' 
+#MEDIA_KEYS='/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' 
+#
+#addCustom(){
+#    dconf write "$MEDIA_KEYS/custom$1/binding" "$2"
+#    dconf write "$MEDIA_KEYS/custom$1/command" "$3"
+#    dconf write "$MEDIA_KEYS/custom$1/name" "$4"
+#}
 
-addCustom(){
-    dconf write "$MEDIA_KEYS/custom$1/binding" "$2"
-    dconf write "$MEDIA_KEYS/custom$1/command" "$3"
-    dconf write "$MEDIA_KEYS/custom$1/name" "$4"
-}
+echo-color "POP SHELL KEYBINDINGS"
 
-echo-color "POP-OS KEYBINDINGS"
-
-echo-color "Launchers" 
+echo-color "Launchers"
+# terminal
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/terminal' "@as []"
 dconf write '/org/gnome/settings-daemon/plugins/media-keys/terminal' "['<Super>Return']"
-dconf write '/org/gnome/settings-daemon/plugins/media-keys/www' "['<Ctrl><Super>Return']"
+# browser
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/www' "@as []"
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/www' "['<Alt><Super>Return']"
+
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/control-center' " @as []"
 dconf write '/org/gnome/settings-daemon/plugins/media-keys/control-center' "['<Super>comma']"
-dconf write '/org/gnome/settings-daemon/plugins/media-keys/home' "['<Shift><Super>Return']"
+# files
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/home' "@as []"
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/home' "['<Primary><Alt><Super>Return']"
 
 echo-color "Move, resize, and swap windows"
-dconf write '/org/gnome/shell/extensions/pop-shell/tile-enter' "@as ['<Super>w']"
+dconf write '/org/gnome/shell/extensions/pop-shell/tile-enter' "@as []"
+dconf write '/org/gnome/shell/extensions/pop-shell/tile-enter' "@as ['<Super>m']"
 
 echo-color "Navigate applications and windows"
 dconf write '/org/gnome/shell/extensions/pop-shell/activate-launcher' "['<Super>space']"
@@ -42,6 +51,12 @@ dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-1" "['<Shift><S
 dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-2" "['<Shift><Super>2']"
 dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-3" "['<Shift><Super>3']"
 dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-4" "['<Shift><Super>4']"
+dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-4" "['<Shift><Super>4']"
+dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-5" "['<Shift><Super>5']"
+dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-6" "['<Shift><Super>6']"
+dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-7" "['<Shift><Super>7']"
+dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-8" "['<Shift><Super>8']"
+dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-9" "['<Shift><Super>9']"
 
 dconf write "/org/gnome/desktop/wm/keybindings/switch-to-workspace-1" "['<Super>1']"
 dconf write "/org/gnome/desktop/wm/keybindings/switch-to-workspace-2" "['<Super>2']"
@@ -66,24 +81,24 @@ dconf write "/org/gnome/shell/keybindings/toggle-message-tray" "['<Shift><Super>
 dconf write "/org/gnome/desktop/wm/keybindings/panel-main-menu" "['<Alt>F1', '<Alt>equal']"
 dconf write "/org/gnome/desktop/wm/keybindings/panel-run-dialog" "['<Alt>F2', '<Primary><Alt><Super>space']"
 
-echo-color "Create Custom Keybinding entries"
-dconf write "$MEDIA_KEYS" "['$MEDIA_KEYS/custom0/','$MEDIA_KEYS/custom1/','$MEDIA_KEYS/custom2/','$MEDIA_KEYS/custom3/','$MEDIA_KEYS/custom4/','$MEDIA_KEYS/custom5/']"
-
-echo-color "Emacs - remove email short cut to eliminate overlap"
-dconf write '/org/gnome/settings-daemon/plugins/media-keys/email' '@as []'
-addCustom "0" "['<Super>e']" "'emacs'" "'Launch Emacs'"
-
-echo-color "VSCode"
-addCustom "1" "'<Super><Shift>e'" "'code'" "'Launch VSCodium'"
-
-echo-color "Intellij"
-addCustom "2" "'<Super>i'" "'idea'" "'Launch Intellij Idea'"
-
-echo-color "Tweaks"
-addCustom "3" "'<Super>period'" "'Gnome Tweaks'" "'Launch Gnome Tweaks'"
-
-echo-color "Logout"
-addCustom "4" "'<Super><Ctrl>x'" "'gnome-session-quit'" "'Logout'"
-
-echo-color "Tweaks"
-addCustom "5" "'<Super><Shift>x'" "'reboot'" "'Restart'"
+#echo-color "Create Custom Keybinding entries"
+#dconf write "$MEDIA_KEYS" "['$MEDIA_KEYS/custom0/','$MEDIA_KEYS/custom1/','$MEDIA_KEYS/custom2/','$MEDIA_KEYS/custom3/','$MEDIA_KEYS/custom4/','$MEDIA_KEYS/custom5/']"
+#
+#echo-color "Emacs - remove email short cut to eliminate overlap"
+#dconf write '/org/gnome/settings-daemon/plugins/media-keys/email' '@as []'
+#addCustom "0" "['<Super>e']" "'emacs'" "'Launch Emacs'"
+#
+#echo-color "VSCode"
+#addCustom "1" "'<Super><Shift>e'" "'code'" "'Launch VSCodium'"
+#
+#echo-color "Intellij"
+#addCustom "2" "'<Super>i'" "'idea'" "'Launch Intellij Idea'"
+#
+#echo-color "Tweaks"
+#addCustom "3" "'<Super>period'" "'Gnome Tweaks'" "'Launch Gnome Tweaks'"
+#
+#echo-color "Logout"
+#addCustom "4" "'<Super><Ctrl>x'" "'gnome-session-quit'" "'Logout'"
+#
+#echo-color "Tweaks"
+#addCustom "5" "'<Super><Shift>x'" "'reboot'" "'Restart'"
