@@ -27,9 +27,7 @@ clone-if-missing(){
 }
 ################################################################################
 ## SSH KEY 
-read -p "Add SSH Key? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
+if [[ "$(read -e -p 'Add SSH key? [y/N]> '; echo $REPLY)" == [Yy]* ]]
 then
     #echo "==> SSH"
     ssh-keygen -t ed25519 -C "jeff.windsor@gmail.com"
@@ -46,39 +44,58 @@ sudo pacman -Syu
 header "common directories"
 mkdir -p ${HOME}/src/hub
 
+header "gnome"
+install gnome
+install gnome-extra
+install gnome-shell-extension-pop-shell-git
+install xdg-utils
+install firefox
+
 header "packages"
 install alacritty
 install bat
 install exa
 install fd
 install fzf
+install ripgrep
+install stow
+install tldr
+install paru
 
+header "neovim"
 install neovim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim --headless +PlugInstall +qall
 
-install ripgrep
 
-#rust
+header "language: rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-install starship
-install stow
-install tldr
+header "language: go"
+install golang
 
+header "zsh + bling"
+install starship
 install zsh 
 install zsh-autosuggestions 
 install zsh-completions
 install zsh-history-substring-search
 install zsh-syntax-highlighting
-# ZSH as DEFAULT shell
+header "set ZSH as DEFAULT shell"
 chsh -s "$(which zsh)"
 
-paru -S nerd-fonts-jetbrains-mono
+#paru -S nerd-fonts-jetbrains-mono
 ################################################################################
 header "Manual steps"
-xdg-open https://github.com/settings/keys
-xdg-open https://mega.nz/sync
+
+# add ssh key to git hub
+xdg-open https://github.com/settings/keys/
+
+# add mega syns
+xdg-open https://mega.nz/sync/
+
+# add lastpass
+xdg-open https://lastpass.com/
 
 # MacbookPro Retina 15 Wifi: broadcom 14E4:43A0
 #   https://unix.stackexchange.com/questions/175810/how-to-install-broadcom-bcm4360-on-debian-on-macbook-pro
