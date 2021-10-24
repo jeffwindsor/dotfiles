@@ -57,6 +57,7 @@ install bat
 install exa
 install fd
 install fzf
+install keychain
 install ripgrep
 install stow
 install tldr
