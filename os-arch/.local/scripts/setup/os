@@ -22,6 +22,18 @@ install() {
     fi
 }
 
+install-aur() {
+	if paru -Qi $1 &> /dev/null; then
+		tput setaf 2
+  		echo "==> "$1" is already installed"
+      	echo
+		tput sgr0
+	else
+    	header "==> installing package "  $1
+    	paru -S --noconfirm --needed $1 
+    fi
+}
+
 clone-if-missing(){
     [[ ! -d $2 ]] && git clone https://github.com/${1}/${2}.git $2
 }
@@ -35,23 +47,33 @@ then
     ssh-add ~/.ssh/id_ed25519
 fi
 
-header "Use Fastest 5 Mirrors" 
+################################################################################
+header "common directories"
+mkdir -p ${HOME}/src/github.com
+
+################################################################################
+header "System: Use Fastest 5 Mirrors in US and Canada" 
 sudo reflector --verbose --country 'United States, Canada' -l 5 -p http --sort rate --save /etc/pacman.d/mirrorlist
 
-header "Update Packages" 
+header "System: Update Packages" 
 sudo pacman -Syu
+install paru
 
-header "common directories"
-mkdir -p ${HOME}/src/hub
+header "System: Bluetooth"
+install bluez bluez-utils
 
-header "gnome"
+header "Desktop Environment: gnome"
 install gnome
 install gnome-extra
-install gnome-shell-extension-pop-shell-git
+install gnome-shell-extension-pop-shell-git 
+install gnome-shell-extension-sound-output-device-chooser
 install xdg-utils
-install firefox
 
-header "packages"
+header "Desktop: applications"
+install firefox
+install brave-browser
+
+header "Terminal: packages"
 install alacritty
 install bat
 install exa
@@ -61,31 +83,28 @@ install keychain
 install ripgrep
 install stow
 install tldr
-install paru
-
-header "neovim"
-install neovim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim --headless +PlugInstall +qall
-
-
-header "language: rust"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-header "language: go"
-install golang
-
-header "zsh + bling"
 install starship
 install zsh 
 install zsh-autosuggestions 
 install zsh-completions
 install zsh-history-substring-search
 install zsh-syntax-highlighting
-header "set ZSH as DEFAULT shell"
+
+header "Editors: neovim"
+install neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim --headless +PlugInstall +qall
+
+
+header "Programming Languages: Rust"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+header "Programming Languages: Go Lang"
+install go
+
+header "System: Set ZSH as DEFAULT"
 chsh -s "$(which zsh)"
 
-#paru -S nerd-fonts-jetbrains-mono
 ################################################################################
 header "Manual steps"
 
