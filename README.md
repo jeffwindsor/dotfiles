@@ -1,5 +1,3 @@
-![Dotfiles](dotfiles.png)
-
 ## The files 
 
 Configuration files in (\*)NIX systems usually start with a 'dot'.  Examples include directories and files like: `~/.config`,  `~/.zshrc` and `~/.gitconfig`. These files can exist at any location but are usually found in your home directory `~/` and in the [XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) directory, which by convention is usually `~/.config`.
