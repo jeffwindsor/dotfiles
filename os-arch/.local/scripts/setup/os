@@ -60,14 +60,49 @@ sudo pacman -Syu
 install paru
 
 header "System: Bluetooth"
-install bluez bluez-utils
+install bluez 
+install bluez-libs
+install bluez-utils
+#install blueberry
+
+header "System: Laptop"
+install tlp
+
+header "System: Network"
+install avahi
+#install nss-mdns
+#install gvfs-smb
+
+header "System: Sound"
+install alsa-firmware
+install alsa-lib
+install alsa-plugins
+install alsa-utils
+#install gstreamer
+#install gst-plugins-good
+#install gst-plugins-bad
+#install gst-plugins-base
+#install gst-plugins-ugly
+#install playerctl
+#install pulseaudio
+#install pulseaudio-alsa
+install pipewire
+install pipewire-pulse
+install pavucontrol
+#install volumeicon
 
 header "Desktop Environment: gnome"
 install gnome
 install gnome-extra
 install gnome-shell-extension-pop-shell-git 
 install gnome-shell-extension-sound-output-device-chooser
+install gnome-tweaks
 install xdg-utils
+
+header "Desktop: fonts"
+install noto-fonts
+install ttf-jetbrains-mono
+install otf-fira-code
 
 header "Desktop: applications"
 install firefox
@@ -79,6 +114,7 @@ install bat
 install exa
 install fd
 install fzf
+install git
 install keychain
 install ripgrep
 install stow
@@ -96,11 +132,11 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 nvim --headless +PlugInstall +qall
 
 
-header "Programming Languages: Rust"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-header "Programming Languages: Go Lang"
-install go
+#header "Programming Languages: Rust"
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#
+#header "Programming Languages: Go Lang"
+#install go
 
 header "System: Set ZSH as DEFAULT"
 chsh -s "$(which zsh)"
