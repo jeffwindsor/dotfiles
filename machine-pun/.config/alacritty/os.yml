@@ -3,7 +3,8 @@ window:
   padding:
       x: 2
       y: 2
-  opacity: 0.8
+
+background-opacity: 0.8
 
 cursor: 
   style: Block
