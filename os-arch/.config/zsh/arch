@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # ssh
-eval $(keychain --eval --quiet id_ed25519) 
+alias key="eval $(keychain --eval --quiet id_ed25519)" 
 
 install() {
 	if pacman -Qi $1 &> /dev/null; then
