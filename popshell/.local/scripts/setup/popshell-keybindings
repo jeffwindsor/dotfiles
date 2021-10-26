@@ -13,6 +13,12 @@ dconf write '/org/gnome/settings-daemon/plugins/media-keys/terminal' "['<Super>R
 dconf write '/org/gnome/settings-daemon/plugins/media-keys/www' "['<Super><Alt>Return']"
 dconf write '/org/gnome/settings-daemon/plugins/media-keys/home' "['<Super><Alt><Primary>Return']"
 dconf write '/org/gnome/settings-daemon/plugins/media-keys/control-center' "['<Super>comma']"
+
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' "['/org/gnome/settings-daemon/plugins/media-keys/custom0']"
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom0/binding' "['<Super>Return']"
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom0/command' 'alacritty'
+dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom0/name' 'alacritty'
+
 dconf write '/org/gnome/shell/extensions/pop-shell/activate-launcher' "['<Super>space']"
 dconf write '/org/gnome/shell/extensions/pop-shell/tile-enter' "@as ['<Super>m']"
 
