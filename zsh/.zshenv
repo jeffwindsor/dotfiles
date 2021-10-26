@@ -8,4 +8,3 @@ for rc in $XDG_CONFIG_HOME/zsh/env/*
 do
     source $rc
 done
-. "$HOME/.cargo/env"
