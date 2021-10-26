@@ -96,6 +96,7 @@ install gnome
 install gnome-extra
 install gnome-shell-extension-pop-shell-git 
 install-aur gnome-shell-extension-sound-output-device-chooser
+install-aur gnome-shell-extension-caffeine-git
 install gnome-tweaks
 install xdg-utils
 
