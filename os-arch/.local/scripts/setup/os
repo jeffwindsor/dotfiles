@@ -95,7 +95,7 @@ header "Desktop Environment: gnome"
 install gnome
 install gnome-extra
 install gnome-shell-extension-pop-shell-git 
-install gnome-shell-extension-sound-output-device-chooser
+install-aur gnome-shell-extension-sound-output-device-chooser
 install gnome-tweaks
 install xdg-utils
 
