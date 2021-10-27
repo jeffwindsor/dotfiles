@@ -64,6 +64,8 @@ install bluez
 install bluez-libs
 install bluez-utils
 #install blueberry
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
 
 header "System: Laptop"
 install tlp
