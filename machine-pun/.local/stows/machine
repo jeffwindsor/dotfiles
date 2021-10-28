@@ -1,10 +1,9 @@
 machine-pun
+data
 os-arch
-xmonad
-polybar
+gnome
 popshell
 alacritty
-data
 fd
 git
 nvim
