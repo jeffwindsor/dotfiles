@@ -101,6 +101,7 @@ install-aur gnome-shell-extension-sound-output-device-chooser
 install-aur gnome-shell-extension-caffeine-git
 install gnome-tweaks
 install xdg-utils
+install arcolinux-logout-git
 
 header "Desktop: fonts"
 install noto-fonts
