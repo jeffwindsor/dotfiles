@@ -4,7 +4,7 @@ window:
       x: 4
       y: 4
 
-background_opacity: 0.88
+background_opacity: 0.96
 
 cursor: 
   style: Block
@@ -12,7 +12,5 @@ cursor:
 draw_bold_text_with_bright_colors: true
 
 font:
-  normal:
-    family: 'JetBrainsMono Nerd Font Mono'
   size: 14.0
 
