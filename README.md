@@ -60,6 +60,7 @@ Multiple strategies have been devised to backup, share, and keep change history 
 
 ### Other resources
 
+* [Video](https://www.youtube.com/watch?v=r_MpUP6aKiQ)
 * [Getting Started With Dotfiles](https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789)
 * [The best way to store your dotfiles: A bare Git repository ](https://www.atlassian.com/git/tutorials/dotfiles)
 * [Managing Your Dotfiles](https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/)
