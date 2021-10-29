@@ -58,6 +58,7 @@ sudo reflector --verbose --country 'United States, Canada' -l 5 -p http --sort r
 header "System: Update Packages" 
 sudo pacman -Syu
 install paru
+install intel-mc
 
 header "System: Bluetooth"
 install bluez 
