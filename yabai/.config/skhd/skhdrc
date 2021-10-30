@@ -1,0 +1,98 @@
+#!/usr/bin/env sh
+
+#   
+#   /$$$$$$  /$$       /$$             /$$
+#  /$$__  $$| $$      | $$            | $$
+# | $$  \__/| $$   /$$| $$$$$$$   /$$$$$$$
+# |  $$$$$$ | $$  /$$/| $$__  $$ /$$__  $$
+#  \____  $$| $$$$$$/ | $$  \ $$| $$  | $$
+#  /$$  \ $$| $$_  $$ | $$  | $$| $$  | $$
+# |  $$$$$$/| $$ \  $$| $$  | $$|  $$$$$$$
+#  \______/ |__/  \__/|__/  |__/ \_______/
+
+######################################################################################
+# applications
+######################################################################################
+cmd - 0x2A                  : open -a  'Finder'                 # launch files
+cmd + alt - 0x2A            : open -na 'Intellij IDEA'          # launch ide
+cmd + alt +ctrl - 0x2A      : open -na 'DBVisualizer'
+#                           : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
+cmd - return                : open -na 'alacritty'              # launch terminal
+cmd + alt - return          : open -na 'firefox'                # launch browser 
+cmd + alt + ctrl  - return  : open -na 'vivaldi'                # launch browser2
+
+
+######################################################################################
+# yabai window manager
+######################################################################################
+cmd + alt - 0               : yabai -m window --space 0 && yabai -m space --focus 0;    # window: move to given space 0 with focus
+cmd + alt - 0x18            : yabai -m window --ratio rel:0.01                          # window: increase and decrease relative window ratios by 1% (plus) 
+cmd + alt - 0x1B            : yabai -m window --ratio rel:-0.01                         # window: increase and decrease relative window ratios by 1% (minus) 
+cmd + alt - 1               : yabai -m window --space 1 && yabai -m space --focus 1;    # window: move to given space 1 with focus
+cmd + alt - 2               : yabai -m window --space 2 && yabai -m space --focus 2;    # window: move to given space 2 with focus
+cmd + alt - 3               : yabai -m window --space 3 && yabai -m space --focus 3;    # window: move to given space 3 with focus
+cmd + alt - 4               : yabai -m window --space 4 && yabai -m space --focus 4;    # window: move to given space 4 with focus
+cmd + alt - 5               : yabai -m window --space 5 && yabai -m space --focus 5;    # window: move to given space 5 with focus
+cmd + alt - 6               : yabai -m window --space 6 && yabai -m space --focus 6;    # window: move to given space 6 with focus
+cmd + alt - 7               : yabai -m window --space 7 && yabai -m space --focus 7;    # window: move to given space 7 with focus
+cmd + alt - 8               : yabai -m window --space 8 && yabai -m space --focus 8;    # window: move to given space 8 with focus
+cmd + alt - 9               : yabai -m window --space 9 && yabai -m space --focus 9;    # window: move to given space 9 with focus
+cmd + alt - b               : yabai -m config layout bsp                                # spaces: Set the layout of the selected space to bsp
+cmd + alt - c               : yabai -m window --toggle float && yabai -m window --grid 4:4:1:1:2:2;     # window: center on screen - toggle
+cmd + alt - f               : yabai -m window --toggle zoom-fullscreen                  # window: full screen - toggle
+cmd + alt - h               : yabai -m window --focus west                              # window: move window focus left.
+cmd + alt - j               : yabai -m window --focus south                             # window: move window focus down.
+cmd + alt - k               : yabai -m window --focus north                             # window: move window focus up.
+cmd + alt - l               : yabai -m window --focus east                              # window: move window focus right.
+cmd + alt - r               : brew services stop yabai && brew services start yabai && skhd -r          # restart all
+cmd + alt - s               : yabai -m config layout stack                              # spaces: Set the layout of the selected space to stacking
+cmd + alt - x               : yabai -m space --balance                                  # window ratios: Adjust the split ratios of the selected space so that all windows occupy the same area.
+
+cmd + alt + ctrl - 0x18     : yabai -m space --padding rel:2:2:2:2 && yabai -m space --gap rel:2;       # window gaps (plus)
+cmd + alt + ctrl - 0x1B     : yabai -m space --padding rel:-2:-2:-2:-2 && yabai -m space --gap rel:-2;  # window gaps (minus)
+cmd + alt + ctrl - h        : yabai -m window --warp west                               # window: reinsert window by splitting window to the left.
+cmd + alt + ctrl - j        : yabai -m window --warp south                              # window: reinsert window by splitting window below.
+cmd + alt + ctrl - k        : yabai -m window --warp north                              # window: reinsert window by splitting window above.
+cmd + alt + ctrl - l        : yabai -m window --warp east                               # window: reinsert window by splitting window to the right.
+cmd + alt + ctrl - r        : skhd -r                                                   # reload key bindings
+
+cmd + shift - h             : yabai -m window --swap west                               # window: swap window left.
+cmd + shift - j             : yabai -m window --swap south                              # window: swap window down.
+cmd + shift - k             : yabai -m window --swap norths                             # window: swap window up.
+cmd + shift - l             : yabai -m window --swap east                               # window: swap window right.
+
+# keycode and key reference 
+#   https://github.com/koekeishiya/skhd/issues/1
+#   backslash   = 0x2A
+#   minus       = 0x1B
+#   plus        = 0x18
+
+
+######################################################################################
+# amethyst window manager
+######################################################################################
+# cmd + alt - minus           : Shrink Main Pane 
+# cmd + alt - plus            : Expand Main Pane
+# cmd + alt - j               : Move Focus Counter Clockwise 
+# cmd + alt - k               : Move Focus Clockwise
+# cmd + alt - h               : Move Focus to Main window
+# cmd + alt + ctrl - j        : Swap Focused Window Counter Clockwise
+# cmd + alt + ctrl - k        : Swap Focused Window Clockwise
+# cmd + alt + ctrl - h        : Swap Focused Window to Main window
+# cmd + alt - x               : Force windows to be reevaluated
+# cmd + alt - 1               : Swap focused windows to space 1
+# cmd + alt - 2               : Swap focused windows to space 2
+# cmd + alt - 3               : Swap focused windows to space 3
+# cmd + alt - 4               : Swap focused windows to space 4
+# cmd + alt - 5               : Swap focused windows to space 5
+# cmd + alt - 6               : Swap focused windows to space 6
+# cmd + alt - 7               : Swap focused windows to space 7
+# cmd + alt - 8               : Swap focused windows to space 8
+# cmd + alt - 9               : Swap focused windows to space 9
+# cmd + alt - 0               : Swap focused windows to space 0
+# cmd + alt + ctrl - t        : Select Tall Right Layout
+# cmd + alt - t               : Select Tall Layout
+# cmd + alt - w               : Select Wide Layout
+# cmd + alt - c               : Select 3Column Middle Layout
+# cmd + shift - r             : Relaunch Amethyst
+
