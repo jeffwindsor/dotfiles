@@ -9,5 +9,7 @@ cursor:
 draw_bold_text_with_bright_colors: true
 font:
   size: 16.0
-  normal:
-    family: "FiraCode NerdFontMono"
+    #  normal:
+    #    family: "Hack Nerd Font Mono"
+    #            # "Fira Code"
+    #            # "Hack Nerd Font Mono"
