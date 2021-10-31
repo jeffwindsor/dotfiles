@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-################################################################################
-# ARCH / ARCO
-################################################################################
-cd "$(dirname "${0}")"
 
 header(){
     tput setaf 3
@@ -37,77 +33,47 @@ install-aur() {
 clone-if-missing(){
     [[ ! -d $2 ]] && git clone https://github.com/${1}/${2}.git $2
 }
-################################################################################
-## SSH KEY 
-if [[ "$(read -e -p 'Add SSH key? [y/N]> '; echo $REPLY)" == [Yy]* ]]
-then
-    #echo "==> SSH"
-    ssh-keygen -t ed25519 -C "jeff.windsor@gmail.com"
-    eval $(ssh-agent)
-    ssh-add ~/.ssh/id_ed25519
-fi
+###################################################################
+header "Generate mirror list with reflector"
+pacman --noconfirm -Sy reflector
+reflector --verbose --country 'United States, Canada' -l 5 -p https --sort rate --save /etc/pacman.d/mirrorlist
+sudo pacman -Syu
 
 ################################################################################
-header "common directories"
+header "Create standard directories"
 mkdir -p ${HOME}/src/github.com
 
 ################################################################################
-header "System: Use Fastest 5 Mirrors in US and Canada" 
-sudo reflector --verbose --country 'United States, Canada' -l 5 -p http --sort rate --save /etc/pacman.d/mirrorlist
-
 header "System: Update Packages" 
-sudo pacman -Syu
-install paru
-install intel-mc
+git clone git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+cd
+rm -rf paru
+
+#install intel-ucode
 
 header "System: Bluetooth"
-install bluez 
-install bluez-libs
 install bluez-utils
-#install blueberry
-sudo systemctl enable bluetooth.service
-sudo systemctl start bluetooth.service
 
 header "System: Laptop"
 install tlp
 
-header "System: Network"
-install avahi
-#install nss-mdns
-#install gvfs-smb
-
-header "System: Sound"
-install alsa-firmware
-install alsa-lib
-install alsa-plugins
-install alsa-utils
-#install gstreamer
-#install gst-plugins-good
-#install gst-plugins-bad
-#install gst-plugins-base
-#install gst-plugins-ugly
-#install playerctl
-#install pulseaudio
-#install pulseaudio-alsa
-install pipewire
-install pipewire-pulse
-install pavucontrol
-#install volumeicon
-
 header "Desktop Environment: gnome"
-install gnome
-install gnome-extra
-install gnome-shell-extension-pop-shell-git 
+install-aur arcolinux-logout
+
+install-aur gnome-shell-extension-pop-shell-git 
+gnome-extensions enable pop-shell@system76.com
+
 install-aur gnome-shell-extension-sound-output-device-chooser
+gnome-extensions enable sound-ouput-device-chooser@kgshank.net
+
 install-aur gnome-shell-extension-caffeine-git
-install gnome-tweaks
-install xdg-utils
-install arcolinux-logout-git
+gnome-extensions enable caffeine@patapon.info
 
 header "Desktop: fonts"
 install noto-fonts
-install ttf-jetbrains-mono
-install otf-fira-code
+install-aur nerd-fonts-complete
 
 header "Desktop: applications"
 install firefox
@@ -127,36 +93,38 @@ install tldr
 install starship
 install zsh 
 install zsh-autosuggestions 
-install zsh-completions
-install zsh-history-substring-search
+#install zsh-completions
+#install zsh-history-substring-search
 install zsh-syntax-highlighting
 
-header "Editors: neovim"
-install neovim
+header "Editors: neovim"; install neovim
+# Install Vim Plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim --headless +PlugInstall +qall
 
+header "Programming Languages: Rust"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-#header "Programming Languages: Rust"
-#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-#
-#header "Programming Languages: Go Lang"
-#install go
+header "Programming Languages: Go Lang"
+install go
 
 header "System: Set ZSH as DEFAULT"
 chsh -s "$(which zsh)"
 
 ################################################################################
-header "Manual steps"
-
-# add ssh key to git hub
+header "Generate SSH key and add to Github"
+ssh-keygen -t ed25519 -C "jeff.windsor@gmail.com"
+eval $(ssh-agent)
+ssh-add ~/.ssh/id_ed25519
 xdg-open https://github.com/settings/keys/
 
-# add mega syns
-xdg-open https://mega.nz/sync/
+################################################################################
+header "Add mega sync sync"; xdg-open https://mega.nz/sync/
+header "Add last pass"; xdg-open https://lastpass.com/
 
-# add lastpass
-xdg-open https://lastpass.com/
+
+
+
 
 # MacbookPro Retina 15 Wifi: broadcom 14E4:43A0
 #   https://unix.stackexchange.com/questions/175810/how-to-install-broadcom-bcm4360-on-debian-on-macbook-pro

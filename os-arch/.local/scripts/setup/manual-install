@@ -1,0 +1,236 @@
+#!/usr/bin/env bash
+
+# via SSH
+# 1) establish wlan: iwctl --passphrase `passphrase` station wlan0 connect `SSID`
+# 2) set password:   passwd
+# 3) start service:  systemctl start sshd.service
+
+###################################################################
+# variables
+device="/dev/sda"           # identify with 'lsblk' or 'fdisk -l'
+swapsize="16G"
+driveformat="ext4"
+hostname="$1"
+
+###################################################################
+# install script follows the arch installation guide:  https://wiki.archlinux.org/title/installation_guide
+header(){
+    tput setaf 3
+    echo "==> " $@
+    tput sgr0
+}
+
+install() {
+	if pacman -Qi $1 &> /dev/null; then
+		tput setaf 2
+  		echo "==> "$1" is already installed"
+      	echo
+		tput sgr0
+	else
+    	header "==> installing package "  $1
+    	sudo pacman -S --noconfirm --needed $1 
+    fi
+}
+
+install-aur() {
+	if paru -Qi $1 &> /dev/null; then
+		tput setaf 2
+  		echo "==> "$1" is already installed"
+      	echo
+		tput sgr0
+	else
+    	header "==> installing package "  $1
+    	paru -S --noconfirm --needed $1 
+    fi
+}
+
+clone-if-missing(){
+    [[ ! -d $2 ]] && git clone https://github.com/${1}/${2}.git $2
+}
+###################################################################
+header "Check: on arch live medium"
+if [ ! "$(uname -n)" = "archiso" ]; then
+    echo "This script is ment to be run from the Archlinux live medium." ; exit
+fi
+header "Check: currently root"
+if [ "$(id -u)" -ne 0 ]; then
+     echo "This script must be run as root." ; exit
+fi
+
+###################################################################
+header "Set the console keyboard: US"
+loadkeys us
+
+###################################################################
+header "Update the System Clock"
+timedatectl set-ntp true
+
+###################################################################
+header "Partition the disk"
+
+# gpt
+parted -s "$device" mklabel gpt
+
+# efi boot partition (ef00) @ 400 Mb
+sgdisk "$device" -n=1:0:+400M -t=1:ef00
+mkfs.vfat "$device"1
+
+# swap partition (8200) with hibernate
+sgdisk "$device" -n=2:0:+"$swapsize" -t=2:8200 
+mkswap "$device"2
+swapon "$device"2
+
+# linux (8300) or luks partition (8309) with all the remaining space
+sgdisk "$device" -n=3:0:0 -t=3:8300
+mkfs."$driveformat" "$device"3
+mount "$device"3 /mnt
+
+###################################################################
+header "Generate mirror list with reflector"
+pacman --noconfirm -Sy reflector
+reflector --verbose --country 'United States, Canada' -l 5 -p https --sort rate --save /etc/pacman.d/mirrorlist
+
+###################################################################
+header "Install base system"
+pacstrap /mnt base linux linux-firmware
+
+###################################################################
+header "Configure system"
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+
+#timezone
+ln -sf /usr/share/zoneinfo/America/Los_Angeles
+hwclock --systohc
+
+#localization
+echo "en_US.UTF-8" > /etc/locale.gen;  locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "KEYMAP=us" > /etc/vconsole.conf
+
+#network
+echo "$hostname" > /etc/hostname
+
+#password
+passwd
+
+#update packages
+sudo pacman -Syu
+
+################################################################################
+header "Create standard directories"
+mkdir -p ${HOME}/src/github.com
+
+################################################################################
+header "System: Update Packages" 
+install paru
+install intel-mc
+
+header "System: Bluetooth"
+install bluez 
+install bluez-libs
+install bluez-utils
+#install blueberry
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+
+header "System: Laptop"
+install tlp
+
+header "System: Network"
+install avahi
+#install nss-mdns
+#install gvfs-smb
+
+header "System: Sound"
+install alsa-firmware
+install alsa-lib
+install alsa-plugins
+install alsa-utils
+#install gstreamer
+#install gst-plugins-good
+#install gst-plugins-bad
+#install gst-plugins-base
+#install gst-plugins-ugly
+#install playerctl
+#install pulseaudio
+#install pulseaudio-alsa
+install pipewire
+install pipewire-pulse
+install pavucontrol
+#install volumeicon
+
+header "Desktop Environment: gnome"
+install gnome
+install gnome-extra
+install gnome-shell-extension-pop-shell-git 
+install-aur gnome-shell-extension-sound-output-device-chooser
+install-aur gnome-shell-extension-caffeine-git
+install gnome-tweaks
+install xdg-utils
+install arcolinux-logout-git
+
+header "Desktop: fonts"
+install noto-fonts
+install ttf-jetbrains-mono
+install otf-fira-code
+
+header "Desktop: applications"
+install firefox
+install brave-browser
+
+header "Terminal: packages"
+install alacritty
+install bat
+install exa
+install fd
+install fzf
+install git
+install keychain
+install ripgrep
+install stow
+install tldr
+install starship
+install zsh 
+install zsh-autosuggestions 
+install zsh-completions
+install zsh-history-substring-search
+install zsh-syntax-highlighting
+
+header "Editors: neovim"; install neovim
+# Install Vim Plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim --headless +PlugInstall +qall
+
+header "Programming Languages: Rust"; curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+header "Programming Languages: Go Lang"; install go
+header "System: Set ZSH as DEFAULT"; chsh -s "$(which zsh)"
+
+################################################################################
+header "Generate SSH key and add to Github"
+ssh-keygen -t ed25519 -C "jeff.windsor@gmail.com"
+eval $(ssh-agent)
+ssh-add ~/.ssh/id_ed25519
+xdg-open https://github.com/settings/keys/
+
+################################################################################
+header "Add mega sync sync"; xdg-open https://mega.nz/sync/
+header "Add last pass"; xdg-open https://lastpass.com/
+
+
+
+
+
+# MacbookPro Retina 15 Wifi: broadcom 14E4:43A0
+#   https://unix.stackexchange.com/questions/175810/how-to-install-broadcom-bcm4360-on-debian-on-macbook-pro
+#install broadcom-sta-dkms
+#sudo modprobe -r b44 b43 b43legacy ssb brcmsmac
+#sudo modprobe wl
+
+# Laptop Power Management
+#sysdl='/etc/systemd/logind.conf'
+#cat $sysdl \
+#    | sed -r 's/\#?HandleLidSwitchExternalPower=.*/HandleLidSwitchExternalPower=ignore/g' \
+#    | sed -r 's/\#?HandleLidSwitch=.*/HandleLidSwitch=poweroff/g' \
+#    | sudo tee $sysdl
+
