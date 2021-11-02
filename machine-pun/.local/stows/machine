@@ -1,8 +1,6 @@
 machine-pun
-data
 os-arch
-gnome
-popshell
+data
 alacritty
 fd
 git
