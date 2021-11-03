@@ -1,2 +1,6 @@
 #!/usr/bin/env zsh
 
+#ssh 
+keychain $HOME/.ssh/id_ed25519
+source $HOME/.keychain/pun-sh
+
