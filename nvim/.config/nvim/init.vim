@@ -126,6 +126,7 @@ nnoremap <leader>bn :tabnew<CR>
 nnoremap <leader>bs :w<CR>
 nnoremap <leader>fc :Files $HOME/.config/<CR>
 nnoremap <leader>fd :Files $HOME/.dotfiles/<CR>
+nnoremap <leader>ft :Files $HOME/.setups/<CR>
 nnoremap <leader>ff :Files %:p:h<CR>
 nnoremap <leader>fh :Files $HOME<CR>
 nnoremap <leader>fs :Files $HOME/src/<CR>
