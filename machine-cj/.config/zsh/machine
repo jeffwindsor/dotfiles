@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-
+alias sdk-start="source $HOME/.sdkman/bin/sdkman-init.sh"
 alias acd="aws-cloudfront-describe"
 alias acd="aws-cloudfront-describe-status"
 alias dbstart="nohup VBoxHeadless --startvm 'Oracle11g32' &> /dev/null &"
