@@ -30,7 +30,7 @@ The dotfiles are packaged into "configuration" folders, such as the below neovim
    └── nvim
 </pre>
 
-When a configuration folder is "added" to the current system, stow will link the highest file/folder appropriate  
+When a configuration folder is "added" to the current system, stow will link the highest file/folder appropriate based on current files in the target directory.  
 
 <pre>
 ~/.config
