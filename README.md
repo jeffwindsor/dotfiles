@@ -45,10 +45,8 @@ There are three script files that help automate linking the dotfile configuratio
 
 * `./add {dotfile-configuration-folder}` - links a single configuration folder to the system
 * `./remove {dotfile-configuration-folder}` - removes a single configuration folder from the system
-* `./config {stows-file}` - removes and re-adds a list of configuration folders, automating a complete machine configuration
+* `./config {stows-file}` - removes and re-adds a list of configuration folders (listed in the stows-file), automating a complete machine configuration
     
-A stows file is a list of dotfile-configuration-folders
-
 Most of the time I use add or remove to test configurations.  Then use the stows files to setup a new machine or refresh a specific machine.
 
 ## You have options to do this differently
