@@ -1,11 +1,11 @@
 format = """
-$directory$git_branch$git_status
-$time$character"""
+[┌ ](dimmed blue)$directory$git_branch$git_status
+[└ ](dimmed blue)$time $character"""
 
 [character]
-success_symbol = "[:](dimmed yellow)"
-error_symbol   = "[:](red)"
-vicmd_symbol   = "[::](dimmed yellow)"
+success_symbol = "[:](dimmed green)"
+error_symbol   = "[:](dimmed red)"
+vicmd_symbol   = "[>](dimmed yellow)"
 
 [directory]
 style = "blue"
@@ -16,8 +16,8 @@ symbol = ""
 style = "cyan"
 
 [git_status]
-style = "yellow"
+format = '([\[](dimmed yellow)[$all_status$ahead_behind](yellow)[\]](dimmed yellow))'
 
 [time]
 disabled=false
-style="dimmed blue"
+format = '[$time](dimmed blue)'
