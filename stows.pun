@@ -1,9 +1,9 @@
-machine-pun
-os-arch
+arch
 data
 alacritty
 fd
 git
+git-personal
 nvim
 starship
 zsh
