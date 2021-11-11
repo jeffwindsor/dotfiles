@@ -28,3 +28,7 @@ install-aur() {
     fi
 }
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
