@@ -1,9 +1,11 @@
 arch
-data
 alacritty
+data
 fd
 git
 git-personal
 nvim
 starship
 zsh
+xmonad
+polybar
