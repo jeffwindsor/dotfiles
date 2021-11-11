@@ -1,5 +1,5 @@
-machine-cj
-os-macos
+cj
+macos
 alacritty
 alfred
 data
