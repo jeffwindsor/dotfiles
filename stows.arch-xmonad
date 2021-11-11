@@ -3,7 +3,7 @@ alacritty
 data
 fd
 git
-git-personal
+personal
 nvim
 starship
 zsh
