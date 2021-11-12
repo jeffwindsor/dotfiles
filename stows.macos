@@ -4,6 +4,7 @@ alacritty
 alfred
 data
 fd
+fzf
 git
 npm
 nvim
