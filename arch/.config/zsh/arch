@@ -27,8 +27,3 @@ install-aur() {
     	paru -S --noconfirm --needed $1 
     fi
 }
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-

@@ -3,6 +3,7 @@ arch
 alacritty
 data
 fd
+fzf
 git
 nvim
 starship
