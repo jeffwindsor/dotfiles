@@ -1,5 +1,7 @@
 personal
-arch
+linux
+pacman
+paru
 alacritty
 data
 fd

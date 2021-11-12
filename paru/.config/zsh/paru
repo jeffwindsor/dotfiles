@@ -1,19 +1,5 @@
 #!/usr/bin/env zsh
 
-install() {
-	if pacman -Qi $1 &> /dev/null; then
-		tput setaf 2
-  		echo "==> "$1" is already installed"
-      	echo
-		tput sgr0
-	else
-        tput setaf 3
-        echo "==> installing package"
-        tput sgr0
-    	sudo pacman -S --noconfirm --needed $1 
-    fi
-}
-
 install-aur() {
 	if paru -Qi $1 &> /dev/null; then
 		tput setaf 2
