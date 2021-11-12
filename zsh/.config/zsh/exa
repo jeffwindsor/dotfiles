@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+alias tree='exa --all --color=always --tree'
+alias l='exa -lF --color=always --group-directories-first'       #alias ll='ls -laLhG'
+alias ll='exa -lF --all --color=always --group-directories-first'       #alias ll='ls -laLhG'
+alias lll='exa -lF --all --color=always --group-directories-first --git-ignore'       #alias ll='ls -laLhG'

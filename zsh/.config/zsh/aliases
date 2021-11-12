@@ -31,7 +31,6 @@ alias cat='bat -p'
 alias config='cd $XDG_CONFIG_HOME'
 alias configs='nvim -c ":Files $XDG_CONFIG_HOME"'
 alias d='dirs -v | head -10'
-alias doom="$HOME/.emacs.d/bin/doom"
 alias dot='cd $HOME/.dotfiles'
 alias dots='nvim -c ":Files $HOME/.dotfiles"'
 alias grep='rg'
@@ -40,12 +39,5 @@ alias kk='clear && reset'
 alias saf='search-alias-functions'
 alias setup='cd $HOME/.setups'
 alias setups='nvim -c ":Files $HOME/.setups"'
-alias theme="$HOME/.local/scripts/alacritty/change_theme"
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-alias lx='nnn -de'
-
-alias tree='exa --all --color=always --tree'
-alias l='exa -lF --color=always --group-directories-first'       #alias ll='ls -laLhG'
-alias ll='exa -lF --all --color=always --group-directories-first'       #alias ll='ls -laLhG'
-alias lll='exa -lF --all --color=always --group-directories-first --git-ignore'       #alias ll='ls -laLhG'
