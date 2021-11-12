@@ -5,7 +5,7 @@ alfred
 data
 fd
 fzf
-jetbrains-idea
+intellij-idea
 git
 nvim
 nvm
