@@ -12,3 +12,6 @@ export PATH=$PATH:$HOME/.local/bin
 export SRC=$HOME/src
 export TERM='xterm-256color'
 export ZSH_PLUGINS='/usr/local/share'
+
+# Scala Coursier
+[[ -d "$HOME/Library/Application Support/Coursier/bin" ]] && export PATH="$PATH:/Users/jefwinds/Library/Application Support/Coursier/bin"
