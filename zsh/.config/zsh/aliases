@@ -14,7 +14,7 @@ search-alias-functions(){
     alias | grep $1;
 }
 
-cs () {
+cdl () {
     cd "$@" && ls
 }
 
