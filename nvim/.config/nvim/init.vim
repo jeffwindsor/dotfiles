@@ -87,13 +87,18 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'                   
   Plug 'preservim/nerdtree'
-  
+
+  " ide
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'scalameta/nvim-metals'
+
 call plug#end()
 
 source $HOME/.config/nvim/vim-sneak.vim
 source $HOME/.config/nvim/nerd-tree.vim
 source $HOME/.config/nvim/autosave.vim
 source $HOME/.config/nvim/fzf.vim
+source $HOME/.config/nvim/metals.vim
 
 
 " ===== EYE CANDY =========================
