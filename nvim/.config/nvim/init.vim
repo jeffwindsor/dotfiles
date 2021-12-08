@@ -76,13 +76,6 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'ryanoasis/vim-devicons'
   Plug 'tpope/vim-fugitive'
 
-
-  " ide
-  "Plug 'nvim-lua/plenary.nvim'
-  "Plug 'scalameta/nvim-metals'
-  Plug 'lexima.vim'
-  "Plug 'neovim/nvim-lspconfig'
-
 call plug#end()
 
 source $HOME/.config/nvim/vim-sneak.vim
