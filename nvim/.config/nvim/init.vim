@@ -57,40 +57,31 @@ set wildmode=longest,list                           " get bash-like tab completi
 call plug#begin('~/.cache/nvim/plugged')
   
  " themes
-  Plug 'lifepillar/vim-solarized8'
   Plug 'arcticicestudio/nord-vim'
   Plug 'cocopon/iceberg.vim'
-  Plug 'habamax/vim-bronzage'
   Plug 'jacoborus/tender.vim'
   Plug 'joshdick/onedark.vim'
-  Plug 'mhartington/oceanic-next'
   Plug 'morhetz/gruvbox'
-  Plug 'sainnhe/everforest'
   Plug 'tomasr/molokai'
-  Plug 'adlawson/vim-sorcerer'
-  Plug 'xero/sourcerer.vim'
 
   " system
   Plug '907th/vim-auto-save'                        " Auto Save
   Plug 'airblade/vim-rooter'                        " current directory moves with file
-  "Plug 'ap/vim-css-color'                           " highlight hex colors
-  "Plug 'chrisbra/Colorizer'
   Plug 'itchyny/lightline.vim'
-  Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
-  Plug 'justinmk/vim-sneak'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'romgrk/barbar.nvim'
-
-  " files
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'                   
+  Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
+  Plug 'justinmk/vim-sneak'
   Plug 'preservim/nerdtree'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'tpope/vim-fugitive'
+
 
   " ide
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'scalameta/nvim-metals'
+  "Plug 'nvim-lua/plenary.nvim'
+  "Plug 'scalameta/nvim-metals'
+  Plug 'lexima.vim'
+  "Plug 'neovim/nvim-lspconfig'
 
 call plug#end()
 
