@@ -11,5 +11,7 @@ cursor:
 draw_bold_text_with_bright_colors: true
 
 font:
-  size: 14
+  normal:
+    family: "JetBrains Mono"
+  size: 16
 
