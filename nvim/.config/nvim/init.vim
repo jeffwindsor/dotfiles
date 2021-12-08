@@ -82,7 +82,6 @@ source $HOME/.config/nvim/vim-sneak.vim
 source $HOME/.config/nvim/nerd-tree.vim
 source $HOME/.config/nvim/autosave.vim
 source $HOME/.config/nvim/fzf.vim
-source $HOME/.config/nvim/metals.vim
 
 
 " ===== EYE CANDY =========================
