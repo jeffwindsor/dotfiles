@@ -79,7 +79,7 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'romgrk/barbar.nvim'
 
   " ide
-  Plug 'neoclide/coc.nvim', {'branch,':'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
   Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
