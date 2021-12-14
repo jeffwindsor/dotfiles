@@ -78,12 +78,17 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'romgrk/barbar.nvim'
 
+  " ide
+  Plug 'neoclide/coc.nvim', {'branch,':'release'}
+  Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+
 call plug#end()
 
 source $HOME/.config/nvim/vim-sneak.vim
 source $HOME/.config/nvim/nerd-tree.vim
 source $HOME/.config/nvim/autosave.vim
 source $HOME/.config/nvim/fzf.vim
+source $HOME/.config/nvim/coc.vim
 
 
 " ===== EYE CANDY =========================
