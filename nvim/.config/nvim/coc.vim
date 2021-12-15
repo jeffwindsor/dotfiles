@@ -1,8 +1,8 @@
-highlight CocErrorSign guifg=#E06C75 
-highlight CocWarningSign guifg=#E5C07B 
-highlight StatusLineStatus guifg=#4B5263 guibg=#2C323C 
-highlight StatusLineError guifg=#E06C75  guibg=#2C323C 
-highlight StatusLineWarning guifg=#E5C07B  guibg=#2C323C 
+"highlight CocErrorSign guifg=#E06C75 
+"highlight CocWarningSign guifg=#E5C07B 
+"highlight StatusLineStatus guifg=#4B5263 guibg=#2C323C 
+"highlight StatusLineError guifg=#E06C75  guibg=#2C323C 
+"highlight StatusLineWarning guifg=#E5C07B  guibg=#2C323C 
 
 " These default mappings should either go in your .vimrc or in a file that
 " you're going to source from your .vimrc. For example, you can copy this file
