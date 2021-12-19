@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 git-to-main() { git branch -m master main && git push -u origin main; }
 git-commit(){ git commit -m ${1:-'Refactor'}; }

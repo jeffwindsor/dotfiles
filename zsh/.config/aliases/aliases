@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 exec-on-file () {
     local result=`fd . "$2" -t f -H --ignore-file $XDG_CONFIG_HOME/fdignore | fzf`

@@ -1,5 +1,4 @@
-#!/usr/bin/env zsh
-
+#!/usr/bin/env bash
 alias bat='batcat'
 alias fd='fdfind'
 
