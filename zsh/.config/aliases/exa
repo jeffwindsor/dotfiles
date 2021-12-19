@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 alias t='exa --color=always --tree'
 alias tt='exa --color=always --tree --all'
