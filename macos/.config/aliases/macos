@@ -5,11 +5,6 @@ source $ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zs
 source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-
 brews() {
     local result=$(brew formulae | fzf -m --preview="brew info {}" --preview-window=:hidden --bind=space:toggle-preview)
     [ ! -z "$result" ] && brew install "$result"
