@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmconfig
+export NPM_PACKAGES=$HOME/.npm-packages
 
