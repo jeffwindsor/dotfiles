@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+export HISTCONTROL=ignoreboth
+export HISTFILE=${XDG_CACHE_HOME}/zsh/zsh_history   # put history to cache, seperating it from the other ZDOT files
+export LESSHISTFILE="-"
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'" # use bat as man pager
+export SRC=$HOME/src
+export TERM='xterm-256color'
+export ZSH_PLUGINS='/usr/share'
