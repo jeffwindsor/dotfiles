@@ -92,9 +92,9 @@ source $HOME/.config/nvim/fzf.vim
 
 
 " ===== EYE CANDY =========================
-colorscheme tender
+colorscheme iceberg
 " https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md
-let g:lightline = { 'colorscheme': 'tender'}
+let g:lightline = { 'colorscheme': 'iceberg'}
 
 " ===== KEYS ==============================
 let mapleader = "\<Space>"
