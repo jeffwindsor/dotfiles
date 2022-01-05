@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-alias bat='batcat'
-alias fd='fdfind'
-
