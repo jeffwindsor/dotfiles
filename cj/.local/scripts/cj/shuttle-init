@@ -29,8 +29,20 @@ set -o pipefail
 
 cd "\$(dirname "\${0}")"
 
-# call deploy.sh in root directory
-../deploy.sh
+echo "Deploying Environment $SHUTTLE_ENV_NAME"
+
+if test $SHUTTLE_ENV_NAME = "CJ Empire Developers"
+then
+    ../deploy.sh 
+
+elif test $SHUTTLE_ENV_NAME = "CJ Finance Product"
+then
+    ../deploy.sh 
+
+else
+    echo "==> Unknown Deploy Environment"
+    exit 1
+fi
 
 EOF
 
@@ -40,9 +52,14 @@ cat << EOF >> shuttle.json
 {
   "environments": [
     {
-      "name": "dev",
+      "name": "CJ Empire Developers",
       "account": "845290112482"
+    },
+    {
+      "name": "CJ Finance Product",
+      "account": "900394040587"
     }
+  ],
   ],
   "artifactFiles": [
   ]
