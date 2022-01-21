@@ -11,11 +11,12 @@
 
 ######################################################################################
 # applications
+#   keys:
+#       0x2A = Backslash
 ######################################################################################
-cmd - 0x2A                  : open -a  'Finder'                 # launch files
-cmd + alt - 0x2A            : open -na 'Intellij IDEA'          # launch ide
-cmd + alt +ctrl - 0x2A      : open -na 'DBVisualizer'
-#                           : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
-cmd - return                : open -na 'alacritty'              # launch terminal
-cmd + alt - return          : open -na 'firefox'                # launch broser 
-cmd + alt + ctrl  - return  : open -na 'vivaldi'                # launch browser2
+cmd + ctrl - f              : open -a  'Finder'                 # launch files
+cmd + ctrl - i              : open -na 'Intellij IDEA'          # launch ide
+cmd + ctrl - d              : open -na 'DBVisualizer'
+cmd + ctrl - v              : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
+cmd + ctrl - t              : open -na 'alacritty'              # launch terminal
+cmd + ctrl - b              : open -na 'firefox'                # launch broser 
