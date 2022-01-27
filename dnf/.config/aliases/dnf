@@ -1,7 +1,7 @@
-#!/bin/baah
+#!/bin/bash
 
 alias dup='sudo dnf upgrade'
 alias din='sudo dnf install'
 alias dar='sudo dnf autoremove'
 alias dif='sudo dnf info'
-
+alias dch='dnf check-upgrade'
