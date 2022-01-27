@@ -6,7 +6,7 @@ data
 fd
 fzf
 git
-npm
+node
 nvim
 rust
 skhd

@@ -7,8 +7,8 @@ fzf
 git
 intellij-idea
 macos
+node
 nvim
-nvm
 rust
 starship
 topgrade
