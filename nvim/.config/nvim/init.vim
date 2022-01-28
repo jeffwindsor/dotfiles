@@ -75,8 +75,8 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'ryanoasis/vim-devicons'
   Plug 'tpope/vim-fugitive'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'romgrk/barbar.nvim'
+  "  Plug 'kyazdani42/nvim-web-devicons'
+  "  Plug 'romgrk/barbar.nvim'
 
   " ide
   "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
