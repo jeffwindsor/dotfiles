@@ -124,7 +124,7 @@ nnoremap <leader>fd :Files $HOME/.dotfiles/<CR>
 nnoremap <leader>fi :Files $HOME/.installs/<CR>
 nnoremap <leader>ff :Files %:p:h<CR>
 nnoremap <leader>fh :Files $HOME<CR>
-nnoremap <leader>fs :Files $HOME/src/<CR>
+nnoremap <leader>fs :Files $HOME/Source/<CR>
 nnoremap <leader>pc :source $MYVIMRC<CR> :PlugClean<CR>
 nnoremap <leader>pi :source $MYVIMRC<CR> :PlugInstall<CR>
 nnoremap <leader>q  :quit<CR>

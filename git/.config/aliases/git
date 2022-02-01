@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-gch() { git clone git@github.com:$1 $HOME/src/github.com/$1; }
+gch() { git clone git@github.com:$1 $HOME/Source/github.com/$1; }
 git-to-main() { git branch -m master main && git push -u origin main; }
 git-commit(){ git commit -m ${1:-'Refactor'}; }
 git-log-graph(){ git log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}; }
@@ -26,5 +26,5 @@ alias gpls='for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done'
 alias gr='git remote -vv'
 alias gs='git status -sb --ignore-submodules'
 alias gsync='git checkout master && git pull --rebase && git checkout - && git rebase master'
-alias src='cd $HOME/src'
+alias src='cd $HOME/Source'
 alias srcs="exec-on-git-repos cd $SRC"
