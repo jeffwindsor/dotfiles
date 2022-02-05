@@ -3,6 +3,7 @@
 gch() { git clone git@github.com:$1 $HOME/Source/github.com/$1; }
 git-to-main() { git branch -m master main && git push -u origin main; }
 git-commit(){ git commit -m ${1:-'Refactor'}; }
+git-add-commit(){ git commit -a -m ${1:-'Refactor'}; }
 git-log-graph(){ git log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}; }
 git-find-dirs () { find $1 -type d \( -exec test -d "{}/.git" -a "{}" != "." \; -print -prune -o -name .git -prune \); }
 exec-on-git-repos () {
@@ -15,6 +16,7 @@ alias gaa='git add --all'
 alias gb='git branch -v'
 alias gc='git clone'
 alias gcm='git-commit'
+alias gcma='git-add-commit'
 alias gco='git checkout'
 alias gd='git diff --ignore-space-at-eol -b -w --ignore-blank-lines'
 alias gh='git-log-graph'
