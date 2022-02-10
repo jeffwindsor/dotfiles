@@ -31,5 +31,8 @@ alias gpls='for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done'
 alias gr='git remote -vv'
 alias gs='git status -sb --ignore-submodules'
 alias gsync='git checkout master && git pull --rebase && git checkout - && git rebase master'
-alias src='cd $HOME/Source'
+alias src='cd $SRC'
 alias srcs="exec-on-git-repos cd $SRC"
+alias hub='cd $SRC/github.com'
+alias hubs="exec-on-git-repos cd $SRC/github.com/"
+

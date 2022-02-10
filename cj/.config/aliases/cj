@@ -16,4 +16,9 @@ alias test-schemas='java -jar ./target/schemas-main-SNAPSHOT.one-jar.jar locator
 alias tns='v ~/.local/cjdev/ci/tns-admin/tnsnames.ora'
 alias uber='cd Library/Application\ Support/Übersicht/widgets/'
 
+alias lab='cd $SRC/gitlab.cj.dev'
+alias labs="exec-on-git-repos cd $SRC/gitlab.cj.dev"
+alias emp='cd $SRC/gitlab.cj.dev/empire'
+alias emps="exec-on-git-repos cd $SRC/gitlab.cj.dev/empire"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
