@@ -9,7 +9,9 @@ intellij-idea
 macos
 node
 nvim
+nvim
 rust
+sdkman
 starship
 topgrade
 zsh
