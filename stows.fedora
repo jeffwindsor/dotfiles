@@ -6,8 +6,10 @@ fzf
 git
 linux
 node
+nvm
 nvim
 personal
+sdkman
 starship
 zsh
 
