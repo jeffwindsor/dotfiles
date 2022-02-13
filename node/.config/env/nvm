@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-export EDITOR=nvim
 export NVM_DIR="$HOME/.nvm"
-export NVIM_LOG_FILE=$HOME/.cache/nvim-log/
-export NVM_DIR=$HOME/.config/nvim

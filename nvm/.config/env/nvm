@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-export NVM_DIR="$HOME/.config/nvim"
