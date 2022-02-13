@@ -9,7 +9,6 @@ intellij-idea
 macos
 node
 nvim
-nvim
 rust
 sdkman
 starship
