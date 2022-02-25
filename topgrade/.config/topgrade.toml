@@ -38,7 +38,7 @@ cleanup = true
 max_concurrency = 2
 # Additional git repositories to pull
 repos = [
-    "~/src/**/*",
+    "~/Source/**/*",
     "~/.dotfiles"
 ]
 
