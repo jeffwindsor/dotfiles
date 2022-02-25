@@ -1,12 +1,3 @@
-set nocompatible                                    " Disable compatibility to old-time vi
-set viminfo+=n~/.cache/nvim/viminfo                 " neo vim
-set runtimepath^=~/.viDTreeShowHidden=1uvim/after   " neo vim
-let &packpath = &runtimepath                        " neo vim
-set rtp+=/usr/local/opt/fzf
-
-filetype plugin on
-syntax enable                                       " turn on all the magic, including Explorer and syntax highlighting
-
 set autoindent                                      " autoindent
 set clipboard+=unnamedplus                          " yank to clipboard
 set cursorline                                      " highlight current line
@@ -37,11 +28,3 @@ set timeoutlen=2000
 set updatetime=300                      " Faster completion
 set wildmenu
 set wildmode=longest,list                           " get bash-like tab completions
-
-"if (has("termguicolors"))
-"  set termguicolors
-"endif
-"autocmd BufRead,BufNewFile *.md setlocal spell
-"let g:netrw_banner = 0
-"let g:sneak#label = 1
-
