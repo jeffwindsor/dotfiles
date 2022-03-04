@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+alias v='vim'
+alias vv='vim -O'
+
+alias configs='vim -c ":Files $XDG_CONFIG_HOME"'
+alias dots='vim -c ":Files $HOME/.dotfiles"'
+alias ins='vim -c ":Files $HOME/.installs"'

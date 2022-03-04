@@ -2,3 +2,7 @@
 
 alias v='nvim'
 alias vv='nvim -O'
+
+alias configs='nvim -c ":Files $XDG_CONFIG_HOME"'
+alias dots='nvim -c ":Files $HOME/.dotfiles"'
+alias ins='nvim -c ":Files $HOME/.installs"'
