@@ -1,4 +1,23 @@
 set nocompatible                                    " Disable compatibility to old-time vi
+
+"
+"   /$$   /$$                     /$$    /$$ /$$              
+"  | $$$ | $$                    | $$   | $$|__/              
+"  | $$$$| $$  /$$$$$$   /$$$$$$ | $$   | $$ /$$ /$$$$$$/$$$$ 
+"  | $$ $$ $$ /$$__  $$ /$$__  $$|  $$ / $$/| $$| $$_  $$_  $$
+"  | $$  $$$$| $$$$$$$$| $$  \ $$ \  $$ $$/ | $$| $$ \ $$ \ $$
+"  | $$\  $$$| $$_____/| $$  | $$  \  $$$/  | $$| $$ | $$ | $$
+"  | $$ \  $$|  $$$$$$$|  $$$$$$/   \  $/   | $$| $$ | $$ | $$
+"  |__/  \__/ \_______/ \______/     \_/    |__/|__/ |__/ |__/
+"                                                            
+                                                           
+
+" ===== NEOVIM ============================
+set viminfo+=n~/.cache/nvim/viminfo                 " neo vim
+set runtimepath^=~/.viDTreeShowHidden=1uvim/after   " neo vim
+let &packpath = &runtimepath                        " neo vim
+
+" ===== SETS ==============================
 filetype plugin on
 syntax enable                                       " turn on all the magic, including Explorer and syntax highlighting
 
@@ -12,6 +31,7 @@ set fileencoding=utf-8                              " The encoding written to fi
 set hidden                                          " Required to keep multiple buffers open multiple buffers
 set hlsearch                                        " highlight matches
 set ignorecase                                      " Do case insensitive matching
+set inccommand=split
 set incsearch                                       " search as characters are entered
 set lazyredraw                                      " redraw only when we need to.
 set mouse=a
@@ -34,7 +54,7 @@ set wildmenu
 set wildmode=longest,list                           " get bash-like tab completions
 
 " ===== PLUGS =============================
-call plug#begin('~/.cache/vim/plugged')
+call plug#begin('~/.cache/nvim/plugged')
   
  " themes
   Plug 'arcticicestudio/nord-vim'
@@ -55,13 +75,21 @@ call plug#begin('~/.cache/vim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'ryanoasis/vim-devicons'
   Plug 'tpope/vim-fugitive'
+  "  Plug 'kyazdani42/nvim-web-devicons'
+  "  Plug 'romgrk/barbar.nvim'
+
+  " ide
+  "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+  "Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
-source $HOME/.config/vim/vim-sneak.vim
-source $HOME/.config/vim/nerd-tree.vim
-source $HOME/.config/vim/autosave.vim
-source $HOME/.config/vim/fzf.vim
+source $HOME/.config/nvim/vim-sneak.vim
+source $HOME/.config/nvim/nerd-tree.vim
+source $HOME/.config/nvim/autosave.vim
+source $HOME/.config/nvim/fzf.vim
+"source $HOME/.config/nvim/coc.vim
+
 
 " ===== EYE CANDY =========================
 colorscheme iceberg
