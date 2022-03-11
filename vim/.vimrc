@@ -4,7 +4,7 @@ syntax enable                                       " turn on all the magic, inc
 
 set autoindent                                      " autoindent
 set background=dark
-set clipboard+=unnamedplus                          " yank to clipboard
+set clipboard=unnamedplus                          " yank to clipboard
 set cursorline                                      " highlight current line
 set encoding=UTF-8
 set expandtab
@@ -14,7 +14,7 @@ set hlsearch                                        " highlight matches
 set ignorecase                                      " Do case insensitive matching
 set incsearch                                       " search as characters are entered
 set lazyredraw                                      " redraw only when we need to.
-set mouse=a
+"set mouse=a
 set nowrap
 set number relativenumber                           " hybrid line numbers
 set ruler              			                    " Show the cursor position all the time
@@ -29,38 +29,38 @@ set splitright
 set tabstop=4
 set timeoutlen=2000
 set termguicolors
-set updatetime=300                                  " Faster completion
-set wildmenu
-set wildmode=longest,list                           " get bash-like tab completions
+"set updatetime=300                                  " Faster completion
+"set wildmenu
+"set wildmode=longest,list                           " get bash-like tab completions
 
 " ===== PLUGS =============================
 call plug#begin('~/.cache/vim/plugged')
   
  " themes
-  Plug 'arcticicestudio/nord-vim'
+  "Plug 'arcticicestudio/nord-vim'
   Plug 'cocopon/iceberg.vim'
-  Plug 'jacoborus/tender.vim'
-  Plug 'joshdick/onedark.vim'
-  Plug 'morhetz/gruvbox'
-  Plug 'tomasr/molokai'
+  "Plug 'jacoborus/tender.vim'
+  "Plug 'joshdick/onedark.vim'
+  "Plug 'morhetz/gruvbox'
+  "Plug 'tomasr/molokai'
 
   " system
-  Plug '907th/vim-auto-save'                        " Auto Save
-  Plug 'airblade/vim-rooter'                        " current directory moves with file
+  "Plug '907th/vim-auto-save'                        " Auto Save
+  "Plug 'airblade/vim-rooter'                        " current directory moves with file
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'                   
-  Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
-  Plug 'justinmk/vim-sneak'
-  Plug 'preservim/nerdtree'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'tpope/vim-fugitive'
+  "Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
+  "Plug 'justinmk/vim-sneak'
+  "Plug 'preservim/nerdtree'
+  "Plug 'ryanoasis/vim-devicons'
+  "Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
-source $HOME/.config/vim/vim-sneak.vim
-source $HOME/.config/vim/nerd-tree.vim
-source $HOME/.config/vim/autosave.vim
+"source $HOME/.config/vim/vim-sneak.vim
+"source $HOME/.config/vim/nerd-tree.vim
+"source $HOME/.config/vim/autosave.vim
 source $HOME/.config/vim/fzf.vim
 
 " ===== EYE CANDY =========================
@@ -76,7 +76,9 @@ nnoremap ; :
 vnoremap ; :
 
 " Yank act like other capital letters
-nnoremap Y y$
+nnoremap y "+y
+vnoremap y "+y
+nnoremap Y "+y$
 
 " Keeping it centered
 nnoremap n nzzzv
