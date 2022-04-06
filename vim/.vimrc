@@ -45,22 +45,22 @@ call plug#begin('~/.cache/vim/plugged')
   "Plug 'tomasr/molokai'
 
   " system
-  "Plug '907th/vim-auto-save'                        " Auto Save
-  "Plug 'airblade/vim-rooter'                        " current directory moves with file
+  Plug '907th/vim-auto-save'                        " Auto Save
+  Plug 'airblade/vim-rooter'                        " current directory moves with file
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'                   
-  "Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
-  "Plug 'justinmk/vim-sneak'
+  Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
+  Plug 'justinmk/vim-sneak'
   "Plug 'preservim/nerdtree'
   "Plug 'ryanoasis/vim-devicons'
   "Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
-"source $HOME/.config/vim/vim-sneak.vim
+source $HOME/.config/vim/vim-sneak.vim
 "source $HOME/.config/vim/nerd-tree.vim
-"source $HOME/.config/vim/autosave.vim
+source $HOME/.config/vim/autosave.vim
 source $HOME/.config/vim/fzf.vim
 
 " ===== EYE CANDY =========================
