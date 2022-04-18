@@ -1,9 +1,11 @@
 #!/bin/bash
 
-alias dup='sudo dnf upgrade'
 alias up='sudo dnf upgrade && flatpak upgrade'
+
+alias dup='sudo dnf upgrade'
 alias din='sudo dnf install'
 alias dar='sudo dnf autoremove'
 alias dif='sudo dnf info'
 alias dch='dnf check-upgrade'
 alias dck='dnf check-upgrade'
+alias dls='dnf history --userinstalled'
