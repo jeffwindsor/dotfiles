@@ -1,0 +1,10 @@
+#!/bin/bash
+
+alias up='sudo zypper upgrade && flatpak upgrade'
+alias zup='sudo zypper upgrade'
+alias zin='sudo zypper install'
+alias zar='sudo zypper autoremove'
+alias zif='sudo zypper info'
+alias zch='zypper list-updates'
+alias zck='zypper list-updates'
+alias zls='sudo zypper se -i'
