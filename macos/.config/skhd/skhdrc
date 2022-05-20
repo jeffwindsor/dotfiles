@@ -19,4 +19,4 @@ cmd + ctrl - i              : open -na 'Intellij IDEA'          # launch ide
 cmd + ctrl - d              : open -na 'DBVisualizer'
 cmd + ctrl - v              : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
 cmd + ctrl - t              : open -na 'alacritty'              # launch terminal
-cmd + ctrl - b              : open -na 'chromium'                # launch broser 
+cmd + ctrl - b              : open -na 'firefox'                # launch broser 
