@@ -1,5 +1,4 @@
 set nocompatible                                    " Disable compatibility to old-time vi
-
 "
 "   /$$   /$$                     /$$    /$$ /$$              
 "  | $$$ | $$                    | $$   | $$|__/              
@@ -10,9 +9,6 @@ set nocompatible                                    " Disable compatibility to o
 "  | $$ \  $$|  $$$$$$$|  $$$$$$/   \  $/   | $$| $$ | $$ | $$
 "  |__/  \__/ \_______/ \______/     \_/    |__/|__/ |__/ |__/
 "                                                            
-                                                           
-
-" ===== NEOVIM ============================
 set viminfo+=n~/.cache/nvim/viminfo                 " neo vim
 set runtimepath^=~/.viDTreeShowHidden=1uvim/after   " neo vim
 let &packpath = &runtimepath                        " neo vim
@@ -61,26 +57,29 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'cocopon/iceberg.vim'
   Plug 'jacoborus/tender.vim'
   Plug 'joshdick/onedark.vim'
-  Plug 'morhetz/gruvbox'
-  Plug 'tomasr/molokai'
 
   " system
   Plug '907th/vim-auto-save'                        " Auto Save
   Plug 'airblade/vim-rooter'                        " current directory moves with file
-  Plug 'itchyny/lightline.vim'
+  "Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'                   
   Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
   Plug 'justinmk/vim-sneak'
   Plug 'preservim/nerdtree'
-  Plug 'ryanoasis/vim-devicons'
   Plug 'tpope/vim-fugitive'
-  "  Plug 'kyazdani42/nvim-web-devicons'
-  "  Plug 'romgrk/barbar.nvim'
 
-  " ide
-  "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-  "Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+  " code
+  Plug 'neovim/nvim-lspconfig'                      " Collection of common configurations for the Nvim LSP client
+  Plug 'hrsh7th/nvim-cmp'                           " Completion framework
+  Plug 'hrsh7th/cmp-nvim-lsp'                       " LSP completion source for nvim-cmp
+  Plug 'hrsh7th/cmp-vsnip'                          " Snippet completion source for nvim-cmp
+  Plug 'hrsh7th/cmp-path'                           " Other usefull completion sources
+  Plug 'hrsh7th/cmp-buffer'                         " Other usefull completion sources
+  " See hrsh7th's other plugins for more completion sources!
+
+  " languages
+  Plug 'simrat39/rust-tools.nvim'                   " To enable more of the features of rust-analyzer, such as inlay hints and more!
 
 call plug#end()
 
@@ -88,13 +87,12 @@ source $HOME/.config/nvim/vim-sneak.vim
 source $HOME/.config/nvim/nerd-tree.vim
 source $HOME/.config/nvim/autosave.vim
 source $HOME/.config/nvim/fzf.vim
-"source $HOME/.config/nvim/coc.vim
+source $HOME/.config/nvim/rust-lsp.vim
 
 
 " ===== EYE CANDY =========================
-colorscheme iceberg
-" https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md
-let g:lightline = { 'colorscheme': 'iceberg'}
+colorscheme onedark
+"let g:lightline = { 'colorscheme': 'onedark'}
 
 " ===== KEYS ==============================
 let mapleader = "\<Space>"
@@ -105,10 +103,6 @@ vnoremap ; :
 
 " Yank act like other capital letters
 nnoremap Y y$
-
-" Keeping it centered
-nnoremap n nzzzv
-nnoremap N Nzzzv
 
 " Leader maps
 nnoremap <leader><leader> :Lines<CR>
