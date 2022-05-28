@@ -1,4 +1,3 @@
-alacritty
 data
 dnf
 fd
@@ -6,9 +5,8 @@ fzf
 git
 linux
 node
-nvim
+astronvim
 personal
-sdkman
 starship
 zsh
 
