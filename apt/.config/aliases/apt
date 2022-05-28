@@ -1,5 +1,0 @@
-#!/bin/bash
-
-alias up='sudo apt upgrade && sudo apt autoremove'
-alias install='sudo apt install -y'
-alias info='apt info'
