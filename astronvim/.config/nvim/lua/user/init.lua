@@ -58,6 +58,8 @@ local config = {
     telescope_select = true,
   },
 
+  -- test
+  --
   -- Configure plugins
   plugins = {
     -- Add plugins, the packer syntax without the "use"
@@ -67,6 +69,7 @@ local config = {
 
       -- You can also add new plugins here as well:
       -- { "andweeb/presence.nvim" },
+      { "Pocco81/AutoSave.nvim" },
       -- {
       --   "ray-x/lsp_signature.nvim",
       --   event = "BufRead",
