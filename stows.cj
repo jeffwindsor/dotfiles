@@ -8,7 +8,7 @@ git
 intellij-idea
 macos
 node
-vim
+astronvim
 rust
 sdkman
 starship
