@@ -2,7 +2,7 @@
     name = Jeff Windsor
     email = jeff.windsor@gmail.com
 [core]
-    excludesFile = ~/.config/git/config_
+    excludesFile = ~/.config/git/ignore
 [pull]
 	ff = only
 [init]
