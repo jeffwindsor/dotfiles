@@ -14,6 +14,12 @@ exec-on-git-repos () {
     [ ! -z "$result" ] && $1 $result
 }
 
+alias src='cd $SRC'
+alias srcs="exec-on-git-repos cd $SRC"
+
+alias hub='cd $SRC/github.com'
+alias hubs="exec-on-git-repos cd $SRC/github.com/"
+
 alias gup='git-add-commit-push'
 alias ga='git add'
 alias gaa='git add --all'
@@ -30,9 +36,9 @@ alias gpl='git pull'
 alias gpls='for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done'
 alias gr='git remote -vv'
 alias gs='git status -sb --ignore-submodules'
-alias gsync='git checkout master && git pull --rebase && git checkout - && git rebase master'
-alias src='cd $SRC'
-alias srcs="exec-on-git-repos cd $SRC"
-alias hub='cd $SRC/github.com'
-alias hubs="exec-on-git-repos cd $SRC/github.com/"
 
+# sync with remote master
+alias gsync='git checkout master && git pull --rebase && git checkout - && git rebase master'
+
+# convert remotes via config
+# alias g2ssh='git config --global url."https://github.com/".insteadOf "git@github.com:"'

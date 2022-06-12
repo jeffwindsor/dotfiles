@@ -5,4 +5,4 @@ alias vv='nvim -O'
 
 alias configs='nvim -c "Telescope find_files cwd=$HOME/$XDG_CONFIG_HOME hidden=true"'
 alias dots='nvim -c "Telescope find_files cwd=$HOME/.dotfiles hidden=true"'
-alias ins='nvim -c "Telescope find_files cwd=$HOME/.installs hidden=true"'
+alias ins='nvim -c "Telescope find_files cwd=$HOME/.installs"'
