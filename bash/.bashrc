@@ -19,7 +19,7 @@ do
     source $rc
 done
 
-for rc in $XDG_CONFIG_HOME/bash/*
+for rc in $XDG_CONFIG_HOME/bash/autoloads/*
 do
     source $rc
 done
