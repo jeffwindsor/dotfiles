@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+cd $(dirname "$0")
+
+# default source and target if missing
+[ -z "$source" ] && source=$(dirname "$0") 
+[ -z "$target" ] && target=$HOME
+
+folders=(
+    astronvim
+    bash
+    data
+    dnf
+    fd
+    fzf
+    git
+    linux
+    node
+    rust
+    starship
+    zsh
+    ) 
+
+# unstow then stow each folder 
+for folder in $folders
+do
+    if [ ! -z "$folder" ]
+    then
+        echo -ne "  $folder"
+        stow -D -d "$source" -t "$target" "$folder"
+        echo -ne "\033[0;34m > cleaned\033[0;30m"
+
+        stow -d "$source" -t "$target" "$folder"
+        echo -e "\033[0;32m > added\033[0m"
+    fi
+done
+
