@@ -1,11 +1,5 @@
 #!/usr/bin/env zsh
 
-# load all shel shared aliases
-for rc in $XDG_CONFIG_HOME/aliases/*
-do
-    source $rc
-done
-
 # zsh config
 export CLICOLOR=1
 setopt LOCAL_OPTIONS EXTENDED_GLOB
@@ -26,7 +20,20 @@ unsetopt correctall BEEP
 HISTSIZE=50000
 SAVEHIST=10000
 
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+#===========================================================
+# autoloads
+for file in $ZDOTDIR/autoloads/*
+do
+    source $file
+done
+
+# aliases
+for file in $XDG_CONFIG_HOME/aliases/*
+do
+    source $file
+done
+
+#===========================================================
 
 # auto/tab completion 
 zstyle ':completion:*' menu select
@@ -34,5 +41,4 @@ zmodload zsh/complist
 _comp_options+=(globdots)    #include hidden files
 
 autoload -Uz compinit
-compinit 
-
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
