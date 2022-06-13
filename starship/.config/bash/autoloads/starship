@@ -1,2 +1,2 @@
 #!/usr/bin/env zsh
-eval "$(starship init bash)"
+#eval "$(starship init bash)"
