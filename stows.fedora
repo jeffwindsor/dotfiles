@@ -1,3 +1,4 @@
+astronvim
 data
 dnf
 fd
@@ -5,7 +6,6 @@ fzf
 git
 linux
 node
-astronvim
+rust
 starship
 zsh
-
