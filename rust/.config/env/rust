@@ -1,4 +1,8 @@
 #!/usr/bin/env zsh
 
-source "$HOME/.cargo/env"
+# moves cargo from .cargo to data directory
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+
+# required by rustup / rustc / cargo
+source "$CARGO_HOME/env"
 
