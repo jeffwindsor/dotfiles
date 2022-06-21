@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
+export DOTFILES=$SRC/github.com/jeffwindsor/dotfiles/
+export INSTALLS=$SRC/github.com/jeffwindsor/installs/
 export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(auto)%d%C(reset) - %s | %C(cyan)%an %C(dim)%cr%C(reset)'
 

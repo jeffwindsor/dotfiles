@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-gch() { git clone git@github.com:$1 $HOME/Source/github.com/$1; }
+gch() { git clone git@github.com:$1 $SRC/github.com/$1; }
 git-to-main() { git branch -m master main && git push -u origin main; }
 git-commit(){ git commit -m ${1:-'Refactor'}; }
 git-add-commit-push(){ 

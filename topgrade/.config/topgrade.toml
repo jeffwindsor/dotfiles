@@ -38,8 +38,7 @@ cleanup = true
 max_concurrency = 2
 # Additional git repositories to pull
 repos = [
-    "~/Source/**/*",
-    "~/.dotfiles"
+    "$SRC/**/*"
 ]
 
 # Don't pull the predefined git repos
