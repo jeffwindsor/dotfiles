@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+alias .....='cd ../../../../'
+alias ....='cd ../../../'
+alias ...='cd ../../'
+alias ..='cd ..'
+alias config='cd $XDG_CONFIG_HOME'
