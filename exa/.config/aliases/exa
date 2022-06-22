@@ -1,7 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-alias t='exa --color=always --tree'
+alias  t='exa --color=always --tree'
 alias tt='exa --color=always --tree --all'
-alias l='exa -lF --color=always --group-directories-first --git'       #alias ll='ls -laLhG'
-alias ll='exa -lF --all --color=always --group-directories-first --git'       #alias ll='ls -laLhG'
-alias lll='exa -lF --all --color=always --group-directories-first --git-ignore'       #alias ll='ls -laLhG'
+
+alias   l='exa -lF --color=always --group-directories-first --git --no-permissions --no-user --time="changed" --time-style="iso"'       #alias ll='ls -laLhG'
+alias  ll='exa -lF --all --color=always --group-directories-first --git --no-permissions --no-user --time="changed" --time-style="iso"'       #alias ll='ls -laLhG'
+alias lll='exa -lF --all --color=always --group-directories-first --git-ignore --no-permissions --no-user --time="changed" --time-style="iso"'       #alias ll='ls -laLhG'
