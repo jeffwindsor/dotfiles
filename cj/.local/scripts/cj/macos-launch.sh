@@ -4,7 +4,6 @@ status=$1
 launchDaemons=(
 com.checkpoint.epc.service
 com.cirrato.cirratod
-com.docker.vmnetd
 com.jamf.management.daemon
 com.jamfsoftware.startupItem*
 com.jamfsoftware.task.1
