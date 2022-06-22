@@ -19,6 +19,13 @@ sha1-check()  { shasum -a 1 -c "$1.sha1"; }
 sha256-check(){ shasum -a 256 -c "$1.sha256"; }
 sha512-check(){ shasum -a 512 -c "$1.sha512"; }
 md5-check()  { md5 -r "$1" | diff "$1.md5" -; }
+
+alias .....='cd ../../../../'
+alias ....='cd ../../../'
+alias ...='cd ../../'
+alias ..='cd ..'
+alias config='cd $XDG_CONFIG_HOME'
+
 alias aws1="alias aws='/usr/local/opt/awscli@1/bin/aws'"
 alias aws2="unalias aws"
 alias bc="brew cask"

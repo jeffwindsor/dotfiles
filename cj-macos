@@ -8,19 +8,23 @@ cd $(dirname "$0")
 folders=(
     alacritty
     alfred
+    astronvim
+    bat
     cj
     data
+    exa
     fd
     fzf
     git
     intellij-idea
     macos
     node
-    astronvim
+    ripgrep
     rust
     sdkman
     starship
     topgrade
+    vscode
     zsh
     )
 

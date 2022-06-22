@@ -8,13 +8,16 @@ cd $(dirname "$0")
 folders=(
     astronvim
     bash
+    bat
     data
     dnf
+    exa
     fd
     fzf
     git
     linux
     node
+    ripgrep
     rust
     starship
     zsh

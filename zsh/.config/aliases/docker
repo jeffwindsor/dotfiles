@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-alias dkl='docker ps -a'
-alias dkr='docker run --rm'
-alias dkrh='docker run --rm -d -p 8081:80'
-alias dkrt='docker run --rm -it'
-alias dri='docker rmi -f $(docker images -a -q)'
