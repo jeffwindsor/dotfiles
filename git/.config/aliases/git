@@ -21,7 +21,7 @@ alias hub='cd $SRC/github.com'
 alias hubs="exec-on-git-repos cd $SRC/github.com/"
 
 alias dot='cd $DOTFILES'
-alias in='cd $HOME/.installs'
+alias in='cd $INSTALLS'
 
 alias gup='git-add-commit-push'
 alias ga='git add'
