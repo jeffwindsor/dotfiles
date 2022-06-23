@@ -15,6 +15,7 @@ folders=(
     exa
     fd
     fzf
+    fish
     git
     intellij-idea
     macos

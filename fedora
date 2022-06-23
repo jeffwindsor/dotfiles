@@ -13,6 +13,7 @@ folders=(
     dnf
     exa
     fd
+    fish
     fzf
     git
     hledger
