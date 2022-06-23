@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function git-commit{ git commit -m ${1:-'Refactor'}; }
+function git-add-commit-push{ 
+    git add --all;
+    git commit -m ${1:-'Refactor'}; 
+    git push;
+}
+function git-log-graph{ git log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}; }
+function git-find-dirs { find $1 -type d \( -exec test -d "{}/.git" -a "{}" != "." \; -print -prune -o -name .git -prune \); }
+function exec-on-git-repos {
+    local result=`git-find-dirs $2 | cut -d '/' -f5- | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden --reverse --height 40% | awk -v path="$2/" '{print path $0}'`
+    [ ! -z "$result" ] && $1 $result
+}
+
+function gphs { for i in **/.git; do ( echo $i; cd $i/..; git push; ); done }
+function gpls {for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done }
