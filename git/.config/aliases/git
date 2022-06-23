@@ -1,20 +1,5 @@
 #!/usr/bin/env bash
 
-gch() { git clone git@github.com:$1 $SRC/github.com/$1; }
-
-git-to-main() { git branch -m master main && git push -u origin main; }
-git-commit(){ git commit -m ${1:-'Refactor'}; }
-git-add-commit-push(){ 
-    git commit -a -m ${1:-'Refactor'}; 
-    git push;
-}
-git-log-graph(){ git log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}; }
-git-find-dirs () { find $1 -type d \( -exec test -d "{}/.git" -a "{}" != "." \; -print -prune -o -name .git -prune \); }
-exec-on-git-repos () {
-    local result=`git-find-dirs $2 | cut -d '/' -f5- | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden --reverse --height 40% | awk -v path="$2/" '{print path $0}'`
-    [ ! -z "$result" ] && $1 $result
-}
-
 alias src="cd $SRC"
 alias srcs="exec-on-git-repos cd $SRC"
 
@@ -24,6 +9,10 @@ alias jeff="cd $SRC/github.com/jeffwindsor/"
 
 alias dot="cd $DOTFILES"
 alias in="cd $INSTALLS"
+
+alias git-to-main="git branch -m master main && git push -u origin main"
+alias gch="git clone git@github.com:$1 $SRC/github.com/$1"
+
 
 alias gup="git-add-commit-push"
 alias ga="git add"
@@ -36,9 +25,7 @@ alias gd="git diff --ignore-space-at-eol -b -w --ignore-blank-lines"
 alias gh="git-log-graph"
 alias gl="git log"
 alias gph="git push"
-alias gphs='for i in **/.git; do ( echo $i; cd $i/..; git push; ); done'
 alias gpl="git pull"
-alias gpls='for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done'
 alias gr="git remote -vv"
 alias gs="git status -sb --ignore-submodules"
 

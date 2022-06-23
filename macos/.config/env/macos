@@ -5,7 +5,6 @@ if type brew &>/dev/null; then
 fi
 
 export HISTCONTROL=ignoreboth
-export HISTFILE=${XDG_CACHE_HOME}/zsh/zsh_history   # put history to cache, seperating it from the other ZDOT files
 export LESSHISTFILE="-"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'" # use bat as man pager
 export PATH=$PATH:$HOME/.local/bin
