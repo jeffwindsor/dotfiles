@@ -15,6 +15,7 @@ folders=(
     fd
     fzf
     git
+    hledger
     linux
     node
     ripgrep
