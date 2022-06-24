@@ -21,3 +21,6 @@ exec-on-git-repos() {
 
 gphs() { for i in **/.git; do ( echo $i; cd $i/..; git push; ); done }
 gpls() {for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done }
+gch(){ 
+    git clone git@github.com:$1 $SRC/github.com/$1 
+}

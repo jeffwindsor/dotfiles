@@ -11,8 +11,6 @@ alias dot="cd $DOTFILES"
 alias in="cd $INSTALLS"
 
 alias git-to-main="git branch -m master main && git push -u origin main"
-alias gch="git clone git@github.com:$1 $SRC/github.com/$1"
-
 
 alias gup="git-add-commit-push"
 alias ga="git add"
