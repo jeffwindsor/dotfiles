@@ -1,6 +1,9 @@
 #!/bin/sh
 
-export LEDGER_FILE="$SRC/github.com/jeffwindsor/ledger-personal/hledger.journal"
+export LEDGER_DIR="$SRC/github.com/jeffwindsor/hledger-data"
+export LEDGER_IMPORTS_DIR="$LEDGER_DIR/imports"
+export LEDGER_FILE="$LEDGER_DIR/personal-finances.journal"
 
-alias hls="git -C $LEDGER_FILE commit -a -m 'manual save' && git -C $LEDGER_FILE push"
-alias hla=""
+alias hl="hledger"
+alias hld="cd $LEDGER_DIR"
+alias hlup="git -C $LEDGER_FILE commit -a -m 'manual save' && git -C $LEDGER_FILE push"
