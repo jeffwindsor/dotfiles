@@ -6,7 +6,6 @@ cd $(dirname "$0")
 [ -z "$target" ] && target=$HOME
 
 folders=(
-    alacritty
     astronvim
     bash
     bat
