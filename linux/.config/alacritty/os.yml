@@ -13,5 +13,5 @@ draw_bold_text_with_bright_colors: true
 font:
   normal:
     family: "JetBrainsMono Nerd Font"
-  size: 13
+  size: 11
 

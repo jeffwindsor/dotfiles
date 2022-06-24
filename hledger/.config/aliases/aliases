@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export LEDGER_FILE="$SRC/github.com/jeffwindsor/ledger-personal"
+export LEDGER_FILE="$SRC/github.com/jeffwindsor/ledger-personal/hledger.journal"
 
 alias hls="git -C $LEDGER_FILE commit -a -m 'manual save' && git -C $LEDGER_FILE push"
 alias hla=""
