@@ -7,7 +7,6 @@ cd $(dirname "$0")
 
 folders=(
     astronvim
-    bash
     bat
     data
     dnf
@@ -22,7 +21,6 @@ folders=(
     ripgrep
     rust
     starship
-    zsh
     ) 
 
 # unstow then stow each folder 
