@@ -1,6 +1,6 @@
 format = """
-[┌ ](blue)$directory$git_branch$git_status
-[└ ](blue)$time$shell$character"""
+[┌ ](blue)$directory$git_branch$git_status$jobs
+[└ ](blue)$time$cmd_duration$shell$character"""
 
 [character]
 success_symbol = "[:](green)"
@@ -26,5 +26,12 @@ format = '[$time](dimmed blue) '
 fish_indicator = ""
 zsh_indicator = "z"
 style = "dimmed blue"
-disabled = false
+disabled = true
 
+[cmd_duration]
+disabled=false
+
+[jobs]
+disabled=false
+number_threshold=1
+format='([\[](dimmed blue)[$number](dimmed blue)[\]](dimmed blue))'
