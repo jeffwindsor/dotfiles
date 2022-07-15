@@ -6,4 +6,4 @@ alias vup='nvim --headless +PackerUpdate +qa'
 
 alias configs='nvim -c "Telescope find_files cwd=$HOME/$XDG_CONFIG_HOME hidden=true"'
 alias dots='nvim -c "Telescope find_files cwd=$DOTFILES hidden=true"'
-alias ins='nvim -c "Telescope find_files cwd=$HOME/.installs"'
+alias ins='nvim -c "Telescope find_files cwd=$INSTALLS"'

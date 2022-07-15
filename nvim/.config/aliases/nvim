@@ -5,4 +5,4 @@ alias vv='nvim -O'
 
 alias configs='nvim -c ":Files $XDG_CONFIG_HOME"'
 alias dots='nvim -c ":Files $DOTFILES"'
-alias ins='nvim -c ":Files $HOME/.installs"'
+alias ins='nvim -c ":Files $INSTALLS"'
