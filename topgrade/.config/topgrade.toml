@@ -35,10 +35,10 @@ no_retry = true
 cleanup = true
 
 [git]
-max_concurrency = 2
+max_concurrency = 5
 # Additional git repositories to pull
 repos = [
-    "$SRC/**/*"
+    "~/Source/**/*"
 ]
 
 # Don't pull the predefined git repos
