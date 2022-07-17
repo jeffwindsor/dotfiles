@@ -19,3 +19,9 @@ if status is-interactive
     end
 
 end
+
+function fish_greeting
+    set_color blue
+    fortune
+    set_color normal
+end
