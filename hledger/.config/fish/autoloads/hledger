@@ -1,5 +1,3 @@
-#!/bin/sh
-
 export LEDGER_DIR="$SRC/github.com/jeffwindsor/hledger-data"
 export LEDGER_IMPORTS_DIR="$LEDGER_DIR/imports"
 export LEDGER_FILE="$LEDGER_DIR/personal-finances.journal"
@@ -10,11 +8,11 @@ alias hldi="cd $LEDGER_IMPORTS_DIR"
 alias hlup="git -C $LEDGER_FILE commit -a -m 'manual save' && git -C $LEDGER_FILE push"
 
 function hlc-usaa
-  hledger import --dry $1 --rules-file=usaa.rules | hledger -f- -I print unknown
+  hledger import --dry $argv[1] --rules-file=usaa.rules | hledger -f- -I print unknown
 end 
 
 function hli-usaa
-  hledger import $1 --rules-file=usaa.rules 
+  hledger import $argv[1] --rules-file=usaa.rules 
 end
 
 

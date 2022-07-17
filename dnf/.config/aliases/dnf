@@ -1,7 +1,4 @@
-#!/bin/bash
-
 alias up='sudo dnf -y upgrade && flatpak -y upgrade'
-
 alias dup='sudo dnf upgrade'
 alias din='sudo dnf install'
 alias dar='sudo dnf autoremove'

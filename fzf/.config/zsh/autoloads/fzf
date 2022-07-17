@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 if [ -d /usr/local/opt/fzf ] # MACOS
 then
   [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]] && export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"

@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 alias src="cd $SRC"
 alias srcs="exec-on-git-repos cd $SRC"
 
