@@ -1,5 +1,5 @@
-alias t='exa --color=always --tree'
-alias tt='exa --color=always --tree --all'
+alias t='exa --color=always --tree -I ".git"'
+alias tt='exa --color=always --tree --all -I ".git"'
 alias l='exa -lF --color=always --group-directories-first --git --no-permissions --no-user --time="changed" --time-style="iso"'       #alias ll='ls -laLhG'
 alias ll='exa -lF --all --color=always --group-directories-first --git --no-permissions --no-user --time="changed" --time-style="iso"'       #alias ll='ls -laLhG'
 alias lll='exa -lF --all --color=always --group-directories-first --git-ignore --no-permissions --no-user --time="changed" --time-style="iso"'       #alias ll='ls -laLhG'
