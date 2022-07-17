@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # moves cargo from .cargo to data directory
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 

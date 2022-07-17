@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 export SRC=$HOME/Source
 export DOTFILES=$SRC/github.com/jeffwindsor/dotfiles/
 export INSTALLS=$SRC/github.com/jeffwindsor/installs/

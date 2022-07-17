@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 alias cb='cabal build'
 alias cg='cabal repl'
 alias cr='cabal -v0 run'

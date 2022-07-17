@@ -1,2 +1,1 @@
-#!/usr/bin/env zsh
 alias up='topgrade' # package upgrade

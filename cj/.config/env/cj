@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 #export PATH="$PATH:$JAVA_HOME/bin"
 #export PATH="$PATH:$SOFTWARE_HOME/bin"
 #export PATH="$PATH:$SOFTWARE_HOME/resin"

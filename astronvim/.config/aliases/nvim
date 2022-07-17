@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 alias v='nvim'
 alias vv='nvim -O'
 alias vup='nvim --headless +PackerUpdate +qa'
