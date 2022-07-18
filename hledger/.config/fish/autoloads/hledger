@@ -6,13 +6,10 @@ alias hl="hledger"
 alias hld="cd $LEDGER_DIR"
 alias hldi="cd $LEDGER_IMPORTS_DIR"
 alias hlup="git -C $LEDGER_FILE commit -a -m 'manual save' && git -C $LEDGER_FILE push"
+alias hli-usaa="hledger import --rules-file=usaa.rules"
+alias hlid-usaa="hledger import --rules-file=usaa.rules --dry"
 
 function hlc-usaa
-  hledger import --dry $argv[1] --rules-file=usaa.rules | hledger -f- -I print unknown
+  hledger import --dry --rules-file=usaa.rules $argv[1] | hledger -f- -I print unknown
 end 
-
-function hli-usaa
-  hledger import $argv[1] --rules-file=usaa.rules 
-end
-
 
