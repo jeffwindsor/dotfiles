@@ -1,7 +1,7 @@
 local config = {
 
   -- Set colorscheme
-  colorscheme = "default_theme",
+  colorscheme = "tokyonight",
 
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   options = {
@@ -14,9 +14,7 @@ local config = {
   },
 
   -- dashboard header
-  header = {
-    "",
-  },
+  header = {""},
   -- Default theme configuration
   default_theme = {
     diagnostics_style = { italic = true },
@@ -69,7 +67,9 @@ local config = {
 
       -- You can also add new plugins here as well:
       -- { "andweeb/presence.nvim" },
-      { "Pocco81/AutoSave.nvim" },
+      { "pocco81/auto-save.nvim" },
+      { "folke/tokyonight.nvim", style = "night" },
+      --{ "shaunsingh/nord.nvim" },
       -- {
       --   "ray-x/lsp_signature.nvim",
       --   event = "BufRead",
