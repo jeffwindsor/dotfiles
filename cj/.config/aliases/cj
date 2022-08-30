@@ -8,12 +8,14 @@ alias java17='sdk use java 17.0.1.12.1-amzn'
 alias java8='sdk use java 8.302.08.1-amzn'
 alias qb='java8 && mvn clean install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
 alias qqb='java8 && mvn install -T 1C -Ddelta.skip=true -Dcleanup.skip=true -Dqunit.numThreads=8 -DskipTests -Dtablespaces.skip=true -Dgulp.task=min && java11'
-alias shopcart='sqlplus -L jwindsor@shopcart'
 alias shuttle-init="$HOME/.local/scripts/cj/shuttle-init"
-alias t1='sqlplus -L cj@tcjoweb1'
 alias test-schemas='java -jar ./target/schemas-main-SNAPSHOT.one-jar.jar locator=T5 tnsnames=/USers/jwindsor/.local/cjdev/ci/tns-admin/tnsnames.ora'
 alias tns='v ~/.local/cjdev/ci/tns-admin/tnsnames.ora'
 alias uber='cd Library/Application\ Support/Übersicht/widgets/'
+
+alias shopcart='sqlplus -L jwindsor@shopcart.db.cj.com:1531/shopcart'
+alias t1='sqlplus -L cj@tcjoweb1.db.cj.com:1521/tcjoweb1'
+alias t5='sqlplus -L cj@tcjoweb5.db.cj.com:1521/tcjoweb5'
 
 alias lab='cd $SRC/gitlab.cj.dev'
 alias labs="exec-on-git-repos cd $SRC/gitlab.cj.dev"
