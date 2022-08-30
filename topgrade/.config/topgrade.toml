@@ -35,7 +35,7 @@ no_retry = true
 cleanup = true
 
 [git]
-max_concurrency = 5
+max_concurrency = 1
 # Additional git repositories to pull
 repos = [
     "~/Source/**/*"
