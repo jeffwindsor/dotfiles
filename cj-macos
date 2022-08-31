@@ -18,6 +18,7 @@ folders=(
     fish
     git
     intellij-idea
+    hledger
     macos
     node
     ripgrep
