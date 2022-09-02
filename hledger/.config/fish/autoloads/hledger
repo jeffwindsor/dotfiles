@@ -10,11 +10,9 @@ alias hlup="git -C $LEDGER_FILE commit -a -m 'manual save' && git -C $LEDGER_FIL
 alias  hli="hledger import"
 alias hlid="hledger import --dry"
 
+alias hunknown="hledger -f- -I print unknown"
+
 function hl-csv-col-uniq
   awk -F, 'BEGIN {OFS=","} { print $"$argv[1]" }' $argv[2] | sort | uniq
 end
-
-function hliu
-  hledger import --dry $argv[1] | hledger -f- -I print unknown
-end 
 
