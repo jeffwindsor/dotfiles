@@ -1,0 +1,7 @@
+# placed here so we can gaurentee $SRC
+export LEDGER_FILE="$SRC/github.com/jeffwindsor/hledger-data/personal-finances.journal"
+
+alias hl="hledger"
+alias hli="hledger import"
+alias hlid="hledger import --dry"
+alias hunknown="hledger -f- -I print unknown"
