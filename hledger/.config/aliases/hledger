@@ -1,5 +1,10 @@
 # placed here so we can gaurentee $SRC
-export LEDGER_FILE="$SRC/github.com/jeffwindsor/hledger-data/personal-finances.journal"
+export LEDGER_FILE_PERSONAL_FINANCES="$SRC/github.com/jeffwindsor/fin/personal-finances/pf.journal"
+export LEDGER_FILE_PERSONAL_INVESTMENTS="$SRC/github.com/jeffwindsor/fin/personal-investments/pi.journal"
+
+export LEDGER_FILE=$LEDGER_FILE_PERSONAL_FINANCES
+alias hl-pf="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_FINANCES"
+alias hl-pi="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_INVESTMENTS"
 
 alias hl="hledger-ui"
 alias hli="hledger import"
