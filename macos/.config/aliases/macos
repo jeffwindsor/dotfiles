@@ -3,20 +3,20 @@ source $ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zs
 source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-brews() {
-    local result=$(brew formulae | fzf -m --preview="brew info {}" --preview-window=:hidden --bind=space:toggle-preview)
-    [ ! -z "$result" ] && brew install "$result"
-}
-casks() {
-    local result=$(brew search --casks | fzf -m --preview="brew cask info {}" --preview-window=:hidden --bind=space:toggle-preview)
-    [ ! -z "$result" ] && brew cask install "$result"
-}
-sshkey(){ ssh-keygen -t ed25519 -C $1 -f $2; }
-sshadd(){ eval "$(ssh-agent -s)" && ssh-add -K ~/.ssh/${1}; }
-sha1-check()  { shasum -a 1 -c "$1.sha1"; }
-sha256-check(){ shasum -a 256 -c "$1.sha256"; }
-sha512-check(){ shasum -a 512 -c "$1.sha512"; }
-md5-check()  { md5 -r "$1" | diff "$1.md5" -; }
+#brews() {
+#    local result=$(brew formulae | fzf -m --preview="brew info {}" --preview-window=:hidden --bind=space:toggle-preview)
+#    [ ! -z "$result" ] && brew install "$result"
+#}
+#casks() {
+#    local result=$(brew search --casks | fzf -m --preview="brew cask info {}" --preview-window=:hidden --bind=space:toggle-preview)
+#    [ ! -z "$result" ] && brew cask install "$result"
+#}
+#sshkey(){ ssh-keygen -t ed25519 -C $1 -f $2; }
+#sshadd(){ eval "$(ssh-agent -s)" && ssh-add -K ~/.ssh/${1}; }
+#sha1-check()  { shasum -a 1 -c "$1.sha1"; }
+#sha256-check(){ shasum -a 256 -c "$1.sha256"; }
+#sha512-check(){ shasum -a 512 -c "$1.sha512"; }
+#md5-check()  { md5 -r "$1" | diff "$1.md5" -; }
 
 alias .....='cd ../../../../'
 alias ....='cd ../../../'

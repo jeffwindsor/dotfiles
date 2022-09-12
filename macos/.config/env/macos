@@ -1,8 +1,3 @@
-# add brew auto completions if they exist
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-fi
-
 export HISTCONTROL=ignoreboth
 export LESSHISTFILE="-"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'" # use bat as man pager
@@ -11,4 +6,4 @@ export TERM='xterm-256color'
 export ZSH_PLUGINS='/usr/local/share'
 
 # Scala Coursier
-[[ -d "$HOME/Library/Application Support/Coursier/bin" ]] && export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
+#[[ -d "$HOME/Library/Application Support/Coursier/bin" ]] && export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
