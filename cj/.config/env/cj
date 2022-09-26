@@ -13,3 +13,4 @@ export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
 export PROJECTS_DIR="$HOME/.local/cjdev"
 export SOFTWARE_HOME="$PROJECTS_DIR"
 export TNS_ADMIN="$SOFTWARE_HOME/ci/tns-admin/"
+export DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock
