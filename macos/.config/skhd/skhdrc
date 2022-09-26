@@ -14,9 +14,9 @@
 #   keys:
 #       0x2A = Backslash
 ######################################################################################
-cmd + ctrl - f              : open -a  'Finder'                 # launch files
-cmd + ctrl - i              : open -na 'Intellij IDEA'          # launch ide
-cmd + ctrl - d              : open -na 'DBVisualizer'
-cmd + ctrl - v              : open -na 'VSCodium.app' --args --extensions-dir $HOME/.vscode-oss/extensions
+cmd + ctrl - f              : open -a  'Finder'
+cmd + ctrl - i              : open -na 'Intellij IDEA'
+cmd + ctrl - d              : open -na 'Intellij IDEA' --args $SRC/gitlab.cj.dev/jwindsor/sql
+cmd + ctrl - v              : open -na 'Visual Studio Code'
 cmd + ctrl - t              : open -na 'alacritty'              # launch terminal
-cmd + ctrl - b              : open -na 'Google Chrome'                # launch browser 
+cmd + ctrl - b              : open -na 'Google Chrome'          # launch browser 
