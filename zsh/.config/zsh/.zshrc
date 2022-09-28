@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# use to profile startup time
+# zmodload zsh/zprof
+
 # zsh config
 export CLICOLOR=1
 setopt LOCAL_OPTIONS EXTENDED_GLOB

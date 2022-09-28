@@ -1,7 +1,7 @@
-source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh
-source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source $ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh
+#source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #brews() {
 #    local result=$(brew formulae | fzf -m --preview="brew info {}" --preview-window=:hidden --bind=space:toggle-preview)
@@ -30,10 +30,10 @@ alias bc="brew cask"
 alias bi="brew info"
 alias bl="brew list && brew cask list && mas list"
 alias bs="brew search"
-alias bt="brew leaves | xargs brew deps --installed --for-each | sed \"s/^.*:/$(tput setaf 4)&$(tput sgr0)/\""
-alias bundle_name="osascript -e 'id of app"
-alias caskroom="cd /usr/local/Caskroom && l"
-alias cellar="cd /usr/local/Cellar && l"
+#alias bt="brew leaves | xargs brew deps --installed --for-each | sed \"s/^.*:/$(tput setaf 4)&$(tput sgr0)/\""
+#alias bundle_name="osascript -e 'id of app"
+#alias caskroom="cd /usr/local/Caskroom && l"
+#alias cellar="cd /usr/local/Cellar && l"
 alias m5c="md5-check"
 alias mf="mas info"
 alias mi="mas install"
