@@ -6,17 +6,17 @@ if status is-interactive
     export XDG_CACHE_HOME=$HOME/.cache
     export XDG_CONFIG_HOME=$HOME/.config
 
-#    for file in $XDG_CONFIG_HOME/env/*
-#        source $file
-#    end
-#
-#    for file in $XDG_CONFIG_HOME/fish/autoloads/*
-#        source $file
-#    end
-#
-#    for file in $XDG_CONFIG_HOME/aliases/*
-#        source $file
-#    end
+    for file in $XDG_CONFIG_HOME/env/*
+        source $file
+    end
+
+    for file in $XDG_CONFIG_HOME/fish/autoloads/*
+        source $file
+    end
+
+    for file in $XDG_CONFIG_HOME/aliases/*
+        source $file
+    end
 
 end
 
