@@ -61,7 +61,7 @@ call plug#begin('~/.cache/nvim/plugged')
   " system
   Plug '907th/vim-auto-save'                        " Auto Save
   Plug 'airblade/vim-rooter'                        " current directory moves with file
-  "Plug 'itchyny/lightline.vim'
+  Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'                   
   Plug 'junegunn/vim-peekaboo'                      " show my registers, fool... 
@@ -69,30 +69,16 @@ call plug#begin('~/.cache/nvim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'tpope/vim-fugitive'
 
-  " code
-  Plug 'neovim/nvim-lspconfig'                      " Collection of common configurations for the Nvim LSP client
-  Plug 'hrsh7th/nvim-cmp'                           " Completion framework
-  Plug 'hrsh7th/cmp-nvim-lsp'                       " LSP completion source for nvim-cmp
-  Plug 'hrsh7th/cmp-vsnip'                          " Snippet completion source for nvim-cmp
-  Plug 'hrsh7th/cmp-path'                           " Other usefull completion sources
-  Plug 'hrsh7th/cmp-buffer'                         " Other usefull completion sources
-  " See hrsh7th's other plugins for more completion sources!
-
-  " languages
-  Plug 'simrat39/rust-tools.nvim'                   " To enable more of the features of rust-analyzer, such as inlay hints and more!
-
 call plug#end()
 
 source $HOME/.config/nvim/vim-sneak.vim
 source $HOME/.config/nvim/nerd-tree.vim
 source $HOME/.config/nvim/autosave.vim
 source $HOME/.config/nvim/fzf.vim
-source $HOME/.config/nvim/rust-lsp.vim
-
 
 " ===== EYE CANDY =========================
-colorscheme onedark
-"let g:lightline = { 'colorscheme': 'onedark'}
+colorscheme iceberg
+let g:lightline = { 'colorscheme': 'iceberg'}
 
 " ===== KEYS ==============================
 let mapleader = "\<Space>"
