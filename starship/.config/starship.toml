@@ -26,6 +26,7 @@ format = '[$time](dimmed blue) '
 fish_indicator = ""
 bash_indicator = "b"
 zsh_indicator = "z"
+nu_indicator = "z"
 style = "dimmed blue"
 disabled = false
 
