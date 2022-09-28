@@ -3,16 +3,16 @@
 
 ### GIT #########################################################################
 alias src  = cd $env.SRC
-alias hub  = cd ($env.SRC | append "/github.com")
-alias jeff = cd ($env.SRC | append "/github.com/jeffwindsor")
+alias hub  = cd ([$env.SRC, '/github.com'] | str collect)
+alias jeff = cd ([$env.SRC, '/github.com/jeffwindsor'] | str collect)
 alias ga   = git add
 alias gaa  = git add --all
 alias gb   = git branch -v
 alias gc   = git clone
-alias gcm  = git-commit
+alias gcm  = git commit -m
 alias gco  = git checkout
 alias gd   = git diff --ignore-space-at-eol -b -w --ignore-blank-lines
-alias gl   = git-log-graph
+alias gl   = git log --graph --pretty=format:'%C(green)%h%C(auto)%d%C(reset) - %s | %C(cyan)%an %C(dim)%cr%C(reset)' --abbrev-commit --max-count=25
 alias gll  = git log
 alias gph  = git push
 alias gpl  = git pull
@@ -24,12 +24,16 @@ alias lg   = lazygit
 alias cfg  = cd $env.XDG_CONFIG_HOME
 alias dot  = cd $env.DOTFILES
 alias in   = cd $env.INSTALLS
+alias configs = nvim -c ([':Files ', $env.XDG_CONFIG_HOME] | str collect)
+alias dots    = nvim -c ([':Files ', $env.DOTFILES] | str collect)
+alias ins     = nvim -c ([':Files ', $env.INSTALLS] | str collect)
 
-##################################################################################
+### REDIRECTS ####################################################################
 alias grep = rg
 alias cat  = bat -p
-##################################################################################
+alias v    = nvim
 
+##################################################################################
 module completions {
   # Custom completions for external commands (those outside of Nushell)
   # Each completions has two parts: the form of the external command, including its flags and parameters
