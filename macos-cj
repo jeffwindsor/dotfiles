@@ -15,12 +15,10 @@ folders=(
     exa
     fd
     fzf
-    fish
     git
     intellij-idea
     hledger
     macos
-    node
     ripgrep
     rust
     sdkman
