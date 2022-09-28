@@ -3,8 +3,8 @@
 
 ### GIT #########################################################################
 alias src  = cd $env.SRC
-alias hub  = cd $env.SRC/github.com
-alias jeff = cd $env.SRC/github.com/jeffwindsor/
+alias hub  = cd ($env.SRC | append "/github.com")
+alias jeff = cd ($env.SRC | append "/github.com/jeffwindsor")
 alias ga   = git add
 alias gaa  = git add --all
 alias gb   = git branch -v
