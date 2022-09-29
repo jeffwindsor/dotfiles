@@ -3,17 +3,13 @@
 let-env EDITOR   = 'nvim'
 let-env VISUAL   = 'nvim'
 
-let-env SRC      = ([$env.HOME, '/Source'] | str collect)
-let-env DOTFILES = ([$env.SRC, '/github.com/jeffwindsor/dotfiles/'] | str collect)
-let-env INSTALLS = ([$env.SRC, '/github.com/jeffwindsor/installs/'] | str collect)
-let-env LEDGER_DIR                       = ([$env.SRC, '/github.com/jeffwindsor/finances'] | str collect)
-let-env LEDGER_FILE_PERSONAL_FINANCES    = ([$env.LEDGER_DIR, '/finances.journal'] | str collect)
-let-env LEDGER_FILE_PERSONAL_INVESTMENTS = ([$env.LEDGER_DIR, '/investments.journal'] | str collect)
+let-env SRC      = $'($env.HOME)/Source'
+let-env DOTFILES = $'($env.SRC)/github.com/jeffwindsor/dotfiles/'
+let-env INSTALLS = $'($env.SRC)/github.com/jeffwindsor/installs/'
+let-env LEDGER_DIR                       = $'($env.SRC)/github.com/jeffwindsor/finances'
+let-env LEDGER_FILE_PERSONAL_FINANCES    = $'($env.LEDGER_DIR)/finances.journal'
+let-env LEDGER_FILE_PERSONAL_INVESTMENTS = $'($env.LEDGER_DIR)/investments.journal'
 let-env LEDGER_FILE                      = $env.LEDGER_FILE_PERSONAL_FINANCES
-
-##################################################################################
-# PROMPT
-##################################################################################
 
 def create_left_prompt [] {
     let path_segment = if (is-admin) {
