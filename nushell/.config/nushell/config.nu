@@ -3,8 +3,8 @@
 
 ### GIT #########################################################################
 alias src  = cd $env.SRC
-alias hub  = cd ([$env.SRC, '/github.com'] | str collect)
-alias jeff = cd ([$env.SRC, '/github.com/jeffwindsor'] | str collect)
+alias hub  = cd $'($env.SRC)/github.com'
+alias jeff = cd $'($env.SRC)/github.com/jeffwindsor'
 alias ga   = git add
 alias gaa  = git add --all
 alias gb   = git branch -v
@@ -12,7 +12,9 @@ alias gc   = git clone
 alias gcm  = git commit -m
 alias gco  = git checkout
 alias gd   = git diff --ignore-space-at-eol -b -w --ignore-blank-lines
-alias gl   = git log --graph --pretty=format:'%C(green)%h%C(auto)%d%C(reset) - %s | %C(cyan)%an %C(dim)%cr%C(reset)' --abbrev-commit --max-count=25
+def gl [count: int = 10] { 
+    git log --graph --pretty=format:"%C(green)%h%C(auto)%d%C(reset) - %s | %C(cyan)%an %C(dim)%cr%C(reset)" --abbrev-commit $'--max-count=($count)'
+}
 alias gll  = git log
 alias gph  = git push
 alias gpl  = git pull
@@ -24,14 +26,15 @@ alias lg   = lazygit
 alias cfg  = cd $env.XDG_CONFIG_HOME
 alias dot  = cd $env.DOTFILES
 alias in   = cd $env.INSTALLS
-alias configs = nvim -c ([':Files ', $env.XDG_CONFIG_HOME] | str collect)
-alias dots    = nvim -c ([':Files ', $env.DOTFILES] | str collect)
-alias ins     = nvim -c ([':Files ', $env.INSTALLS] | str collect)
+alias configs = nvim -c $':Files ($env.XDG_CONFIG_HOME)'
+alias dots    = nvim -c $':Files ($env.DOTFILES)'
+alias ins     = nvim -c $':Files ($env.INSTALLS)'
 
 ### REDIRECTS ####################################################################
 alias grep = rg
 alias cat  = bat -p
 alias v    = nvim
+alias ll   = ls -a
 
 ##################################################################################
 module completions {
@@ -288,16 +291,16 @@ let-env config = {
   # buffer_editor: "emacs" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
   use_ansi_coloring: true
   filesize_format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
-  edit_mode: vi # emacs, vi
+  edit_mode: emacs # emacs, vi
   max_history_size: 10000 # Session has to be reloaded for this to take effect
   sync_history_on_enter: true # Enable to share the history between multiple sessions, else you have to close the session to persist history to file
   history_file_format: "plaintext" # "sqlite" or "plaintext"
   shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
   disable_table_indexes: false # set to true to remove the index column from tables
-  cd_with_abbreviations: true # set to true to allow you to do things like cd s/o/f and nushell expand it to cd some/other/folder
+  cd_with_abbreviations: false # set to true to allow you to do things like cd s/o/f and nushell expand it to cd some/other/folder
   case_sensitive_completions: false # set to true to enable case-sensitive completions
   enable_external_completion: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up my be very slow
-  max_external_completion_results: 20 # setting it lower can improve completion performance at the cost of omitting some options
+  max_external_completion_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
   # A strategy of managing table view in case of limited space.
   table_trim: {
     methodology: wrapping, # truncating
