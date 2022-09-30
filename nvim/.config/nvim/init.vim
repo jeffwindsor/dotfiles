@@ -97,7 +97,7 @@ nnoremap <leader>bl :BufferMoveNext<CR>
 
 nnoremap <leader>cl :set background=light<CR>
 nnoremap <leader>cd :set background=dark<CR>
-nnoremap <leader>cc :Colors
+nnoremap <leader>cc :Colors<CR>
 
 nnoremap <leader>e :NERDTreeToggle<CR>
 
