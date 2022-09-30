@@ -18,6 +18,11 @@ def gl [count: int = 10] {
 alias gll  = git log
 alias gph  = git push
 alias gpl  = git pull
+def gup [comment="Refactor"] {
+    git add --all
+    git commit -m ($comment)
+    git push
+}
 alias gr   = git remote -vv
 alias gs   = git status -sb --ignore-submodules
 alias lg   = lazygit
