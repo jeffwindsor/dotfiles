@@ -19,6 +19,7 @@ folders=(
     hledger
     linux
     node
+    nushell
     ripgrep
     rust
     starship
