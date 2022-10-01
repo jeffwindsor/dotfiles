@@ -9,6 +9,7 @@ folders=(
     alacritty
     alfred
     bat
+    bash
     cj
     data
     exa
