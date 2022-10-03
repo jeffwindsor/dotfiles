@@ -21,6 +21,10 @@ return require('packer').startup(function(use)
   -- tools
   use 'pocco81/auto-save.nvim'
   use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  }
+  use {
     'nvim-neo-tree/neo-tree.nvim',
     branch   = 'v2.x',
     requires = { 
