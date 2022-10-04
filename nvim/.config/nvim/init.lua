@@ -1,6 +1,6 @@
-require 'global.options'
-require 'global.mappings'
-require 'plugins'
+require 'options'
+require 'mappings'
+require 'packages'
 
-vim.cmd 'colorscheme tender'
+vim.cmd 'colorscheme kanagawa'
 

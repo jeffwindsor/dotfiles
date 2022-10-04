@@ -16,20 +16,9 @@ map('n', 'Y', 'y$', opts)
 --leader maps
 map('n', '<leader>q',   '<Cmd>quit<CR>', opts)
 map('n', '<leader>rr',  '<Cmd>source $MYVIMRC<CR>', opts)
---commands
 --colors
 map('n', '<leader>cl',  '<Cmd>set background=light<CR>', opts)
 map('n', '<leader>cd',  '<Cmd>set background=dark<CR>', opts)
---files
-map('n', '<leader>e',   '<Cmd>Neotree toggle<CR>', opts)
---filetypes
---git
---packages
-map('n', '<leader>pc',  '<Cmd>source $MYVIMRC<CR> :PackerClean<CR>', opts)
-map('n', '<leader>pi',  '<Cmd>source $MYVIMRC<CR> :PackerInstall<CR>', opts)
-map('n', '<leader>ps',  '<Cmd>source $MYVIMRC<CR> :PackerSync<CR>', opts)
-map('n', '<leader>pu',  '<Cmd>source $MYVIMRC<CR> :PackerUpdate<CR>', opts)
---search
 --tabs
 map('n', '<leader>tn',  '<Cmd>tabnew<cr>', opts)
 map('n', '<leader>tl',  '<Cmd>tabnext<cr>', opts)
