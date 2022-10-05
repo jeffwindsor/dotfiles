@@ -1,38 +1,28 @@
+# Colors (Tender)
 colors:
   # Default colors
   primary:
-    background: '0x282828'
-    foreground: '0xeeeeee'
-
-  # Bright colors
-  bright:
-    black:   '#323232'
-    red:     '#f43753'
-    green:   '#c9d05c'
-    yellow:  '#d3b987'
-    blue:    '#b3deef'
-    magenta: '#ada0d3'
-    cyan:    '#999999'
-    white:   '#ffffff'
+    background: '#282828'
+    foreground: '#eeeeee'
 
   # Normal colors
   normal:
-    black:   '#1D1d1d'
-    red:     '#c5152f'
-    green:   '#9faa00'
+    black:   '#282828'
+    red:     '#f43753'
+    green:   '#c9d05c'
     yellow:  '#ffc24b'
-    blue:    '#73cef4'
-    magenta: '#a093c7'
-    cyan:    '#666666'
+    blue:    '#b3deef'
+    magenta: '#d3b987'
+    cyan:    '#73cef4'
     white:   '#eeeeee'
 
-  # Dim colors
-  dim:
-    black:   '#0b0b0b'
-    red:     '#79313c'
-    green:   '#6a6b3f'
-    yellow:  '#715b2f'
-    blue:    '#44778d'
-    magenta: '#ada0d3'
-    cyan:    '#444444'
-    white:   '#bbbbbb'
+  # Bright colors
+  bright:
+    black:   '#4c4c4c'
+    red:     '#f43753'
+    green:   '#c9d05c'
+    yellow:  '#ffc24b'
+    blue:    '#b3deef'
+    magenta: '#d3b987'
+    cyan:    '#73cef4'
+    white:   '#feffff'

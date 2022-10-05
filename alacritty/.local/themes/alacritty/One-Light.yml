@@ -1,9 +1,9 @@
-# Colors (One Dark)
+# Colors (One Light)
 colors:
   # Default colors
   primary:
-    background: '#282c34'
-    foreground: '#abb2bf'
+    foreground: '#282c34'
+    background: '#ffffff'
 
   # Normal colors
   normal:
