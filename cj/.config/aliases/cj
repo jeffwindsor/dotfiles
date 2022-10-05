@@ -13,9 +13,9 @@ alias test-schemas='java -jar ./target/schemas-main-SNAPSHOT.one-jar.jar locator
 alias tns='v ~/.local/cjdev/ci/tns-admin/tnsnames.ora'
 alias uber='cd Library/Application\ Support/Übersicht/widgets/'
 
-alias shopcart='sqlplus jwindsor@shopcart.db.cj.com:1531/shopcart'
-alias t1='sqlplus cj@tcjoweb1.db.cj.com:1521/tcjoweb1'
-alias t5='sqlplus cj@tcjoweb5.db.cj.com:1521/tcjoweb5'
+alias shopcart='rlwrap sqlplus jwindsor@shopcart.db.cj.com:1531/shopcart'
+alias t1='rlwrap sqlplus cj@tcjoweb1.db.cj.com:1521/tcjoweb1'
+alias t5='rlwrap sqlplus cj@tcjoweb5.db.cj.com:1521/tcjoweb5'
 
 alias lab='cd $SRC/gitlab.cj.dev'
 alias labs="exec-on-git-repos cd $SRC/gitlab.cj.dev"
