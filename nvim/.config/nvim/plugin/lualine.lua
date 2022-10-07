@@ -1,23 +1,6 @@
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
--- mappings 
-map('n', '<leader>bc',  '<Cmd>bd<CR>', opts)
-map('n', '<leader>bd',  '<Cmd>bd<CR>', opts)
-map('n', '<leader>bq',  '<Cmd>bd<CR>', opts)
-map('n', '<leader>bh',  '<Cmd>bp<CR>', opts)
-map('n', '<leader>bl',  '<Cmd>bn<CR>', opts)
-map('n', '<leader>1',   '<Cmd>LualineBuffersJump! 1<CR>', opts)
-map('n', '<leader>2',   '<Cmd>LualineBuffersJump! 2<CR>', opts)
-map('n', '<leader>3',   '<Cmd>LualineBuffersJump! 3<CR>', opts)
-map('n', '<leader>4',   '<Cmd>LualineBuffersJump! 4<CR>', opts)
-map('n', '<leader>5',   '<Cmd>LualineBuffersJump! 5<CR>', opts)
-map('n', '<leader>6',   '<Cmd>LualineBuffersJump! 6<CR>', opts)
-map('n', '<leader>7',   '<Cmd>LualineBuffersJump! 7<CR>', opts)
-map('n', '<leader>8',   '<Cmd>LualineBuffersJump! 8<CR>', opts)
-map('n', '<leader>9',   '<Cmd>LualineBuffersJump! 9<CR>', opts)
-map('n', '<leader>0',   '<Cmd>LualineBuffersJump! $<CR>', opts)
-
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -54,12 +37,12 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {'buffers'},
+    lualine_a = {'tabs'},
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {'buffers'}
   },
   winbar = {},
   inactive_winbar = {},
