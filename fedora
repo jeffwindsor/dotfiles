@@ -6,7 +6,6 @@ cd $(dirname "$0")
 [ -z "$target" ] && target=$HOME
 
 folders=(
-    astronvim
     bat
     bash
     data
@@ -20,6 +19,7 @@ folders=(
     linux
     node
     nushell
+    nvim
     ripgrep
     rust
     starship
