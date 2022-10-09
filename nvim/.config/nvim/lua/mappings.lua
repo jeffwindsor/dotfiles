@@ -9,8 +9,8 @@ map('i', 'jk', '<ESC>', opts)                                         -- use jk 
 map('n', ';', ':', opts)                                              -- get to command mode without the shift key
 map('v', ';', ':', opts)                                              -- get to command mode without the shift key
 map('n', 'Y', 'y$', opts)                                             -- make yank act like other capitol letters
-map('n', '<leader>q',   '<Cmd>quit<CR>', opts)                        -- quit
-map('n', '<leader>qx',  '<Cmd>q!<CR>', opts)                          -- quit force
+map('n', '<leader>q',   '<Cmd>q<CR>', opts)                           -- quit
+map('n', '<leader>x',   '<Cmd>q!<CR>', opts)                          -- quit force
 map('n', '<leader>rr',  '<Cmd>luafile %<CR>', opts)                   -- reload config file
 map('n', '<leader>cl',  '<Cmd>set background=light<CR>', opts)        -- light theme
 map('n', '<leader>cd',  '<Cmd>set background=dark<CR>', opts)         -- dark theme

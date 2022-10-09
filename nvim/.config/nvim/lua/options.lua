@@ -9,6 +9,7 @@ vim.opt.hlsearch        = true			    -- highlight found searches
 vim.opt.ignorecase	    = true        
 vim.opt.inccommand	    = 'split'		    -- get preview of replacements
 vim.opt.incsearch 	    = true       		-- show match while typing
+vim.opt.mouse           = 'a'           -- turn on mouse usage
 vim.opt.number          = true
 vim.opt.relativenumber  = true			    -- hybrid number scheme
 vim.opt.ruler           = true
