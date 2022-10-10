@@ -8,7 +8,7 @@ map('n', '<leader>bb',  '<Cmd>Telescope buffers<CR>', opts)
 --commands
 map('n', '<leader>cc',  '<Cmd>Telescope commands<CR>', opts)
 map('n', '<leader>ch',  '<Cmd>Telescope command_history<CR>', opts)
-map('n', '<leader>cy',  '<Cmd>Telescope registers<CR>', opts)
+map('n', '<leader>\'',  '<Cmd>Telescope registers<CR>', opts)
 --colors
 map('n', '<leader>cs',  '<Cmd>Telescope colorscheme<CR>', opts)
 --files
