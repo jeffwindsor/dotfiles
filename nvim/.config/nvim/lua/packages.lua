@@ -16,7 +16,8 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  
+  use 'nvim-treesitter/nvim-treesitter'
+
   -- auto save changes
   use 'pocco81/auto-save.nvim'
 
