@@ -17,7 +17,10 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-treesitter/nvim-treesitter'
-
+  
+  -- caching for fast load times
+  use 'lewis6991/impatient.nvim'
+  
   -- auto save changes
   use 'pocco81/auto-save.nvim'
 
