@@ -1,17 +1,16 @@
 window:
-  decoration: none
   padding:
-      x: 2
-      y: 2
-  opacity: 0.94
+      x: 4
+      y: 4
+  opacity: 0.96
 
 cursor: 
   style: Block
 
-draw_bold_text_with_bright_colors: true
+    #draw_bold_text_with_bright_colors: true
 
 font:
   normal:
-    family: "JetBrainsMono Nerd Font"
-  size: 11
+    family: "JetBrainsMono Nerd Font Mono"
+  size: 14
 
