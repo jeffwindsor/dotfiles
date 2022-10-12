@@ -28,3 +28,13 @@ map('n', '<leader>gs',  '<Cmd>Telescope git_status<CR>', opts)
 --search
 map('n', '<leader>s',   '<Cmd>Telescope live_grep<CR>', opts)
 --map('n', '<leader>ss',  '<Cmd>Telescope grep_string<CR>', opts)
+
+
+require('telescope').setup{
+  defaults = {
+    layout_strategy = 'vertical',
+    layout_config = { prompt_position = 'top' },
+    sorting_strategy = 'ascending',
+  },
+}
+
