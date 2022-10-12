@@ -2,4 +2,4 @@ alias rs='rpm-ostree status'
 alias ru='rpm-ostree update'
 alias ri='rpm-ostree install'
 alias rr='rpm-ostree uninstall'
-
+alias sr='systemctl reboot'
