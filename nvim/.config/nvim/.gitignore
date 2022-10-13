@@ -1,1 +1,7 @@
+# packer compiled files
 *_compiled.lua
+
+# node
+pack/
+package-lock.json
+
