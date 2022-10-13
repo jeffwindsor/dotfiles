@@ -21,26 +21,30 @@ return require('packer').startup(function(use)
   -- caching for fast load times
   use 'lewis6991/impatient.nvim'
   
-  -- auto save changes
+  -- auto save
   use 'pocco81/auto-save.nvim'
 
-  --buffer and status line
+  -- buffer and status line
   use{'nvim-lualine/lualine.nvim', 
-      requires = { 'kyazdani42/nvim-web-devicons' }}
+      requires = { 'kyazdani42/nvim-web-devicons' }
+    }
   
-  --decorates indention levels
+  -- indention lines
   use 'lukas-reineke/indent-blankline.nvim'
   
   -- fuzzy finder
   use{'nvim-telescope/telescope.nvim', 
       branch   = '0.1.x', 
-      requires = { 'nvim-lua/plenary.nvim' }}
+      requires = { 'nvim-lua/plenary.nvim' }
+    }
 
   -- use 'ggandor/leap.nvim'        --other motion plugin
   -- use 'phaazon/hop.nvim'         --motion plugin
   -- use 'numToStr/Comment.nvim'    --comment plugin 
 
+  --===========================
   -- color schemes
+  --===========================
   --use 'arcticicestudio/nord-vim'
   use 'shaunsingh/nord.nvim'
   --use 'cocopon/iceberg.vim'
