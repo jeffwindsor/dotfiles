@@ -1,1 +1,2 @@
 alias up='topgrade' # package upgrade
+alias upg='topgrade --only git_repos'
