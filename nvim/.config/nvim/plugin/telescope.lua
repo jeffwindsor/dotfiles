@@ -12,6 +12,7 @@ map('n', '<leader>\'',  '<Cmd>Telescope registers<CR>', opts)
 --colors
 map('n', '<leader>cs',  '<Cmd>Telescope colorscheme<CR>', opts)
 --files
+map('n', '<leader>fb',  '<Cmd>Telescope file_browser<CR>', opts)
 map('n', '<leader>fc',  '<Cmd>Telescope find_files cwd=$XDG_CONFIG_HOME<CR>', opts)
 map('n', '<leader>fd',  '<Cmd>Telescope find_files cwd=$DOTFILES<CR>', opts)
 map('n', '<leader>ff',  '<Cmd>Telescope find_files<CR>', opts)
@@ -26,15 +27,22 @@ map('n', '<leader>gc',  '<Cmd>Telescope git_commits<CR>', opts)
 map('n', '<leader>gf',  '<Cmd>Telescope git_files<CR>', opts)
 map('n', '<leader>gs',  '<Cmd>Telescope git_status<CR>', opts)
 --search
-map('n', '<leader>s',   '<Cmd>Telescope live_grep<CR>', opts)
---map('n', '<leader>ss',  '<Cmd>Telescope grep_string<CR>', opts)
+map('n', '<leader>ss',   '<Cmd>Telescope live_grep<CR>', opts)
 
+local telescope = require('telescope')
 
-require('telescope').setup{
-  defaults = {
-    layout_strategy = 'vertical',
-    layout_config = { prompt_position = 'top' },
-    sorting_strategy = 'ascending',
-  },
-}
+telescope.setup{
+    defaults = {
+      layout_strategy = 'vertical',
+      layout_config = { prompt_position = 'top' },
+      sorting_strategy = 'ascending',
+    },
+    extensions = {
+      file_browser = {
+        hidden = true,
+        --layout_strategy = 'horizontal',
+      }
+    }
+  }
 
+telescope.load_extension('file_browser')

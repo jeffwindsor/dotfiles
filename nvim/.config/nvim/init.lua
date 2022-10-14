@@ -1,6 +1,6 @@
 require 'options'
 require 'mappings'
-require 'packages'
+require 'plugins'
 
 vim.cmd 'colorscheme kanagawa'
 
