@@ -23,7 +23,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {},
+    lualine_c = {''},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -42,7 +42,9 @@ require('lualine').setup {
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {'buffers'}
+    lualine_z = {
+      {'filename', path = 3, shorting_target = 40, }
+    }
   },
   winbar = {},
   inactive_winbar = {},
