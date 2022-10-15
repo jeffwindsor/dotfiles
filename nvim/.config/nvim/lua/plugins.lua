@@ -21,8 +21,9 @@ return require('packer').startup(function(use)
   use 'lewis6991/impatient.nvim'                       -- caching for fast load times
   use 'pocco81/auto-save.nvim'                         -- auto save
   use 'lukas-reineke/indent-blankline.nvim'            -- vertical lines on indents
-  -- use 'ggandor/leap.nvim'                           -- motion plugin
-  -- use 'numToStr/Comment.nvim'                       -- comments
+  -- use 'ggandor/leap.nvim'                              -- motion plugin
+  -- use 'numToStr/Comment.nvim'                          -- comments
+  -- use 'nvim-telescope/telescope-project.nvim'          -- projects
   use 'kdheepak/lazygit.nvim'                          -- lazygit in a centered popup
   use{'nvim-lualine/lualine.nvim',                     -- buffer and status line 
       requires = { 
