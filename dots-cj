@@ -14,6 +14,7 @@ folders=(
     data
     exa
     fd
+    fish
     fzf
     git
     intellij-idea
