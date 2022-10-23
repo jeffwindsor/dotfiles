@@ -16,12 +16,15 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
 
+  --===========================
+  -- plugins
+  --===========================
   use 'wbthomason/packer.nvim'                         -- plugin manager
-  use 'nvim-treesitter/nvim-treesitter'                -- syntax
+  use 'nvim-treesitter/nvim-treesitter'                -- lanuage syntax
   use 'lewis6991/impatient.nvim'                       -- caching for fast load times
-  use 'pocco81/auto-save.nvim'                         -- auto save
+  use 'pocco81/auto-save.nvim'                         -- auto save on retuurn to normal mode
   use 'lukas-reineke/indent-blankline.nvim'            -- vertical lines on indents
-  -- use 'ggandor/leap.nvim'                              -- motion plugin
+  use 'ggandor/leap.nvim'                              -- motion plugin
   -- use 'numToStr/Comment.nvim'                          -- comments
   -- use 'nvim-telescope/telescope-project.nvim'          -- projects
   use 'kdheepak/lazygit.nvim'                          -- lazygit in a centered popup
@@ -30,18 +33,22 @@ return require('packer').startup(function(use)
         'kyazdani42/nvim-web-devicons'                 -- pretty pictures
       }
     }
-  use{'nvim-telescope/telescope.nvim',                 -- fuzzy finder and mores 
+  use{'nvim-telescope/telescope.nvim',                 -- fuzzy finders and more 
       branch   = '0.1.x', 
       requires = { 
         'nvim-lua/plenary.nvim',                        -- helpers
-        'nvim-telescope/telescope-file-browser.nvim',   -- add file browser capability
+        'nvim-telescope/telescope-file-browser.nvim',   -- extend telescope with file browser capability
       }
     }
+  use 'folke/which-key.nvim'                            -- display key bindings (like emacs)
+  
   --===========================
-  use 'shaunsingh/nord.nvim'                            -- color scheme
-  use 'marko-cerovac/material.nvim'                     -- color scheme
-  use 'mhartington/oceanic-next'                        -- color scheme
-  use 'rebelot/kanagawa.nvim'                           -- color scheme
+  -- color schemes
+  --===========================
+  use 'shaunsingh/nord.nvim'
+  use 'marko-cerovac/material.nvim'
+  use 'mhartington/oceanic-next'
+  use 'rebelot/kanagawa.nvim'
 
   --===========================
   if packer_bootstrap then require('packer').sync() end
