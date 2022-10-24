@@ -10,12 +10,11 @@ top loader of files and global configuration
 
 * mappings.lua - global key maps
 * options.lua  - global options
-* packages.lua - packer config and plugin list
+* plugins.lua  - packer config with a list of loaded plugins
 
 ### plugins/
 
-The files in this directory are auto loaded.   
-I create one file per plugin, in which I stow the plugins config.  
-Note: This could have all been done in the packages.lua startup function, 
-but I think this method better modularizes the configs.
+* One file per plugin needing config for good modularization. 
+  * The files in this directory are auto loaded.   
+  * This could have all been done with packer and startup functions.
 
