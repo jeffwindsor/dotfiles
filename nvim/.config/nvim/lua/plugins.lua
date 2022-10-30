@@ -49,6 +49,7 @@ return require('packer').startup(function(use)
   use 'marko-cerovac/material.nvim'
   use 'mhartington/oceanic-next'
   use 'rebelot/kanagawa.nvim'
+  --use 'bluz71/vim-nightfly-guicolors'
 
   --===========================
   if packer_bootstrap then require('packer').sync() end
