@@ -1,5 +1,6 @@
 vim.opt.autoindent	    = true
 vim.opt.background	    = 'dark'
+vim.opt.backspace       = 'indent,eol,start'
 vim.opt.clipboard       = 'unnamedplus' 
 vim.opt.cursorline	    = true            
 vim.opt.encoding        = 'UTF-8'

@@ -45,8 +45,8 @@ wk.register({
   },
   p = { 
     name = 'packer',
-    c = {'<Cmd>lualine %<CR><Cmd>PackerClean<CR>','clean'},
-    s = {'<Cmd>lualine %<CR><Cmd>PackerSync<CR>','sync'},
+    c = {'<Cmd>luafile %<CR><Cmd>PackerClean<CR>','clean'},
+    s = {'<Cmd>luafile %<CR><Cmd>PackerSync<CR>','sync'},
   },
   q = {'<Cmd>q<CR>','quit'},
   r = {'<Cmd>luafile %<CR>','reload config'},
