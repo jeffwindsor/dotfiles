@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 config=$XDG_CONFIG_HOME/alacritty
 themes=$HOME/.local/themes/alacritty
