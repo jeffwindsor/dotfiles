@@ -11,7 +11,7 @@ git-log-graph(){
 }
 git-find-dirs() { 
   # find all directories ending in .git (including hidden and ignored listings)
-  fd '^.git$' $1 -HIt d --max-depth 4 | sed 's/.git\/$//'
+  fd '^.git$' $1 -HItd --max-depth 4 | sed 's/.git\/$//'
 }
 exec-on-git-repos() {
   local result=$(git-find-dirs $argv[2] | fzf --reverse)
