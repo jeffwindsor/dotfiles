@@ -1,6 +1,6 @@
 format = """
-[┌ ](blue)$directory$git_branch$git_status$jobs$shell
-[└ ](blue)$time$cmd_duration$character"""
+[┌ ](blue)$directory$git_branch$git_status$jobs
+[└ ](blue)$shell$time$cmd_duration$character"""
 
 #right_format = "(purple)$shell"
 
@@ -25,10 +25,10 @@ disabled=false
 format = '[$time](dimmed blue) '
 
 [shell]
-fish_indicator = "fish"
-bash_indicator = "bash"
-zsh_indicator = "zsh"
-nu_indicator = "nu"
+fish_indicator = "🐟"
+bash_indicator = "💣"
+zsh_indicator = "🧟"
+nu_indicator = "n"
 style = "dimmed blue"
 disabled = false
 
