@@ -2,5 +2,5 @@ require 'options'
 require 'mappings'
 require 'plugins'
 
-vim.cmd 'colorscheme material'
+vim.cmd 'colorscheme kanagawa'
 
