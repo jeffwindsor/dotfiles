@@ -1,5 +1,5 @@
 # placed here so we can gaurentee $SRC
-export LEDGER_DIR="$SRC/github.com/jeffwindsor/finances"
+export LEDGER_DIR="$HOME/portable/documents/finances/hledger"
 export LEDGER_FILE_PERSONAL_FINANCES="$LEDGER_DIR/finances.journal"
 export LEDGER_FILE_PERSONAL_INVESTMENTS="$LEDGER_DIR/investments.journal"
 
