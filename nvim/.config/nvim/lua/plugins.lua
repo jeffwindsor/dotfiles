@@ -22,7 +22,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'                         -- plugin manager
   use 'nvim-treesitter/nvim-treesitter'                -- lanuage syntax
   use 'lewis6991/impatient.nvim'                       -- caching for fast load times
-  use 'pocco81/auto-save.nvim'                         -- auto save on retuurn to normal mode
+  use 'pocco81/auto-save.nvim'                         -- auto save on return to normal mode
   use 'lukas-reineke/indent-blankline.nvim'            -- vertical lines on indents
   use 'ggandor/leap.nvim'                              -- motion plugin
   -- use 'numToStr/Comment.nvim'                          -- comments
