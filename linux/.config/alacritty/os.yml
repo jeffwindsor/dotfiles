@@ -2,7 +2,7 @@ window:
   padding:
       x: 4
       y: 4
-  opacity: 0.96
+  opacity: 0.98
 
 cursor: 
   style: Block
@@ -12,5 +12,5 @@ cursor:
 font:
   normal:
     family: "JetBrainsMono Nerd Font Mono"
-  size: 14
+  size: 12
 
