@@ -1,43 +1,49 @@
-
-local wk = require('which-key')
-
 -- prepend action with telescope. example = <Cmd>Telescope action<CR>
 function telescope(action)
   return command('Telescope ' .. action)
 end
+
 -- wraps action in a vim command.  example = <Cmd>action<CR> which is the same as :action<CR>
 function command(action)
   return '<Cmd>' .. action .. '<CR>'
 end
 
+local buffer_next = command('buffernext')
+local load_config = command('luafile %')
+
+local wk = require('which-key')
 wk.setup()
 wk.register({
-  ["<leader>"] = {telescope('find_files'),'find files'},
-  ["."] = {command('luafile %'),'re-load config'}, 
+  ["<leader>"] = { telescope('find_files'), 'find files'},
+  ["."] = { load_config, 'load config'}, 
+  [","] = { 
+    name = 'commands',
+    [","] = {telescope('commands'),'commands'},
+    h = {telescope('command_history'),'history'},
+  },
   b = { 
     name = 'buffers',
     b = {telescope('buffers'),'buffers'},
     c = {command('bdelete'),'close'},
     j = {command('bprevious'),'previous'},
-    k = {command('bnext'),'next'},
+    k = {buffer_next,'next'},
     n = {command('enew'),'new'},
   },
   c = {
-    name = 'commands and colors',
-    c = {telescope('commands'),'commands'},
-    d = {command('set background=dark'),'dark theme'},
-    l = {command('set background=light'),'light theme'},
-    h = {telescope('command_history'),'command history'},
-    s = {telescope('colorscheme'),'color schemes'},
+    name = 'color schemes',
+    c = {command('colorscheme'),'color schemes'},
+    d = {command('set background=dark'),'dark'},
+    l = {command('set background=light'),'light'},
   },
   f = { 
-    name = 'find files',
+    name = 'files',
     b = {telescope('file_browser'),'via browser'},
     c = {telescope('find_files cwd=$XDG_CONFIG_HOME'),'in config directory'},
     d = {telescope('find_files cwd=$DOTFILES'),'in dotfiles directory'},
     f = {telescope('find_files'),'in current directory'},
     h = {telescope('find_files cwd=$HOME'),'in home directory'},
     i = {telescope('find_files cwd=$INSTALLS'),'in install files directory'},
+    p = {telescope('project_files'),'in project'},
     s = {telescope('find_files cwd=$SRC'),'in git repos'},
     t = {telescope('filetypes'),'set file type'},
   },
@@ -56,8 +62,8 @@ wk.register({
   },
   p = { 
     name = 'packer',
-    c = {command('luafile %') .. command('PackerClean'),'clean'},
-    s = {command('luafile %') .. command('PackerSync'),'sync'},
+    c = {load_config .. command('PackerClean'),'clean'},
+    s = {load_config .. command('PackerSync'),'sync'},
   },
   q = {command('q'),'quit'},
   r = {telescope('registers'),'registers'},
@@ -76,8 +82,8 @@ wk.register({
     j = {'<C-W><down>','down'},
     k = {'<C-W><up>','up'},
     l = {'<C-W><right>','right'},
-    s = {command('split') .. command('bnext'),'split down'},
-    v = {command('vsplit') .. command('bnext'),'split right'},
+    s = {command('split') .. buffer_next,'split down'},
+    v = {command('vsplit') .. buffer_next,'split right'},
     x = {
       name = 'resize',
       h = {command('vertical resize -5'),'left'},
