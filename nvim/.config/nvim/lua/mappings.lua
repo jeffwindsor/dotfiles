@@ -1,22 +1,36 @@
-local map     = vim.api.nvim_set_keymap
+--
+-- Location of all non leader based mappings
+-- Leader based have been moved tothe which key config in plugins
+--
+-- makes "action" a VIM command.  example = <Cmd>action<CR> which is the same as :action<CR>
+local function command(action)
+  return '<Cmd>' .. action .. '<CR>'
+end
+
+-- vim keymap function
+local keymap     = vim.api.nvim_set_keymap
+
+-- protects from remapping by other configs
 local noremap = { noremap = true }
-local silent  = { noremap = true, silent = true }     -- silent means dont show command in command line
 
--- map leader to <space> 
-vim.g.mapleader = " "           
+-- silent does not show bound command in bottom row / command output
+local silent  = { noremap = true, silent = true }
+
 
 -------------------------------------------------------------------------------
--- homies
+-- home row improvements
 -------------------------------------------------------------------------------
 
--- quick <jk> produces an <escape> 
-map('i', 'jk', '<ESC>', silent)   
+-- quick <jk> produces an <escape> while in insert mode
+keymap('i', 'jk', '<ESC>', silent)   
 
--- window movement direct from CONTROL
-keymap("n", "<C-h>", "<C-w>h", silent)
-keymap("n", "<C-j>", "<C-w>j", silent)
-keymap("n", "<C-k>", "<C-w>k", silent)
-keymap("n", "<C-l>", "<C-w>l", silent)
+-- buffer movement direct from CONTROL
+--   left / right for tabs 
+keymap("n", "<C-h>", "tabprev", silent)
+keymap("n", "<C-l>", "tabnext", silent)
+--   up / down for buffers
+keymap("n", "<C-j>", "bprev", silent)
+keymap("n", "<C-k>", "bnext", silent)
 
 -- first character in line
 keymap("n", "H", "^", silent)
@@ -25,16 +39,17 @@ keymap("n", "H", "^", silent)
 keymap("n", "L", "$", silent)
 
 -- return remove highlights
-keymap("n", "<CR>", "<Cmd>noh<CR><CR>", silent)
+keymap("n", "<CR>", ":noh<CR><CR>", silent)
 
 -------------------------------------------------------------------------------
--- simplifiers
+-- muscle memory improvements
 -------------------------------------------------------------------------------
--- get to command mode without the shift key (normal and visual mode)
-map('n', ';', ':', noremap)
-map('v', ';', ':', noremap)
 
--- make yank act like other capitol letters (normal mode)
-map('n', 'Y', 'y$', noremap)
+-- command mode without the shift key (normal and visual mode)
+keymap('n', ';', ':', noremap)
+keymap('v', ';', ':', noremap)
+
+-- yank acts like other capitol letters (normal mode)
+keymap('n', 'Y', 'y$', noremap)
 
 
