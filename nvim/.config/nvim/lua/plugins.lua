@@ -28,18 +28,20 @@ return require('packer').startup(function(use)
   -- use 'numToStr/Comment.nvim'                          -- comments
   -- use 'nvim-telescope/telescope-project.nvim'          -- projects
   use 'kdheepak/lazygit.nvim'                          -- lazygit in a centered popup
-  use{'nvim-lualine/lualine.nvim',                     -- buffer and status line 
-      requires = { 
-        'kyazdani42/nvim-web-devicons'                 -- pretty pictures
-      }
+  use {
+    'nvim-lualine/lualine.nvim',                     -- buffer and status line 
+    requires = { 
+      'kyazdani42/nvim-web-devicons'                 -- pretty pictures
     }
-  use{'nvim-telescope/telescope.nvim',                 -- fuzzy finders and more 
-      branch   = '0.1.x', 
-      requires = { 
-        'nvim-lua/plenary.nvim',                        -- helpers
-        'nvim-telescope/telescope-file-browser.nvim',   -- extend telescope with file browser capability
-      }
+  }
+  use{
+    'nvim-telescope/telescope.nvim',                 -- fuzzy finders and more 
+    branch   = '0.1.x', 
+    requires = { 
+      'nvim-lua/plenary.nvim',                        -- helpers
+      'nvim-telescope/telescope-file-browser.nvim',   -- extend telescope with file browser capability
     }
+  }
   use 'folke/which-key.nvim'                            -- display key bindings (like emacs)
   
   --===========================
@@ -48,7 +50,9 @@ return require('packer').startup(function(use)
   use 'shaunsingh/nord.nvim'
   use 'marko-cerovac/material.nvim'
   use 'mhartington/oceanic-next'
-  use 'rebelot/kanagawa.nvim'
+
+  -- commit specification can be removed after nvim is upgraded to 0.8 on all machines
+  use {'rebelot/kanagawa.nvim', commit= 'fc2e308'}
   --use 'bluz71/vim-nightfly-guicolors'
 
   --===========================
