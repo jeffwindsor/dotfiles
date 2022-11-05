@@ -1,21 +1,35 @@
--- prepend action with telescope. example = <Cmd>Telescope action<CR>
-function telescope(action)
-  return command('Telescope ' .. action)
+--
+-- Location of all <leader> based key bindings
+-- Non-Leader based are in the ./lua/mapping.lua file
+--
+-- map leader to <space> 
+vim.g.mapleader = " "           
+
+-- display "message" in the bottom row / the command output
+local function echo(message)
+  return '<Cmd>echo "' .. message .. '"<CR>'
 end
 
--- wraps action in a vim command.  example = <Cmd>action<CR> which is the same as :action<CR>
-function command(action)
+-- makes "action" a VIM command.  example = <Cmd>action<CR> which is the same as :action<CR>
+local function command(action)
   return '<Cmd>' .. action .. '<CR>'
 end
 
-local buffer_next = command('buffernext')
+---- makes "action" a Telescope command. example = <Cmd>Telescope action<CR>
+local function telescope(action)
+  return command('Telescope ' .. action)
+end
+
+-- re-used commands
+local buffer_next = command('bnext')
 local load_config = command('luafile %')
 
+-- which key configuration
 local wk = require('which-key')
 wk.setup()
 wk.register({
   ["<leader>"] = { telescope('find_files'), 'find files'},
-  ["."] = { load_config, 'load config'}, 
+  ["."] = { load_config .. echo('Configuration Re-Loaded'), 'load config'}, 
   [","] = { 
     name = 'commands',
     [","] = {telescope('commands'),'commands'},
@@ -25,7 +39,7 @@ wk.register({
     name = 'buffers',
     b = {telescope('buffers'),'buffers'},
     c = {command('bdelete'),'close'},
-    j = {command('bprevious'),'previous'},
+    j = {command('bprev'),'previous'},
     k = {buffer_next,'next'},
     n = {command('enew'),'new'},
   },
@@ -62,8 +76,8 @@ wk.register({
   },
   p = { 
     name = 'packer',
-    c = {load_config .. command('PackerClean'),'clean'},
-    s = {load_config .. command('PackerSync'),'sync'},
+    c = {load_config .. command('PackerClean') .. echo('Packages Cleaned'),'clean'},
+    s = {load_config .. command('PackerSync') .. echo('Pacakges Synced'),'sync'},
   },
   q = {command('q'),'quit'},
   r = {telescope('registers'),'registers'},
