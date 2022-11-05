@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 cd $(dirname "$0")
 
 # default source and target if missing
