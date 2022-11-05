@@ -52,7 +52,7 @@ return require('packer').startup(function(use)
   use 'mhartington/oceanic-next'
 
   -- commit specification can be removed after nvim is upgraded to 0.8 on all machines
-  use {'rebelot/kanagawa.nvim', commit= 'fc2e308'}
+  use {'rebelot/kanagawa.nvim'} --, commit= 'fc2e308'}
   --use 'bluz71/vim-nightfly-guicolors'
 
   --===========================
