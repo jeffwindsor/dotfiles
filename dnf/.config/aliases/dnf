@@ -1,5 +1,15 @@
+# prefer topgrade iwth just `up` but here for convienence 
 alias dup='sudo dnf upgrade'
+
+# install a package
 alias di='sudo dnf install'
+
+# install considering the test package repos
+alias dit='sudo dnf --enablerepo=updates-testing,updates-testing-modular --best install'
+
+# removes unused packages
 alias da='sudo dnf autoremove'
+
 alias df='sudo dnf info'
+
 alias dls='dnf history --userinstalled'
