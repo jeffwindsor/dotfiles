@@ -1,13 +1,17 @@
 git-commit() { 
-    git commit -m ${1:-'Refactor'} 
+  git commit -m ${1:-'Refactor'} 
+}
+git-add-commit() { 
+  git add --all  
+  git commit -m ${1:-'Refactor'} 
 }
 git-add-commit-push() { 
-    git add --all
-    git commit -m ${1:-'Refactor'} 
-    git push
+  git add --all
+  git commit -m ${1:-'Refactor'} 
+  git push
 }
 git-log-graph(){ 
-    git log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}
+  git log --graph --pretty=format:${GIT_LOG_PRETTY_FORMAT} --abbrev-commit --max-count=${1:-10}
 }
 git-find-dirs() { 
   # find all directories ending in .git (including hidden and ignored listings)
@@ -19,7 +23,5 @@ exec-on-git-repos() {
 }
 
 gphs() { for i in **/.git; do ( echo $i; cd $i/..; git push; ); done }
-gpls() {for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done }
-gch(){ 
-    git clone git@github.com:$1 $SRC/github.com/$1 
-}
+gpls() { for i in **/.git; do ( echo $i; cd $i/..; git pull; ); done }
+gch()  { git clone git@github.com:$1 $SRC/github.com/$1; }
