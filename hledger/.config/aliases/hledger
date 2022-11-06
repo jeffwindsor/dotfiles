@@ -1,13 +1,11 @@
-# placed here so we can gaurentee $SRC
-export LEDGER_DIR="$HOME/portable/documents/finances/hledger"
-export LEDGER_FILE_PERSONAL_FINANCES="$LEDGER_DIR/finances.journal"
-export LEDGER_FILE_PERSONAL_INVESTMENTS="$LEDGER_DIR/investments.journal"
-
-export LEDGER_FILE=$LEDGER_FILE_PERSONAL_FINANCES
 alias hl-pf="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_FINANCES"
 alias hl-pi="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_INVESTMENTS"
 
-alias hl="hledger-ui"
-alias hli="hledger import"
-alias hlid="hledger import --dry"
-alias hlunknown="hledger -f- -I print unknown"
+alias hl="hledger"
+alias hu="hledger-ui"
+alias hw="hledger-web"
+alias hi="hledger import"
+alias hid="hledger import --dry"
+alias unknown="hledger -f- -I print unknown"
+
+alias bal="hledger bal -M -2"
