@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 cd $(dirname "$0")
 
 # default source and target if missing
@@ -28,6 +28,7 @@ folders=(
     topgrade
     zsh
     )
+#echo "$folders"
 
 # unstow then stow each folder 
 for folder in $folders
