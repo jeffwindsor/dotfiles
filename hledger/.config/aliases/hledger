@@ -1,6 +1,6 @@
 alias hl-pf="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_FINANCES"
 alias hl-pi="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_INVESTMENTS"
-alias hlcd="cd $LEDGER_FILE"
+alias hlcd="cd $LEDGER_DIR"
 
 alias hl="hledger"
 alias hu="hledger-ui"
