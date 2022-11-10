@@ -44,7 +44,7 @@ return require('packer').startup(function(use)
   use 'ggandor/leap.nvim'
   
   -- lazygit in a centered popup
-  use 'kdheepak/lazygit.nvim'
+  --use 'kdheepak/lazygit.nvim'
   
   -- display key bindings (like emacs)
   use 'folke/which-key.nvim'
@@ -62,7 +62,9 @@ return require('packer').startup(function(use)
   use 'marko-cerovac/material.nvim'
   use 'mhartington/oceanic-next'
   use 'rebelot/kanagawa.nvim'
-
+  use 'joshdick/onedark.vim'
+  use 'folke/tokyonight.nvim'
+  
   --===========================
   if packer_bootstrap then require('packer').sync() end
 end)
