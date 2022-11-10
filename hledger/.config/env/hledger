@@ -1,4 +1,2 @@
 export LEDGER_DIR="$HOME/portable/documents/finances/hledger"
-export LEDGER_FILE_PERSONAL_FINANCES="$LEDGER_DIR/finances.journal"
-export LEDGER_FILE_PERSONAL_INVESTMENTS="$LEDGER_DIR/investments.journal"
-export LEDGER_FILE=$LEDGER_FILE_PERSONAL_FINANCES
+export LEDGER_FILE="$LEDGER_DIR/finances.journal"

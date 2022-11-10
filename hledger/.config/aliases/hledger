@@ -1,22 +1,29 @@
-alias hl-pf="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_FINANCES"
-alias hl-pi="export LEDGER_FILE=$LEDGER_FILE_PERSONAL_INVESTMENTS"
 alias hlcd="cd $LEDGER_DIR"
+alias unknown="hledger -f- -I print unknown"
 
+# application shortcuts
 alias hl="hledger"
 alias hu="hledger-ui"
 alias hw="hledger-web"
+
+# importing information
 alias hi="hledger import"
 alias hid="hledger import --dry"
-alias unknown="hledger -f- -I print unknown"
 
+alias hi-d="hledger import --rules-file rules/deposit.csv.rules"
+alias hid-d="hledger import --dry --rules-file rules/deposit.csv.rules"
+
+# report income statement
 alias inc="hledger inc -M"
 alias inc2="hledger inc -M -2"
 alias inc3="hledger inc -M -3"
 
+# report balance statement
 alias bs="hledger bs -M"
 alias bs2="hledger bs -M -2"
 alias bs3="hledger bs -M -3"
 
+# report balance sheet and budget
 alias budget="hledger bal --budget -M"
 alias bal="hledger bal -M"
 alias bal2="hledger bal -M -2"
