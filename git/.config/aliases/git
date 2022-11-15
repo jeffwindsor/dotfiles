@@ -24,7 +24,7 @@ alias gph="git push"
 alias gpl="git pull"
 alias gr="git remote -vv"
 alias gs="git status -sb --ignore-submodules"
-alias gup="git add --all && git-commit && git push"
+alias gup="git-add-commit-push"
 
 # sync with remote master
 alias gsync="git checkout master && git pull --rebase && git checkout - && git rebase master"
