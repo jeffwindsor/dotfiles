@@ -1,0 +1,5 @@
+# prefer topgrade iwth just `up` but here for convienence 
+alias zup='sudo zypper up'
+alias zi='sudo zypper install'
+alias zi='sudo zypper remove'
+
