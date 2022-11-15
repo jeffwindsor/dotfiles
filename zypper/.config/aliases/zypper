@@ -1,5 +1,7 @@
 # prefer topgrade iwth just `up` but here for convienence 
 alias zup='sudo zypper up'
 alias zi='sudo zypper install'
-alias zi='sudo zypper remove'
+alias zr='sudo zypper remove'
 
+# enter overlay shell (like rpm-ostree but a shell), use zypper to install packages
+alias overlay='sudo tukit --continue execute /bin/bash'
