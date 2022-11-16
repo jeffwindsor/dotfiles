@@ -19,6 +19,6 @@ cmd + ctrl - i              : open -na 'Intellij IDEA'
 cmd + ctrl - d              : open -na 'Intellij IDEA' --args $SRC/gitlab.cj.dev/jwindsor/sql
 cmd + ctrl - v              : open -na 'Visual Studio Code'
 cmd + ctrl - t              : open -na 'alacritty'              # launch terminal
-cmd + ctrl - b              : open -na 'Firefox'
+cmd + ctrl - b              : open -na 'Google Chrome'
 cmd + ctrl - c              : open -na 'Google Chrome'
 cmd + ctrl - y              : open -na 'Google Chrome' 'https://www.youtube.com'
