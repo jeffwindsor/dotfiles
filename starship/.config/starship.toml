@@ -1,5 +1,5 @@
 format = """
-[┌ ](blue)$directory$git_branch$git_status$jobs
+[┌ ](blue)$directory$git_branch$git_status$jobs$container
 [└ ](blue)$shell$time$cmd_duration$character"""
 
 #right_format = "(purple)$shell"
@@ -39,3 +39,7 @@ disabled=false
 disabled=false
 number_threshold=1
 format='([\[](dimmed blue)[$number](dimmed blue)[\]](dimmed blue))'
+
+[container]
+style = "cyan"
+disabled=false
