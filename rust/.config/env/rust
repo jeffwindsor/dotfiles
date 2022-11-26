@@ -7,5 +7,5 @@
 # checks cargo bin is in path
 # source "$CARGO_HOME/env"
 
-export PATH="$XDG_DATA_HOME/cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
