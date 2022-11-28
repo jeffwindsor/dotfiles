@@ -17,6 +17,7 @@ folders=(
     fish
     fzf
     git
+    helix
     intellij-idea
     hledger
     macos
