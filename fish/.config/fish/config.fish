@@ -22,6 +22,6 @@ end
 
 function fish_greeting
     set_color blue
-    fortune
+    fortune $XDG_DATA_HOME/fortune/
     set_color normal
 end
