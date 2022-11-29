@@ -6,24 +6,26 @@ cd $(dirname "$0")
 [ -z "$target" ] && target=$HOME
 
 folders=(
-    bat
-    bash
-    data
-    dnf
-    exa
-    fd
-    fish
-    fzf
-    git
-    hledger
-    linux
-    node
-    nvim
-    ripgrep
-    rust
-    starship
-    topgrade
-    ) 
+  alacritty
+  bat
+  bash
+  data
+  dnf
+  exa
+  fd
+  fish
+  fzf
+  git
+  helix
+  hledger
+  linux
+  node
+  nvim
+  ripgrep
+  rust
+  starship
+  topgrade
+  ) 
 
 # unstow then stow each folder 
 for folder in "${folders[@]}"

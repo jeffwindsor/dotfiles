@@ -31,6 +31,7 @@ return require('packer').startup(function(use)
     requires = { 
       'nvim-lua/plenary.nvim',                        -- helpers
       'nvim-telescope/telescope-file-browser.nvim',   -- extend telescope with file browser capability
+      'kyazdani42/nvim-web-devicons',
     }
   }
 
