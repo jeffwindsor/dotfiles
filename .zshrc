@@ -15,6 +15,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 # personal
 export SRC=$HOME/Source
+export DOTFILES=$SRC/github.com/jeffwindsor/dotfiles
 
 #==============================================================================
 # ZSH plugin manager: https://github.com/zdharma-continuum/zinit
