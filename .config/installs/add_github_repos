@@ -1,0 +1,39 @@
+#!/bin/bash
+
+###############################################################################
+# Functions
+###############################################################################
+function echo_header() {
+  echo -ne "\e[38;5;39m ===> ${1} \e[0m"
+}
+
+###############################################################################
+# INSTALL SCRIPT
+###############################################################################
+cd "$(dirname "${0}")" || exit
+clear
+
+# ssh keys and repos from github
+if ! test -f "$HOME"/.ssh/github.com.pub; then
+
+  ssh-keygen -t ed25519 -C "jeff.windsor@gmail.com" -f "$HOME"/.ssh/github.com
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/github.com
+
+  echo_header "add ssh public key to github"
+  cat "$HOME"/.ssh/*.pub
+  echo "hit any key when completed"
+  read -r
+
+  echo_header "cloning personal github repos"
+
+  JEFF="$HOME/Source/github.com/jeffwindsor"
+  git clone git@github.com:jeffwindsor/startpage.git "$JEFF"/startpage
+
+  read -r -p "Personal Repos? [y/N]" -n 1
+  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+    git clone git@github.com:jeffwindsor/financials-home.git "$JEFF"/financials-home.git
+    git clone git@github.com:jeffwindsor/financials-wfp.git "$JEFF"/financials-wfp.git
+  fi
+
+fi

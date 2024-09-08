@@ -1,0 +1,16 @@
+[open]
+rules = [
+	{ mime = "text/*",  use = "text" },
+	{ mime = "image/*", use = "image" },
+
+	{ name = "*.json", use = "text" },
+	{ name = "*.toml", use = "text" },
+	{ name = "*.lua",  use = "text" },
+	{ name = "*.py",   use = "text" },
+	{ name = "*.html", use = "text" },
+]
+
+[opener]
+text = [
+    { run = 'nvim "$@"', block = true },
+]

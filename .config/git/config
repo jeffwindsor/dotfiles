@@ -1,0 +1,37 @@
+[branch]
+  sort = -committerdate
+
+[core]
+  excludesFile = ~/.config/git/ignore
+
+[credential]
+	helper = cache
+
+[gpg]
+  format = ssh
+
+[include]
+  path = ~/.gitconfig-local
+
+[init]
+  defaultBranch = main
+
+[merge]
+  conflictstyle = zdiff3
+
+[pull]
+  rebase = true
+
+[push]
+  default = current
+
+[rebase]
+  autosquash = true
+  autostash = true
+
+[rerere]
+  enabled = true
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+

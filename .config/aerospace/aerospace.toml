@@ -1,0 +1,260 @@
+# It's not necessary to copy all keys to your config.
+# If the key is missing in your config, "default-config.toml" will serve as a fallback
+start-at-login = true
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# after-startup-command = [
+#   # JankyBorders
+#   'exec-and-forget borders active_color=0xffc3e88d inactive_color=0xff494d64 width=4.0',
+# ]
+
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Possible values:
+# - Constant:     gaps.outer.top = 8
+# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
+#                 In this example, 24 is a default value when there is no match.
+#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
+#                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[gaps]
+inner.horizontal = [{ monitor.secondary = 0 }, 2]
+inner.vertical = [{ monitor.secondary = 0 }, 2]
+outer.left = [{ monitor.secondary = 0 }, 2]
+outer.bottom = [{ monitor.secondary = 0 }, 2]
+outer.top = [{ monitor.secondary = 0 }, 2]
+outer.right = [{ monitor.secondary = 0 }, 2]
+
+
+# =======================================================
+# BINDINGS:  'main' binding mode must be always presented
+# https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# =======================================================
+# All possible keys:
+# - Letters.        a, b, c, ..., z
+# - Numbers.        0, 1, 2, ..., 9
+# - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
+# - F-keys.         f1, f2, ..., f20
+# - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
+#                   leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
+# - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
+#                   keypadMinus, keypadMultiply, keypadPlus
+# - Arrows.         left, down, up, right
+# All possible modifiers: cmd, alt, ctrl, shift
+# All possible commands:  https://nikitabobko.github.io/AeroSpace/commands
+# =============================
+# KEY PATTERNS: subject - verb - object
+#  subjects
+#   | window: [ALT]
+#   | monitor: [ALT + CMD]
+#  verbs
+#   | focus: <subject default>
+#   | move: [<subject> + SHIFT]
+#  objects
+#   | hjkl: left, down, up, right
+#   | left, right arrows: prev, next (wrap-around usually)
+#   | minus, equal: increase, decrease (size usually)
+#   | [#] = indexed location (ie workspace 1)
+#
+# LAUNCHERS: ALT+CTRL+CMD
+#
+# RULES:
+#   any move is coupled with focus change to target
+
+[mode.main.binding]
+alt-cmd-r = 'reload-config'
+
+# WINDOWS, LAYOUTS and WORKSPACES : ALT
+# windows
+alt-w = 'close'
+alt-f = 'fullscreen'
+
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+
+# layouts
+alt-slash = 'layout tiles horizontal vertical'
+alt-period = 'layout accordion horizontal vertical'
+
+# workspaces 
+alt-1 = 'workspace 1'
+cmd-1 = 'workspace 1'                                       # for others who use my machine and expect macos default
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+alt-2 = 'workspace 2'
+cmd-2 = 'workspace 2'                                       # for others who use my machine and expect macos default
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+alt-3 = 'workspace 3'
+cmd-3 = 'workspace 3'                                       # for others who use my machine and expect macos default
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+alt-4 = 'workspace 4'
+cmd-4 = 'workspace 4'                                       # for others who use my machine and expect macos default
+alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+alt-5 = 'workspace 5'
+cmd-5 = 'workspace 5'                                       # for others who use my machine and expect macos default
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+alt-6 = 'workspace 6'
+cmd-6 = 'workspace 6'                                       # for others who use my machine and expect macos default
+alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+alt-7 = 'workspace 7'
+cmd-7 = 'workspace 7'                                       # for others who use my machine and expect macos default
+alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+alt-8 = 'workspace 8'
+cmd-8 = 'workspace 8'                                       # for others who use my machine and expect macos default
+alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+alt-9 = 'workspace 9'
+cmd-9 = 'workspace 9'                                       # for others who use my machine and expect macos default
+alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+alt-0 = 'workspace 10'
+cmd-0 = 'workspace 10'                                      # for others who use my machine and expect macos default
+alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
+alt-a = 'workspace a'
+alt-shift-a = ['move-node-to-workspace a', 'workspace a']
+alt-c = 'workspace c'
+alt-shift-c = ['move-node-to-workspace c', 'workspace c']
+alt-m = 'workspace m'
+alt-shift-m = ['move-node-to-workspace m', 'workspace m']
+alt-n = 'workspace n'
+alt-shift-n = ['move-node-to-workspace n', 'workspace n']
+alt-o = 'workspace o'
+alt-shift-o = ['move-node-to-workspace o', 'workspace o']
+alt-s = 'workspace s'
+alt-shift-s = ['move-node-to-workspace s', 'workspace s']
+alt-t = 'workspace t'
+alt-shift-t = ['move-node-to-workspace t', 'workspace t']
+alt-u = 'workspace u'
+alt-shift-u = ['move-node-to-workspace u', 'workspace u']
+
+alt-shift-right = 'workspace --wrap-around next'
+alt-shift-left = 'workspace --wrap-around prev'
+
+# Monitors : ALT + CMD
+alt-cmd-1 = 'focus-monitor 1'
+alt-cmd-shift-1 = ['move-node-to-monitor 1', 'focus-monitor 1']
+alt-cmd-2 = 'focus-monitor 2'
+alt-cmd-shift-2 = ['move-node-to-monitor 2', 'focus-monitor 2']
+alt-cmd-3 = 'focus-monitor 3'
+alt-cmd-shift-3 = ['move-node-to-monitor 3', 'focus-monitor 3']
+
+alt-cmd-right = 'focus-monitor --wrap-around next'
+alt-cmd-left = 'focus-monitor --wrap-around prev'
+
+# LAUNCHERS : ALT-CTRL-CMD
+alt-ctrl-cmd-a = 'exec-and-forget open "/Applications/Slack.app"'
+alt-ctrl-cmd-b = 'exec-and-forget open -n "/Applications/Google Chrome.app"'
+alt-ctrl-cmd-c = 'exec-and-forget open /System/Applications/Calendar.app'
+alt-ctrl-cmd-comma = 'exec-and-forget open "/System/Applications/System Settings.app"'
+alt-ctrl-cmd-enter = 'exec-and-forget open -n /Applications/WezTerm.app'
+alt-ctrl-cmd-f = 'exec-and-forget open -n "/Applications/Firefox.app"'
+alt-ctrl-cmd-m = 'exec-and-forget open /System/Applications/Messages.app'
+alt-ctrl-cmd-n = 'exec-and-forget open /System/Applications/Notes.app'
+alt-ctrl-cmd-o = 'exec-and-forget open /Applications/Outlook.app'
+alt-ctrl-cmd-s = 'exec-and-forget open "/Applications/Spotify.app"'
+alt-ctrl-cmd-space = 'exec-and-forget open ~'
+alt-ctrl-cmd-t = 'exec-and-forget open /Applications/Teams.app'
+alt-ctrl-cmd-v = 'exec-and-forget wezterm start -- nvim'
+alt-ctrl-cmd-y = 'exec-and-forget wezterm start -- yazi'
+
+
+# alt-cmd-up = 'macos-native-fullscreen'
+# alt-cmd-down = 'macos-native-minimize'
+
+# JOIN 
+# alt-shift-h = 'join-with left'
+# alt-shift-j = 'join-with down'
+# alt-shift-k = 'join-with up'
+# alt-shift-l = 'join-with right'
+
+
+# OVERRIDE / DISABLE
+cmd-h = [] # DISABLE NATIVE WINDOW HIDE
+cmd-m = [] # DISABLE NATIVE WINDOW MINIMIZE
+
+# =======================================================
+# WORKSPACE AND WINDOW DEFAULTS
+#  put office and entertainment apps on own workspace by letter
+
+# 1 = 1                            # Monitor sequence number from left to right. 1-based indexing
+# 2 = 'main'                       # Main monitor
+# 3 = 'secondary'                  # Non-main monitor in case when there are only two monitors
+# 4 = 'built-in'                   # Case insensitive regex substring
+# 5 = '^built-in retina display$'  # Case insensitive regex match
+# 6 = ['secondary', 'dell']        # You can specify multiple patterns. The first matching pattern will be used
+[workspace-to-monitor-force-assignment]
+a = 'secondary' # slack
+c = 'secondary' # mac Calendar
+m = 'secondary' # mac Messages
+n = 'secondary' # mac Notes
+o = 'secondary' # ms office (work)
+s = 'secondary' # spotify
+t = 'secondary' # ms teams (work)
+u = 'secondary' # ms teams - meeting (work)
+
+# osascript -e 'id of app "Application Name"'
+#
+# Terminal
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = ['move-node-to-workspace 1']
+
+# Browsers
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = ['move-node-to-workspace 2']
+
+# Xcode
+[[on-window-detected]]
+if.app-id = 'com.apple.dt.Xcode'
+run = ['move-node-to-workspace 5']
+
+# IntelliJ
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij'
+run = ['move-node-to-workspace 5']
+
+# Slack
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace a']
+
+# iCalendar
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = ['move-node-to-workspace c']
+
+# iMessages
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+run = ['move-node-to-workspace m']
+
+# Notes
+[[on-window-detected]]
+if.app-id = 'com.apple.Notes'
+run = ['move-node-to-workspace n']
+
+# Outlook - set to accordian horiztontal because many windows may exist for app
+[[on-window-detected]]
+if.app-id = 'com.microsoft.Outlook'
+run = ['move-node-to-workspace o']  #, 'layout accordion horizontal']
+
+# Spotify
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = ['move-node-to-workspace s']
+
+# Teams - set to accordian horiztontal because many windows may exist for app
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = ['move-node-to-workspace t'] #, 'layout accordion horizontal']

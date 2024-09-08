@@ -1,0 +1,23 @@
+#!/bin/bash
+
+###############################################################################
+# Functions
+###############################################################################
+function echo_header() {
+  echo -ne "\e[38;5;39m ===> ${1} \e[0m"
+}
+
+###############################################################################
+# INSTALL SCRIPT
+###############################################################################
+cd "$(dirname "${0}")" || exit
+clear
+
+# dotfiles : https://yadm.io/
+if command -v yadm &>/dev/null; then
+
+  echo_header "configuring dot files (yadm)"
+  yadm clone git@github.com:jeffwindsor/dotfiles.git
+  yadm status
+
+fi

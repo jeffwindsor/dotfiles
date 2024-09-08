@@ -1,0 +1,100 @@
+list:
+  @just --list
+
+test-me:
+    #!/bin/bash
+    formulae=(
+      bat
+      bash
+      eza
+      fastfetch
+    )
+    for f in "${formulae[@]}"; do echo "$f"; done
+
+
+
+_packages:
+    #!/bin/bash
+    formulae=(
+        bat
+        bash
+        eza
+        fastfetch
+        fd
+        fzf
+        git
+        just
+        lazygit
+        neovim
+        ripgrep
+        sd
+        starship
+        tldr
+        yadm
+        yazi
+        imagemagick
+        ffmpegthumbnailer
+        zoxide
+        zsh
+    )
+    for f in "${formulae[@]}"; do brew install "$f"; done
+
+    casks=(
+      firefox --cask
+      font-jetbrains-mono-nerd-font --cask
+      font-droid-sans-mono-nerd-font --cask
+      font-fira-code-nerd-font --cask
+      google-chrome --cask
+      spotify --cask
+      transmission --cask
+      vlc --cask
+      wezterm --cask
+    )
+    for c in "${casks[@]}"; do brew install "$c" --cask; done
+
+[macos]
+packages: _packages
+    brew install aerospace --cask
+    brew install balenaetcher --cask
+    brew install keepingyouawake --cask
+
+_homebrew:
+    eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+[macos]
+homebrew: _homebrew
+
+[linux]
+homebrew-redhat: _homebrew
+    sudo yum groupinstall 'Development Tools'
+    sudo yum install procps-ng curl file git
+    sudo yum install libxcrypt-compat # needed by Fedora 30 and up
+
+[linux]
+homebrew-debian: _homebrew
+    sudo apt-get install build-essential procps curl file git
+
+dotfiles:
+    yadm clone git@github.com:jeffwindsor/dotfiles.git
+    yadm status
+
+repos:
+    mkdir -p $HOME/Source/github.com/
+    git clone git@github.com:jeffwindsor/startpage.git $HOME/Source/github.com/jeffwindsor/startpage
+    git clone git@github.com:jeffwindsor/financials-home.git $HOME/Source/github.com/jeffwindsor/financials-home
+    git clone git@github.com:jeffwindsor/financials-wfp.git $HOME/Source/github.com/jeffwindsor/financials-wfp
+
+_ssh-keys:
+    sh-keygen -t ed25519 -f $HOME/.ssh/github.com -C "jeff.windsor@gmail.com"
+
+[linux]
+ssh-keys: _ssh-keys
+
+[macos]
+ssh-keys: _ssh-keys
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/github.com
+
+flatpacks:
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  
