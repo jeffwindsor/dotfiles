@@ -29,11 +29,6 @@ if ! test -f "$HOME"/.ssh/github.com.pub; then
 
   JEFF="$HOME/Source/github.com/jeffwindsor"
   git clone git@github.com:jeffwindsor/startpage.git "$JEFF"/startpage
-
-  read -r -p "Personal Repos? [y/N]" -n 1
-  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-    git clone git@github.com:jeffwindsor/financials-home.git "$JEFF"/financials-home.git
-    git clone git@github.com:jeffwindsor/financials-wfp.git "$JEFF"/financials-wfp.git
-  fi
+  git clone git@github.com:jeffwindsor/dotfiles.git "$JEFF"/dotfiles
 
 fi
