@@ -15,15 +15,12 @@ BREW_PACKAGES=(
   just
   lazygit
   neovim
-  pipx
   ripgrep
   sd
   starship
+  stow
   tldr
-  yadm
   yazi
-  imagemagick
-  ffmpegthumbnailer
   zoxide
   zsh
 )
@@ -35,7 +32,7 @@ BREW_CASKS=(
   font-fira-code-nerd-font
   google-chrome
   spotify
-  transmission
+  qbittorrent
   vlc
   wezterm
 )
@@ -49,7 +46,7 @@ if [ "$(uname)" == "Darwin" ]; then
   )
 
 # add linux specific
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+#elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 
 fi
 
