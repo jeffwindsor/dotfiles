@@ -1,2 +1,0 @@
-export LEDGER_DIR="$HOME/portable/documents/finances/hledger"
-export LEDGER_FILE="$LEDGER_DIR/finances.journal"

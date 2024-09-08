@@ -1,6 +1,0 @@
-alias v='nvim'
-alias vv='nvim -O'
-
-alias configs='nvim -c ":Telescope find_files cwd=$XDG_CONFIG_HOME"'
-alias dots='nvim -c ":Telescope find_files cwd=$DOTFILES"'
-alias ins='nvim -c ":Telescope find_files cwd=$INSTALLS"'
