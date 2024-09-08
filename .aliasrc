@@ -36,7 +36,7 @@ if command -v brew &>/dev/null; then
     alias brm="fuzzy_brew_uninstall"
     alias bnc="fuzzy_cask_install"
     alias brmc="fuzzy_cask_uninstall"
-  else 
+  else
     alias bn="brew install"
     alias brm="brew remove" # same as uninstall or rm
   fi
@@ -52,7 +52,7 @@ elif command -v nix &>/dev/null; then
   alias ngc="nix-store --gc"
   # nix-darwin
   if command -v darwin-rebuild &>/dev/null; then
-    alias ndr="darwin-rebuild build --flake $XDG_CONFIG_HOME/nix"
+    alias ndr="darwin-rebuild build --flake \$XDG_CONFIG_HOME/nix"
     alias nds="nix run nix-darwin -- switch --flake ~/.config/nix"
   fi
   # nix-home-manager
@@ -69,14 +69,14 @@ if command -v asdf &>/dev/null; then
     fi
 
     if [[ $lang ]]; then
-      local versions=$(asdf list-all $lang | fzf --tac --no-sort --multi)
+      local versions
+      versions=$(asdf list-all "$lang" | fzf --tac --no-sort --multi)
       if [[ $versions ]]; then
-        for version in $(echo $versions);
-        do; asdf install $lang $version; done;
+        for version in $(echo $versions); do asdf install $lang $version; done
       fi
     fi
   }
-  
+
   # Remove one or more versions of specified language
   asdf_rm() {
     local lang=${1}
@@ -86,10 +86,10 @@ if command -v asdf &>/dev/null; then
     fi
 
     if [[ $lang ]]; then
-      local versions=$(asdf list $lang | fzf -m)
+      local versions
+      versions=$(asdf list $lang | fzf -m)
       if [[ $versions ]]; then
-        for version in $(echo $versions);
-        do; asdf uninstall $lang $version; done;
+        for version in $(echo $versions); do asdf uninstall $lang $version; done
       fi
     fi
   }
@@ -124,7 +124,8 @@ fi
 # fuzzy finder: https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
   function wezterm-theme() {
-    local color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
+    local color_scheme
+    color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
 
     # if color_scheme was selected, change the wezterm config file colorscheme value
     [ -n "$color_scheme" ] && sd '^config.color_scheme.*$' "config.color_scheme = '${color_scheme}'" "$XDG_CONFIG_HOME"/wezterm/wezterm.lua
@@ -137,7 +138,8 @@ if command -v fzf &>/dev/null; then
     local root_folder="$2"
     local exec_command="$1"
     # find list of directories containing a .git subfolder, presumably a repo
-    local git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf --reverse)
+    local git_repos
+    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf --reverse)
 
     [ -n "$git_repos" ] && "$exec_command" "$git_repos"
   }
@@ -146,13 +148,13 @@ if command -v fzf &>/dev/null; then
   alias srcd="exec-on-git-repos cd \$SRC && lla"
   alias srcs=srcd
   alias srcv="exec-on-git-repos cd \$SRC && nvim ."
-  alias ten="cd $SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
-  alias startpage="cd $SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
+  alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
+  alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
 
   fzf_rg() {
     if [ ! "$#" -gt 0 ]; then
-      echo "Need a string to search for!";
-      return 1;
+      echo "Need a string to search for!"
+      return 1
     fi
     # if FZF_PREVIEW_WINDOW is undefined, quoting it breaks the script
     rg --files-with-matches --no-messages "$1" | fzf --preview-window "$FZF_PREVIEW_WINDOW" --preview "rg --ignore-case --pretty --context 10 '$1' {}"
@@ -166,7 +168,7 @@ if command -v git &>/dev/null; then
     for d in */; do
       echo "==> $d"
       sleep 5
-      cd ./$d
+      cd ./"$d" || return
       git pull
       cd ..
     done
@@ -215,13 +217,13 @@ if command -v nvim &>/dev/null; then
   alias dots="fuzzy-search-dotfiles"
 
   function fuzzy-search-neovim-config() {
-    cd $XDG_CONFIG_HOME/nvim/lua/plugins
+    cd "\$XDG_CONFIG_HOME/nvim/lua/plugins" || return
     fzf --query ${1:-""} | xargs nvim
-    cd -
+    cd - || return
   }
   alias vdn="fuzzy-search-neovim-config"
   alias dotsn="fuzzy-search-neovim-config"
-  alias ve="nvim $HOME/portable/exocortex"
+  alias ve="nvim \$HOME/portable/exocortex"
   alias vf="nvim -c \":Telescope find_files cwd=\$HOME/portable/financials\""
 
   function nvim-clean-caches() {
@@ -244,17 +246,9 @@ if command -v rg &>/dev/null; then
 fi
 
 # dotfiles: https://github.com/TheLocehiliosan/yadm
-if command -v yadm &>/dev/null; then
-  alias da="yadm add"
-  alias daa="yadm add -u" #stage modified and deletions
-  alias dg="cd && yadm enter lazygit && cd -"
-  alias ds="yadm status -sb --ignore-submodules"
-  alias dpl="yadm pull"
-  alias ya="yadm add"
-  alias yaa="yadm add -u" #stage modified and deletions
-  alias yg="cd && yadm enter lazygit && cd -"
-  alias ys="yadm status -sb --ignore-submodules"
-  alias ypl="yadm pull"
+if command -v stow &>/dev/null; then
+  alias dg="lazygit --path \$DOTFILES"
+  alias dpl="git pull -C \$DOTFILES"
 fi
 
 # tui file manager: https://github.com/sxyazi/yazi
@@ -264,10 +258,11 @@ if command -v yazi &>/dev/null; then
 
   # shell wrapper that will change to the selected directory on exit
   function yy() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    local tmp
+    tmp="$(mktemp -t "yazi-cwd.XXXXX")"
     yazi "$@" --cwd-file="$tmp"
     if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-      cd -- "$cwd"
+      cd -- "$cwd" || return
     fi
     rm -f -- "$tmp"
   }
@@ -275,7 +270,7 @@ fi
 
 function exec-in-subdirs() {
   for d in */; do
-    cd ./$d
+    cd ./"$d" || return
     echo "=== Executing $1 on $(pwd)"
     eval "$1"
     cd ..
@@ -283,6 +278,6 @@ function exec-in-subdirs() {
 }
 
 # source machine specific aliases
-if test -f $HOME/.aliasrc.local; then
-  source $HOME/.aliasrc.local
+if test -f "$HOME/.aliasrc.local"; then
+  source "$HOME/.aliasrc.local"
 fi
