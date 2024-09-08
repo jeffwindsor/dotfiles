@@ -1,0 +1,35 @@
+#!/bin/bash
+
+###############################################################################
+# Functions
+###############################################################################
+function echo_header() {
+  echo -ne "\e[38;5;39m ===> ${1} \e[0m"
+}
+
+###############################################################################
+# INSTALL SCRIPT
+###############################################################################
+cd "$(dirname "${0}")" || exit
+clear
+
+if command -v brew &>/dev/null; then
+  echo_header "brew installed"
+else
+
+  echo_header "installing brew"
+  eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # brew - linux build dependencies
+  if command -v yum &>/dev/null; then
+    # Redhat
+    sudo yum groupinstall 'Development Tools'
+    sudo yum install procps-ng curl file git
+    sudo yum install libxcrypt-compat # needed by Fedora 30 and up
+
+  elif command -v apt-get &>/dev/null; then
+    # Debian
+    sudo apt-get install build-essential procps curl file git
+
+  fi
+fi

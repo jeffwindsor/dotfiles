@@ -1,0 +1,79 @@
+#!/bin/bash
+###############################################################################
+# PACKAGES
+#   maybe: just, nushell, shellcheck, xh, sshs, age,
+#   maybe: balenaetcher
+###############################################################################
+BREW_PACKAGES=(
+  bat
+  bash
+  eza
+  fastfetch
+  fd
+  fzf
+  git
+  just
+  lazygit
+  neovim
+  pipx
+  ripgrep
+  sd
+  starship
+  tldr
+  yadm
+  yazi
+  imagemagick
+  ffmpegthumbnailer
+  zoxide
+  zsh
+)
+
+BREW_CASKS=(
+  firefox
+  font-jetbrains-mono-nerd-font
+  font-droid-sans-mono-nerd-font
+  font-fira-code-nerd-font
+  google-chrome
+  spotify
+  transmission
+  vlc
+  wezterm
+)
+
+# add mac specific
+if [ "$(uname)" == "Darwin" ]; then
+  BREW_CASKS+=(
+    aerospace
+    balenaetcher
+    keepingyouawake
+  )
+
+# add linux specific
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+
+fi
+
+###############################################################################
+# Functions
+###############################################################################
+function echo_header() {
+  echo -ne "\e[38;5;39m ===> ${1} \e[0m"
+}
+
+###############################################################################
+# INSTALL SCRIPT
+###############################################################################
+cd "$(dirname "${0}")" || exit
+clear
+
+echo_header "installing brew packages"
+for i in "${BREW_PACKAGES[@]}"; do
+  echo_header "installing $i"
+  brew install "$i"
+done
+
+echo_header "installing brew casks"
+for i in "${BREW_CASKS[@]}"; do
+  echo_header "installing $i"
+  brew install "$i" --cask
+done

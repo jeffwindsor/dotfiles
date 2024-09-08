@@ -1,0 +1,89 @@
+###################################################################
+# appearance and behavior 
+###################################################################
+
+theme = "kanagawa"
+
+[editor]
+auto-save   = true
+bufferline  = "multiple"
+color-modes = true
+line-number = "relative" #"absolute"
+mouse       = true
+shell       = ["zsh", "-c"]
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden     = false
+git-ignore = true
+git-global = true
+
+[editor.indent-guides]
+render    = true
+character = "|"
+
+[editor.statusline]
+left   = [ "mode","spinner","file-name","file-modification-indicator","version-control" ]
+center = [ "position","selections" ]
+right  = [ "diagnostics","file-encoding","file-line-ending","file-type"]
+
+[editor.statusline.mode]
+normal = "NORMAL"
+insert = "INSERT"
+select = "SELECT"
+
+###################################################################
+# key maps
+###################################################################
+
+[keys.normal]
+# buffers
+"A-." = ":bn"
+"A-," = ":bp"
+"A-w" = ":bc"
+"A-n" = ":new"
+# lazygit
+"A-g" = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+
+# Switch case of the selected text
+"`" = "switch_case"
+
+# vim like yank + yank to clipboard
+y = ["yank_main_selection_to_clipboard","yank"]
+
+# vim like esc 
+esc = ["collapse_selection","keep_primary_selection",":write"]
+
+[keys.normal.space]
+c = ":buffer-close"
+q = ":write-quit-all"
+# lazy git
+g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+
+# themes  
+[keys.normal.space.t]
+b = ":theme base16_terminal"
+d = ":theme default"
+g = ":theme github_dark_high_contrast"
+k = ":theme kanagawa"
+m = ":theme molokai"
+n = ":theme nord"
+s = ":theme sonokai" 
+t = ":theme tokyonight_storm"
+              
+[keys.insert]
+esc = ["collapse_selection", "normal_mode", ":write"]
+
+[keys.select]
+# auto save on returning to normal mode
+esc = ["collapse_selection","normal_mode",":write"] 
+          
+# Switch case of the selected text
+ "`" = "switch_case"
+        
+# vim like yank + yank to clipboard
+y = ["yank_main_selection_to_clipboard","yank"]

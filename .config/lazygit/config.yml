@@ -1,0 +1,4 @@
+keybinding:
+  universal:
+    optionMenu: '~' # show help menu
+    optionMenu-alt1: '?' # show help menu

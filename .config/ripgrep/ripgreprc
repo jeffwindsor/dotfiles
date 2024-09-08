@@ -1,0 +1,8 @@
+--max-columns=120
+--max-columns-preview
+--smart-case
+--hidden
+
+# Using glob patterns to include/exclude files or folders
+--glob=!.git/*
+
