@@ -3,7 +3,7 @@ local config = wezterm.config_builder() -- used to build a config to return to w
 local act = wezterm.action -- used by key bindings "action" values
 
 -- Color Scheme
-config.color_scheme = 'Tokyo Night Moon'
+config.color_scheme = 'tender (base16)'
 
 -- Flair
 config.window_background_opacity = 0.9 -- 0 to 1
