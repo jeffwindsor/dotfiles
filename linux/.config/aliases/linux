@@ -1,7 +1,0 @@
-alias .....='cd ../../../../'
-alias ....='cd ../../../'
-alias ...='cd ../../'
-alias ..='cd ..'
-alias config='cd $XDG_CONFIG_HOME'
-alias envr='env | rg'
-alias aliasr='alias | rg'

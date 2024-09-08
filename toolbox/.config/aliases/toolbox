@@ -1,4 +1,0 @@
-alias tx='podman stop'
-alias txa='podman stop -a'
-alias te='toolbox enter'
-

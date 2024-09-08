@@ -1,5 +1,0 @@
-#alias    t='exa -TI ".git"'
-#alias   tt='exa -TI ".git" --all'
-#alias    l='exa -lF --group-directories-first --no-permissions --no-user --time="changed" --time-style="iso"'       #alias ll='ls -laLhG'
-#alias   ll='exa -lF --group-directories-first --no-permissions --no-user --time="changed" --time-style="iso" --git --all'       #alias ll='ls -laLhG'
-#alias  lll='exa -lF --group-directories-first --no-permissions --no-user --time="changed" --time-style="iso" --git-ignore --all'       #alias ll='ls -laLhG'
