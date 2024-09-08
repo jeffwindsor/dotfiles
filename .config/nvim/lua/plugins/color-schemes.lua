@@ -2,11 +2,10 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-moon",
+      -- colorscheme = "tokyonight-moon",
       -- colorscheme = "ayu-mirage",
       -- colorscheme = "monokai-pro-octagon",
-      -- colorscheme = "flexoki",
-      -- colorscheme = "synthwave-transparent",
+      colorscheme = "tender",
     },
   },
 
@@ -38,10 +37,9 @@ return {
   { "shaunsingh/nord.nvim" },
   { "Shatur/neovim-ayu" },
   { "loctvl842/monokai-pro.nvim" },
-  { "kepano/flexoki-neovim" },
-  { "samharju/synthweave.nvim" },
-  --
-  -- -- ON DECK
+
+  -- { "kepano/flexoki-neovim" },
+  -- { "samharju/synthweave.nvim" },
   -- { "AlexvZyl/nordic.nvim" },
   -- { "Daiki48/sakurajima.nvim" },
   -- { "NTBBloodbath/doom-one.nvim" },
