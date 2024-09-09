@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
 # Jump Directories - could replace with zoxide
+alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
 alias ..="cd .."
-alias finb="cd \$SRC/github.com/jeffwindsor/financials/gnucash/business/imports"
-alias finh="cd \$SRC/github.com/jeffwindsor/financials/gnucash/home/imports"
-alias hub="cd \$SRC/github.com"
-alias icloud="cd \$HOME/Library/Mobile\\ Documents/com~apple~CloudDocs/Documents"
-alias jeff="cd \$SRC/github.com/jeffwindsor/"
+alias hub="cd \$GITHUB"
+alias icloud="cd \$ICLOUD"
+alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
 
 # package manager
@@ -144,10 +143,9 @@ if command -v fzf &>/dev/null; then
     [ -n "$git_repos" ] && "$exec_command" "$git_repos"
   }
 
-  alias hubs="exec-on-git-repos cd \$SRC/github.com/ && lla"
-  alias srcd="exec-on-git-repos cd \$SRC && lla"
-  alias srcs=srcd
-  alias srcv="exec-on-git-repos cd \$SRC && nvim ."
+  alias hubs="exec-on-git-repos cd \$GITHUB/ && lla"
+  alias srcs="exec-on-git-repos cd \$SRC && lla"
+  alias srcsv="exec-on-git-repos cd \$SRC && nvim ."
   alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
   alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
 
@@ -205,32 +203,25 @@ fi
 
 # editor: https://github.com/neovim/neovim
 if command -v nvim &>/dev/null; then
-  alias v="nvim"
-  alias vim=v
-  alias vi=v
-  alias v.="nvim ."
-
-  function fuzzy-search-dotfiles() {
-    yadm list -a | sd "^" "$HOME/" | rg -v -e "$HOME/$" | fzf --query ${1:-""} | xargs nvim
-  }
-  alias vd="fuzzy-search-dotfiles"
-  alias dots="fuzzy-search-dotfiles"
-
-  function fuzzy-search-neovim-config() {
-    cd "\$XDG_CONFIG_HOME/nvim/lua/plugins" || return
-    fzf --query ${1:-""} | xargs nvim
-    cd - || return
-  }
-  alias vdn="fuzzy-search-neovim-config"
-  alias dotsn="fuzzy-search-neovim-config"
-  alias ve="nvim \$HOME/portable/exocortex"
-  alias vf="nvim -c \":Telescope find_files cwd=\$HOME/portable/financials\""
-
   function nvim-clean-caches() {
     rm -rf "$HOME"/.local/share/nvim
     rm -rf "$HOME"/.local/state/nvim
     rm -rf "$HOME"/.cache/nvim
   }
+  function fuzzy-search() {
+    cd "$1" || return
+    fzf --query ${1:-""} | xargs nvim
+    cd - || return
+  }
+
+  alias v="nvim"
+  alias vim="nvim"
+  alias vi="nvim"
+  alias v.="nvim ."
+
+  alias dots="fuzzy-search \$DOTFILES"
+  alias dotsn="fuzzy-search \$XDG_CONFIG_HOME/nvim/lua/plugins"
+  alias exo="nvim \$HOME/portable/exocortex"
 
 fi
 
@@ -253,8 +244,7 @@ fi
 
 # tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
-  alias f="yy"
-  alias f.="yazi"
+  alias y="yazi"
 
   # shell wrapper that will change to the selected directory on exit
   function yy() {
