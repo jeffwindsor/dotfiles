@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTFILES="$HOME/Source/github.com/jeffwindsor/startpage"
+
 function Add-Homebrew() {
   eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
@@ -42,16 +44,23 @@ function Add-Packages() {
 function Add-Dotfiles() {
   mkdir -p "$HOME/Source/github.com/"
   git clone git@github.com:jeffwindsor/dotfiles.git "$HOME/Source/github.com/jeffwindsor/dotfiles"
-  git clone git@github.com:jeffwindsor/startpage.git "$HOME/Source/github.com/jeffwindsor/startpage"
+  git clone git@github.com:jeffwindsor/startpage.git "$DOTFILES"
 
-  cd "$HOME/Source/github.com/jeffwindsor/dotfiles" || return
+  cd "$DOTFILES" || return
   stow . --target="$HOME"
+  cd || return
+}
+
+function Force-Dotfile-Overwrite() {
+  cd "$DOTFILES" || return
+  stow . --target="$HOME" --adopt
+  git restore .
   cd || return
 }
 
 PS3="Execute Setup Operation: "
 
-select opt in All Add-Homebrew Add-Packages Add-Dotfiles Quit; do
+select opt in All Add-Homebrew Add-Packages Add-Dotfiles Force-Dotfile-Overwrite Quit; do
   case $opt in
   "All")
     Add-Homebrew
@@ -66,6 +75,9 @@ select opt in All Add-Homebrew Add-Packages Add-Dotfiles Quit; do
     ;;
   "Add-Dotfiles")
     Add-Dotfiles
+    ;;
+  "Force-Dotfile-Overwrite")
+    Force-Dotfile-Overwrite
     ;;
   "Quit")
     break
