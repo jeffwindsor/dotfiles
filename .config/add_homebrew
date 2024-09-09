@@ -32,4 +32,9 @@ else
     sudo apt-get install build-essential procps curl file git
 
   fi
+
 fi
+
+# required for rest of setup
+brew install just
+just
