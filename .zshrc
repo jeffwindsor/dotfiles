@@ -68,7 +68,7 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 #==============================================================================
 # shared
 if test -f $HOME/.shellrc; then
-  source "$HOME/.shellrc zsh"
+  source "$HOME/.shellrc" zsh
 fi 
 
 # change directory replacement: https://github.com/ajeetdsouza/zoxide
