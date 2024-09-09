@@ -1,12 +1,5 @@
 #!/usr/bin/env zsh
 
-#==============================================================================
-# Environment (setting here instead of .zshenv for ability to re-source)
-#==============================================================================
-if test -f $HOME/.envrc; then
-  source $HOME/.envrc
-fi 
-
 # avoids insecure directories warning
 export ZSH_DISABLE_COMPFIX="true"
 
@@ -39,8 +32,6 @@ zinit cdreplay -q
 
 #==============================================================================
 # Shell OPTIONS
-#==============================================================================
-
 # remove the beep
 unsetopt BEEP
 # VIM FTW, change to -e if you are more an emacs person
@@ -75,26 +66,10 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 
 
 #==============================================================================
-# initialize programs
-#==============================================================================
-
-# package manager: https://github.com/Homebrew
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  # only auto-updates db every 12+ hours
-  export HOMEBREW_AUTO_UPDATE_SECS=43200
-
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# personal aliases (shell independent)
-if test -f $HOME/.aliasrc; then
-  source $HOME/.aliasrc
+# shared
+if test -f $HOME/.shellrc; then
+  source "$HOME/.shellrc zsh"
 fi 
-
-# fuzzy finder: https://github.com/junegunn/fzf
-if command -v fzf &>/dev/null; then
-  eval "$(fzf --zsh)"
-fi
 
 # change directory replacement: https://github.com/ajeetdsouza/zoxide
 if command -v zoxide &>/dev/null; then
@@ -102,17 +77,3 @@ if command -v zoxide &>/dev/null; then
   eval "$(zoxide init --cmd cd zsh)"
 fi
 
-# Prompt : https://github.com/starship/starship
-if command -v starship &>/dev/null; then
-  eval "$(starship init zsh)"
-fi
-
-# Extendable version manager : https://github.com/asdf-vm/asdf
-if command -v $(brew --prefix asdf)/libexec/asdf.sh &>/dev/null; then
-  # node
-  export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmconfig
-  export NPM_PACKAGES=$HOME/.npm-packages
-  export NVM_DIR="$XDG_DATA_HOME"/nvm
-
-  source $(brew --prefix asdf)/libexec/asdf.sh
-fi
