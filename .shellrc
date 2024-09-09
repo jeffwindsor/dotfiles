@@ -42,7 +42,7 @@ if command -v brew &>/dev/null; then
   # only auto-updates db every 12+ hours
   export HOMEBREW_AUTO_UPDATE_SECS=43200
   # initialize
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$($(which brew) shellenv)"
 
   function brew-list-all() {
     echo '== Formula Leaves =='
