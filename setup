@@ -1,0 +1,77 @@
+#!/bin/bash
+
+function Add-Homebrew() {
+  eval "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
+function Add-Packages() {
+  packages=(
+    bat
+    bash
+    eza
+    fastfetch
+    fd
+    fzf
+    git
+    lazygit
+    neovim
+    ripgrep
+    sd
+    starship
+    stow
+    tldr
+    yazi
+    zoxide
+    zsh
+    aerospace --cask
+    balenaetcher --cask
+    firefox --cask
+    font-droid-sans-mono-nerd-font --cask
+    font-fira-code-nerd-font --cask
+    font-jetbrains-mono-nerd-font --cask
+    google-chrome --cask
+    keepingyouawake --cask
+    qbittorrent --cask
+    spotify --cask
+    vlc --cask
+    wezterm --cask
+  )
+  for p in "${packages[@]}"; do brew install "$p"; done
+}
+
+function Add-Dotfiles() {
+  mkdir -p "$HOME/Source/github.com/"
+  git clone git@github.com:jeffwindsor/dotfiles.git "$HOME/Source/github.com/jeffwindsor/dotfiles"
+  git clone git@github.com:jeffwindsor/startpage.git "$HOME/Source/github.com/jeffwindsor/startpage"
+
+  cd "$HOME/Source/github.com/jeffwindsor/dotfiles" || return
+  stow . --target="$HOME"
+  cd || return
+}
+
+PS3="Execute Setup Operation: "
+
+select opt in All Add-Homebrew Add-Packages Add-Dotfiles Quit; do
+  case $opt in
+  "All")
+    Add-Homebrew
+    Add-Packages
+    Add-Dotfiles
+    ;;
+  "Add-Homebrew")
+    Add-Homebrew
+    ;;
+  "Add-Packages")
+    Add-Packages
+    ;;
+  "Add-Dotfiles")
+    Add-Dotfiles
+    ;;
+  "Quit")
+    break
+    ;;
+  *)
+    echo "Unrecognized Option"
+    ;;
+  esac
+done
