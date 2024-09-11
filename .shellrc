@@ -56,20 +56,20 @@ if command -v brew &>/dev/null; then
   alias bl="brew-list-all"
   alias blc="brew list --casks --versions"
   alias blf="brew list --formula --versions"
+  alias bn="brew install"
+  alias br=brm
+  alias brm="brew remove" # same as uninstall or rm
   alias bs="brew search"
   alias bsd="brew search --desc"
   alias bup="brew update && brew upgrade"
   alias bx="brew autoremove"
 
-  if type fuzzy_brew_install >/dev/null; then
+  if type fuzzy_brew_install &>/dev/null; then
     # requires fzf-brew zsh plugin or equivilant be installed
-    alias bn="fuzzy_brew_install"
-    alias brm="fuzzy_brew_uninstall"
-    alias bnc="fuzzy_cask_install"
-    alias brmc="fuzzy_cask_uninstall"
-  else
-    alias bn="brew install"
-    alias brm="brew remove" # same as uninstall or rm
+    alias bnf="fuzzy_brew_install"
+    alias brmf="fuzzy_brew_uninstall"
+    alias bncf="fuzzy_cask_install"
+    alias brmcf="fuzzy_cask_uninstall"
   fi
 
 elif command -v nix &>/dev/null; then
