@@ -81,13 +81,18 @@ elif command -v nix &>/dev/null; then
   alias ns="nix-shell -p"
   alias nup="nix-env --upgrade"
   alias ngc="nix-store --gc"
-  # nix-darwin
+  # nix-darwin (macos)
   if command -v darwin-rebuild &>/dev/null; then
-    alias ndr="darwin-rebuild build --flake \$XDG_CONFIG_HOME/nix"
-    alias nds="nix run nix-darwin -- switch --flake ~/.config/nix"
+    alias rebuild="darwin-rebuild build --flake \$XDG_CONFIG_HOME/nix"
+    # alias nds="nix run nix-darwin -- switch --flake ~/.config/nix"
+  #nixos
+  elif [ -d "/etc/nixos" ]; then
+    alias clean_gens="nix-env --delete-generations +5 && nix-collect-garbage"
+    alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
+    alias optimize="nix optimise-store"
+    alias rebuild="sudo nixos-rebuild switch"
+    alias upgrade="sudo nixos-rebuild switch --upgrade"
   fi
-  # nix-home-manager
-  # nixos
 fi
 
 # ===============================================================================
