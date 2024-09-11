@@ -30,9 +30,7 @@ return {
         { action = 'lua LazyVim.pick("live_grep")()', desc = " Find Text", icon = " ", key = "g" },
         { action = "lua LazyVim.pick.config_files()()", desc = " Config", icon = " ", key = "c" },
         {
-          action = function()
-            vim.api.nvim_input("<cmd>Telescope find_files find_command=yadm,list,-a<cr>")
-          end,
+          action = 'lua LazyVim.pick( "files", { cwd="$DOTFILES" } )()',
           desc = " Dotfiles",
           icon = " ",
           key = "d",
