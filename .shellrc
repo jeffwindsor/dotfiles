@@ -306,7 +306,7 @@ fi
 # dotfiles: https://github.com/TheLocehiliosan/yadm
 if command -v stow &>/dev/null; then
   alias dg="lazygit --path \$DOTFILES"
-  alias dpl="git pull -C \$DOTFILES"
+  alias dpl="cd \$DOTFILES && git pull && cd -"
 fi
 
 # ===============================================================================
