@@ -18,7 +18,9 @@ source "${ZINIT_HOME}/zinit.zsh"
 # plugin - Fish shell-like syntax highlighting for Zsh
 zinit light zsh-users/zsh-syntax-highlighting
 # plugin - Homebrew commands enhanced with fzf 
-zinit light thirteen37/fzf-brew
+if command -v brew &>/dev/null; then 
+  zinit light thirteen37/fzf-brew
+fi
 # plugin - Lightweight git via fzf
 zinit load wfxr/forgit
 # plugin - replace zsh's default completion selection menu with fzf!
