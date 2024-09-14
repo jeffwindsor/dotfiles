@@ -1,45 +1,12 @@
+import=['/home/mid/.config/alacritty/themes/tender.toml']
+
 [window]
-padding = { x = 4, y = 4 }
+padding = { x = 8, y = 8 }
 opacity = 0.98
 
 [cursor]
 style = "Block"
 
 [font]
-normal = { family = "JetBrainsMonoNerdFont", size = 14.0 }
-
-[colors]
-author = "Folke"
-name = "TokyoNight Night"
-
-[[colors.indexed_colors]]
-color = "0xff9e64"
-index = 16
-
-[[colors.indexed_colors]]
-color = "0xdb4b4b"
-index = 17
-
-[colors.bright]
-black = "0x414868"
-blue = "0x7aa2f7"
-cyan = "0x7dcfff"
-green = "0x9ece6a"
-magenta = "0xbb9af7"
-red = "0xf7768e"
-white = "0xc0caf5"
-yellow = "0xe0af68"
-
-[colors.normal]
-black = "0x15161E"
-blue = "0x7aa2f7"
-cyan = "0x7dcfff"
-green = "0x9ece6a"
-magenta = "0xbb9af7"
-red = "0xf7768e"
-white = "0xa9b1d6"
-yellow = "0xe0af68"
-
-[colors.primary]
-background = "0x1a1b26"
-foreground = "0xc0caf5"
+normal = { family = "JetBrainsMonoNerdFont", style = "Regular" }
+size = 14.0
