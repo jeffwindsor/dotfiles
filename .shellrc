@@ -197,20 +197,32 @@ if command -v fzf &>/dev/null; then
     rg --files-with-matches --no-messages "$1" | fzf --preview-window "$FZF_PREVIEW_WINDOW" --preview "rg --ignore-case --pretty --context 10 '$1' {}"
   }
 
-  function wezterm-theme() {
-    local color_scheme
-    color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
-
-    # if color_scheme was selected, change the wezterm config file colorscheme value
-    [ -n "$color_scheme" ] && sd '^config.color_scheme.*$' "config.color_scheme = '${color_scheme}'" "$XDG_CONFIG_HOME"/wezterm/wezterm.lua
-  }
-
-  alias theme="wezterm-theme"
   alias hubs="exec-on-git-repos cd \$GITHUB/ && lla"
   alias srcs="exec-on-git-repos cd \$SRC && lla"
   alias srcsv="exec-on-git-repos cd \$SRC && nvim ."
   alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
   alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
+
+  #terminal theming
+  if command -v wezterm &>/dev/null; then
+    function theme-wezterm() {
+      local color_scheme
+      color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
+
+      # if color_scheme was selected, change the wezterm config file colorscheme value
+      [ -n "$color_scheme" ] && sd '^config.color_scheme.*$' "config.color_scheme = '${color_scheme}'" "$XDG_CONFIG_HOME"/wezterm/wezterm.lua
+    }
+  fi
+  if command -v alacritty &>/dev/null; then
+    function theme-alacritty() {
+      local selected
+      selected=$(fd -i .toml $XDG_CONFIG_HOME/alacritty/themes/ | fzf)
+
+      # if color_scheme was selected, change the alacritty config file colorscheme value
+      [ -n "$selected" ] && sd "^import.*" "import=['$selected']" $XDG_CONFIG_HOME/alacritty/alacritty.toml
+    }
+  fi
+
 
 fi
 
