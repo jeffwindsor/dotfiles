@@ -1,3 +1,7 @@
+git:
+  paging:
+    pager: "delta --dark --paging=never"
+
 keybinding:
   universal:
     optionMenu: '~' # show help menu
