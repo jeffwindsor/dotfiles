@@ -3,9 +3,17 @@
 
 [core]
   excludesFile = ~/.config/git/ignore
+  pager = delta
 
 [credential]
 	helper = cache
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  side-by-side = true
+
+[diff]
+  colorMoved = default
 
 [gpg]
   format = ssh
@@ -16,8 +24,11 @@
 [init]
   defaultBranch = main
 
+[interactive]
+  diffFilter = delta --color-only
+
 [merge]
-  conflictstyle = zdiff3
+  conflictstyle = diff3
 
 [pull]
   rebase = true
