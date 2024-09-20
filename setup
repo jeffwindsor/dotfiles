@@ -15,6 +15,7 @@ function Add-Packages() {
     fd
     fzf
     git
+    git-delta
     lazygit
     neovim
     ripgrep
@@ -41,6 +42,30 @@ function Add-Packages() {
   for p in "${packages[@]}"; do brew install "$p"; done
 }
 
+function Add-Work-Packages() {
+  packages=(
+    asdf
+    aws-cdk
+    awscli
+    colima
+    curl
+    docker
+    docker-credential-helper
+    gitlab-ci-localk9s
+    kubernetes-cli
+    kubeseal
+    lazydocker
+    maven
+    rlwrap
+    sbt
+    scala
+    watch
+    balenaetcher --cask
+    tuple --cask
+  )
+  for p in "${packages[@]}"; do brew install "$p"; done
+}
+
 function Add-Dotfiles() {
   mkdir -p "$HOME/Source/github.com/"
   git clone git@github.com:jeffwindsor/dotfiles.git "$HOME/Source/github.com/jeffwindsor/dotfiles"
@@ -60,7 +85,7 @@ function Force-Dotfile-Overwrite() {
 
 PS3="Execute Setup Operation: "
 
-select opt in All Add-Homebrew Add-Packages Add-Dotfiles Force-Dotfile-Overwrite Quit; do
+select opt in All Add-Homebrew Add-Packages Add-Work-Packages Add-Dotfiles Force-Dotfile-Overwrite Quit; do
   case $opt in
   "All")
     Add-Homebrew
@@ -72,6 +97,9 @@ select opt in All Add-Homebrew Add-Packages Add-Dotfiles Force-Dotfile-Overwrite
     ;;
   "Add-Packages")
     Add-Packages
+    ;;
+  "Add-Work-Packages")
+    Add-Work-Packages
     ;;
   "Add-Dotfiles")
     Add-Dotfiles
