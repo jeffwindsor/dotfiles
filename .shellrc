@@ -282,7 +282,10 @@ if command -v nvim &>/dev/null; then
     rm -rf "$HOME"/.cache/nvim
   }
   function fuzzy-search() {
-    cd "$1" && fzf | xargs nvim && cd -
+    cd "$1" || exit
+    files=$(fzf)
+    nvim $files
+    cd - || exit
   }
 
   alias v="nvim"
