@@ -1,3 +1,7 @@
+gui:
+  authorColors:
+    'Jeff Windsor': 'blue'
+    '*': 'cyan'
 git:
   paging:
     color: always
