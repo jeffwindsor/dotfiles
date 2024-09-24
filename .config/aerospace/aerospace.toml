@@ -152,7 +152,7 @@ alt-ctrl-cmd-a = 'exec-and-forget open "/Applications/Slack.app"'
 alt-ctrl-cmd-b = 'exec-and-forget open -n "/Applications/Google Chrome.app"'
 alt-ctrl-cmd-c = 'exec-and-forget open /System/Applications/Calendar.app'
 alt-ctrl-cmd-comma = 'exec-and-forget open "/System/Applications/System Settings.app"'
-alt-ctrl-cmd-enter = 'exec-and-forget open -n /Applications/WezTerm.app'
+alt-ctrl-cmd-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 alt-ctrl-cmd-f = 'exec-and-forget open -n "/Applications/Firefox.app"'
 alt-ctrl-cmd-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-cmd-n = 'exec-and-forget open /System/Applications/Notes.app'
@@ -203,6 +203,10 @@ u = 'secondary' # ms teams - meeting (work)
 # Terminal
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
+run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
 run = ['move-node-to-workspace 1']
 
 # Browsers
