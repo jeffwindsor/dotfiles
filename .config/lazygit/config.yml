@@ -1,11 +1,16 @@
-gui:
-  authorColors:
-    'Jeff Windsor': 'blue'
-    '*': 'cyan'
 git:
   paging:
     color: always
-    pager: "delta --dark --paging=never --line-numbers"
+    pager: "delta --dark --paging=never --line-numbers --diff-so-fancy"
+  
+gui:
+  authorColors:
+    'Jeff Windsor': 'blue'
+    'Windsor, Jeff': 'cyan'
+    '*': '#364348'
+  theme:
+    selectedLineBgColor:
+      - '#364348'  # shade of blue from tender theme
 
 keybinding:
   universal:
