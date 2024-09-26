@@ -1,12 +1,21 @@
-import = ['/Users/jefwinds/.config/alacritty/themes/tender.toml']
+#
+# docs: https://alacritty.org/config-alacritty.html
+#
 
-[window]
-padding = { x = 8, y = 8 }
-opacity = 0.98
+# color_scheme import is replaced by shell function
+import = ['/Users/jeffwindsor/.config/alacritty/themes/tender.toml']
 
-[cursor]
-style = "Block"
+#[cursor]
+#style = "Block"  #default value
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
 size = 14.0
+
+# [keyboard]
+# bindings = [{ <key>, <mods>, <mode>, <command> | <chars> | <action> },]
+
+[window]
+decorations = "None"
+padding = { x = 8, y = 8 }
+opacity = 0.94

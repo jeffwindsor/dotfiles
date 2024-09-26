@@ -214,6 +214,7 @@ if command -v fzf &>/dev/null; then
     }
   fi
   if command -v alacritty &>/dev/null; then
+    alias theme=theme-alacritty
     function theme-alacritty() {
       local selected
       selected=$(fd -i .toml $XDG_CONFIG_HOME/alacritty/themes/ | fzf)
