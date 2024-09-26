@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = "tokyonight-moon",
+      -- colorscheme = "tokyonight",
       -- colorscheme = "ayu-mirage",
       -- colorscheme = "monokai-pro-octagon",
       colorscheme = "tender",
@@ -14,11 +14,11 @@ return {
     "folke/tokyonight.nvim",
     opts = {
       -- transparency
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
+      -- transparent = true,
+      -- styles = {
+      --   sidebars = "transparent",
+      --   floats = "transparent",
+      -- },
 
       -- visibility
       on_highlights = function(hl, c)
