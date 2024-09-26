@@ -7,6 +7,8 @@
 --
 local map = vim.keymap.set
 
+map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle Zen Mode" })
+
 -- map("n", "<leader>cf", "", { desc = "+format" })
 map("n", "<leader>cfx", "<cmd>%!xmllint --format - <cr>", { desc = "Format XML" })
 map("n", "<leader>cfs", "<cmd>%!shfmt - <cr>", { desc = "Format Shell" })
