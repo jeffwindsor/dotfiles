@@ -294,8 +294,10 @@ if command -v nvim &>/dev/null; then
   alias vi="nvim"
   alias v.="nvim ."
 
+  alias dot="cd \$DOTFILES"
+  alias dotn="cd \$DOTFILES/nvim/lua/plugins"
   alias dots="fuzzy-search \$DOTFILES"
-  alias dotsn="fuzzy-search \$XDG_CONFIG_HOME/nvim/lua/plugins"
+  alias dotsn="fuzzy-search \$DOTFILES/nvim/lua/plugins"
   alias exo="nvim \$HOME/portable/exocortex"
 
 fi
