@@ -2,10 +2,9 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = "tokyonight",
+      colorscheme = "tokyonight",
       -- colorscheme = "ayu-mirage",
-      -- colorscheme = "monokai-pro-octagon",
-      colorscheme = "tender",
+      -- colorscheme = "tender",
     },
   },
 
@@ -33,11 +32,12 @@ return {
     },
   },
   { "jacoborus/tender.vim" },
-  { "rebelot/kanagawa.nvim" },
   { "shaunsingh/nord.nvim" },
   { "Shatur/neovim-ayu" },
-  { "loctvl842/monokai-pro.nvim" },
+  { "marko-cerovac/material.nvim" },
 
+  -- { "rebelot/kanagawa.nvim" },
+  -- { "loctvl842/monokai-pro.nvim" },
   -- { "kepano/flexoki-neovim" },
   -- { "samharju/synthweave.nvim" },
   -- { "AlexvZyl/nordic.nvim" },
