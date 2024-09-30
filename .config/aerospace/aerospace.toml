@@ -132,6 +132,8 @@ alt-t = 'workspace t'
 alt-shift-t = ['move-node-to-workspace t', 'workspace t']
 alt-u = 'workspace u'
 alt-shift-u = ['move-node-to-workspace u', 'workspace u']
+alt-y = 'workspace y'
+alt-shift-y = ['move-node-to-workspace y', 'workspace y']
 
 alt-shift-right = 'workspace --wrap-around next'
 alt-shift-left = 'workspace --wrap-around prev'
@@ -147,21 +149,21 @@ alt-cmd-shift-3 = ['move-node-to-monitor 3', 'focus-monitor 3']
 alt-cmd-right = 'focus-monitor --wrap-around next'
 alt-cmd-left = 'focus-monitor --wrap-around prev'
 
-# LAUNCHERS : ALT-CTRL-CMD
-alt-ctrl-cmd-a = 'exec-and-forget open "/Applications/Slack.app"'
-alt-ctrl-cmd-b = 'exec-and-forget open -n "/Applications/Google Chrome.app"'
-alt-ctrl-cmd-c = 'exec-and-forget open /System/Applications/Calendar.app'
-alt-ctrl-cmd-comma = 'exec-and-forget open "/System/Applications/System Settings.app"'
-alt-ctrl-cmd-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
-alt-ctrl-cmd-f = 'exec-and-forget open -n "/Applications/Firefox.app"'
-alt-ctrl-cmd-m = 'exec-and-forget open /System/Applications/Messages.app'
-alt-ctrl-cmd-n = 'exec-and-forget open /System/Applications/Notes.app'
-alt-ctrl-cmd-o = 'exec-and-forget open /Applications/Outlook.app'
-alt-ctrl-cmd-s = 'exec-and-forget open "/Applications/Spotify.app"'
-alt-ctrl-cmd-space = 'exec-and-forget open ~'
-alt-ctrl-cmd-t = 'exec-and-forget open /Applications/Teams.app'
-alt-ctrl-cmd-v = 'exec-and-forget wezterm start -- nvim'
-alt-ctrl-cmd-y = 'exec-and-forget wezterm start -- yazi'
+# LAUNCHERS : alt-ctrl
+alt-ctrl-a = 'exec-and-forget open "/Applications/Slack.app"'
+alt-ctrl-b = 'exec-and-forget open -n "/Applications/Google Chrome.app"'
+alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
+alt-ctrl-comma = 'exec-and-forget open "/System/Applications/System Settings.app"'
+alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
+alt-ctrl-f = 'exec-and-forget open -n "/Applications/Firefox.app"'
+alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
+alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
+alt-ctrl-o = 'exec-and-forget open /Applications/Outlook.app'
+alt-ctrl-s = 'exec-and-forget open "/Applications/Spotify.app"'
+alt-ctrl-space = 'exec-and-forget open ~'
+alt-ctrl-t = 'exec-and-forget open /Applications/Teams.app'
+alt-ctrl-v = 'exec-and-forget wezterm start -- nvim'
+alt-ctrl-y = 'exec-and-forget wezterm start -- yazi'
 
 
 # alt-cmd-up = 'macos-native-fullscreen'
