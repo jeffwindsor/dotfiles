@@ -4,97 +4,59 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-mods      = [["alt"], ["alt", "control"], ["alt", "control", "mod4"]]
-mod_metas = [c + ["shift"] for c in mods]
+m1, m2, mm = "alt", "control", "shift"
+mod1, mod1m = [m1], [m1, mm]
+mod2, mod2m = [m1, m2], [m1, m2, mm]
 
+groups = [Group(i) for i in "1234567890acmnostuy"]
 terminal = guess_terminal()
 
 # https://docs.qtile.org/en/latest/manual/config/lazy.html#special-keys
 keys = [
     # Launchers
-    Key(mods[0], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key(mods[2], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key(mods[2], "a", lazy.spawn(slack), desc="Launch slack"),
-    Key(mods[2], "b", lazy.spawn(firefox), desc="Launch firefox"),
-    Key(mods[2], "c", lazy.spawn(calendar), desc="Launch calendar"),
-    Key(mods[2], ",", lazy.spawn(settings), desc="Launch settings"),
-    Key(mods[2], "f", lazy.spawn(firefox), desc="Launch firefox"),
-    Key(mods[2], "m", lazy.spawn(messages), desc="Launch messages"),
-    Key(mods[2], "n", lazy.spawn(notes), desc="Launch notes"),
-    Key(mods[2], "o", lazy.spawn(outlook), desc="Launch outlook"),
-    Key(mods[2], "s", lazy.spawn(spotify), desc="Launch spotify"),
-    # Key(mods[2], "space", lazy.spawn(home folder), desc="Launch home folder"),
-    # Key(mods[2], "t", lazy.spawn(teams), desc="Launch teams"),
-    Key(mods[2], "v", lazy.spawn(zsh nvim), desc="Launch neovim"),
-    Key(mods[2], "y", lazy.spawn(zsh yazi), desc="Launch file manager"),
+    Key(mod1, "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key(mod2, "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key(mod2, "a", lazy.spawn(slack), desc="Launch slack"),
+    Key(mod2, "b", lazy.spawn(firefox), desc="Launch firefox"),
+    Key(mod2, "c", lazy.spawn(calendar), desc="Launch calendar"),
+    Key(mod2, ",", lazy.spawn(settings), desc="Launch settings"),
+    Key(mod2, "f", lazy.spawn(firefox), desc="Launch firefox"),
+    Key(mod2, "m", lazy.spawn(messages), desc="Launch messages"),
+    Key(mod2, "n", lazy.spawn(notes), desc="Launch notes"),
+    Key(mod2, "o", lazy.spawn(outlook), desc="Launch outlook"),
+    Key(mod2, "s", lazy.spawn(spotify), desc="Launch spotify"),
+    # Key(mod2, "space", lazy.spawn(home folder), desc="Launch home folder"),
+    # Key(mod2, "t", lazy.spawn(teams), desc="Launch teams"),
+    Key(mod2, "v", lazy.spawn(zsh nvim), desc="Launch neovim"),
+    Key(mod2, "y", lazy.spawn(zsh yazi), desc="Launch file manager"),
 
     # System
-    Key(mod_metas[0] "r", lazy.reload_config(), desc="Reload the config"),
+    Key(mod1m, "r", lazy.reload_config(), desc="Reload the config"),
+    Key(mod1m, "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
     # Windows
-    Key(mods[0], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key(mods[0], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
-    Key(mod_metas[0], "f", lazy.window.toggle_floating(), desc="Toggle floating"),
-    Key(mods[0], "h", lazy.layout.left(), desc="Focus left"),
-    Key(mods[0], "l", lazy.layout.right(), desc="Focus right"),
-    Key(mods[0], "j", lazy.layout.down(), desc="Focus down"),
-    Key(mods[0], "k", lazy.layout.up(), desc="Focus up"),
-    Key(mod_metas[0], "Return", lazy.layout.toggle_split(), desc="Focus Master/Stack"),
-    Key(mod_metas[0], "h", lazy.layout.shuffle_left(), desc="Move left"),
-    Key(mod_metas[0], "l", lazy.layout.shuffle_right(), desc="Move right"),
-    Key(mod_metas[0], "j", lazy.layout.shuffle_down(), desc="Move down"),
-    Key(mod_metas[0], "k", lazy.layout.shuffle_up(), desc="Move up"),
-    Key(mods[0], "=", lazy.layout.increase_ratio(), desc="Increase Master Ratio"),
-    Key(mods[0], "-", lazy.layout.decrease_ratio(), desc="Decrease Master Ratio"),
-    
-    # Layouts
-    Key(mods[0], "Tab", lazy.layout.decrease_ratio(), desc="Decrease Master Ratio"),
-
-
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key(mods[0], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    Key(mods[0], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key(mod1, "w", lazy.window.kill(), desc="Kill focused window"),
+    Key(mod1, "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
+    Key(mod1m, "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
+    Key(mod1, "h", lazy.layout.left(), desc="Focus window left"),
+    Key(mod1, "l", lazy.layout.right(), desc="Focus window right"),
+    Key(mod1, "j", lazy.layout.down(), desc="Focus window down"),
+    Key(mod1, "k", lazy.layout.up(), desc="Focus window up"),
+    Key(mod1m, "Return", lazy.layout.toggle_split(), desc="Focus Master/Stack"),
+    Key(mod1m, "h", lazy.layout.shuffle_left(), desc="Move window left"),
+    Key(mod1m, "l", lazy.layout.shuffle_right(), desc="Move window right"),
+    Key(mod1m, "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key(mod1m, "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key(mod1, "=", lazy.layout.increase_ratio(), desc="Increase Master Ratio"),
+    Key(mod1, "-", lazy.layout.decrease_ratio(), desc="Decrease Master Ratio"),
+    Key(mod1, "n", lazy.layout.normalize(), desc="Reset all window sizes"),
 ]
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
+# Focus Workspace / Group
+keys.extend([Key( mod1, i.name, lazy.group[i.name].toscreen(), desc=f"Switch to group {i.name}",) for i in groups])
 
-
-groups = [Group(i) for i in "123456789"]
-
-for i in groups:
-    keys.extend(
-        [
-            # mod + group number = switch to group
-            Key(
-                mods[0],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
-            ),
-            # mod + shift + group number = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc=f"Switch to & move focused window to group {i.name}",
-            ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod + shift + group number = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
-        ]
-    )
+# Move Window and Focus Workspace / Group
+keys.extend(Key( [mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True), desc=f"Switch to & move focused window to group {i.name}",) for i in groups])
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
@@ -154,9 +116,9 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag(mods[0], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag(mods[0], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    Click(mods[0], "Button2", lazy.window.bring_to_front()),
+    Drag(mod1, "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag(mod1, "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Click(mod1, "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
