@@ -244,6 +244,7 @@ if command -v git &>/dev/null; then
   }
 
   alias gclean="git clean -xdf"
+  alias gls="git ls-tree --full-tree --name-only -r HEAD."
   alias gs="git status"
   alias gpl="git pull"
   # git blame (more precise)
