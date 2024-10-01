@@ -1,10 +1,6 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.editor.fzf",
-    "lazyvim.plugins.extras.lang.nix",
-    "lazyvim.plugins.extras.lang.toml",
-    "lazyvim.plugins.extras.util.dot",
-    "lazyvim.plugins.extras.util.mini-hipatterns"
+    "lazyvim.plugins.extras.editor.fzf"
   ],
   "news": {
     "NEWS.md": "6520"
