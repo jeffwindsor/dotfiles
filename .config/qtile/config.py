@@ -4,68 +4,84 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-m1, m2, mm = "alt", "control", "shift"
-mod1, mod1m = [m1], [m1, mm]
-mod2, mod2m = [m1, m2], [m1, m2, mm]
+modifers1 = ["mod1"]
+modifers2 = modifers1 + ["shift"]
+launch    = modifers1 + ["mod4"]
 
-groups = [Group(i) for i in "1234567890acmnostuy"]
-terminal = guess_terminal()
 
-# https://docs.qtile.org/en/latest/manual/config/lazy.html#special-keys
+# https://docs.qtile.org/en/latest/manual/config/keys.html#modifiers
 keys = [
-    # Launchers
-    Key(mod1, "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key(mod2, "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key(mod2, "a", lazy.spawn(slack), desc="Launch slack"),
-    Key(mod2, "b", lazy.spawn(firefox), desc="Launch firefox"),
-    Key(mod2, "c", lazy.spawn(calendar), desc="Launch calendar"),
-    Key(mod2, ",", lazy.spawn(settings), desc="Launch settings"),
-    Key(mod2, "f", lazy.spawn(firefox), desc="Launch firefox"),
-    Key(mod2, "m", lazy.spawn(messages), desc="Launch messages"),
-    Key(mod2, "n", lazy.spawn(notes), desc="Launch notes"),
-    Key(mod2, "o", lazy.spawn(outlook), desc="Launch outlook"),
-    Key(mod2, "s", lazy.spawn(spotify), desc="Launch spotify"),
-    # Key(mod2, "space", lazy.spawn(home folder), desc="Launch home folder"),
-    # Key(mod2, "t", lazy.spawn(teams), desc="Launch teams"),
-    Key(mod2, "v", lazy.spawn(zsh nvim), desc="Launch neovim"),
-    Key(mod2, "y", lazy.spawn(zsh yazi), desc="Launch file manager"),
-
     # System
-    Key(mod1m, "r", lazy.reload_config(), desc="Reload the config"),
-    Key(mod1m, "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key(modifers1, "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key(modifers2, "r", lazy.reload_config(), desc="Reload the config"),
+    Key(modifers2, "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
     # Windows
-    Key(mod1, "w", lazy.window.kill(), desc="Kill focused window"),
-    Key(mod1, "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
-    Key(mod1m, "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
-    Key(mod1, "h", lazy.layout.left(), desc="Focus window left"),
-    Key(mod1, "l", lazy.layout.right(), desc="Focus window right"),
-    Key(mod1, "j", lazy.layout.down(), desc="Focus window down"),
-    Key(mod1, "k", lazy.layout.up(), desc="Focus window up"),
-    Key(mod1m, "Return", lazy.layout.toggle_split(), desc="Focus Master/Stack"),
-    Key(mod1m, "h", lazy.layout.shuffle_left(), desc="Move window left"),
-    Key(mod1m, "l", lazy.layout.shuffle_right(), desc="Move window right"),
-    Key(mod1m, "j", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key(mod1m, "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    Key(mod1, "=", lazy.layout.increase_ratio(), desc="Increase Master Ratio"),
-    Key(mod1, "-", lazy.layout.decrease_ratio(), desc="Decrease Master Ratio"),
-    Key(mod1, "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key(modifers1, "-", lazy.layout.decrease_ratio(), desc="Decrease Master Ratio"),
+    Key(modifers1, "=", lazy.layout.increase_ratio(), desc="Increase Master Ratio"),
+    Key(modifers1, "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
+    Key(modifers1, "h", lazy.layout.left(), desc="Focus window left"),
+    Key(modifers1, "j", lazy.layout.down(), desc="Focus window down"),
+    Key(modifers1, "k", lazy.layout.up(), desc="Focus window up"),
+    Key(modifers1, "l", lazy.layout.right(), desc="Focus window right"),
+    Key(modifers1, "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key(modifers1, "w", lazy.window.kill(), desc="Kill focused window"),
+    Key(modifers2, "Return", lazy.layout.toggle_split(), desc="Focus Master/Stack"),
+    Key(modifers2, "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
+    Key(modifers2, "h", lazy.layout.shuffle_left(), desc="Move window left"),
+    Key(modifers2, "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key(modifers2, "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key(modifers2, "l", lazy.layout.shuffle_right(), desc="Move window right"),
+
+    # Monitors
+    
+    # Launchers
+    Key(launch, "a", lazy.spawn(slack), desc="Launch slack"),
+    # Key(launch, "c", lazy.spawn(calendar), desc="Launch calendar"),
+    # Key(launch, ",", lazy.spawn(settings), desc="Launch settings"),
+    Key(launch, "f", lazy.spawn(firefox), desc="Launch firefox"),
+    # Key(launch, "m", lazy.spawn(messages), desc="Launch messages"),
+    # Key(launch, "n", lazy.spawn(notes), desc="Launch notes"),
+    # Key(launch, "o", lazy.spawn(outlook), desc="Launch outlook"),
+    Key(launch, "s", lazy.spawn(spotify), desc="Launch spotify"),
+    # Key(launch, "space", lazy.spawn(home folder), desc="Launch home folder"),
+    # Key(launch, "t", lazy.spawn(teams), desc="Launch teams"),
 ]
 
-# Focus Workspace / Group
-keys.extend([Key( mod1, i.name, lazy.group[i.name].toscreen(), desc=f"Switch to group {i.name}",) for i in groups])
+groups = {
+    Group(name="1", label="Terminal", screen_affinity=0, persist=false, match = [Match(wm_class=terminal)]),
+    Group(name="2", label="Web", screen_affinity=0, persist=false, match = [Match(wm_class=firefox)]),
+    Group(name="3", label="3", screen_affinity=0, persist=false),
+    Group(name="4", label="4", screen_affinity=0, persist=false),
+    Group(name="5", label="Ide", screen_affinity=0, persist=false),
+    Group(name="6", label="6", screen_affinity=0, persist=false),
+    Group(name="7", label="7", screen_affinity=0, persist=false),
+    Group(name="8", label="8", screen_affinity=0, persist=false),
+    Group(name="9", label="9", screen_affinity=0, persist=false),
+    Group(name="0", label="0", screen_affinity=0, persist=false),
+    Group(name="a", label="Slack", screen_affinity=0, persist=false, match = [Match(wm_class=slack)]),
+    # Group(name="c", label="Calendar", screen_affinity=0, persist=false, match = [Match(wm_class=calendar)]),
+    # Group(name="m", label="Messages", screen_affinity=0, persist=false, match = [Match(wm_class=messages)]),
+    # Group(name="n", label="Notes", screen_affinity=0, persist=false, match = [Match(wm_class=notes)]),
+    # Group(name="o", label="Outlook", screen_affinity=0, persist=false, match = [Match(wm_class=outlook)]),
+    Group(name="s", label="Spotify", screen_affinity=0, persist=false, match = [Match(wm_class=spotify)])
+}
+for g in groups:
+    keys.extend([
+        # Focus
+        Key(modifers1, g.name, lazy.group[g.name].toscreen(), desc=f"Switch to group {g.name}"),
+        # Move window and Focus
+        Key(modifers2, g.name, lazy.window.togroup(g.name, switch_group=True), desc=f"Move Window to group {g.name}")
+    ])
 
-# Move Window and Focus Workspace / Group
-keys.extend(Key( [mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True), desc=f"Switch to & move focused window to group {i.name}",) for i in groups])
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
+    # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    # layout.Max(),
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
+    layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
@@ -116,9 +132,9 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag(mod1, "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag(mod1, "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    Click(mod1, "Button2", lazy.window.bring_to_front()),
+    Drag(modifers1, "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag(modifers1, "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Click(modifers1, "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
