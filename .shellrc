@@ -14,6 +14,7 @@ export GITCJ="$SRC/gitlab.cj.dev"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
 export DOTFILES="$JEFF/dotfiles"
+export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua/plugins/"
 
 # Jump Directories
 alias .....="cd ../../../../"
@@ -295,9 +296,9 @@ if command -v nvim &>/dev/null; then
   alias v.="nvim ."
 
   alias dot="cd \$DOTFILES"
-  alias dotn="cd \$DOTFILES/nvim/lua/plugins"
+  alias dotn="cd \$DOTFILES_NVIM"
   alias dots="fuzzy-search \$DOTFILES"
-  alias dotsn="fuzzy-search \$DOTFILES/nvim/lua/plugins"
+  alias dotsn="fuzzy-search \$DOTFILES_NVIM"
   alias exo="nvim \$HOME/portable/exocortex"
 
 fi
@@ -338,10 +339,22 @@ fi
 # ===============================================================================
 # tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
-  alias y="yazi"
+  # opens yazi either at the given directory or at the one zoxide suggests
+  yazi-zoxide() {
+    if [ "$1" != "" ]; then
+      if [ -d "$1" ]; then
+        yazi "$1"
+      else
+        yazi "$(zoxide query $1)"
+      fi
+    else
+      yazi
+    fi
+    return $?
+  }
 
-  # shell wrapper that will change to the selected directory on exit
-  function yy() {
+  # open yazi and shell change to the selected directory on exit
+  function yazi-change-dir() {
     local tmp
     tmp="$(mktemp -t "yazi-cwd.XXXXX")"
     yazi "$@" --cwd-file="$tmp"
@@ -350,9 +363,13 @@ if command -v yazi &>/dev/null; then
     fi
     rm -f -- "$tmp"
   }
+
+  alias y="yazi-zoxide"
+  alias yy="yazi-change-dir"
+
 fi
 
-if command -v yazi &>/dev/null; then
+if command -v zinit &>/dev/null; then
   alias zup="zinit update --parallel"
 fi
 
