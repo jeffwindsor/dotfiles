@@ -15,7 +15,7 @@ export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
 export DOTFILES="$JEFF/dotfiles"
 
-# Jump Directories - could replace with zoxide
+# Jump Directories
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
@@ -350,6 +350,10 @@ if command -v yazi &>/dev/null; then
     fi
     rm -f -- "$tmp"
   }
+fi
+
+if command -v yazi &>/dev/null; then
+  alias zup="zinit update --parallel"
 fi
 
 # ===============================================================================
