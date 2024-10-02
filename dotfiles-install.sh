@@ -24,7 +24,6 @@ function Add-Packages() {
     stow
     tldr
     yazi
-    zoxide
     zsh
     aerospace --cask
     balenaetcher --cask
@@ -36,7 +35,10 @@ function Add-Packages() {
     keepingyouawake --cask
     qbittorrent --cask
     spotify --cask
+    sweet-home3d --cask
     vlc --cask
+    allacritty --cask
+    kitty --cask
     wezterm --cask
   )
   for p in "${packages[@]}"; do brew install "$p"; done
