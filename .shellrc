@@ -323,6 +323,7 @@ fi
 if command -v stow &>/dev/null; then
   alias dg="lazygit --path \$DOTFILES"
   alias dpl="cd \$DOTFILES && git pull && cd -"
+  alias d*="cd \$DOTFILES && stow -D . && stow . && cd -"
 fi
 
 # ===============================================================================
