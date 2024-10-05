@@ -178,7 +178,7 @@ if command -v fzf &>/dev/null; then
   eval "$(fzf --$SHELL_NAME)"
 
   # prompt user to select from list of git directories under $2 and if user selects one, execute command $1 on it
-  function exec-on-git-repos() {
+  function exec_on_git_repos() {
     local root_folder="$2"
     local exec_command="$1"
     # find list of directories containing a .git subfolder, presumably a repo
@@ -197,9 +197,10 @@ if command -v fzf &>/dev/null; then
     rg --files-with-matches --no-messages "$1" | fzf --preview-window "$FZF_PREVIEW_WINDOW" --preview "rg --ignore-case --pretty --context 10 '$1' {}"
   }
 
-  alias hubs="exec-on-git-repos cd \$GITHUB/ && lla"
-  alias srcs="exec-on-git-repos cd \$SRC && lla"
-  alias srcsv="exec-on-git-repos cd \$SRC && nvim ."
+  alias fr="fzf_rg"
+  alias hubs="exec_on_git_repos cd \$GITHUB/ && lla"
+  alias srcs="exec_on_git_repos cd \$SRC && lla"
+  alias srcsv="exec_on_git_repos cd \$SRC && nvim ."
   alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
   alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
 
