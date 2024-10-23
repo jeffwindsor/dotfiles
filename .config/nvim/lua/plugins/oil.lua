@@ -2,33 +2,29 @@ return {
   {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("oil").setup({
-        default_file_explorer = true,
-        delete_to_trash = true,
-        skip_confirm_for_simple_edits = true,
-        keymaps = {
-          ["~"] = "actions.show_help",
-          ["p"] = "actions.preview",
-          ["<Esc>"] = "actions.close",
-        },
-        view_options = {
-          show_hidden = true,
-          -- natural_order = true,
-          is_always_hidden = function(name, _)
-            return name == ".." or name == ".git"
-          end,
-        },
-        win_options = {
-          wrap = true,
-        },
-      })
-
-      -- Open parent directory in current window
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
-      -- Open parent directory in floating window
-      vim.keymap.set("n", "_", require("oil").toggle_float, { desc = "Open in Floating Window" })
-    end,
+    lazy = false,
+    keys = {
+      { "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
+    },
+    opts = {
+      default_file_explorer = true,
+      delete_to_trash = true,
+      skip_confirm_for_simple_edits = true,
+      keymaps = {
+        ["~"] = "actions.show_help",
+        ["p"] = "actions.preview",
+        ["q"] = "actions.close",
+      },
+      view_options = {
+        show_hidden = true,
+        is_always_hidden = function(name, _)
+          return name == ".." or name == ".git"
+        end,
+        case_insensitive = true,
+      },
+      win_options = {
+        wrap = true,
+      },
+    },
   },
 }
