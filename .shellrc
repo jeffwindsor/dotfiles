@@ -150,10 +150,10 @@ fi
 # ===============================================================================
 # ls replacement (rust): https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
-  alias l="eza -F --group-directories-first --no-user"
   alias la="eza -F --group-directories-first --git --all --no-user"
   alias ll="eza -lF --group-directories-first --no-user"
   alias lla="eza -lF --group-directories-first --git --all --no-user"
+  alias l="clear && lla"
   alias tree="eza --tree --git"
   alias treea="eza --tree --git --all"
   alias treed="eza --tree --git --level"
