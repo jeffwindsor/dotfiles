@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-SHELL_NAME=$1
+SHELL_NAME=${1:-"zsh"}
 
 # xdg-ify
 export XDG_STATE_HOME=$HOME/.local/state
