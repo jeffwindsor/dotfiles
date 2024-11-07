@@ -37,6 +37,15 @@ function exec-in-subdirs() {
   done
 }
 
+function up() {
+  # homebrew packages
+  brew update
+  brew upgrade
+  # lazy vim packages
+  nvim --headless "+Lazy! sync" +qa
+  # dot files
+  dpl
+}
 # ===============================================================================
 # Package Managers
 if command -v brew &>/dev/null; then
