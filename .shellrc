@@ -334,7 +334,7 @@ fi
 if command -v stow &>/dev/null; then
   alias dg="lazygit --path \$DOTFILES"
   alias dpl="cd \$DOTFILES && git pull && cd -"
-  alias dsync="cd \$DOTFILES && stow -D . && stow . && cd -"
+  alias dsync="cd \$DOTFILES && stow -D . && stow . --target=$HOME && cd -"
 fi
 
 # ===============================================================================
