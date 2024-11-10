@@ -320,6 +320,7 @@ if command -v rg &>/dev/null; then
   alias grep="rg"
   alias ar="alias | rg"
   alias er="env | rg"
+  alias fr="declare -f | rg"
 fi
 
 # ===============================================================================

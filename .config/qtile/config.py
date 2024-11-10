@@ -36,6 +36,7 @@ keys = [
     # Monitors
     
     # Launchers
+    Key(launch, "Return", lazy.spawn(wezterm), desc="Launch Wezterm"),
     Key(launch, "a", lazy.spawn(slack), desc="Launch slack"),
     # Key(launch, "c", lazy.spawn(calendar), desc="Launch calendar"),
     # Key(launch, ",", lazy.spawn(settings), desc="Launch settings"),
@@ -101,7 +102,7 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.CurrentLayout(),
+                # widget.CurrentLayout(),
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
@@ -112,7 +113,7 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#005f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
@@ -131,11 +132,11 @@ screens = [
 ]
 
 # Drag floating layouts.
-mouse = [
-    Drag(modifers1, "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag(modifers1, "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    Click(modifers1, "Button2", lazy.window.bring_to_front()),
-]
+#mouse = [
+#    Drag(modifers1, "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+#    Drag(modifers1, "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+#    Click(modifers1, "Button2", lazy.window.bring_to_front()),
+#]
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
