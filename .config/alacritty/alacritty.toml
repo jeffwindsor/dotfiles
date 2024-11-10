@@ -10,7 +10,7 @@ import = ['/Users/jeffwindsor/.config/alacritty/themes/tender.toml']
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
-size = 14.0
+size = 12.0
 
 # [keyboard]
 # bindings = [{ <key>, <mods>, <mode>, <command> | <chars> | <action> },]
