@@ -38,13 +38,18 @@ function exec-in-subdirs() {
 }
 
 function up() {
-  # homebrew packages
+  # homebrew database
   brew update
+  # homebrew packages
   brew upgrade
-  # lazy vim packages
+
+  # sync lazy vim packages
   nvim --headless "+Lazy! sync" +qa
+
   # dot files
-  dpl
+  cd $DOTFILES
+  git pull
+  cd -
 }
 # ===============================================================================
 # Package Managers
