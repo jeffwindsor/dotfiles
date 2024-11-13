@@ -17,7 +17,8 @@ map("n", "<leader>cfs", "<cmd>%!shfmt - <cr>", { desc = "Format Shell" })
 map("n", "<leader>o", "<cmd>!open %<cr>", { desc = "Open with default application" })
 
 -- Search Dotfiles
-map("n", "<leader>fd", '<cmd>FzfLua files cwd="$DOTFILES"<cr>', { desc = "Open dotfiles" })
+map("n", "<leader>fd", '<cmd>FzfLua files cwd="$DOTFILES"<cr>', { desc = "Find dotfiles" })
+map("n", "<leader>fN", '<cmd>FzfLua files cwd="$DOTFILES_NIX"<cr>', { desc = "Find nixos configs" })
 
 -- Dashboard
 map("n", "<leader>d", "<cmd>Dashboard<cr>", { desc = "Show Dashboard" })

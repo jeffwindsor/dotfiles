@@ -35,6 +35,12 @@ return {
           icon = " ",
           key = "d",
         },
+        {
+          action = 'lua LazyVim.pick( "files", { cwd="$DOTFILES_NIX" } )()',
+          desc = " Nixos Config",
+          icon = " ",
+          key = "N",
+        },
         { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
         { action = "LazyExtras", desc = " Lazy Extras", icon = " ", key = "x" },
         { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
