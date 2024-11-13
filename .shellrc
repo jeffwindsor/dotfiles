@@ -14,7 +14,7 @@ export GITCJ="$SRC/gitlab.cj.dev"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
 export DOTFILES="$JEFF/dotfiles"
-export DOTFILES_NIX="$JEFF/nixos-config"
+export DOTFILES_NIXOS="$JEFF/nixos-config"
 export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua/plugins/"
 
 # Jump Directories
@@ -308,12 +308,15 @@ if command -v nvim &>/dev/null; then
   alias v="nvim"
   alias vim="nvim"
   alias vi="nvim"
+
   alias v.="nvim ."
 
   alias dot="cd \$DOTFILES"
-  alias dotn="cd \$DOTFILES_NVIM"
   alias dots="fuzzy-search \$DOTFILES"
-  alias dotsn="fuzzy-search \$DOTFILES_NVIM"
+
+  alias dotn="cd \$DOTFILES_NIXOS"
+  alias dotsn="fuzzy-search \$DOTFILES_NIXOS"
+
   alias exo="nvim \$HOME/portable/exocortex"
 
 fi
@@ -338,8 +341,13 @@ fi
 # dotfiles: https://github.com/TheLocehiliosan/yadm
 if command -v stow &>/dev/null; then
   alias dg="lazygit --path \$DOTFILES"
-  alias dpl="cd \$DOTFILES && git pull && cd -"
-  alias dsync="cd \$DOTFILES && stow -D . && stow . --target=$HOME && cd -"
+  alias dpl="git -C \$DOTFILES pull"
+  function dsync() {
+    # clean current links
+    #stow -D . --dir=$DOTFILES --target=$HOME
+    # put stowed into $HOME
+    stow . --dir=$DOTFILES --target=$HOME
+  }
 fi
 
 # ===============================================================================
