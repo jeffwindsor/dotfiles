@@ -14,6 +14,7 @@ export GITCJ="$SRC/gitlab.cj.dev"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
 export DOTFILES="$JEFF/dotfiles"
+export DOTFILES_NIX="$JEFF/nixos-config"
 export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua/plugins/"
 
 # Jump Directories
