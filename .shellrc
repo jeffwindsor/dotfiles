@@ -13,6 +13,7 @@ export GITHUB="$SRC/github.com"
 export GITCJ="$SRC/gitlab.cj.dev"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
+export EXOCORTEXT="$HOME/portable/exocortex"
 export DOTFILES="$JEFF/dotfiles"
 export DOTFILES_NIXOS="$JEFF/nixos-config"
 export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua/plugins/"
@@ -187,7 +188,7 @@ if command -v fzf &>/dev/null; then
     local exec_command="$1"
     # find list of directories containing a .git subfolder, presumably a repo
     local git_repos
-    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf --reverse)
+    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf)
 
     [ -n "$git_repos" ] && "$exec_command" "$git_repos"
   }
@@ -308,7 +309,11 @@ if command -v nvim &>/dev/null; then
   alias dotn="cd \$DOTFILES_NIXOS"
   alias dotsn="fuzzy-search \$DOTFILES_NIXOS"
 
-  alias exo="nvim \$HOME/portable/exocortex"
+  alias dotv="cd \$DOTFILES_NVIM"
+  alias dotsv="fuzzy-search \$DOTFILES_NVIM"
+
+  alias exo="cd \$EXOCORTEXT"
+  alias exo="fuzzy-search \$EXOCORTEXT"
 
 fi
 
@@ -332,7 +337,10 @@ fi
 # dotfiles: https://github.com/TheLocehiliosan/yadm
 if command -v stow &>/dev/null; then
   alias dg="lazygit --path \$DOTFILES"
-  alias dpl="git -C \$DOTFILES pull"
+  function dpl() {
+    git -C $DOTFILES pull
+    git -C $DOTFILES_NIXOS pull
+  }
   function dsync() {
     # clean current links
     #stow -D . --dir=$DOTFILES --target=$HOME
@@ -396,9 +404,8 @@ if test -f "$HOME/.shellrc.local"; then
 fi
 
 function up() {
-  echo "==> Pull Repos"
-  git -C $DOTFILES pull
-  git -C $DOTFILES_NIXOS pull
+  echo "==> Pull Important Repos"
+  dpl
   git -C $JEFF/startpage pull
 
   echo "==> UP homebrew database and packages"
