@@ -38,19 +38,6 @@ function exec-in-subdirs() {
   done
 }
 
-function up() {
-  echo "==> dot files"
-  git -C $DOTFILES pull
-
-  echo "==> homebrew database"
-  brew update
-  echo "==> homebrew packages"
-  brew upgrade
-
-  echo "==> sync lazy vim packages"
-  nvim --headless "+Lazy! sync" +qa
-
-}
 # ===============================================================================
 # Package Managers
 if command -v brew &>/dev/null; then
@@ -75,7 +62,10 @@ if command -v brew &>/dev/null; then
   alias br="brew remove"
   alias bs="brew search"
   alias bsd="brew search --desc"
-  alias bup="brew update && brew upgrade"
+  function bup() {
+    brew update
+    brew upgrade
+  }
   alias bx="brew autoremove"
 
   if type fuzzy_brew_install &>/dev/null; then
@@ -310,6 +300,7 @@ if command -v nvim &>/dev/null; then
   alias vi="nvim"
 
   alias v.="nvim ."
+  alias vup="nvim --headless \"+Lazy! sync\" +qa"
 
   alias dot="cd \$DOTFILES"
   alias dots="fuzzy-search \$DOTFILES"
@@ -395,7 +386,7 @@ if command -v yazi &>/dev/null; then
 fi
 
 if command -v zinit &>/dev/null; then
-  alias zup="zinit update --parallel"
+  alias zup="zinit update --all"
 fi
 
 # ===============================================================================
@@ -403,3 +394,19 @@ fi
 if test -f "$HOME/.shellrc.local"; then
   source "$HOME/.shellrc.local"
 fi
+
+function up() {
+  echo "==> Pull Repos"
+  git -C $DOTFILES pull
+  git -C $DOTFILES_NIXOS pull
+  git -C $JEFF/startpage pull
+
+  echo "==> UP homebrew database and packages"
+  bup
+
+  echo "==> UP zinit"
+  zup
+
+  echo "==> UP lazyvim"
+  vup
+}
