@@ -182,13 +182,31 @@ if command -v fzf &>/dev/null; then
   export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
   eval "$(fzf --$SHELL_NAME)"
 
+  function fzf_query() {
+    local query_value=${1:-""}
+
+    # test for std input before passing it along
+    if (($# == 0)); then
+      fzf --query $query_value </dev/stdin
+    else
+      fzf --query $query_value
+    fi
+  }
+
   # prompt user to select from list of git directories under $2 and if user selects one, execute command $1 on it
+  function cd_on_git_rep() {
+    exec_on_git_repos cd "$1" "$2"
+    lla
+  }
+
   function exec_on_git_repos() {
     local root_folder="$2"
     local exec_command="$1"
+    local query_value=${3:-""}
+
     # find list of directories containing a .git subfolder, presumably a repo
     local git_repos
-    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf)
+    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query $query_value)
 
     [ -n "$git_repos" ] && "$exec_command" "$git_repos"
   }
@@ -203,9 +221,8 @@ if command -v fzf &>/dev/null; then
   }
 
   alias fr="fzf_rg"
-  alias hubs="exec_on_git_repos cd \$GITHUB/ && lla"
-  alias srcs="exec_on_git_repos cd \$SRC && lla"
-  alias srcsv="exec_on_git_repos cd \$SRC && nvim ."
+  alias hubs="cd_on_git_rep \$GITHUB"
+  alias srcs="cd_on_git_rep \$SRC"
   alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
   alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
 
@@ -291,7 +308,7 @@ if command -v nvim &>/dev/null; then
   }
   function fuzzy-search() {
     cd "$1"
-    files=$(fzf)
+    files=$(fzf_query ${2:-""})
     nvim $files
     cd -
   }
@@ -313,7 +330,7 @@ if command -v nvim &>/dev/null; then
   alias dotsv="fuzzy-search \$DOTFILES_NVIM"
 
   alias exo="cd \$EXOCORTEXT"
-  alias exo="fuzzy-search \$EXOCORTEXT"
+  alias exos="fuzzy-search \$EXOCORTEXT"
 
 fi
 
