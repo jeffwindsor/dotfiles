@@ -183,13 +183,20 @@ if command -v fzf &>/dev/null; then
   eval "$(fzf --$SHELL_NAME)"
 
   function fzf_query() {
-    local query_value=${1:-""}
-
-    # test for std input before passing it along
-    if (($# == 0)); then
-      fzf --query $query_value </dev/stdin
+    # passed in query
+    if [ -n "$1" ]; then
+      fzf --query "$1"
     else
-      fzf --query $query_value
+      fzf
+    fi
+  }
+
+  function fzf_query_piped() {
+    # passed in query
+    if [ -n "$1" ]; then
+      fzf --query "$1" </dev/stdin
+    else
+      fzf </dev/stdin
     fi
   }
 
@@ -206,7 +213,7 @@ if command -v fzf &>/dev/null; then
 
     # find list of directories containing a .git subfolder, presumably a repo
     local git_repos
-    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query $query_value)
+    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
 
     [ -n "$git_repos" ] && "$exec_command" "$git_repos"
   }
