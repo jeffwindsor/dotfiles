@@ -411,7 +411,10 @@ if command -v yazi &>/dev/null; then
 fi
 
 if command -v zinit &>/dev/null; then
+  alias zclean="zinit delete --clean"
   alias zup="zinit update --all"
+
+  alias zsync="zclean && zup"
 fi
 
 # ===============================================================================
