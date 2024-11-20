@@ -17,8 +17,8 @@ require("lazy").setup({
     -- import/override with your plugins
     { import = "plugins" },
     -- disable lazyvim plugins
-    { "echasnovski/mini.pairs", enabled = false },
-    { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+    -- { "echasnovski/mini.pairs", enabled = false },
+    -- { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
