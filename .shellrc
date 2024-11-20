@@ -247,10 +247,10 @@ if command -v fzf &>/dev/null; then
     alias theme=theme-alacritty
     function theme-alacritty() {
       local selected
-      selected=$(fd -i .toml $XDG_CONFIG_HOME/alacritty/themes/ | fzf)
+      selected=$(fd -i .toml $XDG_CONFIG_HOME/alacritty/themes/ | fzf | sd "$HOME" "~")
 
       # if color_scheme was selected, change the alacritty config file colorscheme value
-      [ -n "$selected" ] && sd "^import.*" "import=['$selected']" $XDG_CONFIG_HOME/alacritty/alacritty.toml
+      [ -n "$selected" ] && sd "^import.*" "import=[\"$selected\"]" $XDG_CONFIG_HOME/alacritty/alacritty.toml
     }
   fi
 
