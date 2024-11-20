@@ -1,16 +1,13 @@
-#
 # docs: https://alacritty.org/config-alacritty.html
-#
-
-# color_scheme import is replaced by shell function
-import = ['/Users/jeffwindsor/.config/alacritty/themes/tender.toml']
-
-#[cursor]
-#style = "Block"  #default value
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
 size = 12.0
+
+[general]
+live_config_reload = true
+# color_scheme import is replaced by shell function
+import=["~/.config/alacritty/themes/tender.toml"]
 
 # [keyboard]
 # bindings = [{ <key>, <mods>, <mode>, <command> | <chars> | <action> },]
