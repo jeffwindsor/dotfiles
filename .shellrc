@@ -16,6 +16,7 @@ export JEFF="$SRC/github.com/jeffwindsor"
 export EXOCORTEXT="$HOME/portable/exocortex"
 export DOTFILES="$JEFF/dotfiles"
 export DOTFILES_NIXOS="$JEFF/nixos-config"
+export DOTFILES_GNOME="$JEFF/gnome-config"
 export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua/plugins/"
 
 # Jump Directories
@@ -362,8 +363,9 @@ fi
 if command -v stow &>/dev/null; then
   alias dg="lazygit --path \$DOTFILES"
   function dpl() {
-    git -C $DOTFILES pull
-    git -C $DOTFILES_NIXOS pull
+    git -C $DOTFILES pull -v
+    git -C $DOTFILES_NIXOS pull -v
+    git -C $DOTFILES_GNOME pull -v
   }
   function dsync() {
     # clean current links
