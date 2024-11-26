@@ -17,16 +17,15 @@ source "${ZINIT_HOME}/zinit.zsh"
 #==============================================================================
 # Plugins
 zinit snippet OMZP::asdf
-[ -x "$(command -v foo)" ] && zinit light thirteen37/fzf-brew
+
+zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light z-shell/zsh-zoxide
-zinit light Aloxaf/fzf-tab    # ******  Add this as the last plugin just in case of conflicts
 #==============================================================================
 
 
 # initialize ZSH
 autoload -Uz compinit && compinit
-zinit cdreplay -q
+#zinit cdreplay -q
 
 #==============================================================================
 # Shell OPTIONS

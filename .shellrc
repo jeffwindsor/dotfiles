@@ -17,7 +17,7 @@ export EXOCORTEXT="$HOME/portable/exocortex"
 export DOTFILES="$JEFF/dotfiles"
 export DOTFILES_NIXOS="$JEFF/nixos-config"
 export DOTFILES_GNOME="$JEFF/gnome-config"
-export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua/plugins/"
+export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua"
 
 # Jump Directories
 alias .....="cd ../../../../"
