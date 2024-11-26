@@ -437,6 +437,9 @@ function up() {
   dpl
   git -C $JEFF/startpage pull
 
+  echo "==> reconnect dotfiles (stow)"
+  dsync
+
   echo "==> UP homebrew database and packages"
   bup
 
