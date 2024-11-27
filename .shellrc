@@ -435,7 +435,8 @@ fi
 function up() {
   echo "==> Pull Important Repos"
   dpl
-  git -C $JEFF/startpage pull
+  git -C $JEFF/startpage pull -v
+  git -C $JEFF/ascii-art pull -v
 
   echo "==> reconnect dotfiles (stow)"
   dsync
