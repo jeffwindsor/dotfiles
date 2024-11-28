@@ -17,7 +17,7 @@ export EXOCORTEXT="$HOME/portable/exocortex"
 export DOTFILES="$JEFF/dotfiles"
 export DOTFILES_NIXOS="$JEFF/nixos-config"
 export DOTFILES_GNOME="$JEFF/gnome-config"
-export DOTFILES_NVIM="$DOTFILES/.config/nvim/lua"
+export DOTFILES_NVIM="$XDG_CONFIG_HOME/nvim"
 
 # Jump Directories
 alias .....="cd ../../../../"
@@ -231,8 +231,11 @@ if command -v fzf &>/dev/null; then
   alias fr="fzf_rg"
   alias hubs="cd_on_git_rep \$GITHUB"
   alias srcs="cd_on_git_rep \$SRC"
-  alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
-  alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
+
+  if command -v nvim &>/dev/null; then
+    #alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
+    alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
+  fi
 
   #terminal theming
   if command -v wezterm &>/dev/null; then
@@ -309,16 +312,23 @@ fi
 # ===============================================================================
 # editor: https://github.com/neovim/neovim
 if command -v nvim &>/dev/null; then
+
   function nvim-clean-caches() {
     rm -rf "$HOME"/.local/share/nvim
     rm -rf "$HOME"/.local/state/nvim
     rm -rf "$HOME"/.cache/nvim
   }
-  function fuzzy-search() {
+
+  function fuzzy-search-nvim() {
     cd "$1"
     files=$(fzf_query ${2:-""})
     nvim $files
     cd -
+  }
+
+  # use lazy nvim config
+  function nvim-lazyvim-config() {
+    ln -sf $XDG_CONFIG_HOME/nvim_lazyvim $XDG_CONFIG_HOME/nvim
   }
 
   alias v="nvim"
@@ -329,16 +339,16 @@ if command -v nvim &>/dev/null; then
   alias vup="nvim --headless \"+Lazy! sync\" +qa"
 
   alias dot="cd \$DOTFILES"
-  alias dots="fuzzy-search \$DOTFILES"
+  alias dots="fuzzy-search-nvim \$DOTFILES"
 
   alias dotn="cd \$DOTFILES_NIXOS"
-  alias dotsn="fuzzy-search \$DOTFILES_NIXOS"
+  alias dotsn="fuzzy-search-nvim \$DOTFILES_NIXOS"
 
   alias dotv="cd \$DOTFILES_NVIM"
-  alias dotsv="fuzzy-search \$DOTFILES_NVIM"
+  alias dotsv="fuzzy-search-nvim \$DOTFILES_NVIM"
 
   alias exo="cd \$EXOCORTEXT"
-  alias exos="fuzzy-search \$EXOCORTEXT"
+  alias exos="fuzzy-search-nvim \$EXOCORTEXT"
 
 fi
 
