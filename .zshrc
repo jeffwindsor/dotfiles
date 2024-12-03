@@ -41,6 +41,7 @@ zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-min-height 50
 
 autoload compinit
 compinit
@@ -52,8 +53,10 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 
 #==============================================================================
 # Shell OPTIONS
-setopt no_beep                   # no beep on error
-bindkey -e                       # emacs bindings
+setopt no_beep                  # no beep on error
+setopt GLOB_DOTS                # allows fzf-tab to show hidden files by default
+setopt completealiases          # Autocomplete command line switches for aliases
+bindkey -e                      # emacs bindings
 
 # History
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
