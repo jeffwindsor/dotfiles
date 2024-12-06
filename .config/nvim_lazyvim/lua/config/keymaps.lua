@@ -7,6 +7,9 @@
 --
 local map = vim.keymap.set
 
+-- Select All
+map("n", "<D-a>", "ggVG", { noremap = true, silent = true })
+
 map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle Zen Mode" })
 
 -- map("n", "<leader>cf", "", { desc = "+format" })

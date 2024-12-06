@@ -6,7 +6,7 @@ return {
       { "_", "<CMD>Yazi cwd<CR>", desc = "Open the file manager in nvim's working directory" },
     },
     opts = {
-      open_for_directories = false,
+      floating_window_scaling_factor = 1.0,
       keymaps = {
         show_help = "~",
       },

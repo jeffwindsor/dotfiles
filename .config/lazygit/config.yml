@@ -1,7 +1,7 @@
 git:
   paging:
     color: always
-    pager: "delta --dark --paging=never --line-numbers --diff-so-fancy"
+    # pager: "delta --dark --paging=never --line-numbers --diff-so-fancy"
   
 gui:
   authorColors:
