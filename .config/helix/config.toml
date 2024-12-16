@@ -1,14 +1,14 @@
 ###################################################################
-# appearance and behavior 
+# https://docs.helix-editor.com/master/commands.html
 ###################################################################
 
 theme = "kanagawa"
 
 [editor]
 auto-save   = true
-bufferline  = "multiple"
+bufferline  = "always"
 color-modes = true
-line-number = "relative" #"absolute"
+line-number = "relative"  #"relative" #"absolute"
 mouse       = true
 shell       = ["zsh", "-c"]
 
@@ -38,19 +38,17 @@ select = "SELECT"
 
 ###################################################################
 # key maps
+# , = switch buffer
+# z = Zen Mode
 ###################################################################
 
 [keys.normal]
-# buffers
-"A-." = ":bn"
-"A-," = ":bp"
-"A-w" = ":bc"
-"A-n" = ":new"
-# lazygit
-"A-g" = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
-
 # Switch case of the selected text
 "`" = "switch_case"
+"~" = "switch_case"
+"H" = "goto_line_start"
+"L" = "goto_line_end"
+"G" = "goto_file_end"
 
 # vim like yank + yank to clipboard
 y = ["yank_main_selection_to_clipboard","yank"]
@@ -59,10 +57,15 @@ y = ["yank_main_selection_to_clipboard","yank"]
 esc = ["collapse_selection","keep_primary_selection",":write"]
 
 [keys.normal.space]
-c = ":buffer-close"
 q = ":write-quit-all"
 # lazy git
-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+#g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+
+#[keys.normal.space.b]
+#c = ":buffer-close"
+#"." = ":buffer-next"
+#"," = ":buffer-previous"
+#n = ":new"
 
 # themes  
 [keys.normal.space.t]
@@ -74,16 +77,19 @@ m = ":theme molokai"
 n = ":theme nord"
 s = ":theme sonokai" 
 t = ":theme tokyonight_storm"
-              
+
 [keys.insert]
 esc = ["collapse_selection", "normal_mode", ":write"]
 
 [keys.select]
 # auto save on returning to normal mode
 esc = ["collapse_selection","normal_mode",":write"] 
+"H" = "goto_line_start"
+"L" = "goto_line_end"
+"G" = "goto_file_end"
           
 # Switch case of the selected text
  "`" = "switch_case"
-        
+ "~" = "switch_case"
 # vim like yank + yank to clipboard
 y = ["yank_main_selection_to_clipboard","yank"]
