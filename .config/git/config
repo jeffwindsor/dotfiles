@@ -6,7 +6,7 @@
   pager = delta
 
 [credential]
-	helper = cache
+	helper = osxkeychain
 
 [delta]
   navigate = true    # use n and N to move between diff sections
