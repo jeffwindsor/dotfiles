@@ -323,7 +323,7 @@ if command -v nvim &>/dev/null; then
   function fuzzy-search-nvim() {
     cd "$1"
     files=$(fzf_query ${2:-""})
-    nvim $files
+    hx $files
     cd -
   }
 
@@ -458,6 +458,6 @@ function up() {
   echo "==> UP zinit"
   zup
 
-  echo "==> UP lazyvim"
-  vup
+  # echo "==> UP lazyvim"
+  # vup
 }
