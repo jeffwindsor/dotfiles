@@ -48,7 +48,7 @@ config.keys = {
 	{ key = "t", mods = "CTRL", action = act.SpawnTab("CurrentPaneDomain") },
 
 	-- close current pane (default: super w)
-	{ key = "w", mods = "CTRL", action = act.CloseCurrentPane({ confirm = false }) },
+	{ key = "q", mods = "CTRL", action = act.CloseCurrentPane({ confirm = false }) },
 
 	-- zoom current pane (default: ctrl|shift z)
 	{ key = "a", mods = "CTRL", action = act.TogglePaneZoomState },
