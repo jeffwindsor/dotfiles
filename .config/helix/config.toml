@@ -61,6 +61,7 @@ esc = ["collapse_selection","keep_primary_selection",":write"] # vim like esc
 
 [keys.normal.space]
 q = ":write-quit-all"
+
 # lazy git
 #g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
 
