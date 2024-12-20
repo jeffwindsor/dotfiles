@@ -44,28 +44,25 @@ select = "SELECT"
 
 [keys.normal]
 # Switch case of the selected text
-"`" = "switch_case"
-"~" = "switch_case"
 "H" = "goto_line_start"
 "L" = "goto_line_end"
+
+# VIM LIKE (CAUSE IT MAKES IT EASIER TO SWITCH)
+esc = ["collapse_selection","keep_primary_selection",":write"] # vim like esc 
+"$" = "goto_line_end"
+"0" = "goto_line_start"
 "G" = "goto_file_end"
-
-# vim like yank + yank to clipboard
-y = ["yank_main_selection_to_clipboard","yank"]
-
-# vim like esc 
-esc = ["collapse_selection","keep_primary_selection",":write"]
+"V" = ["select_mode", "extend_to_line_bounds"] 
+"^" = "goto_first_nonwhitespace"
+"`" = "switch_case"
+"x" = "delete_selection"
+"y" = ["yank_main_selection_to_clipboard","yank"] # vim like yank + yank to clipboard
+"~" = "switch_case"
 
 [keys.normal.space]
 q = ":write-quit-all"
 # lazy git
 #g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
-
-#[keys.normal.space.b]
-#c = ":buffer-close"
-#"." = ":buffer-next"
-#"," = ":buffer-previous"
-#n = ":new"
 
 # themes  
 [keys.normal.space.t]
@@ -82,14 +79,17 @@ t = ":theme tokyonight_storm"
 esc = ["collapse_selection", "normal_mode", ":write"]
 
 [keys.select]
-# auto save on returning to normal mode
-esc = ["collapse_selection","normal_mode",":write"] 
 "H" = "goto_line_start"
 "L" = "goto_line_end"
+
+# VIM LIKE (CAUSE IT MAKES IT EASIER TO SWITCH)
+esc = ["collapse_selection","keep_primary_selection",":write"] # vim like esc 
+"$" = "goto_line_end"
+"0" = "goto_line_start"
 "G" = "goto_file_end"
-          
-# Switch case of the selected text
- "`" = "switch_case"
- "~" = "switch_case"
-# vim like yank + yank to clipboard
-y = ["yank_main_selection_to_clipboard","yank"]
+"V" = ["select_mode", "extend_to_line_bounds"] 
+"^" = "goto_first_nonwhitespace"
+"`" = "switch_case"
+"x" = "delete_selection"
+"y" = ["yank_main_selection_to_clipboard","yank"] # vim like yank + yank to clipboard
+"~" = "switch_case"
