@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 SHELL_NAME=${1:-"zsh"}
+export EDITOR="hx"
 
 # xdg-ify
 export XDG_STATE_HOME=$HOME/.local/state
@@ -29,8 +30,19 @@ alias hub="cd \$GITHUB"
 alias icloud="cd \$ICLOUD"
 alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
+alias dot="cd \$DOTFILES"
+alias dotn="cd \$DOTFILES_NIXOS"
+alias dotv="cd \$DOTFILES_NVIM"
+alias exo="cd \$EXOCORTEXT"
 
-# ===============================================================================
+alias dots="edit-via-fuzzy-search \$DOTFILES"
+alias dotsn="edit-via-fuzzy-search \$DOTFILES_NIXOS"
+alias dotsv="edit-via-fuzzy-search \$DOTFILES_NVIM"
+alias exos="edit-via-fuzzy-search \$EXOCORTEXT"
+alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs $EDITOR && cd -"
+alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && $EDITOR index.html && cd -"
+
+#===============================================================================
 # Functions
 function exec-in-subdirs() {
   for d in */; do
@@ -40,9 +52,33 @@ function exec-in-subdirs() {
     cd ..
   done
 }
+function edit-via-fuzzy-search() {
+  cd "$1"
+  files=$(fzf_query ${2:-""})
+  $EDITOR $files
+  cd -
+}
 
-# ===============================================================================
+# combined "upgrade" my stuff function
+function up() {
+  echo "==> Pull Important Repos"
+  dpl
+
+  echo "==> Dotfiles"
+  dsync
+
+  echo "==> Homebrew"
+  bup
+
+  echo "==> Zsh"
+  zup
+
+}
+
+#===============================================================================
 # Package Managers
+#===============================================================================
+#== Homebrew: https://brew.sh/ ==
 if command -v brew &>/dev/null; then
   # only auto-updates db every 12+ hours
   export HOMEBREW_AUTO_UPDATE_SECS=43200
@@ -79,6 +115,7 @@ if command -v brew &>/dev/null; then
     alias br__="fuzzy_cask_uninstall"
   fi
 
+#== Nix https://nixos.org/ ==
 elif command -v nix &>/dev/null; then
   # standard nix
   alias ni="nix-env --install"
@@ -102,9 +139,14 @@ elif command -v nix &>/dev/null; then
   fi
 fi
 
-# ===============================================================================
+
+
+
+#===============================================================================
+# Development
+#===============================================================================
+#==ASDF (Extendable version manager): https://github.com/asdf-vm/asdf
 if command -v asdf &>/dev/null; then
-  # Extendable version manager : https://github.com/asdf-vm/asdf
   if command -v "$(brew --prefix asdf)/libexec/asdf.sh" &>/dev/null; then
     # node
     export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmconfig
@@ -148,14 +190,127 @@ if command -v asdf &>/dev/null; then
   }
 fi
 
-# ===============================================================================
-# cat replacement (rust): https://github.com/sharkdp/bat
+#==Git (Source Control): https://github.com/git/git
+if command -v git &>/dev/null; then
+
+  export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
+
+  # pull personal repositories that I want up to date
+  function dpl() {
+    git -C $DOTFILES pull -v
+    git -C $DOTFILES_NIXOS pull -v
+    git -C $DOTFILES_GNOME pull -v
+    git -C $JEFF/kickstart.nvim pull -v
+    git -C $JEFF/nvim_mini pull -v
+    git -C $JEFF/startpage pull -v
+    git -C $JEFF/ascii-art pull -v
+  }
+
+  # used at work because there is a limit on how many pulls per sec
+  function git-rec() {
+    for d in */; do
+      echo "==> $d"
+      sleep 5
+      cd ./"$d" || return
+      git pull
+      cd ..
+    done
+  }
+
+  alias gclean="git clean -xdf"
+  alias gls="git ls-tree --full-tree --name-only -r HEAD."
+  alias gs="git status"
+  alias gpl="git pull"
+  # git blame (more precise)
+  alias gb="git blame -w -C -C -C"
+  # git blame line range
+  alias gbl="git blame -w -C -C -C -L"
+  # git diff by words changed
+  alias gdw="git diff --word-diff"
+  alias gm="git maintenance start"
+
+  # git clone from git hub to my source directory
+  function ghub() { git clone git@github.com:"$1" "$SRC"/github.com/"$1"; }
+  # git clone from git hub to my source directory
+  function glab() { git clone git@gitlab.cj.dev:"$1" "$SRC"/gitlab.cj.dev/"$1"; }
+
+  #==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
+  if command -v lazygit &>/dev/null; then
+    alias gg="lazygit"
+    alias lg="lazygit"
+    alias dg="lazygit --path \$DOTFILES"
+  fi
+fi
+
+
+#===============================================================================
+# Editors
+#===============================================================================
+#== Helix: https://github.com/helix-editor/helix
+if command -v hx &>/dev/null; then
+  alias h="hx"
+  alias h.="hx ."
+fi
+
+#===============================================================================
+#== Neovim: https://github.com/neovim/neovim
+if command -v nvim &>/dev/null; then
+
+  function nvim-clean-caches() {
+    echo "Cleaning current caches"
+    rm -rf "$HOME"/.local/share/nvim
+    rm -rf "$HOME"/.local/state/nvim
+    rm -rf "$HOME"/.cache/nvim
+  }
+
+
+  function nvim-switch-config() {
+    if [[ -n "$1" ]]; then
+        nvim-clean-caches
+        
+        echo "Moving Config to $1"
+        rm "$XDG_CONFIG_HOME/nvim"
+        ln -s "$XDG_CONFIG_HOME/nvim_$1" "$XDG_CONFIG_HOME/nvim"
+    else
+        echo "No target config given"
+    fi
+  }
+  
+  function nvim-switch-config-selection() {
+    local SELECTION=$(printf "lazynvim\nmini\nkickstart\nbespoke" | fzf)
+    if [[ -n "$SELECTION" ]]; then
+      nvim-switch-config "$SELECTION"
+    else
+        echo "No nvim config selection made"
+    fi
+  }
+  
+  alias nsc="nvim-switch-config-selection"
+  
+  alias v="nvim"
+  alias vim="nvim"
+  alias vi="nvim"
+
+  alias v.="nvim ."
+  alias vup="nvim --headless \"+Lazy! sync\" +qa"
+
+fi
+
+
+
+
+
+
+#===============================================================================
+# Terminal
+#===============================================================================
+#== cat replacement (rust): https://github.com/sharkdp/bat
 if command -v bat &>/dev/null; then
   alias cat="bat --style=plain"
 fi
 
-# ===============================================================================
-# ls replacement (rust): https://github.com/eza-community/eza
+#===============================================================================
+#== ls replacement (rust): https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
   alias la="eza -F --group-directories-first --git --all --no-user"
   alias ll="eza -lF --group-directories-first --no-user"
@@ -171,14 +326,14 @@ else
   alias lla="ls -la"
 fi
 
-# ===============================================================================
-# bling: https://github.com/fastfetch-cli/fastfetch
+#===============================================================================
+#== bling: https://github.com/fastfetch-cli/fastfetch
 if command -v fastfetch &>/dev/null; then
   alias ff="fastfetch"
 fi
 
-# ===============================================================================
-# fuzzy finder: https://github.com/junegunn/fzf
+#===============================================================================
+#== fuzzy finder: https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden' #--ignore-file ~/.config/fd/ignore'
   export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
@@ -233,11 +388,6 @@ if command -v fzf &>/dev/null; then
   alias hubs="cd_on_git_rep \$GITHUB"
   alias srcs="cd_on_git_rep \$SRC"
 
-  if command -v nvim &>/dev/null; then
-    #alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs nvim && cd -"
-    alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && nvim index.html && cd -"
-  fi
-
   #terminal theming
   if command -v wezterm &>/dev/null; then
     function theme-wezterm() {
@@ -261,100 +411,9 @@ if command -v fzf &>/dev/null; then
 
 fi
 
-# ===============================================================================
-# Source Control: https://github.com/git/git
-if command -v git &>/dev/null; then
 
-  export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
-
-  # used at work because there is a limit on how many pulls per sec
-  function git-rec() {
-    for d in */; do
-      echo "==> $d"
-      sleep 5
-      cd ./"$d" || return
-      git pull
-      cd ..
-    done
-  }
-
-  alias gclean="git clean -xdf"
-  alias gls="git ls-tree --full-tree --name-only -r HEAD."
-  alias gs="git status"
-  alias gpl="git pull"
-  # git blame (more precise)
-  alias gb="git blame -w -C -C -C"
-  # git blame line range
-  alias gbl="git blame -w -C -C -C -L"
-  # git diff by words changed
-  alias gdw="git diff --word-diff"
-
-  alias gm="git maintenance start"
-
-  # git clone from git hub to my source directory
-  function ghub() { git clone git@github.com:"$1" "$SRC"/github.com/"$1"; }
-  # git clone from git hub to my source directory
-  function glab() { git clone git@gitlab.cj.dev:"$1" "$SRC"/gitlab.cj.dev/"$1"; }
-
-fi
-
-# ===============================================================================
-# editor: https://github.com/helix-editor/helix
-if command -v hx &>/dev/null; then
-  alias h="hx"
-fi
-
-# ===============================================================================
-if command -v lazygit &>/dev/null; then
-  alias gg="lazygit"
-  alias lg="lazygit"
-fi
-
-# ===============================================================================
-# editor: https://github.com/neovim/neovim
-if command -v nvim &>/dev/null; then
-
-  function nvim-clean-caches() {
-    rm -rf "$HOME"/.local/share/nvim
-    rm -rf "$HOME"/.local/state/nvim
-    rm -rf "$HOME"/.cache/nvim
-  }
-
-  function fuzzy-search-nvim() {
-    cd "$1"
-    files=$(fzf_query ${2:-""})
-    hx $files
-    cd -
-  }
-
-  # use lazy nvim config
-  function nvim-lazyvim-config() {
-    ln -sf $XDG_CONFIG_HOME/nvim_lazyvim $XDG_CONFIG_HOME/nvim
-  }
-
-  alias v="nvim"
-  alias vim="nvim"
-  alias vi="nvim"
-
-  alias v.="nvim ."
-  alias vup="nvim --headless \"+Lazy! sync\" +qa"
-
-  alias dot="cd \$DOTFILES"
-  alias dots="fuzzy-search-nvim \$DOTFILES"
-
-  alias dotn="cd \$DOTFILES_NIXOS"
-  alias dotsn="fuzzy-search-nvim \$DOTFILES_NIXOS"
-
-  alias dotv="cd \$DOTFILES_NVIM"
-  alias dotsv="fuzzy-search-nvim \$DOTFILES_NVIM"
-
-  alias exo="cd \$EXOCORTEXT"
-  alias exos="fuzzy-search-nvim \$EXOCORTEXT"
-
-fi
-
-# ===============================================================================
-# GREP replacement: https://github.com/BurntSushi/ripgrep
+#===============================================================================
+#== GREP replacement: https://github.com/BurntSushi/ripgrep
 if command -v rg &>/dev/null; then
   export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
   alias grep="rg"
@@ -363,31 +422,29 @@ if command -v rg &>/dev/null; then
   alias fr="declare -f | rg"
 fi
 
-# ===============================================================================
-# Prompt : https://github.com/starship/starship
+#===============================================================================
+#== Prompt : https://github.com/starship/starship
 if command -v starship &>/dev/null; then
   eval "$(starship init $SHELL_NAME)"
 fi
 
-# ===============================================================================
-# dotfiles: https://github.com/TheLocehiliosan/yadm
+#===============================================================================
+#== dotfiles: https://github.com/TheLocehiliosan/yadm
 if command -v stow &>/dev/null; then
-  alias dg="lazygit --path \$DOTFILES"
-  function dpl() {
-    git -C $DOTFILES pull -v
-    git -C $DOTFILES_NIXOS pull -v
-    git -C $DOTFILES_GNOME pull -v
-  }
+
+  
+  
   function dsync() {
     # clean current links
     #stow -D . --dir=$DOTFILES --target=$HOME
-    # put stowed into $HOME
+    echo "Stowed $DOTFILES into $HOME"
     stow . --dir=$DOTFILES --target=$HOME
+    
   }
 fi
 
-# ===============================================================================
-# terminal multiplexer : https://github.com/tmux/tmux
+#===============================================================================
+#== terminal multiplexer : https://github.com/tmux/tmux
 if command -v tmux &>/dev/null; then
   alias t="tmux"
   alias tl="tmux ls"         # list
@@ -397,8 +454,8 @@ if command -v tmux &>/dev/null; then
   alias tk="tmux kill-session"
   alias tkn="tmux kill-session -t"
 fi
-# ===============================================================================
-# tui file manager: https://github.com/sxyazi/yazi
+#===============================================================================
+#== tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
   # opens yazi either at the given directory or at the one zoxide suggests
   yazi-zoxide() {
@@ -437,27 +494,10 @@ if command -v zinit &>/dev/null; then
   alias zsync="zclean && zup"
 fi
 
-# ===============================================================================
+#===============================================================================
 # source machine specific aliases
 if test -f "$HOME/.shellrc.local"; then
   source "$HOME/.shellrc.local"
 fi
 
-function up() {
-  echo "==> Pull Important Repos"
-  dpl
-  git -C $JEFF/startpage pull -v
-  git -C $JEFF/ascii-art pull -v
 
-  echo "==> reconnect dotfiles (stow)"
-  dsync
-
-  echo "==> UP homebrew database and packages"
-  bup
-
-  echo "==> UP zinit"
-  zup
-
-  # echo "==> UP lazyvim"
-  # vup
-}
