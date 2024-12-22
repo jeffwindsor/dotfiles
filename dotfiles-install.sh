@@ -8,23 +8,29 @@ function Add-Homebrew() {
 
 function Add-Packages() {
   packages=(
-    bat
+    asdf
     bash
+    bash-language-server
+    bat
+    black
     eza
     fastfetch
     fd
     fzf
     git
-    git-delta
+    helix
     lazygit
     neovim
+    python-lsp-server
     ripgrep
     sd
     starship
     stow
     tldr
+    tmux
     yazi
     zsh
+    
     aerospace --cask
     balenaetcher --cask
     firefox --cask

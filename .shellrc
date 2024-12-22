@@ -421,6 +421,38 @@ if command -v rg &>/dev/null; then
   alias ar="alias | rg"
   alias er="env | rg"
   alias fr="declare -f | rg"
+
+  if command -v sd &>/dev/null; then
+    replace() {
+      # Check if a search pattern is provided
+      if [ -z "$1" ]; then
+        echo "Usage: replace_with_confirmation 'search-pattern'"
+        return 1
+      fi
+
+      # Assign search pattern from the first argument
+      local search_pattern="$1"
+
+      # Preview matching files
+      echo "Searching for files containing the pattern: $search_pattern"
+      rg "$search_pattern"
+
+      # Prompt for replacement or escape
+      read -p "Enter the replacement pattern (or type 'escape' to cancel): " replace_pattern
+
+      if [ "$replace_pattern" == "escape" ]; then
+        echo "Operation canceled."
+        return 0
+      fi
+
+      # Run ripgrep to find files and pass them to sd for replacement
+      echo "Replacing '$search_pattern' with '$replace_pattern'..."
+      rg --files-with-matches -0 "$search_pattern" | xargs -0 sd "$search_pattern" "$replace_pattern"
+
+      echo "Replacement completed."
+    }
+  fi
+  
 fi
 
 #===============================================================================
