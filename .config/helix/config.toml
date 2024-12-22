@@ -55,7 +55,7 @@ esc = ["collapse_selection","keep_primary_selection",":write"] # vim like esc
 "V" = ["select_mode", "extend_to_line_bounds"] 
 "^" = "goto_first_nonwhitespace"
 "`" = "switch_case"
-"x" = "delete_selection"
+# "x" = "delete_selection"
 "y" = ["yank_main_selection_to_clipboard","yank"] # vim like yank + yank to clipboard
 "~" = "switch_case"
 
@@ -91,6 +91,6 @@ esc = ["collapse_selection","keep_primary_selection",":write"] # vim like esc
 "V" = ["select_mode", "extend_to_line_bounds"] 
 "^" = "goto_first_nonwhitespace"
 "`" = "switch_case"
-"x" = "delete_selection"
+# "x" = "delete_selection"
 "y" = ["yank_main_selection_to_clipboard","yank"] # vim like yank + yank to clipboard
 "~" = "switch_case"
