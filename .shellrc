@@ -197,10 +197,11 @@ if command -v git &>/dev/null; then
 
   # pull personal repositories that I want up to date
   function dpl() {
+    # -C specifies location for git to act on, allows running of this command from anywhere
     git -C $DOTFILES pull -v
     git -C $DOTFILES_NIXOS pull -v
     git -C $DOTFILES_GNOME pull -v
-    git -C $JEFF/kickstart.nvim pull -v
+    git -C $JEFF/nvim_kickstart pull -v
     git -C $JEFF/nvim_mini pull -v
     git -C $JEFF/startpage pull -v
     git -C $JEFF/ascii-art pull -v
@@ -432,14 +433,20 @@ fi
 #== dotfiles: https://github.com/TheLocehiliosan/yadm
 if command -v stow &>/dev/null; then
 
-  
-  
+  # cleans old links, and puts new links from a stow location ($1) to a root ($2)
+  function stow-location-sync(){
+    [ -d "$2" ] || mkdir -p "$2"
+    echo "Clean and Restore $1 into $2 (with stow)"
+    stow -D . --dir=$1 --target=$2
+    stow . --dir=$1 --target=$2
+  }
+
+  # sync all dotfile repos to appropriate home locations
   function dsync() {
-    # clean current links
-    #stow -D . --dir=$DOTFILES --target=$HOME
-    echo "Stowed $DOTFILES into $HOME"
-    stow . --dir=$DOTFILES --target=$HOME
-    
+    stow-location-sync "$DOTFILES" "$HOME"
+    stow-location-sync "$JEFF/nvim_lazyvim" "$XDG_CONFIG_HOME/nvim_lazyvim"
+    stow-location-sync "$JEFF/nvim_kickstart" "$XDG_CONFIG_HOME/nvim_kickstart"
+    stow-location-sync "$JEFF/nvim_mini" "$XDG_CONFIG_HOME/nvim_mini"
   }
 fi
 
