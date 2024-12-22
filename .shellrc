@@ -45,33 +45,33 @@ alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && $EDITOR index.htm
 #===============================================================================
 # Functions
 function exec-in-subdirs() {
-  for d in */; do
-    cd ./"$d" || return
-    echo "=== Executing $1 on $(pwd)"
-    eval "$1"
-    cd ..
-  done
+	for d in */; do
+		cd ./"$d" || return
+		echo "=== Executing $1 on $(pwd)"
+		eval "$1"
+		cd ..
+	done
 }
 function edit-via-fuzzy-search() {
-  cd "$1"
-  files=$(fzf_query ${2:-""})
-  $EDITOR $files
-  cd -
+	cd "$1"
+	files=$(fzf_query ${2:-""})
+	$EDITOR "$files"
+	cd -
 }
 
 # combined "upgrade" my stuff function
 function up() {
-  echo "==> Pull Important Repos"
-  dpl
+	echo "==> Pull Important Repos"
+	dpl
 
-  echo "==> Dotfiles"
-  dsync
+	echo "==> Dotfiles"
+	dsync
 
-  echo "==> Homebrew"
-  bup
+	echo "==> Homebrew"
+	bup
 
-  echo "==> Zsh"
-  zup
+	echo "==> Zsh"
+	zup
 
 }
 
@@ -80,463 +80,451 @@ function up() {
 #===============================================================================
 #== Homebrew: https://brew.sh/ ==
 if command -v brew &>/dev/null; then
-  # only auto-updates db every 12+ hours
-  export HOMEBREW_AUTO_UPDATE_SECS=43200
-  # initialize
-  eval "$($(which brew) shellenv)"
+	# only auto-updates db every 12+ hours
+	export HOMEBREW_AUTO_UPDATE_SECS=43200
+	# initialize
+	eval "$($(which brew) shellenv)"
 
-  function brew-list-all() {
-    echo '== Formula Leaves =='
-    brew leaves
-    echo
-    echo '== Casks =='
-    # -1 is to 'Force output to be one entry per line'
-    brew list -1 --casks
-  }
-  alias bi="brew info"
-  alias bl="brew-list-all"
-  alias blc="brew list --casks --versions"
-  alias blf="brew list --formula --versions"
-  alias bn="brew install"
-  alias br="brew remove"
-  alias bs="brew search"
-  alias bsd="brew search --desc"
-  function bup() {
-    brew update
-    brew upgrade
-  }
-  alias bx="brew autoremove"
+	function brew-list-all() {
+		echo '== Formula Leaves =='
+		brew leaves
+		echo
+		echo '== Casks =='
+		# -1 is to 'Force output to be one entry per line'
+		brew list -1 --casks
+	}
+	alias bi="brew info"
+	alias bl="brew-list-all"
+	alias blc="brew list --casks --versions"
+	alias blf="brew list --formula --versions"
+	alias bn="brew install"
+	alias br="brew remove"
+	alias bs="brew search"
+	alias bsd="brew search --desc"
+	function bup() {
+		brew update
+		brew upgrade
+	}
+	alias bx="brew autoremove"
 
-  if type fuzzy_brew_install &>/dev/null; then
-    # requires fzf-brew zsh plugin or equivilant be installed
-    alias bn_="fuzzy_brew_install"
-    alias br_="fuzzy_brew_uninstall"
-    alias bn__="fuzzy_cask_install"
-    alias br__="fuzzy_cask_uninstall"
-  fi
+	if type fuzzy_brew_install &>/dev/null; then
+		# requires fzf-brew zsh plugin or equivilant be installed
+		alias bn_="fuzzy_brew_install"
+		alias br_="fuzzy_brew_uninstall"
+		alias bn__="fuzzy_cask_install"
+		alias br__="fuzzy_cask_uninstall"
+	fi
 
 #== Nix https://nixos.org/ ==
 elif command -v nix &>/dev/null; then
-  # standard nix
-  alias ni="nix-env --install"
-  alias nl="nix-env -q"
-  alias nlg="nix-env --list-generations"
-  alias nr="nix-env --uninstall"
-  alias ns="nix-shell -p"
-  alias nup="nix-env --upgrade"
-  alias ngc="nix-store --gc"
-  # nix-darwin (macos)
-  if command -v darwin-rebuild &>/dev/null; then
-    alias rebuild="darwin-rebuild build --flake \$XDG_CONFIG_HOME/nix"
-    # alias nds="nix run nix-darwin -- switch --flake ~/.config/nix"
-  #nixos
-  elif [ -d "/etc/nixos" ]; then
-    alias clean_gens="nix-env --delete-generations +5 && nix-collect-garbage"
-    alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
-    alias optimize="nix optimise-store"
-    alias rebuild="sudo nixos-rebuild switch"
-    alias upgrade="sudo nixos-rebuild switch --upgrade"
-  fi
+	# standard nix
+	alias ni="nix-env --install"
+	alias nl="nix-env -q"
+	alias nlg="nix-env --list-generations"
+	alias nr="nix-env --uninstall"
+	alias ns="nix-shell -p"
+	alias nup="nix-env --upgrade"
+	alias ngc="nix-store --gc"
+	# nix-darwin (macos)
+	if command -v darwin-rebuild &>/dev/null; then
+		alias rebuild="darwin-rebuild build --flake \$XDG_CONFIG_HOME/nix"
+		# alias nds="nix run nix-darwin -- switch --flake ~/.config/nix"
+	#nixos
+	elif [ -d "/etc/nixos" ]; then
+		alias clean_gens="nix-env --delete-generations +5 && nix-collect-garbage"
+		alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
+		alias optimize="nix optimise-store"
+		alias rebuild="sudo nixos-rebuild switch"
+		alias upgrade="sudo nixos-rebuild switch --upgrade"
+	fi
 fi
-
-
-
 
 #===============================================================================
 # Development
 #===============================================================================
 #==ASDF (Extendable version manager): https://github.com/asdf-vm/asdf
 if command -v asdf &>/dev/null; then
-  if command -v "$(brew --prefix asdf)/libexec/asdf.sh" &>/dev/null; then
-    # node
-    export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmconfig
-    export NPM_PACKAGES=$HOME/.npm-packages
-    export NVM_DIR="$XDG_DATA_HOME"/nvm
+	if command -v "$(brew --prefix asdf)/libexec/asdf.sh" &>/dev/null; then
+		# node
+		export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmconfig
+		export NPM_PACKAGES=$HOME/.npm-packages
+		export NVM_DIR="$XDG_DATA_HOME"/nvm
 
-    source "$(brew --prefix asdf)/libexec/asdf.sh"
-  fi
-  # Install one or more versions of specified language
-  asdf_add() {
-    local lang=${1}
+		source "$(brew --prefix asdf)/libexec/asdf.sh"
+	fi
+	# Install one or more versions of specified language
+	asdf_add() {
+		local lang=${1}
 
-    if [[ ! $lang ]]; then
-      lang=$(asdf plugin-list | fzf)
-    fi
+		if [[ ! $lang ]]; then
+			lang=$(asdf plugin-list | fzf)
+		fi
 
-    if [[ $lang ]]; then
-      local versions
-      versions=$(asdf list-all "$lang" | fzf --tac --no-sort --multi)
-      if [[ $versions ]]; then
-        for version in $(echo $versions); do asdf install $lang $version; done
-      fi
-    fi
-  }
+		if [[ $lang ]]; then
+			local versions
+			versions=$(asdf list-all "$lang" | fzf --tac --no-sort --multi)
+			if [[ $versions ]]; then
+				for version in $(echo $versions); do asdf install $lang $version; done
+			fi
+		fi
+	}
 
-  # Remove one or more versions of specified language
-  asdf_rm() {
-    local lang=${1}
+	# Remove one or more versions of specified language
+	asdf_rm() {
+		local lang=${1}
 
-    if [[ ! $lang ]]; then
-      lang=$(asdf plugin-list | fzf)
-    fi
+		if [[ ! $lang ]]; then
+			lang=$(asdf plugin-list | fzf)
+		fi
 
-    if [[ $lang ]]; then
-      local versions
-      versions=$(asdf list $lang | fzf -m)
-      if [[ $versions ]]; then
-        for version in $(echo $versions); do asdf uninstall $lang $version; done
-      fi
-    fi
-  }
+		if [[ $lang ]]; then
+			local versions
+			versions=$(asdf list $lang | fzf -m)
+			if [[ $versions ]]; then
+				for version in $(echo $versions); do asdf uninstall $lang $version; done
+			fi
+		fi
+	}
 fi
 
 #==Git (Source Control): https://github.com/git/git
 if command -v git &>/dev/null; then
 
-  export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
+	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
 
-  # pull personal repositories that I want up to date
-  function dpl() {
-    # -C specifies location for git to act on, allows running of this command from anywhere
-    git -C $DOTFILES pull -v
-    git -C $DOTFILES_NIXOS pull -v
-    git -C $DOTFILES_GNOME pull -v
-    git -C $JEFF/nvim_kickstart pull -v
-    git -C $JEFF/nvim_mini pull -v
-    git -C $JEFF/startpage pull -v
-    git -C $JEFF/ascii-art pull -v
-  }
+	# pull personal repositories that I want up to date
+	function dpl() {
+		# -C specifies location for git to act on, allows running of this command from anywhere
+		git -C $DOTFILES pull -v
+		git -C $DOTFILES_NIXOS pull -v
+		git -C $DOTFILES_GNOME pull -v
+		git -C $JEFF/nvim_kickstart pull -v
+		git -C $JEFF/nvim_mini pull -v
+		git -C $JEFF/startpage pull -v
+		git -C $JEFF/ascii-art pull -v
+	}
 
-  # used at work because there is a limit on how many pulls per sec
-  function git-rec() {
-    for d in */; do
-      echo "==> $d"
-      sleep 5
-      cd ./"$d" || return
-      git pull
-      cd ..
-    done
-  }
+	# used at work because there is a limit on how many pulls per sec
+	function git-rec() {
+		for d in */; do
+			echo "==> $d"
+			sleep 5
+			cd ./"$d" || return
+			git pull
+			cd ..
+		done
+	}
 
-  alias gclean="git clean -xdf"
-  alias gls="git ls-tree --full-tree --name-only -r HEAD."
-  alias gs="git status"
-  alias gpl="git pull"
-  # git blame (more precise)
-  alias gb="git blame -w -C -C -C"
-  # git blame line range
-  alias gbl="git blame -w -C -C -C -L"
-  # git diff by words changed
-  alias gdw="git diff --word-diff"
-  alias gm="git maintenance start"
+	alias gclean="git clean -xdf"
+	alias gls="git ls-tree --full-tree --name-only -r HEAD."
+	alias gs="git status"
+	alias gpl="git pull"
+	# git blame (more precise)
+	alias gb="git blame -w -C -C -C"
+	# git blame line range
+	alias gbl="git blame -w -C -C -C -L"
+	# git diff by words changed
+	alias gdw="git diff --word-diff"
+	alias gm="git maintenance start"
 
-  # git clone from git hub to my source directory
-  function ghub() { git clone git@github.com:"$1" "$SRC"/github.com/"$1"; }
-  # git clone from git hub to my source directory
-  function glab() { git clone git@gitlab.cj.dev:"$1" "$SRC"/gitlab.cj.dev/"$1"; }
+	# git clone from git hub to my source directory
+	function ghub() { git clone git@github.com:"$1" "$SRC"/github.com/"$1"; }
+	# git clone from git hub to my source directory
+	function glab() { git clone git@gitlab.cj.dev:"$1" "$SRC"/gitlab.cj.dev/"$1"; }
 
-  #==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
-  if command -v lazygit &>/dev/null; then
-    alias gg="lazygit"
-    alias lg="lazygit"
-    alias dg="lazygit --path \$DOTFILES"
-  fi
+	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
+	if command -v lazygit &>/dev/null; then
+		alias gg="lazygit"
+		alias lg="lazygit"
+		alias dg="lazygit --path \$DOTFILES"
+	fi
 fi
-
 
 #===============================================================================
 # Editors
 #===============================================================================
 #== Helix: https://github.com/helix-editor/helix
 if command -v hx &>/dev/null; then
-  alias h="hx"
-  alias h.="hx ."
+	alias h="hx"
+	alias h.="hx ."
 fi
 
 #===============================================================================
 #== Neovim: https://github.com/neovim/neovim
 if command -v nvim &>/dev/null; then
 
-  function nvim-clean-caches() {
-    echo "Cleaning current caches"
-    rm -rf "$HOME"/.local/share/nvim
-    rm -rf "$HOME"/.local/state/nvim
-    rm -rf "$HOME"/.cache/nvim
-  }
+	function nvim-clean-caches() {
+		echo "Cleaning current caches"
+		rm -rf "$HOME"/.local/share/nvim
+		rm -rf "$HOME"/.local/state/nvim
+		rm -rf "$HOME"/.cache/nvim
+	}
 
+	function nvim-switch-config() {
+		if [[ -n "$1" ]]; then
+			nvim-clean-caches
 
-  function nvim-switch-config() {
-    if [[ -n "$1" ]]; then
-        nvim-clean-caches
-        
-        echo "Moving Config to $1"
-        rm "$XDG_CONFIG_HOME/nvim"
-        ln -s "$XDG_CONFIG_HOME/nvim_$1" "$XDG_CONFIG_HOME/nvim"
-    else
-        echo "No target config given"
-    fi
-  }
-  
-  function nvim-switch-config-selection() {
-    local SELECTION=$(printf "lazynvim\nmini\nkickstart\nbespoke" | fzf)
-    if [[ -n "$SELECTION" ]]; then
-      nvim-switch-config "$SELECTION"
-    else
-        echo "No nvim config selection made"
-    fi
-  }
-  
-  alias nsc="nvim-switch-config-selection"
-  
-  alias v="nvim"
-  alias vim="nvim"
-  alias vi="nvim"
+			echo "Moving Config to $1"
+			rm "$XDG_CONFIG_HOME/nvim"
+			ln -s "$XDG_CONFIG_HOME/nvim_$1" "$XDG_CONFIG_HOME/nvim"
+		else
+			echo "No target config given"
+		fi
+	}
 
-  alias v.="nvim ."
-  alias vup="nvim --headless \"+Lazy! sync\" +qa"
+	function nvim-switch-config-selection() {
+		local SELECTION
+		SELECTION=$(printf "lazynvim\nmini\nkickstart\nbespoke" | fzf)
+		if [[ -n "$SELECTION" ]]; then
+			nvim-switch-config "$SELECTION"
+		else
+			echo "No nvim config selection made"
+		fi
+	}
+
+	alias nsc="nvim-switch-config-selection"
+
+	alias v="nvim"
+	alias vim="nvim"
+	alias vi="nvim"
+
+	alias v.="nvim ."
+	alias vup="nvim --headless \"+Lazy! sync\" +qa"
 
 fi
-
-
-
-
-
 
 #===============================================================================
 # Terminal
 #===============================================================================
 #== cat replacement (rust): https://github.com/sharkdp/bat
 if command -v bat &>/dev/null; then
-  alias cat="bat --style=plain"
+	alias cat="bat --style=plain"
 fi
 
 #===============================================================================
 #== ls replacement (rust): https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
-  alias la="eza -F --group-directories-first --git --all --no-user"
-  alias ll="eza -lF --group-directories-first --no-user"
-  alias lla="eza -lF --group-directories-first --git --all --no-user"
-  alias l="clear && lla"
-  alias tree="eza --tree --git"
-  alias treea="eza --tree --git --all"
-  alias treed="eza --tree --git --level"
+	alias la="eza -F --group-directories-first --git --all --no-user"
+	alias ll="eza -lF --group-directories-first --no-user"
+	alias lla="eza -lF --group-directories-first --git --all --no-user"
+	alias l="clear && lla"
+	alias tree="eza --tree --git"
+	alias treea="eza --tree --git --all"
+	alias treed="eza --tree --git --level"
 else
-  alias l="ls"
-  alias la="ls -a"
-  alias ll="ls -l"
-  alias lla="ls -la"
+	alias l="ls"
+	alias la="ls -a"
+	alias ll="ls -l"
+	alias lla="ls -la"
 fi
 
 #===============================================================================
 #== bling: https://github.com/fastfetch-cli/fastfetch
 if command -v fastfetch &>/dev/null; then
-  alias ff="fastfetch"
+	alias ff="fastfetch"
 fi
 
 #===============================================================================
 #== fuzzy finder: https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
-  export FZF_DEFAULT_COMMAND='fd --type f --hidden' #--ignore-file ~/.config/fd/ignore'
-  export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
-  eval "$(fzf --$SHELL_NAME)"
+	export FZF_DEFAULT_COMMAND='fd --type f --hidden' #--ignore-file ~/.config/fd/ignore'
+	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
+	eval "$(fzf --$SHELL_NAME)"
 
-  function fzf_query() {
-    # passed in query
-    if [ -n "$1" ]; then
-      fzf --query "$1"
-    else
-      fzf
-    fi
-  }
+	function fzf_query() {
+		# passed in query
+		if [ -n "$1" ]; then
+			fzf --query "$1"
+		else
+			fzf
+		fi
+	}
 
-  function fzf_query_piped() {
-    # passed in query
-    if [ -n "$1" ]; then
-      fzf --query "$1" </dev/stdin
-    else
-      fzf </dev/stdin
-    fi
-  }
+	function fzf_query_piped() {
+		# passed in query
+		if [ -n "$1" ]; then
+			fzf --query "$1" </dev/stdin
+		else
+			fzf </dev/stdin
+		fi
+	}
 
-  # prompt user to select from list of git directories under $2 and if user selects one, execute command $1 on it
-  function cd_on_git_rep() {
-    exec_on_git_repos cd "$1" "$2"
-    lla
-  }
+	# prompt user to select from list of git directories under $2 and if user selects one, execute command $1 on it
+	function cd_on_git_rep() {
+		exec_on_git_repos cd "$1" "$2"
+		lla
+	}
 
-  function exec_on_git_repos() {
-    local root_folder="$2"
-    local exec_command="$1"
-    local query_value=${3:-""}
+	function exec_on_git_repos() {
+		local root_folder="$2"
+		local exec_command="$1"
+		local query_value=${3:-""}
 
-    # find list of directories containing a .git subfolder, presumably a repo
-    local git_repos
-    git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
+		# find list of directories containing a .git subfolder, presumably a repo
+		local git_repos
+		git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
 
-    [ -n "$git_repos" ] && "$exec_command" "$git_repos"
-  }
+		[ -n "$git_repos" ] && "$exec_command" "$git_repos"
+	}
 
-  fzf_rg() {
-    if [ ! "$#" -gt 0 ]; then
-      echo "Need a string to search for!"
-      return 1
-    fi
-    # if FZF_PREVIEW_WINDOW is undefined, quoting it breaks the script
-    rg --files-with-matches --no-messages "$1" | fzf --preview-window "$FZF_PREVIEW_WINDOW" --preview "rg --ignore-case --pretty --context 10 '$1' {}"
-  }
+	fzf_rg() {
+		if [ ! "$#" -gt 0 ]; then
+			echo "Need a string to search for!"
+			return 1
+		fi
+		# if FZF_PREVIEW_WINDOW is undefined, quoting it breaks the script
+		rg --files-with-matches --no-messages "$1" | fzf --preview-window "$FZF_PREVIEW_WINDOW" --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+	}
 
-  alias fr="fzf_rg"
-  alias hubs="cd_on_git_rep \$GITHUB"
-  alias srcs="cd_on_git_rep \$SRC"
+	alias fr="fzf_rg"
+	alias hubs="cd_on_git_rep \$GITHUB"
+	alias srcs="cd_on_git_rep \$SRC"
 
-  #terminal theming
-  if command -v wezterm &>/dev/null; then
-    function theme-wezterm() {
-      local color_scheme
-      color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
+	#terminal theming
+	if command -v wezterm &>/dev/null; then
+		function theme-wezterm() {
+			local color_scheme
+			color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
 
-      # if color_scheme was selected, change the wezterm config file colorscheme value
-      [ -n "$color_scheme" ] && sd '^config.color_scheme.*$' "config.color_scheme = '${color_scheme}'" "$XDG_CONFIG_HOME"/wezterm/wezterm.lua
-    }
-  fi
-  if command -v alacritty &>/dev/null; then
-    alias theme=theme-alacritty
-    function theme-alacritty() {
-      local selected
-      selected=$(fd -i .toml $XDG_CONFIG_HOME/alacritty/themes/ | fzf | sd "$HOME" "~")
+			# if color_scheme was selected, change the wezterm config file colorscheme value
+			[ -n "$color_scheme" ] && sd '^config.color_scheme.*$' "config.color_scheme = '${color_scheme}'" "$XDG_CONFIG_HOME"/wezterm/wezterm.lua
+		}
+	fi
+	if command -v alacritty &>/dev/null; then
+		alias theme=theme-alacritty
+		function theme-alacritty() {
+			local selected
+			selected=$(fd -i .toml $XDG_CONFIG_HOME/alacritty/themes/ | fzf | sd "$HOME" "~")
 
-      # if color_scheme was selected, change the alacritty config file colorscheme value
-      [ -n "$selected" ] && sd "^import.*" "import=[\"$selected\"]" $XDG_CONFIG_HOME/alacritty/alacritty.toml
-    }
-  fi
+			# if color_scheme was selected, change the alacritty config file colorscheme value
+			[ -n "$selected" ] && sd "^import.*" "import=[\"$selected\"]" $XDG_CONFIG_HOME/alacritty/alacritty.toml
+		}
+	fi
 
 fi
-
 
 #===============================================================================
 #== GREP replacement: https://github.com/BurntSushi/ripgrep
 if command -v rg &>/dev/null; then
-  export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
-  alias grep="rg"
-  alias ar="alias | rg"
-  alias er="env | rg"
-  alias fr="declare -f | rg"
+	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
+	alias grep="rg"
+	alias ar="alias | rg"
+	alias er="env | rg"
+	alias fr="declare -f | rg"
 
-  if command -v sd &>/dev/null; then
-    replace() {
-      # Check if a search pattern is provided
-      if [ -z "$1" ]; then
-        echo "Usage: replace_with_confirmation 'search-pattern'"
-        return 1
-      fi
+	if command -v sd &>/dev/null; then
+		replace() {
+			# Check if a search pattern is provided
+			if [ -z "$1" ]; then
+				echo "Usage: replace_with_confirmation 'search-pattern'"
+				return 1
+			fi
 
-      # Assign search pattern from the first argument
-      local search_pattern="$1"
+			# Assign search pattern from the first argument
+			local search_pattern="$1"
 
-      # Preview matching files
-      echo "Searching for files containing the pattern: $search_pattern"
-      rg "$search_pattern"
+			# Preview matching files
+			echo "Searching for files containing the pattern: $search_pattern"
+			rg "$search_pattern"
 
-      # Prompt for replacement or escape
-      read -p "Enter the replacement pattern (or type 'escape' to cancel): " replace_pattern
+			# Prompt for replacement or escape
+			read -p "Enter the replacement pattern (or type 'escape' to cancel): " replace_pattern
 
-      if [ "$replace_pattern" == "escape" ]; then
-        echo "Operation canceled."
-        return 0
-      fi
+			if [ "$replace_pattern" == "escape" ]; then
+				echo "Operation canceled."
+				return 0
+			fi
 
-      # Run ripgrep to find files and pass them to sd for replacement
-      echo "Replacing '$search_pattern' with '$replace_pattern'..."
-      rg --files-with-matches -0 "$search_pattern" | xargs -0 sd "$search_pattern" "$replace_pattern"
+			# Run ripgrep to find files and pass them to sd for replacement
+			echo "Replacing '$search_pattern' with '$replace_pattern'..."
+			rg --files-with-matches -0 "$search_pattern" | xargs -0 sd "$search_pattern" "$replace_pattern"
 
-      echo "Replacement completed."
-    }
-  fi
-  
+			echo "Replacement completed."
+		}
+	fi
+
 fi
 
 #===============================================================================
 #== Prompt : https://github.com/starship/starship
 if command -v starship &>/dev/null; then
-  eval "$(starship init $SHELL_NAME)"
+	eval "$(starship init $SHELL_NAME)"
 fi
 
 #===============================================================================
 #== dotfiles: https://github.com/TheLocehiliosan/yadm
 if command -v stow &>/dev/null; then
 
-  # cleans old links, and puts new links from a stow location ($1) to a root ($2)
-  function stow-location-sync(){
-    [ -d "$2" ] || mkdir -p "$2"
-    echo "Clean and Restore $1 into $2 (with stow)"
-    stow -D . --dir=$1 --target=$2
-    stow . --dir=$1 --target=$2
-  }
+	# cleans old links, and puts new links from a stow location ($1) to a root ($2)
+	function stow-location-sync() {
+		[ -d "$2" ] || mkdir -p "$2"
+		echo "Clean and Restore $1 into $2 (with stow)"
+		stow -D . --dir=$1 --target=$2
+		stow . --dir=$1 --target=$2
+	}
 
-  # sync all dotfile repos to appropriate home locations
-  function dsync() {
-    stow-location-sync "$DOTFILES" "$HOME"
-    stow-location-sync "$JEFF/nvim_lazyvim" "$XDG_CONFIG_HOME/nvim_lazyvim"
-    stow-location-sync "$JEFF/nvim_kickstart" "$XDG_CONFIG_HOME/nvim_kickstart"
-    stow-location-sync "$JEFF/nvim_mini" "$XDG_CONFIG_HOME/nvim_mini"
-  }
+	# sync all dotfile repos to appropriate home locations
+	function dsync() {
+		stow-location-sync "$DOTFILES" "$HOME"
+		stow-location-sync "$JEFF/nvim_lazyvim" "$XDG_CONFIG_HOME/nvim_lazyvim"
+		stow-location-sync "$JEFF/nvim_kickstart" "$XDG_CONFIG_HOME/nvim_kickstart"
+		stow-location-sync "$JEFF/nvim_mini" "$XDG_CONFIG_HOME/nvim_mini"
+	}
 fi
 
 #===============================================================================
 #== terminal multiplexer : https://github.com/tmux/tmux
 if command -v tmux &>/dev/null; then
-  alias t="tmux"
-  alias tl="tmux ls"         # list
-  alias ta="tmux attach"     # attach all sessions or number
-  alias tan="tmux attach -t" # attach to named
-  alias tn="tmux new -s"     # new with name
-  alias tk="tmux kill-session"
-  alias tkn="tmux kill-session -t"
+	alias t="tmux"
+	alias tl="tmux ls"         # list
+	alias ta="tmux attach"     # attach all sessions or number
+	alias tan="tmux attach -t" # attach to named
+	alias tn="tmux new -s"     # new with name
+	alias tk="tmux kill-session"
+	alias tkn="tmux kill-session -t"
 fi
 #===============================================================================
 #== tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
-  # opens yazi either at the given directory or at the one zoxide suggests
-  yazi-zoxide() {
-    if [ "$1" != "" ]; then
-      if [ -d "$1" ]; then
-        yazi "$1"
-      else
-        yazi "$(zoxide query $1)"
-      fi
-    else
-      yazi
-    fi
-    return $?
-  }
+	# opens yazi either at the given directory or at the one zoxide suggests
+	yazi-zoxide() {
+		if [ "$1" != "" ]; then
+			if [ -d "$1" ]; then
+				yazi "$1"
+			else
+				yazi "$(zoxide query $1)"
+			fi
+		else
+			yazi
+		fi
+		return $?
+	}
 
-  # open yazi and shell change to the selected directory on exit
-  function yazi-change-dir() {
-    local tmp
-    tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-    yazi "$@" --cwd-file="$tmp"
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-      cd -- "$cwd" || return
-    fi
-    rm -f -- "$tmp"
-  }
+	# open yazi and shell change to the selected directory on exit
+	function yazi-change-dir() {
+		local tmp
+		tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+		yazi "$@" --cwd-file="$tmp"
+		if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+			cd -- "$cwd" || return
+		fi
+		rm -f -- "$tmp"
+	}
 
-  alias y="yazi-zoxide"
-  alias yy="yazi-change-dir"
+	alias y="yazi-zoxide"
+	alias yy="yazi-change-dir"
 
 fi
 
 if command -v zinit &>/dev/null; then
-  alias zclean="zinit delete --clean"
-  alias zup="zinit update --all"
+	alias zclean="zinit delete --clean"
+	alias zup="zinit update --all"
 
-  alias zsync="zclean && zup"
+	alias zsync="zclean && zup"
 fi
 
 #===============================================================================
 # source machine specific aliases
 if test -f "$HOME/.shellrc.local"; then
-  source "$HOME/.shellrc.local"
+	source "$HOME/.shellrc.local"
 fi
-
-
