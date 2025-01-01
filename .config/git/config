@@ -3,7 +3,6 @@
 
 [core]
   excludesFile = ~/.config/git/ignore
-  pager = delta
 
 [credential]
 	helper = osxkeychain
@@ -23,9 +22,6 @@
 
 [init]
   defaultBranch = main
-
-[interactive]
-  diffFilter = delta --color-only
 
 [merge]
   conflictstyle = diff3
