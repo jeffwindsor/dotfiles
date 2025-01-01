@@ -467,8 +467,10 @@ if command -v stow &>/dev/null; then
 	function stow-location-sync() {
 		[ -d "$2" ] || mkdir -p "$2"
 		echo "Clean and Restore $1 into $2 (with stow)"
+		# clean old links
 		stow -D . --dir=$1 --target=$2
-		stow . --dir=$1 --target=$2
+		# link to source (no-folding forces links at folder level)
+		stow --no-folding . --dir=$1 --target=$2
 	}
 
 	# sync all dotfile repos to appropriate home locations
