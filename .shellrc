@@ -43,39 +43,6 @@ alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xa
 alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && $EDITOR index.html && cd -"
 
 #===============================================================================
-# Functions
-function exec-in-subdirs() {
-	for d in */; do
-		cd ./"$d" || return
-		echo "=== Executing $1 on $(pwd)"
-		eval "$1"
-		cd ..
-	done
-}
-function edit-via-fuzzy-search() {
-	cd "$1"
-	files=$(fzf_query ${2:-""})
-	$EDITOR "$files"
-	cd -
-}
-
-# combined "upgrade" my stuff function
-function up() {
-	echo "==> Pull Important Repos"
-	dpl
-
-	echo "==> Dotfiles"
-	dsync
-
-	echo "==> Homebrew"
-	bup
-
-	echo "==> Zsh"
-	zup
-
-}
-
-#===============================================================================
 # Package Managers
 #===============================================================================
 #== Homebrew: https://brew.sh/ ==
@@ -468,9 +435,9 @@ if command -v stow &>/dev/null; then
 		[ -d "$2" ] || mkdir -p "$2"
 		echo "Clean and Restore $1 into $2 (with stow)"
 		# clean old links
-		stow -D . --dir=$1 --target=$2
+		stow -D . --dir="$1" --target="$2"
 		# link to source (no-folding forces links at folder level)
-		stow --no-folding . --dir=$1 --target=$2
+		stow . --dir="$1" --target="$2"
 	}
 
 	# sync all dotfile repos to appropriate home locations
@@ -532,6 +499,39 @@ if command -v zinit &>/dev/null; then
 
 	alias zsync="zclean && zup"
 fi
+
+#===============================================================================
+# Functions
+function exec-in-subdirs() {
+	for d in */; do
+		cd ./"$d" || return
+		echo "=== Executing $1 on $(pwd)"
+		eval "$1"
+		cd ..
+	done
+}
+function edit-via-fuzzy-search() {
+	cd "$1"
+	files=$(fzf_query ${2:-""})
+	$EDITOR "$files"
+	cd -
+}
+
+# combined "upgrade" my stuff function
+function up() {
+	echo "==> Pull Important Repos"
+	dpl
+
+	echo "==> Dotfiles"
+	dsync
+
+	echo "==> Homebrew"
+	bup
+
+	echo "==> Zsh"
+	zup
+
+}
 
 #===============================================================================
 # source machine specific aliases
