@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 SHELL_NAME=${1:-"zsh"}
 export EDITOR="hx"
+export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 
 # xdg-ify
 export XDG_STATE_HOME=$HOME/.local/state
@@ -319,20 +320,14 @@ if command -v fzf &>/dev/null; then
 
 	# prompt user to select from list of git directories under $2 and if user selects one, execute command $1 on it
 	function cd_on_git_rep() {
-		exec_on_git_repos cd "$1" "$2"
-		lla
-	}
-
-	function exec_on_git_repos() {
-		local root_folder="$2"
-		local exec_command="$1"
-		local query_value=${3:-""}
+		local root_folder="$1"
+		local query_value=${2:-""}
 
 		# find list of directories containing a .git subfolder, presumably a repo
 		local git_repos
 		git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
 
-		[ -n "$git_repos" ] && "$exec_command" "$git_repos"
+		[ -n "$git_repos" ] && cd "$git_repos" && lla
 	}
 
 	fzf_rg() {
@@ -497,8 +492,34 @@ fi
 if command -v zinit &>/dev/null; then
 	alias zclean="zinit delete --clean"
 	alias zup="zinit update --all"
-
 	alias zsync="zclean && zup"
+fi
+
+if command -v docker &>/dev/null; then
+	function docker_run_on_git_repo() {
+		local root_folder="$1"
+		local query_value=${2:-""}
+
+		# find list of directories containing a .git subfolder, presumably a repo
+		local git_repo
+		git_repo=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
+
+		if [ -n "$git_repo" ]; then
+			local docker_image
+			docker_image=$(docker images --format '{{.Repository}}:{{.Tag}}' | fzf)
+
+			if [ -n "$docker_image" ]; then
+				echo "docker run -it -v $git_repo:/workspace $docker_image"
+			fi
+		fi
+	}
+
+	alias dcl='docker container ls'
+	alias dil='docker image ls'
+	alias dir='docker image rm -f'
+	alias dr='docker run -it '
+	alias srcsd="docker_run_on_git_repo \$SRC"
+
 fi
 
 #===============================================================================
