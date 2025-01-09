@@ -13,6 +13,8 @@ function Add-Packages() {
     bash-language-server
     bat
     black
+    docker
+    colima
     eza
     fastfetch
     fd
@@ -34,18 +36,14 @@ function Add-Packages() {
     aerospace --cask
     balenaetcher --cask
     firefox --cask
-    font-droid-sans-mono-nerd-font --cask
-    font-fira-code-nerd-font --cask
     font-jetbrains-mono-nerd-font --cask
     google-chrome --cask
     keepingyouawake --cask
-    qbittorrent --cask
     spotify --cask
     sweet-home3d --cask
     vlc --cask
     allacritty --cask
-    kitty --cask
-    wezterm --cask
+    pearcleaner --cask
   )
   for p in "${packages[@]}"; do brew install "$p"; done
 }
