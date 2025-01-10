@@ -2,7 +2,7 @@
 # https://docs.helix-editor.com/master/commands.html
 ###################################################################
 
-theme = "kanagawa"
+theme = "tokyonight"
 
 [editor]
 auto-save   = true
