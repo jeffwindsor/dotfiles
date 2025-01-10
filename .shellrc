@@ -296,7 +296,7 @@ fi
 #===============================================================================
 #== fuzzy finder: https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
-	export FZF_DEFAULT_COMMAND='fd --type f --hidden' #--ignore-file ~/.config/fd/ignore'
+	export FZF_DEFAULT_COMMAND='find . -type f -name ".*" -o -type f'
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
 	eval "$(fzf --$SHELL_NAME)"
 
@@ -325,7 +325,7 @@ if command -v fzf &>/dev/null; then
 
 		# find list of directories containing a .git subfolder, presumably a repo
 		local git_repos
-		git_repos=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
+		git_repos=$(find "$root_folder" -name ".git" -type d -maxdepth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
 
 		[ -n "$git_repos" ] && cd "$git_repos" && lla
 	}
@@ -350,17 +350,17 @@ if command -v fzf &>/dev/null; then
 			color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
 
 			# if color_scheme was selected, change the wezterm config file colorscheme value
-			[ -n "$color_scheme" ] && sd '^config.color_scheme.*$' "config.color_scheme = '${color_scheme}'" "$XDG_CONFIG_HOME"/wezterm/wezterm.lua
+			[ -n "$color_scheme" ] && sed -i '' "s/^config\\.color_scheme.*$/config.color_scheme = '${color_scheme}'/" "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
 		}
 	fi
 	if command -v alacritty &>/dev/null; then
 		alias theme=theme-alacritty
 		function theme-alacritty() {
 			local selected
-			selected=$(fd -i .toml $XDG_CONFIG_HOME/alacritty/themes/ | fzf | sd "$HOME" "~")
+			selected=$(find "$XDG_CONFIG_HOME/alacritty/themes/" -type f -iname "*.toml" | fzf | sed "s|$HOME|~|g")
 
 			# if color_scheme was selected, change the alacritty config file colorscheme value
-			[ -n "$selected" ] && sd "^import.*" "import=[\"$selected\"]" $XDG_CONFIG_HOME/alacritty/alacritty.toml
+			[ -n "$selected" ] && sed -i '' "s|^import.*|import=[\"$selected\"]|" "$XDG_CONFIG_HOME/alacritty/alacritty.toml"
 		}
 	fi
 
@@ -374,45 +374,6 @@ if command -v rg &>/dev/null; then
 	alias ar="alias | rg"
 	alias er="env | rg"
 	alias fr="declare -f | rg"
-
-	if command -v sd &>/dev/null; then
-		function replace_text() {
-			if [ $# -eq 0 ]; then
-				echo "Usage: replace_text <search_pattern>"
-				return 1
-			fi
-
-			local search_pattern="$1"
-
-			# Find matches using `rg`
-			echo "Searching for '$search_pattern' in text files..."
-			rg --color=always --line-number "$search_pattern"
-
-			if [ $? -ne 0 ]; then
-				echo "No matches found for '$search_pattern'."
-				return 1
-			fi
-
-			# Prompt for replacement text
-			echo -n "Enter replacement text: "
-			read -r replacement_text
-
-			# Quit if no replacement text is entered
-			if [[ -z "$replacement_text" ]]; then
-				echo "No replacement text entered. Exiting."
-				return 1
-			fi
-
-			# Replace using `sd`
-			echo "Performing replacements..."
-			rg --files-with-matches "$search_pattern" | while read -r file; do
-				sd "$search_pattern" "$replacement_text" "$file"
-				echo "Replaced in: $file"
-			done
-
-			echo "Replacement completed."
-		}
-	fi
 
 fi
 
@@ -504,7 +465,7 @@ if command -v docker &>/dev/null; then
 
 		# find list of directories containing a .git subfolder, presumably a repo
 		local git_repo
-		git_repo=$(fd '^.git$' "$root_folder" -HItd --max-depth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
+		git_repo=$(find "$root_folder" -regex '.*/\.git' -type d -maxdepth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
 
 		if [ -n "$git_repo" ]; then
 			local docker_image
@@ -516,6 +477,19 @@ if command -v docker &>/dev/null; then
 		fi
 	}
 
+	function docker_build_from_file(){
+		local root_folder="$1"
+		local query_value=${2:-""}
+
+		local dockerfile
+		dockerfile=$(find "$root_folder" -name "*.Dockerfile" | sed 's/.*\///; s/\.[^.]*$//' | fzf_query_piped $query_value)
+
+		if [ -n "$dockerfile" ]; then
+			docker build -f "$1"/"$dockerfile".Dockerfile -t "$dockerfile" .
+		fi
+	}
+
+	alias db="docker_build_from_file $JEFF/docker-images/"
 	alias dcl='docker container ls'
 	alias dil='docker image ls'
 	alias dir='docker image rm -f'
@@ -537,7 +511,7 @@ function exec-in-subdirs() {
 function edit-via-fuzzy-search() {
 	cd "$1"
 	files=$(fzf_query ${2:-""})
-	$EDITOR "$files"
+	[ -n "$files" ] && $EDITOR "$files"
 	cd -
 }
 
