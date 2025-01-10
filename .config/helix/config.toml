@@ -26,6 +26,9 @@ git-global = true
 render    = true
 character = "|"
 
+[editor.soft-wrap]
+enable = true
+
 [editor.statusline]
 left   = [ "mode","spinner","file-name","file-modification-indicator","version-control" ]
 center = [ "position","selections" ]
