@@ -281,10 +281,10 @@ if command -v eza &>/dev/null; then
 	alias treea="eza --tree --git --all"
 	alias treed="eza --tree --git --level"
 else
-	alias l="ls"
-	alias la="ls -a"
-	alias ll="ls -l"
-	alias lla="ls -la"
+	alias l="ls --color=auto"
+	alias la="ls -a --color=auto"
+	alias ll="ls -l --color=auto"
+	alias lla="ls -la --color=auto"
 fi
 
 #===============================================================================
@@ -325,7 +325,7 @@ if command -v fzf &>/dev/null; then
 
 		# find list of directories containing a .git subfolder, presumably a repo
 		local git_repos
-		git_repos=$(find "$root_folder" -name ".git" -type d -maxdepth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
+		git_repos=$(find "$root_folder" -name ".git" -type d -maxdepth 4 | sed 's/\/.git//' | fzf_query_piped $query_value)
 
 		[ -n "$git_repos" ] && cd "$git_repos" && lla
 	}
@@ -464,16 +464,28 @@ if command -v docker &>/dev/null; then
 		local query_value=${2:-""}
 
 		# find list of directories containing a .git subfolder, presumably a repo
-		local git_repo
-		git_repo=$(find "$root_folder" -regex '.*/\.git' -type d -maxdepth 4 | sed 's/.git\/$//' | fzf_query_piped $query_value)
+		local selected_repo
+		selected_repo=$(find "$root_folder" -regex '.*/\.git' -type d -maxdepth 4 | sed 's/\/.git//' | fzf_query_piped $query_value)
+		# if selectoin was made
+		if [ -n "$selected_repo" ]; then
 
-		if [ -n "$git_repo" ]; then
 			local docker_image
-			docker_image=$(docker images --format '{{.Repository}}:{{.Tag}}' | fzf)
+			docker_image=$(docker images --format '{{.Repository}}' | fzf)
+			
+			local repo_name
+			repo_name=$(echo $selected_repo | sed 's/.*\///; s/\.[^.]*$//' )
 
-			if [ -n "$docker_image" ]; then
-				docker run -it -v $git_repo:/workspace $docker_image
-			fi
+			local container_name
+			container_name="${repo_name}_${docker_image}"
+			
+		    # Check if the container already exists
+            if docker ps -a --format '{{.Names}}' | grep -q "^${container_name}$"; then
+                echo "Container ${container_name} exists. Starting it..."
+                docker start -ai "${container_name}"
+            else
+                echo "Starting new container: image: $docker_image with repo: $repo_name"
+                docker run -it --name "${container_name}" -v "$selected_repo:/workspace" "$docker_image"
+            fi
 		fi
 	}
 
@@ -485,13 +497,17 @@ if command -v docker &>/dev/null; then
 		dockerfile=$(find "$root_folder" -name "*.Dockerfile" | sed 's/.*\///; s/\.[^.]*$//' | fzf_query_piped $query_value)
 
 		if [ -n "$dockerfile" ]; then
+			# edit file / content check
+			"$EDITOR" "$1"/"$dockerfile".Dockerfile
+			# build docker image
 			docker build -f "$1"/"$dockerfile".Dockerfile -t "$dockerfile" .
 		fi
 	}
 
-	alias db="docker_build_from_file $JEFF/docker-images/"
-	alias dcl='docker container ls'
+	alias db="docker_build_from_file $JEFF/docker-images"
+	alias dcl='docker container ls --all'
 	alias dil='docker image ls'
+	alias dila='docker image ls --all'
 	alias dir='docker image rm -f'
 	alias dr='docker run -it '
 	alias drs="docker_run_on_git_repo \$SRC"
