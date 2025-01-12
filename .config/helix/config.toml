@@ -2,13 +2,15 @@
 # https://docs.helix-editor.com/master/commands.html
 ###################################################################
 
-theme = "tokyonight"
+theme = "papercolor-dark"
 
 [editor]
 auto-save   = true
 bufferline  = "always"
 color-modes = true
-line-number = "relative"  #"relative" #"absolute"
+cursorline  = true
+end-of-line-diagnostics = "hint"
+line-number = "absolute"  # relative absolute
 mouse       = true
 shell       = ["zsh", "-c"]
 
@@ -21,13 +23,20 @@ select = "underline"
 hidden     = false
 git-ignore = true
 git-global = true
+# max-depth  = 4
 
 [editor.indent-guides]
 render    = true
 character = "|"
 
+[editor.inline-diagnostics]
+cursor-line = "error"
+
 [editor.soft-wrap]
 enable = true
+
+[editor.smart-tab]
+enable = false
 
 [editor.statusline]
 left   = [ "mode","spinner","file-name","file-modification-indicator","version-control" ]
@@ -41,12 +50,9 @@ select = "SELECT"
 
 ###################################################################
 # key maps
-# , = switch buffer
-# z = Zen Mode
 ###################################################################
 
 [keys.normal]
-# Switch case of the selected text
 "H" = "goto_line_start"
 "L" = "goto_line_end"
 
@@ -58,26 +64,42 @@ esc = ["collapse_selection","keep_primary_selection",":write"] # vim like esc
 "V" = ["select_mode", "extend_to_line_bounds"] 
 "^" = "goto_first_nonwhitespace"
 "`" = "switch_case"
-# "x" = "delete_selection"
 "y" = ["yank_main_selection_to_clipboard","yank"] # vim like yank + yank to clipboard
 "~" = "switch_case"
 
 [keys.normal.space]
-q = ":write-quit-all"
-
 # lazy git
 #g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+q = ":write-quit-all"
 
-# themes  
+# (e)ditor
+[keys.normal.space.e]
+o = ":config-open"
+l = ":open ~/.config/helix/languages.toml"
+r = ":config-reload"
+
+# (t)hemes  
 [keys.normal.space.t]
-b = ":theme base16_terminal"
+a = ":theme autumn_night"
+b = ":theme base16_transparent"
+c = ":theme catppuccin_frappe"
 d = ":theme default"
-g = ":theme github_dark_high_contrast"
+e = ":theme ayu_evolve"
+g = ":theme gruvbox"
+i = ":theme iceberg-dark"
+j = ":theme jellybeans"
 k = ":theme kanagawa"
+l = ":theme ayu_light"
 m = ":theme molokai"
 n = ":theme nord"
+o = ":theme onedark"
+p = ":theme papercolor-dark"
 s = ":theme sonokai" 
 t = ":theme tokyonight_storm"
+z = ":theme zed_onedark"
+
+
+
 
 [keys.insert]
 esc = ["collapse_selection", "normal_mode", ":write"]
