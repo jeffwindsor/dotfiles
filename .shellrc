@@ -19,7 +19,7 @@ export EXOCORTEXT="$HOME/portable/exocortex"
 export DOTFILES="$JEFF/dotfiles"
 export DOTFILES_NIXOS="$JEFF/nixos-config"
 export DOTFILES_GNOME="$JEFF/gnome-config"
-export DOTFILES_NVIM="$XDG_CONFIG_HOME/nvim"
+export DOTFILES_NVIM="$JEFF/nvim-config"
 
 # Jump Directories
 alias .....="cd ../../../../"
@@ -167,8 +167,7 @@ if command -v git &>/dev/null; then
 		git -C $DOTFILES pull -v
 		git -C $DOTFILES_NIXOS pull -v
 		git -C $DOTFILES_GNOME pull -v
-		# git -C $JEFF/nvim_kickstart pull -v
-		# git -C $JEFF/nvim_mini pull -v
+		git -C $DOTFILES_NVIM pull -v
 		git -C $JEFF/startpage pull -v
 		git -C $JEFF/ascii-art pull -v
 	}
@@ -229,34 +228,33 @@ if command -v nvim &>/dev/null; then
 		rm -rf "$HOME"/.cache/nvim
 	}
 
-	function nvim-switch-config() {
-		if [[ -n "$1" ]]; then
-			nvim-clean-caches
+	# function nvim-switch-config() {
+	# 	if [[ -n "$1" ]]; then
+	# 		nvim-clean-caches
 
-			echo "Moving Config to $1"
-			rm "$XDG_CONFIG_HOME/nvim"
-			ln -s "$XDG_CONFIG_HOME/nvim_$1" "$XDG_CONFIG_HOME/nvim"
-		else
-			echo "No target config given"
-		fi
-	}
+	# 		echo "Moving Config to $1"
+	# 		rm "$XDG_CONFIG_HOME/nvim"
+	# 		ln -s "$XDG_CONFIG_HOME/nvim_$1" "$XDG_CONFIG_HOME/nvim"
+	# 	else
+	# 		echo "No target config given"
+	# 	fi
+	# }
 
-	function nvim-switch-config-selection() {
-		local SELECTION
-		SELECTION=$(printf "lazynvim\nmini\nkickstart\nbespoke" | fzf)
-		if [[ -n "$SELECTION" ]]; then
-			nvim-switch-config "$SELECTION"
-		else
-			echo "No nvim config selection made"
-		fi
-	}
+	# function nvim-switch-config-selection() {
+	# 	local SELECTION
+	# 	SELECTION=$(printf "lazynvim\nmini\nkickstart\nbespoke" | fzf)
+	# 	if [[ -n "$SELECTION" ]]; then
+	# 		nvim-switch-config "$SELECTION"
+	# 	else
+	# 		echo "No nvim config selection made"
+	# 	fi
+	# }
 
-	alias nsc="nvim-switch-config-selection"
+	# alias nsc="nvim-switch-config-selection"
 
 	alias v="nvim"
 	alias vim="nvim"
 	alias vi="nvim"
-
 	alias v.="nvim ."
 	alias vup="nvim --headless \"+Lazy! sync\" +qa"
 
