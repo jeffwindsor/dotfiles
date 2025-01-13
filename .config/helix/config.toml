@@ -74,8 +74,13 @@ q = ":write-quit-all"
 
 # (e)ditor
 [keys.normal.space.e]
-o = ":config-open"
+d = ":open ~/Source/github.com/jeffwindsor/dotfiles"
+g = ":open ~/Source/github.com/jeffwindsor/gnome-config"
+h = ":config-open"
+j = ":open ~/Source/github.com/jeffwindsor"
 l = ":open ~/.config/helix/languages.toml"
+N = ":open ~/Source/github.com/jeffwindsor/nixos-config"
+n = ":open ~/Source/github.com/jeffwindsor/nvim-config"
 r = ":config-reload"
 
 # (t)hemes  
