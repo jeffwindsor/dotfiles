@@ -10,6 +10,7 @@ bufferline  = "always"
 color-modes = true
 cursorline  = true
 end-of-line-diagnostics = "hint"
+jump-label-alphabet = "asdfjkl;ghxcvbnmqweruioptyz"  #home row outward
 line-number = "absolute"  # relative absolute
 mouse       = true
 shell       = ["zsh", "-c"]
@@ -53,6 +54,7 @@ select = "SELECT"
 ###################################################################
 
 [keys.normal]
+"," = "goto_word"   # also 'gw', open the 2char jump list
 "H" = "goto_line_start"
 "L" = "goto_line_end"
 
