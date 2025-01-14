@@ -469,25 +469,25 @@ if command -v docker &>/dev/null; then
 
 			local docker_image
 			docker_image=$(docker images --format '{{.Repository}}' | fzf)
-			
+
 			local repo_name
-			repo_name=$(echo $selected_repo | sed 's/.*\///; s/\.[^.]*$//' )
+			repo_name=$(echo $selected_repo | sed 's/.*\///; s/\.[^.]*$//')
 
 			local container_name
 			container_name="${repo_name}_${docker_image}"
-			
-		    # Check if the container already exists
-            if docker ps -a --format '{{.Names}}' | grep -q "^${container_name}$"; then
-                echo "Container ${container_name} exists. Starting it..."
-                docker start -ai "${container_name}"
-            else
-                echo "Starting new container: image: $docker_image with repo: $repo_name"
-                docker run -it --name "${container_name}" -v "$selected_repo:/workspace" "$docker_image"
-            fi
+
+			# Check if the container already exists
+			if docker ps -a --format '{{.Names}}' | grep -q "^${container_name}$"; then
+				echo "Container ${container_name} exists. Starting it..."
+				docker start -ai "${container_name}"
+			else
+				echo "Starting new container: image: $docker_image with repo: $repo_name"
+				docker run -it --name "${container_name}" -v "$selected_repo:/workspace" "$docker_image"
+			fi
 		fi
 	}
 
-	function docker_build_from_file(){
+	function docker_build_from_file() {
 		local root_folder="$1"
 		local query_value=${2:-""}
 
