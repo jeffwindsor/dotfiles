@@ -14,3 +14,10 @@ indent = { tab-width = 4, unit = " " }
 
 [language.formatter]
 command = "shfmt"
+
+# [[language]]
+# name = "nix"
+# language-servers = ["nixd","nil"]
+
+# [language-server.nixd]
+# command = "nixd"
