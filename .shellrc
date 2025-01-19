@@ -17,31 +17,32 @@ export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
 export EXOCORTEXT="$HOME/portable/exocortex"
 export DOTFILES="$JEFF/dotfiles"
-export DOTFILES_NIXOS="$JEFF/nixos-config"
-export DOTFILES_GNOME="$JEFF/gnome-config"
-export DOTFILES_NVIM="$JEFF/nvim-config"
+export NIXOS_CONFIG="$JEFF/nixos-config"
+export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
+export GNOME_CONFIG="$JEFF/gnome-config"
+export NVIM_CONFIG="$JEFF/nvim-config"
 
 # Jump Directories
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
 alias ..="cd .."
-alias config="cd $XDG_CONFIG_HOME"
+alias config="cd \$XDG_CONFIG_HOME"
 alias hub="cd \$GITHUB"
 alias icloud="cd \$ICLOUD"
 alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
 alias dot="cd \$DOTFILES"
-alias dotn="cd \$DOTFILES_NIXOS"
-alias dotv="cd \$DOTFILES_NVIM"
+alias dotn="cd \$NIXOS_CONFIG"
+alias dotv="cd \$NVIM_CONFIG"
 alias exo="cd \$EXOCORTEXT"
 
 alias dots="edit-via-fuzzy-search \$DOTFILES"
-alias dotsn="edit-via-fuzzy-search \$DOTFILES_NIXOS"
-alias dotsv="edit-via-fuzzy-search \$DOTFILES_NVIM"
+alias dotsn="edit-via-fuzzy-search \$NIXOS_CONFIG"
+alias dotsv="edit-via-fuzzy-search \$NVIM_CONFIG"
 alias exos="edit-via-fuzzy-search \$EXOCORTEXT"
-alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs $EDITOR && cd -"
-alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && $EDITOR index.html && cd -"
+alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs \$EDITOR && cd -"
+alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && \$EDITOR index.html && cd -"
 # lowers confusion on target machines, they may not know Alacritty, Wezterm, etc
 alias ssh="TERM=xterm-256color ssh"
 #===============================================================================
@@ -164,12 +165,14 @@ if command -v git &>/dev/null; then
 	# pull personal repositories that I want up to date
 	function dpl() {
 		# -C specifies location for git to act on, allows running of this command from anywhere
-		git -C $DOTFILES pull -v
-		git -C $DOTFILES_NIXOS pull -v
-		git -C $DOTFILES_GNOME pull -v
-		git -C $DOTFILES_NVIM pull -v
-		git -C $JEFF/startpage pull -v
-		git -C $JEFF/ascii-art pull -v
+		git -C "$DOTFILES" pull -v
+		git -C "$NIXOS_CONFIG
+	" pull -v
+		git -C "$NIX_DARWIN_CONFIG" pull -v
+		git -C "$GNOME_CONFIG" pull -v
+		git -C "$NVIM_CONFIG" pull -v
+		git -C "$JEFF/startpage" pull -v
+		git -C "$JEFF/ascii-art" pull -v
 	}
 
 	# used at work because there is a limit on how many pulls per sec
@@ -463,7 +466,7 @@ if command -v docker &>/dev/null; then
 
 		# find list of directories containing a .git subfolder, presumably a repo
 		local selected_repo
-		selected_repo=$(find "$root_folder" -regex '.*/\.git' -type d -maxdepth 4 | sed 's/\/.git//' | fzf_query_piped $query_value)
+		selected_repo=$(find "$root_folder" -regex '.*/\.git' -type d -maxdepth 4 | sed 's/\/.git//' | fzf_query_piped "$query_value")
 		# if selectoin was made
 		if [ -n "$selected_repo" ]; then
 
@@ -471,7 +474,7 @@ if command -v docker &>/dev/null; then
 			docker_image=$(docker images --format '{{.Repository}}' | fzf)
 
 			local repo_name
-			repo_name=$(echo $selected_repo | sed 's/.*\///; s/\.[^.]*$//')
+			repo_name=$(echo "$selected_repo" | sed 's/.*\///; s/\.[^.]*$//')
 
 			local container_name
 			container_name="${repo_name}_${docker_image}"
@@ -492,7 +495,7 @@ if command -v docker &>/dev/null; then
 		local query_value=${2:-""}
 
 		local dockerfile
-		dockerfile=$(find "$root_folder" -name "*.Dockerfile" | sed 's/.*\///; s/\.[^.]*$//' | fzf_query_piped $query_value)
+		dockerfile=$(find "$root_folder" -name "*.Dockerfile" | sed 's/.*\///; s/\.[^.]*$//' | fzf_query_piped "$query_value")
 
 		if [ -n "$dockerfile" ]; then
 			# edit file / content check
@@ -502,7 +505,7 @@ if command -v docker &>/dev/null; then
 		fi
 	}
 
-	alias db="docker_build_from_file $JEFF/docker-images"
+	alias db="docker_build_from_file \$JEFF/docker-images"
 	alias dcl='docker container ls --all'
 	alias dil='docker image ls'
 	alias dila='docker image ls --all'
