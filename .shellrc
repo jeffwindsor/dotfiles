@@ -84,9 +84,10 @@ if command -v brew &>/dev/null; then
 		alias bn__="fuzzy_cask_install"
 		alias br__="fuzzy_cask_uninstall"
 	fi
+fi
 
 #== Nix https://nixos.org/ ==
-elif command -v nix &>/dev/null; then
+if command -v nix &>/dev/null; then
 	# standard nix
 	alias ni="nix-env --install"
 	alias nl="nix-env -q"
@@ -95,17 +96,17 @@ elif command -v nix &>/dev/null; then
 	alias ns="nix-shell -p"
 	alias nup="nix-env --upgrade"
 	alias ngc="nix-store --gc"
-	# nix-darwin (macos)
-	if command -v darwin-rebuild &>/dev/null; then
-		alias rebuild="darwin-rebuild build --flake \$XDG_CONFIG_HOME/nix"
-		# alias nds="nix run nix-darwin -- switch --flake ~/.config/nix"
-	#nixos
-	elif [ -d "/etc/nixos" ]; then
+
+	if [ -d "/etc/nixos" ]; then
+		#nixos
 		alias clean_gens="nix-env --delete-generations +5 && nix-collect-garbage"
 		alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
 		alias optimize="nix optimise-store"
 		alias rebuild="sudo nixos-rebuild switch"
 		alias upgrade="sudo nixos-rebuild switch --upgrade"
+	else
+		# nix-darwin (macos)
+		alias rebuild="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG"
 	fi
 fi
 
