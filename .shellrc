@@ -89,16 +89,9 @@ fi
 
 #== Nix https://nixos.org/ ==
 if command -v nix &>/dev/null; then
+	alias nl="nix-store -q --references /run/current-system/sw"
 
 	if [ -d "/etc/nixos" ]; then
-		# nix (old school channel use)
-		alias ni="nix-env --install"
-		alias nl="nix-env -q"
-		alias nlg="nix-env --list-generations"
-		alias nr="nix-env --uninstall"
-		alias ns="nix-shell -p"
-		alias nup="nix-env --upgrade"
-		alias ngc="nix-store --gc"
 		#nixos
 		alias clean_gens="nix-env --delete-generations +5 && nix-collect-garbage"
 		alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
