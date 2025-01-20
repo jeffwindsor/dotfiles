@@ -15,7 +15,7 @@ export GITHUB="$SRC/github.com"
 export GITCJ="$SRC/gitlab.cj.dev"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
-export EXOCORTEXT="$HOME/portable/exocortex"
+export EXOCORTEXT="$HOME/Documents/personal/exocortex"
 export DOTFILES="$JEFF/dotfiles"
 export NIXOS_CONFIG="$JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
@@ -33,16 +33,17 @@ alias icloud="cd \$ICLOUD"
 alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
 alias dot="cd \$DOTFILES"
-alias dotn="cd \$NIXOS_CONFIG"
+alias doto="cd \$NIXOS_CONFIG"
+alias dotn="cd \$NIX_DARWIN_CONFIG"
 alias dotv="cd \$NVIM_CONFIG"
 alias exo="cd \$EXOCORTEXT"
 
-alias dots="edit-via-fuzzy-search \$DOTFILES"
-alias dotsn="edit-via-fuzzy-search \$NIXOS_CONFIG"
-alias dotsv="edit-via-fuzzy-search \$NVIM_CONFIG"
-alias exos="edit-via-fuzzy-search \$EXOCORTEXT"
-alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs \$EDITOR && cd -"
-alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && \$EDITOR index.html && cd -"
+# alias dots="edit-via-fuzzy-search \$DOTFILES"
+# alias dotsn="edit-via-fuzzy-search \$NIXOS_CONFIG"
+# alias dotsv="edit-via-fuzzy-search \$NVIM_CONFIG"
+# alias exos="edit-via-fuzzy-search \$EXOCORTEXT"
+# alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs \$EDITOR && cd -"
+# alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && \$EDITOR index.html && cd -"
 # lowers confusion on target machines, they may not know Alacritty, Wezterm, etc
 alias ssh="TERM=xterm-256color ssh"
 #===============================================================================
@@ -88,25 +89,28 @@ fi
 
 #== Nix https://nixos.org/ ==
 if command -v nix &>/dev/null; then
-	# standard nix
-	alias ni="nix-env --install"
-	alias nl="nix-env -q"
-	alias nlg="nix-env --list-generations"
-	alias nr="nix-env --uninstall"
-	alias ns="nix-shell -p"
-	alias nup="nix-env --upgrade"
-	alias ngc="nix-store --gc"
 
 	if [ -d "/etc/nixos" ]; then
+		# nix (old school channel use)
+		alias ni="nix-env --install"
+		alias nl="nix-env -q"
+		alias nlg="nix-env --list-generations"
+		alias nr="nix-env --uninstall"
+		alias ns="nix-shell -p"
+		alias nup="nix-env --upgrade"
+		alias ngc="nix-store --gc"
 		#nixos
 		alias clean_gens="nix-env --delete-generations +5 && nix-collect-garbage"
 		alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
 		alias optimize="nix optimise-store"
 		alias rebuild="sudo nixos-rebuild switch"
 		alias upgrade="sudo nixos-rebuild switch --upgrade"
-	else
-		# nix-darwin (macos)
-		alias rebuild="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG"
+
+	elif command -v darwin-rebuild &>/dev/null; then
+		# nix-darwin (macos) with flakes
+		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG"
+		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG"
+
 	fi
 fi
 
@@ -541,11 +545,11 @@ function up() {
 	echo "==> Dotfiles"
 	dsync
 
-	echo "==> Homebrew"
-	bup
+	# echo "==> Homebrew"
+	# bup
 
-	echo "==> Zsh"
-	zup
+	# echo "==> Zsh"
+	# zup
 
 }
 
