@@ -1,24 +1,26 @@
 ###################################################################
 # https://docs.helix-editor.com/master/commands.html
 ###################################################################
-
-theme = "onedark"   # papercolor-dark
+theme = "onedark"
 
 [editor]
+auto-pairs  = false           # do not auto pair symbols
 auto-save   = true
-bufferline  = "always"
-color-modes = true
-cursorline  = true
-end-of-line-diagnostics = "hint"
+bufferline  = "always"        # show buffer tabs at all times
+color-modes = true            # color status line MODE indicator (it's pretty)
+cursorline  = true            # highlight all rows with cursor
 jump-label-alphabet = "asdfjkl;ghxcvbnmqweruioptyz"  #home row outward
-line-number = "absolute"  # relative absolute
+line-number = "absolute"      # relative absolute
 mouse       = true
 shell       = ["zsh", "-c"]
+smart-tab.enable = false
+soft-wrap.enable = true
+# diagnostics after v2.25 
+end-of-line-diagnostics = "hint"
+inline-diagnostics.cursor-line = "error"
 
 [editor.cursor-shape]
 insert = "bar"
-normal = "block"
-select = "underline"
 
 [editor.file-picker]
 hidden     = false
@@ -29,15 +31,6 @@ git-global = true
 [editor.indent-guides]
 render    = true
 character = "|"
-
-[editor.inline-diagnostics]
-cursor-line = "error"
-
-[editor.soft-wrap]
-enable = true
-
-[editor.smart-tab]
-enable = false
 
 [editor.statusline]
 left   = [ "mode","spinner","file-name","file-modification-indicator","version-control" ]
@@ -54,40 +47,43 @@ select = "SELECT"
 ###################################################################
 
 [keys.normal]
+"$" = "goto_line_end" # vim like 
 "," = "goto_word"   # also 'gw', open the 2char jump list
+"0" = "goto_line_start" # vim like 
+"G" = "goto_file_end" # vim like 
 "H" = "goto_line_start"
 "L" = "goto_line_end"
-
-# VIM LIKE (CAUSE IT MAKES IT EASIER TO SWITCH)
-esc = ["collapse_selection","keep_primary_selection",":write"] # vim like esc 
-"$" = "goto_line_end"
-"0" = "goto_line_start"
-"G" = "goto_file_end"
-"V" = ["select_mode", "extend_to_line_bounds"] 
-"^" = "goto_first_nonwhitespace"
-"`" = "switch_case"
+"V" = ["select_mode", "extend_to_line_bounds"] # vim like  
+"^" = "goto_first_nonwhitespace" # vim like 
+"`" = "switch_case" # vim like 
 "y" = ["yank_main_selection_to_clipboard","yank"] # vim like yank + yank to clipboard
-"~" = "switch_case"
+"~" = "switch_case" # vim like 
+esc = ["collapse_selection","keep_primary_selection",":write"] # vim like 
+# "&" = ["split_selection_on_newline","align_selections"]
 
 [keys.normal.space]
 q = ":write-quit-all"
+"/" = ":pipe sort"        # expected sort. ":sort" is different
 
 # (e)ditor
 [keys.normal.space.e]
-h = ":config-open"
+c = ":config-open"
 l = ":open ~/.config/helix/languages.toml"
 r = ":config-reload"
-d = ":open ~/Source/github.com/jeffwindsor/dotfiles"
+"." = ":open ~/Source/github.com/jeffwindsor/dotfiles"
+d = ":open ~/Source/github.com/jeffwindsor/nix-darwin-config"
+e = ":open ~/Documents/personal/exocortex"
 g = ":open ~/Source/github.com/jeffwindsor/gnome-config"
 j = ":open ~/Source/github.com/jeffwindsor"
-N = ":open ~/Source/github.com/jeffwindsor/nixos-config"
-n = ":open ~/Source/github.com/jeffwindsor/nvim-config"
+n = ":open ~/Source/github.com/jeffwindsor/nixos-config"
+s = ":open ~/Source/github.com/jeffwindsor/startpage/index.html"
+v = ":open ~/Source/github.com/jeffwindsor/nvim-config"
 
 # tools(.)
-[keys.normal.space."."]
+# [keys.normal.space."."]
 # f = [":new", ":insert-output lf", "split_selection_on_newline", "goto_file", "goto_last_modification", "goto_last_modified_file", ":buffer-close!"]
-d = [":new", ":insert-output lazydocker", ":buffer-close!", ":redraw"]     # lazygit    
-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]     # lazygit    
+# d = [":new", ":insert-output lazydocker", ":buffer-close!", ":redraw"]     # lazygit    
+# g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]     # lazygit    
 # y = [":new", ":insert-output yazi", ":buffer-close!", ":redraw"]     # yazi
 
 # (t)hemes  
@@ -111,23 +107,21 @@ t = ":theme tokyonight_storm"
 z = ":theme zed_onedark"
 
 
-
-
 [keys.insert]
-esc = ["collapse_selection", "normal_mode", ":write"]
+esc = ["collapse_selection", "normal_mode", ":write"]  # vim like escape
+
 
 [keys.select]
-"H" = "goto_line_start"
-"L" = "goto_line_end"
-
-# VIM LIKE (CAUSE IT MAKES IT EASIER TO SWITCH)
-esc = ["collapse_selection","normal_mode",":write"] # vim like esc 
+# mimic the normal keymap adds
 "$" = "goto_line_end"
+"," = "goto_word"
 "0" = "goto_line_start"
 "G" = "goto_file_end"
+"H" = "goto_line_start"
+"L" = "goto_line_end"
 "V" = ["select_mode", "extend_to_line_bounds"] 
 "^" = "goto_first_nonwhitespace"
 "`" = "switch_case"
-# "x" = "delete_selection"
-"y" = ["yank_main_selection_to_clipboard","yank"] # vim like yank + yank to clipboard
+"y" = ["yank_main_selection_to_clipboard","yank"]
 "~" = "switch_case"
+esc = ["collapse_selection","normal_mode",":write"]
