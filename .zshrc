@@ -16,11 +16,6 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 #==============================================================================
 # Plugins
-# zinit ice blockf atpull'zinit creinstall -q .'
-# zinit snippet OMZP::asdf
-
-# COMPLETIONS SHOULD COME BEFORE COMPINIT
-# zinit light zsh-users/zsh-completions
 # ZSH Completion Styling - FZF-TAB Suggested
 #   disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
@@ -41,7 +36,7 @@ compinit
 
 # FZF-TAB AFTER COMPINIT, BUT BEFORE WRAPPERS LIKE SYNTAX AND SUGGESTIONS
 zinit light Aloxaf/fzf-tab
-zinit light zdharma-continuum/fast-syntax-highlighting
+# zinit light zdharma-continuum/fast-syntax-highlighting
 #zinit light zsh-users/zsh-autosuggestions
 
 #==============================================================================
