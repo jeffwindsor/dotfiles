@@ -29,8 +29,18 @@ args = ["--line-length", "88", "--quiet", "-"]
 [[language]]
 name = "toml"
 auto-format = true
-# indent = { tab-width = 4, unit = " " }
+comment-token = "#"
+language-servers = ["taplo"]
 
 [language.formatter]
 command = "taplo"
-args = ["format", "-"]
+args = ["fmt", "-"]
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+[language-server.taplo.config]
+# Workaround for nonsense of being nonfunctional outside git directories
+# (https://github.com/helix-editor/helix/issues/3897#issuecomment-2361674437)
+root_dir = [".git", "*.toml"]
