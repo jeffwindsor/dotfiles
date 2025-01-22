@@ -3,15 +3,15 @@ format = """
 [└ ](blue)$shell$time$cmd_duration$character"""
 
 [character]
-error_symbol   = "[:](red)"
+error_symbol = "[:](red)"
 success_symbol = "[:](green)"
-vicmd_symbol   = "[>](yellow)"
+vicmd_symbol = "[>](yellow)"
 
 [cmd_duration]
-disabled=false
+disabled = false
 
 [container]
-disabled=false
+disabled = false
 style = "cyan"
 
 [directory]
@@ -26,12 +26,12 @@ symbol = ""
 format = '([\[](dimmed yellow)[$all_status$ahead_behind](yellow)[\]](dimmed yellow)) '
 
 [jobs]
-disabled=false
-format='([\[](dimmed blue)[$number](dimmed blue)[\]](dimmed blue))'
-number_threshold=1
+disabled = false
+format = '([\[](dimmed blue)[$number](dimmed blue)[\]](dimmed blue))'
+number_threshold = 1
 
 [nix_shell]
-disabled=false
+disabled = false
 style = "cyan"
 
 [shell]
@@ -42,5 +42,5 @@ fish_indicator = "🐟"
 zsh_indicator = "🧟"
 
 [time]
-disabled=false
+disabled = false
 format = '[$time](blue) '

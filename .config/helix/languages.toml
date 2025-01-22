@@ -1,5 +1,23 @@
+#== BASH ==
 [[language]]
-name="python"
+name = "bash"
+auto-format = true
+indent = { tab-width = 4, unit = " " }
+
+[language.formatter]
+command = "shfmt"
+
+#== NIX ==
+[[language]]
+name = "nix"
+language-servers = ["nixd", "nil"]
+
+[language-server.nixd]
+command = "nixd"
+
+#== PYTHON ==
+[[language]]
+name = "python"
 auto-format = true
 indent = { tab-width = 4, unit = " " }
 
@@ -7,17 +25,12 @@ indent = { tab-width = 4, unit = " " }
 command = "black"
 args = ["--line-length", "88", "--quiet", "-"]
 
+#== TOML ==
 [[language]]
-name="bash"
+name = "toml"
 auto-format = true
-indent = { tab-width = 4, unit = " " }
+# indent = { tab-width = 4, unit = " " }
 
 [language.formatter]
-command = "shfmt"
-
-# [[language]]
-# name = "nix"
-# language-servers = ["nixd","nil"]
-
-# [language-server.nixd]
-# command = "nixd"
+command = "taplo"
+args = ["format", "-"]
