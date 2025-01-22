@@ -3,17 +3,15 @@ show_hidden = true
 
 [open]
 rules = [
-	{ mime = "text/*",  use = "text" },
-	{ mime = "image/*", use = "image" },
+  { mime = "text/*", use = "text" },
+  { mime = "image/*", use = "image" },
 
-	{ name = "*.json", use = "text" },
-	{ name = "*.toml", use = "text" },
-	{ name = "*.lua",  use = "text" },
-	{ name = "*.py",   use = "text" },
-	{ name = "*.html", use = "text" },
+  { name = "*.json", use = "text" },
+  { name = "*.toml", use = "text" },
+  { name = "*.lua", use = "text" },
+  { name = "*.py", use = "text" },
+  { name = "*.html", use = "text" },
 ]
 
 [opener]
-text = [
-    { run = 'hx "$@"', block = true },
-]
+text = [{ run = 'hx "$@"', block = true }]
