@@ -184,14 +184,18 @@ if command -v git &>/dev/null; then
 	}
 
 	# used at work because there is a limit on how many pulls per sec
-	function git-rec() {
-		for d in */; do
-			echo "==> $d"
-			sleep 5
-			cd ./"$d" || return
-			git pull
-			cd ..
-		done
+	function dirs-git() {
+		if [[ "${1}" ]]; then
+			for d in */; do
+				echo "==> $d"
+				if [[ "${2}" ]]; then
+					sleep "$2"
+				fi
+				cd ./"$d" || return
+				git "$1"
+				cd ..
+			done
+		fi
 	}
 
 	alias gclean="git clean -xdf"
