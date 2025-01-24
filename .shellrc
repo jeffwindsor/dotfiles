@@ -24,29 +24,41 @@ export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
 export GNOME_CONFIG="$JEFF/gnome-config"
 export NVIM_CONFIG="$JEFF/nvim-config"
 
-# Jump Directories
+# Back Directories
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
 alias ..="cd .."
+
+# Jump Directories
 alias config="cd \$XDG_CONFIG_HOME"
 alias hub="cd \$GITHUB"
 alias icloud="cd \$ICLOUD"
 alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
+
 alias dot="cd \$DOTFILES"
-alias doto="cd \$NIXOS_CONFIG"
-alias dotn="cd \$NIX_DARWIN_CONFIG"
-alias dotv="cd \$NVIM_CONFIG"
+alias dots="hx \$DOTFILES"
+alias dotss="hx \$DOTFILES/.shellrc"
+
+alias ncd="cd \$NIX_DARWIN_CONFIG"
+alias ncds="hx \$NIX_DARWIN_CONFIG/flake.nix"
+
+alias nc="cd \$NIXOS_CONFIG"
+alias ncs="hx \$NIXOS_CONFIG"
+
+alias vc="cd \$NVIM_CONFIG"
+alias vcs="hx \$NVIM_CONFIG"
+
 alias exo="cd \$EXOCORTEXT"
-# alias dots="edit-via-fuzzy-search \$DOTFILES"
-# alias dotso="edit-via-fuzzy-search \$NIXOS_CONFIG"
-# alias dotsv="edit-via-fuzzy-search \$NVIM_CONFIG"
-# alias exos="edit-via-fuzzy-search \$EXOCORTEXT"
-# alias ten="cd \$SRC/github.com/steveshogren/10-minute-vim-exercises/ && fzf | xargs \$EDITOR && cd -"
-# alias startpage="cd \$SRC/github.com/jeffwindsor/startpage/ && \$EDITOR index.html && cd -"
+alias exos="hx \$EXOCORTEXT"
+
+alias sp="cd \$JEFF/startpage/index.html"
+alias spi="hx \$JEFF/startpage/index.html"
+
 # lowers confusion on target machines, they may not know Alacritty, Wezterm, etc
 alias ssh="TERM=xterm-256color ssh"
+
 #===============================================================================
 # Package Managers
 #===============================================================================
