@@ -25,6 +25,14 @@ indent = { tab-width = 4, unit = " " }
 command = "black"
 args = ["--line-length", "88", "--quiet", "-"]
 
+#== HASKELL ==
+[[language]]
+name = "haskell"
+
+[language.formatter]
+command = "hindent"
+args = ["-"]
+
 #== TOML ==
 [[language]]
 name = "toml"

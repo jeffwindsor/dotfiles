@@ -93,13 +93,13 @@ if command -v nix &>/dev/null; then
 	function nix_install_to_profile() {
 		nix profile install nixpkgs#"${1}"
 	}
-	function nix_dev_init() {
-		nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#{$1}"
-	}
+	# function nix_dev_init() {
+	# 	nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#{$1}"
+	# }
 
 	alias nl="nix-store -q --references /run/current-system/sw"
 	alias nip="nix_install_to_profile"
-	alias ndi="nix_dev_init"
+	# alias ndi="nix_dev_init"
 
 	if [ -d "/etc/nixos" ]; then
 		#nixos
@@ -111,8 +111,9 @@ if command -v nix &>/dev/null; then
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin (macos) with flakes
-		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG/nix"
+		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG"
 		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG"
+		alias clean="sudo nix-collect-garbage -d"
 
 	fi
 fi
