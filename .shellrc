@@ -102,7 +102,7 @@ fi
 
 #== Nix https://nixos.org/ ==
 if command -v nix &>/dev/null; then
-	function nix-install-package-to-profile() {
+	function nix-package-install-to-profile() {
 		nix profile install nixpkgs#"${1}"
 	}
 	# create a blank shell.nix in currenct folder
@@ -136,8 +136,9 @@ EOF
 	# alias ndi="nix_dev_init"
 
 	alias nl="nix-store -q --references /run/current-system/sw" # list system packages
-	alias nip="nix-install-package-to-profile"
-	alais ni="nix-shell"
+	alias npip="nix-package-install-to-profile"
+	alias nps="nix search nixpkgs"
+	alias ns="nix-shell"
 	alias nsi="nix-shell-init"
 
 	if [ -d "/etc/nixos" ]; then
@@ -214,8 +215,7 @@ if command -v git &>/dev/null; then
 	function dpl() {
 		# -C specifies location for git to act on, allows running of this command from anywhere
 		git -C "$DOTFILES" pull -v
-		git -C "$NIXOS_CONFIG
-	" pull -v
+		git -C "$NIXOS_CONFIG" pull -v
 		git -C "$NIX_DARWIN_CONFIG" pull -v
 		git -C "$GNOME_CONFIG" pull -v
 		git -C "$NVIM_CONFIG" pull -v
