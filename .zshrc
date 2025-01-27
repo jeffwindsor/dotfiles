@@ -36,7 +36,7 @@ compinit
 
 # FZF-TAB AFTER COMPINIT, BUT BEFORE WRAPPERS LIKE SYNTAX AND SUGGESTIONS
 zinit light Aloxaf/fzf-tab
-# zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 #zinit light zsh-users/zsh-autosuggestions
 
 #==============================================================================
