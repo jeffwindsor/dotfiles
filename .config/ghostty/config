@@ -1,2 +1,4 @@
 window-decoration = false
-auto-update = false
+auto-update = off
+
+keybind = global:cmd+grave_accent=toggle_quick_terminal
