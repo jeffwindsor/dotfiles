@@ -435,6 +435,7 @@ if command -v stow &>/dev/null; then
 		# stow-location-sync "$JEFF/nvim_kickstart" "$XDG_CONFIG_HOME/nvim_kickstart"
 		# stow-location-sync "$JEFF/nvim_mini" "$XDG_CONFIG_HOME/nvim_mini"
 	}
+	alias stow-sync="dsync"
 fi
 
 #===============================================================================
