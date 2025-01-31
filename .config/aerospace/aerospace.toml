@@ -120,7 +120,7 @@ alt-a = 'workspace a'
 alt-shift-a = ['move-node-to-workspace a', 'workspace a']
 alt-c = 'workspace c'
 alt-shift-c = ['move-node-to-workspace c', 'workspace c']
-alt-m = 'workspace m':
+alt-m = 'workspace m'
 alt-shift-m = ['move-node-to-workspace m', 'workspace m']
 alt-n = 'workspace n'
 alt-shift-n = ['move-node-to-workspace n', 'workspace n']
@@ -156,7 +156,6 @@ alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 alt-ctrl-cmd-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
-alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 alt-ctrl-f = 'exec-and-forget open -n /Applications/Firefox.app'
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
@@ -206,7 +205,7 @@ u = 'secondary' # ms teams - meeting (work)
 #
 # Terminal
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
+if.app-id = 'com.mitchellh.ghostty'
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
@@ -255,7 +254,7 @@ run = ['move-node-to-workspace n']
 # Outlook - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = ['move-node-to-workspace o']  #, 'layout accordion horizontal']
+run = ['move-node-to-workspace o', 'layout accordion horizontal']
 
 # Spotify
 [[on-window-detected]]
@@ -265,4 +264,4 @@ run = ['move-node-to-workspace s']
 # Teams - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['move-node-to-workspace t'] #, 'layout accordion horizontal']
+run = ['move-node-to-workspace t', 'layout accordion horizontal']

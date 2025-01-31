@@ -1,7 +1,7 @@
 ###################################################################
 # https://docs.helix-editor.com/master/commands.html
 ###################################################################
-theme = "onedark"
+theme = "tokyonight"
 
 [editor]
 auto-pairs = false                                  # do not auto pair symbols
@@ -100,7 +100,7 @@ v = ":open ~/Source/github.com/jeffwindsor/nvim-config"
 [keys.normal.t]
 a = ":theme autumn_night"
 b = ":theme base16_transparent"
-c = ":theme catppuccin_frappe"
+c = ":theme catppuccin_mocha"
 d = ":theme default"
 e = ":theme ayu_evolve"
 g = ":theme gruvbox"
@@ -113,7 +113,7 @@ n = ":theme nord"
 o = ":theme onedark"
 p = ":theme papercolor-dark"
 s = ":theme sonokai"
-t = ":theme tokyonight_storm"
+t = ":theme tokyonight"
 z = ":theme zed_onedark"
 
 
