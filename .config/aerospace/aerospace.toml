@@ -254,7 +254,7 @@ run = ['move-node-to-workspace n']
 # Outlook - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = ['move-node-to-workspace o', 'layout accordion horizontal']
+run = ['move-node-to-workspace o']  #, 'layout accordion horizontal']
 
 # Spotify
 [[on-window-detected]]
@@ -264,4 +264,4 @@ run = ['move-node-to-workspace s']
 # Teams - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['move-node-to-workspace t', 'layout accordion horizontal']
+run = ['move-node-to-workspace t'] #, 'layout accordion horizontal']
