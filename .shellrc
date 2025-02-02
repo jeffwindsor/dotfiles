@@ -23,6 +23,7 @@ export NIXOS_CONFIG="$JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
 export GNOME_CONFIG="$JEFF/gnome-config"
 export NVIM_CONFIG="$JEFF/nvim-config"
+export MACHINE_NAME="$(hostname -s)"
 
 # Back Directories
 alias .....="cd ../../../../"
@@ -151,8 +152,8 @@ EOF
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin (macos) with flakes
-		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG"
-		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG"
+		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG/\$MACHINE_NAME"
+		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$MACHINE_NAME"
 		alias clean="sudo nix-collect-garbage -d"
 
 	fi
@@ -242,7 +243,6 @@ if command -v nvim &>/dev/null; then
 	alias vim="nvim"
 	alias vi="nvim"
 	alias v.="nvim ."
-
 fi
 
 #===============================================================================
@@ -384,13 +384,7 @@ if command -v stow &>/dev/null; then
 	}
 
 	# sync all dotfile repos to appropriate home locations
-	function dsync() {
-		stow-location-sync "$DOTFILES" "$HOME"
-		# stow-location-sync "$JEFF/nvim_lazyvim" "$XDG_CONFIG_HOME/nvim_lazyvim"
-		# stow-location-sync "$JEFF/nvim_kickstart" "$XDG_CONFIG_HOME/nvim_kickstart"
-		# stow-location-sync "$JEFF/nvim_mini" "$XDG_CONFIG_HOME/nvim_mini"
-	}
-	alias stow-sync="dsync"
+	alias dsync="stow-location-sync $DOTFILES $HOME"
 fi
 
 #===============================================================================
@@ -437,68 +431,21 @@ if command -v yazi &>/dev/null; then
 
 fi
 
+#===============================================================================
 if command -v zinit &>/dev/null; then
 	alias zclean="zinit delete --clean"
 	alias zup="zinit update --all"
 	alias zsync="zclean && zup"
 fi
 
+#===============================================================================
 if command -v docker &>/dev/null; then
-
-	#run a container image, mounting the selected repo to workspace
-	function docker_run_on_git_repo() {
-		local root_folder="$1"
-		local query_value=${2:-""}
-
-		# find list of directories containing a .git subfolder, presumably a repo
-		local selected_repo
-		selected_repo=$(find "$root_folder" -regex '.*/\.git' -type d -maxdepth 4 | sed 's/\/.git//' | fzf_query_piped "$query_value")
-		# if selectoin was made
-		if [ -n "$selected_repo" ]; then
-
-			local docker_image
-			docker_image=$(docker images --format '{{.Repository}}' | fzf)
-
-			local repo_name
-			repo_name=$(echo "$selected_repo" | sed 's/.*\///; s/\.[^.]*$//')
-
-			local container_name
-			container_name="${repo_name}_${docker_image}"
-
-			# Check if the container already exists
-			if docker ps -a --format '{{.Names}}' | grep -q "^${container_name}$"; then
-				echo "Container ${container_name} exists. Starting it..."
-				docker start -ai "${container_name}"
-			else
-				echo "Starting new container: image: $docker_image with repo: $repo_name"
-				docker run -it --name "${container_name}" -v "$selected_repo:/workspace" "$docker_image"
-			fi
-		fi
-	}
-
-	function docker_build_from_file() {
-		local root_folder="$1"
-		local query_value=${2:-""}
-
-		local dockerfile
-		dockerfile=$(find "$root_folder" -name "*.Dockerfile" | sed 's/.*\///; s/\.[^.]*$//' | fzf_query_piped "$query_value")
-
-		if [ -n "$dockerfile" ]; then
-			# edit file / content check
-			"$EDITOR" "$1"/"$dockerfile".Dockerfile
-			# build docker image
-			docker build -f "$1"/"$dockerfile".Dockerfile -t "$dockerfile" .
-		fi
-	}
-
-	alias db="docker_build_from_file \$JEFF/docker-images"
 	alias dcl='docker container ls --all'
 	alias dil='docker image ls'
 	alias dila='docker image ls --all'
 	alias dir='docker image rm -f'
 	alias dr='docker run -it '
 	alias drs="docker_run_on_git_repo \$SRC"
-
 fi
 
 #===============================================================================
