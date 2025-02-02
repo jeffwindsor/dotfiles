@@ -67,8 +67,8 @@ e = ":open ~/Documents/personal/exocortex"
 g = ":open ~/Source/github.com/jeffwindsor/gnome-config"
 j = ":open ~/Source/github.com/jeffwindsor"
 n = ":open ~/Source/github.com/jeffwindsor/nixos-config"
-s = ":open ~/Source/github.com/jeffwindsor/startpage/index.html"
-v = ":open ~/Source/github.com/jeffwindsor/nvim-config"
+# s = ":open ~/Source/github.com/jeffwindsor/startpage/index.html"
+# v = ":open ~/Source/github.com/jeffwindsor/nvim-config"
 
 # tools(.)
 # [keys.normal.space."."]
