@@ -9,7 +9,7 @@ auto-save = true
 bufferline = "always"                               # show buffer tabs at all times
 color-modes = true                                  # color status line MODE indicator (it's pretty)
 cursorline = true                                   # highlight all rows with cursor
-jump-label-alphabet = "asdfjkl;ghxcvbnmqweruioptyz" #home row outward
+jump-label-alphabet = "asdfjkl;ghxcvbnmqweruioptyz" # home row outward
 line-number = "absolute"                            # relative absolute
 mouse = true
 shell = ["zsh", "-c"]
@@ -49,32 +49,13 @@ insert = "INSERT"
 select = "SELECT"
 
 ###################################################################
-# key maps
+# which key menus
 ###################################################################
-
-[keys.normal]
-"$" = "goto_line_end" # vim like 
-"," = "goto_word" # also 'gw', open the 2char jump list
-"0" = "goto_line_start" # vim like 
-"G" = "goto_file_end" # vim like 
-"H" = "goto_line_start"
-"L" = "goto_line_end"
-"V" = ["select_mode", "extend_to_line_bounds"] # vim like  
-"^" = "goto_first_nonwhitespace" # vim like 
-"`" = "switch_case" # vim like 
-"y" = [
-  "yank_main_selection_to_clipboard",
-  "yank",
-] # vim like yank + yank to clipboard
-"~" = "switch_case" # vim like 
-esc = ["collapse_selection", "keep_primary_selection", ":write"] # vim like 
-# "&" = ["split_selection_on_newline","align_selections"]
-
 [keys.normal.space]
 q = ":write-quit-all"
 "/" = ":pipe sort"    # expected sort. ":sort" is different
 
-# (e)ditor
+# config files (')
 [keys.normal."'"]
 c = ":config-open"
 l = ":open ~/.config/helix/languages.toml"
@@ -116,21 +97,28 @@ s = ":theme sonokai"
 t = ":theme tokyonight"
 z = ":theme zed_onedark"
 
+###################################################################
+# key maps
+###################################################################
 
 [keys.insert]
 esc = ["collapse_selection", "normal_mode", ":write"] # vim like escape
 
-
-[keys.select]
-# mimic the normal keymap adds
-"$" = "goto_line_end"
-"," = "goto_word"
-"0" = "goto_line_start"
+[keys.normal]
 "G" = "goto_file_end"
 "H" = "goto_line_start"
 "L" = "goto_line_end"
 "V" = ["select_mode", "extend_to_line_bounds"]
-"^" = "goto_first_nonwhitespace"
+"`" = "switch_case"
+"y" = ["yank_main_selection_to_clipboard", "yank"]
+"~" = "switch_case"
+esc = ["collapse_selection", "keep_primary_selection", ":write"]
+
+[keys.select]
+"G" = "goto_file_end"
+"H" = "goto_line_start"
+"L" = "goto_line_end"
+"V" = ["select_mode", "extend_to_line_bounds"]
 "`" = "switch_case"
 "y" = ["yank_main_selection_to_clipboard", "yank"]
 "~" = "switch_case"
