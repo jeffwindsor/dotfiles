@@ -23,7 +23,6 @@ export NIXOS_CONFIG="$JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
 export GNOME_CONFIG="$JEFF/gnome-config"
 export NVIM_CONFIG="$JEFF/nvim-config"
-export MACHINE_NAME="$(hostname -s)"
 
 # Back Directories
 alias .....="cd ../../../../"
@@ -152,8 +151,8 @@ EOF
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin (macos) with flakes
-		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG/\$MACHINE_NAME"
-		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$MACHINE_NAME"
+		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
+		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
 		alias clean="sudo nix-collect-garbage -d"
 
 	fi
@@ -174,8 +173,8 @@ if command -v git &>/dev/null; then
 		git -C "$NIXOS_CONFIG" pull -v
 		git -C "$NIX_DARWIN_CONFIG" pull -v
 		git -C "$GNOME_CONFIG" pull -v
-		git -C "$NVIM_CONFIG" pull -v
-		git -C "$JEFF/startpage" pull -v
+		# git -C "$NVIM_CONFIG" pull -v
+		# git -C "$JEFF/startpage" pull -v
 		git -C "$JEFF/ascii-art" pull -v
 	}
 
