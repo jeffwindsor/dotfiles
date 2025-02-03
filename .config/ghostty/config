@@ -1,4 +1,5 @@
-window-decoration = false
 auto-update = off
+quit-after-last-window-closed = true
+window-decoration = false
 
 keybind = global:cmd+grave_accent=toggle_quick_terminal
