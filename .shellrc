@@ -221,23 +221,6 @@ if command -v hx &>/dev/null; then
 fi
 
 #===============================================================================
-#== Neovim: https://github.com/neovim/neovim
-if command -v nvim &>/dev/null; then
-
-	function nvim-clean-caches() {
-		echo "Cleaning current caches"
-		rm -rf "$HOME"/.local/share/nvim
-		rm -rf "$HOME"/.local/state/nvim
-		rm -rf "$HOME"/.cache/nvim
-	}
-
-	alias v="nvim"
-	alias vim="nvim"
-	alias vi="nvim"
-	alias v.="nvim ."
-fi
-
-#===============================================================================
 # Terminal
 #===============================================================================
 #== cat replacement (rust): https://github.com/sharkdp/bat
