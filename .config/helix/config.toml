@@ -53,7 +53,10 @@ select = "SELECT"
 ###################################################################
 [keys.normal.space]
 q = ":write-quit-all"
-"/" = ":pipe sort"    # expected sort. ":sort" is different
+# expected sort. ":sort" is different
+"down" = ":pipe sort"
+"up" = ":pipe sort --reverse"
+
 
 # config files (')
 [keys.normal."'"]
