@@ -91,13 +91,6 @@ if command -v brew &>/dev/null; then
 	}
 	alias bx="brew autoremove"
 
-	if type fuzzy_brew_install &>/dev/null; then
-		# requires fzf-brew zsh plugin or equivilant be installed
-		alias bn_="fuzzy_brew_install"
-		alias br_="fuzzy_brew_uninstall"
-		alias bn__="fuzzy_cask_install"
-		alias br__="fuzzy_cask_uninstall"
-	fi
 fi
 
 #== Nix https://nixos.org/ ==
