@@ -128,7 +128,7 @@ EOF
 	# }
 	# alias ndi="nix_dev_init"
 
-	alias nl="nix-store -q --references /run/current-system/sw" # list system packages
+	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	alias npip="nix-package-install-to-profile"
 	alias nps="nix search nixpkgs"
 	alias ns="nix-shell"
