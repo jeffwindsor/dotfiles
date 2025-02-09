@@ -182,6 +182,7 @@ toggle_preview = "ctrl-o"
 "tail" = "files"
 "vim" = "files"
 "bat" = "files"
+"hx" = "files"
 
 # git-diff channel
 "git add" = "git-diff"
