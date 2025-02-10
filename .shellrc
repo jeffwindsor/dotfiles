@@ -33,6 +33,8 @@ alias ..="cd .."
 # Jump Directories
 alias config="cd \$XDG_CONFIG_HOME"
 alias hub="cd \$GITHUB"
+alias lab="cd \$GITCJ"
+alias empire="cd \$GITCJ/empire"
 alias icloud="cd \$ICLOUD"
 alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
