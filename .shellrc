@@ -262,71 +262,6 @@ if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_COMMAND='find . -type f -name ".*" -o -type f'
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
 	eval "$(fzf --$SHELL_NAME)"
-
-	function fzf_query() {
-		# passed in query
-		if [ -n "$1" ]; then
-			fzf --query "$1"
-		else
-			fzf
-		fi
-	}
-
-	function fzf_query_piped() {
-		# passed in query
-		if [ -n "$1" ]; then
-			fzf --query "$1" </dev/stdin
-		else
-			fzf </dev/stdin
-		fi
-	}
-
-	# prompt user to select from list of git directories under $2 and if user selects one, execute command $1 on it
-	function cd_on_git_rep() {
-		local root_folder="$1"
-		local query_value=${2:-""}
-
-		# find list of directories containing a .git subfolder, presumably a repo
-		local git_repos
-		git_repos=$(find "$root_folder" -name ".git" -type d -maxdepth 4 | sed 's/\/.git//' | fzf_query_piped $query_value)
-
-		[ -n "$git_repos" ] && cd "$git_repos" && lla
-	}
-
-	fzf_rg() {
-		if [ ! "$#" -gt 0 ]; then
-			echo "Need a string to search for!"
-			return 1
-		fi
-		# if FZF_PREVIEW_WINDOW is undefined, quoting it breaks the script
-		rg --files-with-matches --no-messages "$1" | fzf --preview-window "$FZF_PREVIEW_WINDOW" --preview "rg --ignore-case --pretty --context 10 '$1' {}"
-	}
-
-	alias fr="fzf_rg"
-	alias hubs="cd_on_git_rep \$GITHUB"
-	alias srcs="cd_on_git_rep \$SRC"
-
-	#terminal theming
-	if command -v wezterm &>/dev/null; then
-		function theme-wezterm() {
-			local color_scheme
-			color_scheme=$(fzf <"$XDG_CONFIG_HOME"/wezterm/color_schemes.txt)
-
-			# if color_scheme was selected, change the wezterm config file colorscheme value
-			[ -n "$color_scheme" ] && sed -i '' "s/^config\\.color_scheme.*$/config.color_scheme = '${color_scheme}'/" "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
-		}
-	fi
-	if command -v alacritty &>/dev/null; then
-		alias theme=theme-alacritty
-		function theme-alacritty() {
-			local selected
-			selected=$(find "$XDG_CONFIG_HOME/alacritty/themes/" -type f -iname "*.toml" | fzf | sed "s|$HOME|~|g")
-
-			# if color_scheme was selected, change the alacritty config file colorscheme value
-			[ -n "$selected" ] && sed -i '' "s|^import.*|import=[\"$selected\"]|" "$XDG_CONFIG_HOME/alacritty/alacritty.toml"
-		}
-	fi
-
 fi
 
 #===============================================================================
@@ -375,6 +310,13 @@ if command -v tmux &>/dev/null; then
 	alias tk="tmux kill-session"
 	alias tkn="tmux kill-session -t"
 fi
+
+#===============================================================================
+#== terminal multiplexer : https://github.com/tmux/tmux
+if command -v tv &>/dev/null; then
+	alias srcs="cd $(tv git-repos)"
+fi
+
 #===============================================================================
 #== tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
