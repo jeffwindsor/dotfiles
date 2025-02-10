@@ -40,23 +40,19 @@ alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
 
 alias dot="cd \$DOTFILES"
-alias dots="hx \$DOTFILES"
-alias dotss="hx \$DOTFILES/.shellrc"
+alias dots="$EDITOR \$DOTFILES"
 
 alias ncd="cd \$NIX_DARWIN_CONFIG"
-alias ncds="hx \$NIX_DARWIN_CONFIG/flake.nix"
+alias ncds="$EDITOR \$NIX_DARWIN_CONFIG/flake.nix"
 
 alias nc="cd \$NIXOS_CONFIG"
-alias ncs="hx \$NIXOS_CONFIG"
+alias ncs="$EDITOR \$NIXOS_CONFIG"
 
 alias vc="cd \$NVIM_CONFIG"
-alias vcs="hx \$NVIM_CONFIG"
+alias vcs="$EDITOR \$NVIM_CONFIG"
 
 alias exo="cd \$EXOCORTEXT"
-alias exos="hx \$EXOCORTEXT"
-
-alias sp="cd \$JEFF/startpage/index.html"
-alias spi="hx \$JEFF/startpage/index.html"
+alias exos="$EDITOR \$EXOCORTEXT"
 
 # lowers confusion on target machines, they may not know Alacritty, Wezterm, etc
 alias ssh="TERM=xterm-256color ssh"
@@ -83,15 +79,15 @@ if command -v brew &>/dev/null; then
 	alias bl="brew-list-all"
 	alias blc="brew list --casks --versions"
 	alias blf="brew list --formula --versions"
-	alias bn="brew install"
-	alias br="brew remove"
+	# alias bn="brew install"
+	# alias br="brew remove"
 	alias bs="brew search"
 	alias bsd="brew search --desc"
-	function bup() {
-		brew update
-		brew upgrade
-	}
-	alias bx="brew autoremove"
+	# function bup() {
+	# 	brew update
+	# 	brew upgrade
+	# }
+	# alias bx="brew autoremove"
 
 fi
 
@@ -320,20 +316,6 @@ fi
 #===============================================================================
 #== tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
-	# opens yazi either at the given directory or at the one zoxide suggests
-	yazi-zoxide() {
-		if [ "$1" != "" ]; then
-			if [ -d "$1" ]; then
-				yazi "$1"
-			else
-				yazi "$(zoxide query $1)"
-			fi
-		else
-			yazi
-		fi
-		return $?
-	}
-
 	# open yazi and shell change to the selected directory on exit
 	function yazi-change-dir() {
 		local tmp
@@ -345,7 +327,7 @@ if command -v yazi &>/dev/null; then
 		rm -f -- "$tmp"
 	}
 
-	alias y="yazi-zoxide"
+	alias y="yazi"
 	alias yy="yazi-change-dir"
 
 fi
@@ -391,13 +373,6 @@ function up() {
 
 	echo "==> Dotfiles"
 	dsync
-
-	# echo "==> Homebrew"
-	# bup
-
-	# echo "==> Zsh"
-	# zup
-
 }
 
 #===============================================================================
