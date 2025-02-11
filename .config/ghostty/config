@@ -1,3 +1,4 @@
+theme = tokyonight
 auto-update = off
 quit-after-last-window-closed = true
 window-decoration = false
