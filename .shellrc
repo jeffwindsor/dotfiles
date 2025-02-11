@@ -40,19 +40,19 @@ alias jeff="cd \$JEFF"
 alias src="cd \$SRC && lla"
 
 alias dot="cd \$DOTFILES"
-alias dots="$EDITOR \$DOTFILES"
+alias dots="\$EDITOR \$DOTFILES"
 
 alias ncd="cd \$NIX_DARWIN_CONFIG"
-alias ncds="$EDITOR \$NIX_DARWIN_CONFIG/flake.nix"
+alias ncds="\$EDITOR \$NIX_DARWIN_CONFIG/flake.nix"
 
 alias nc="cd \$NIXOS_CONFIG"
-alias ncs="$EDITOR \$NIXOS_CONFIG"
+alias ncs="\$EDITOR \$NIXOS_CONFIG"
 
 alias vc="cd \$NVIM_CONFIG"
-alias vcs="$EDITOR \$NVIM_CONFIG"
+alias vcs="\$EDITOR \$NVIM_CONFIG"
 
 alias exo="cd \$EXOCORTEXT"
-alias exos="$EDITOR \$EXOCORTEXT"
+alias exos="\$EDITOR \$EXOCORTEXT"
 
 # lowers confusion on target machines, they may not know Alacritty, Wezterm, etc
 alias ssh="TERM=xterm-256color ssh"
@@ -310,7 +310,7 @@ fi
 #===============================================================================
 #== terminal multiplexer : https://github.com/tmux/tmux
 if command -v tv &>/dev/null; then
-	alias srcs="cd $(tv git-repos)"
+	alias srcs="cd \$(tv git-repos)"
 fi
 
 #===============================================================================
