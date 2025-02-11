@@ -1,28 +1,24 @@
 #!/usr/bin/env bash
 SHELL_NAME=${1:-"zsh"}
-export EDITOR="hx"
-export PAGER="less -imMWR"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-# export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 
-# xdg-ify
+export EDITOR="hx"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export PAGER="less -imMWR"
+export VISUAL_EDITOR="zed"
+
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
+export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 
-# personal
-export SRC=$HOME/Source
+export SRC="$HOME/Source"
 export GITHUB="$SRC/github.com"
 export GITCJ="$SRC/gitlab.cj.dev"
-export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 export JEFF="$SRC/github.com/jeffwindsor"
-export EXOCORTEXT="$HOME/Documents/personal/exocortex"
 export DOTFILES="$JEFF/dotfiles"
 export NIXOS_CONFIG="$JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
-export GNOME_CONFIG="$JEFF/gnome-config"
-export NVIM_CONFIG="$JEFF/nvim-config"
 
 # Back Directories
 alias .....="cd ../../../../"
@@ -31,28 +27,24 @@ alias ...="cd ../../"
 alias ..="cd .."
 
 # Jump Directories
-alias config="cd \$XDG_CONFIG_HOME"
-alias hub="cd \$GITHUB"
-alias lab="cd \$GITCJ"
-alias empire="cd \$GITCJ/empire"
-alias icloud="cd \$ICLOUD"
-alias jeff="cd \$JEFF"
-alias src="cd \$SRC && lla"
+function alias_jump() {
+	alias "${1}"="cd $2"
+	alias "${1}h"="$EDITOR $2"
+	alias "${1}z"="$VISUAL_EDITOR $2"
+	alias "${1}g"="lazygit --path $2"
+}
 
-alias dot="cd \$DOTFILES"
-alias dots="\$EDITOR \$DOTFILES"
-
-alias ncd="cd \$NIX_DARWIN_CONFIG"
-alias ncds="\$EDITOR \$NIX_DARWIN_CONFIG/flake.nix"
-
-alias nc="cd \$NIXOS_CONFIG"
-alias ncs="\$EDITOR \$NIXOS_CONFIG"
-
-alias vc="cd \$NVIM_CONFIG"
-alias vcs="\$EDITOR \$NVIM_CONFIG"
-
-alias exo="cd \$EXOCORTEXT"
-alias exos="\$EDITOR \$EXOCORTEXT"
+alias_jump "config" "$XDG_CONFIG_HOME"
+alias_jump "hub" "$GITHUB"
+alias_jump "lab" "$GITCJ"
+alias_jump "empire" "$GITCJ"
+alias_jump "icloud" "$ICLOUD"
+alias_jump "jeff" "$JEFF"
+alias_jump "src" "$SRC"
+alias_jump "dot" "$DOTFILES"
+alias_jump "darwin" "$NIX_DARWIN_CONFIG"
+alias_jump "nixos" "$NIXOS_CONFIG"
+# alias_jump "exo" "$EXOCORTEXT"
 
 # lowers confusion on target machines, they may not know Alacritty, Wezterm, etc
 alias ssh="TERM=xterm-256color ssh"
@@ -79,16 +71,8 @@ if command -v brew &>/dev/null; then
 	alias bl="brew-list-all"
 	alias blc="brew list --casks --versions"
 	alias blf="brew list --formula --versions"
-	# alias bn="brew install"
-	# alias br="brew remove"
 	alias bs="brew search"
 	alias bsd="brew search --desc"
-	# function bup() {
-	# 	brew update
-	# 	brew upgrade
-	# }
-	# alias bx="brew autoremove"
-
 fi
 
 #== Nix https://nixos.org/ ==
@@ -121,10 +105,6 @@ pkgs.mkShell {
 }
 EOF
 	}
-	# function nix_dev_init() {
-	# 	nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#{$1}"
-	# }
-	# alias ndi="nix_dev_init"
 
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	alias npip="nix-package-install-to-profile"
@@ -164,8 +144,6 @@ if command -v git &>/dev/null; then
 		git -C "$NIXOS_CONFIG" pull -v
 		git -C "$NIX_DARWIN_CONFIG" pull -v
 		git -C "$GNOME_CONFIG" pull -v
-		# git -C "$NVIM_CONFIG" pull -v
-		# git -C "$JEFF/startpage" pull -v
 		git -C "$JEFF/ascii-art" pull -v
 	}
 
@@ -205,7 +183,6 @@ if command -v git &>/dev/null; then
 	if command -v lazygit &>/dev/null; then
 		alias gg="lazygit"
 		alias lg="lazygit"
-		alias dg="lazygit --path \$DOTFILES"
 	fi
 fi
 
@@ -216,6 +193,12 @@ fi
 if command -v hx &>/dev/null; then
 	alias h="hx"
 	alias h.="hx ."
+fi
+
+#== Zed: https://zed.dev/docs/
+if command -v zed &>/dev/null; then
+	alias z="zed"
+	alias z.="zed ."
 fi
 
 #===============================================================================
@@ -229,6 +212,7 @@ fi
 if command -v direnv &>/dev/null; then
 	eval "$(direnv hook $SHELL_NAME)"
 fi
+
 #===============================================================================
 #== ls replacement (rust): https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
@@ -259,6 +243,11 @@ if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
 	eval "$(fzf --$SHELL_NAME)"
 fi
+if command -v tv &>/dev/null; then
+	alias src="cd \$(tv git-repos)"
+	alias srch="\$EDITOR \$(tv git-repos)"
+	alias srcz="\$VISUAL_EDITOR \$(tv git-repos)"
+fi
 
 #===============================================================================
 #== GREP replacement: https://github.com/BurntSushi/ripgrep
@@ -283,12 +272,15 @@ if command -v stow &>/dev/null; then
 
 	# cleans old links, and puts new links from a stow location ($1) to a root ($2)
 	function stow-location-sync() {
-		[ -d "$2" ] || mkdir -p "$2"
-		echo "Clean and Restore $1 into $2 (with stow)"
+		source=$1
+		target=$2
+
+		[ -d "$target" ] || mkdir -p "$target"
+		echo "Clean and Restore $1 into $target (with stow)"
 		# clean old links
-		stow -D . --dir="$1" --target="$2"
+		stow -D . --dir="$source" --target="$target"
 		# link to source (no-folding forces links at folder level)
-		stow . --dir="$1" --target="$2"
+		stow . --dir="$source" --target="$target"
 	}
 
 	# sync all dotfile repos to appropriate home locations
@@ -305,12 +297,6 @@ if command -v tmux &>/dev/null; then
 	alias tn="tmux new -s"     # new with name
 	alias tk="tmux kill-session"
 	alias tkn="tmux kill-session -t"
-fi
-
-#===============================================================================
-#== terminal multiplexer : https://github.com/tmux/tmux
-if command -v tv &>/dev/null; then
-	alias srcs="cd \$(tv git-repos)"
 fi
 
 #===============================================================================
