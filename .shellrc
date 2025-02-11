@@ -143,8 +143,8 @@ if command -v git &>/dev/null; then
 		git -C "$DOTFILES" pull -v
 		git -C "$NIXOS_CONFIG" pull -v
 		git -C "$NIX_DARWIN_CONFIG" pull -v
-		git -C "$GNOME_CONFIG" pull -v
-		git -C "$JEFF/ascii-art" pull -v
+		# git -C "$GNOME_CONFIG" pull -v
+		# git -C "$JEFF/ascii-art" pull -v
 	}
 
 	# used at work because there is a limit on how many pulls per sec
