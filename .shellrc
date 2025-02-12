@@ -4,7 +4,7 @@ SHELL_NAME=${1:-"zsh"}
 export EDITOR="hx"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PAGER="less -imMWR"
-export VISUAL_EDITOR="zed"
+export VISUAL="zed"
 
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_DATA_HOME=$HOME/.local/share
@@ -30,9 +30,9 @@ alias ..="cd .."
 function alias_jump() {
 	alias "${1}"="cd $2"
 	alias "${1}h"="$EDITOR $2"
-	alias "${1}z"="$VISUAL_EDITOR $2"
+	alias "${1}z"="$VISUAL $2"
 	# if it is a git repo, add direct access via lazygit
-	if [ -d ${2}/.git ]; then
+	if [ -d "${2}/.git" ]; then
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
@@ -249,7 +249,7 @@ fi
 if command -v tv &>/dev/null; then
 	alias src="cd \$(tv git-repos)"
 	alias srch="\$EDITOR \$(tv git-repos)"
-	alias srcz="\$VISUAL_EDITOR \$(tv git-repos)"
+	alias srcz="\$VISUAL \$(tv git-repos)"
 fi
 
 #===============================================================================
