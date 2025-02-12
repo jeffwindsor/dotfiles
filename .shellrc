@@ -31,22 +31,25 @@ function alias_jump() {
 	alias "${1}"="cd $2"
 	alias "${1}h"="$EDITOR $2"
 	alias "${1}z"="$VISUAL_EDITOR $2"
-	alias "${1}g"="lazygit --path $2"
+	# if it is a git repo, add direct access via lazygit
+	if [ -d ${2}/.git ]; then
+		alias "${1}g"="lazygit --path $2"
+	fi
 }
 
-alias_jump "config" "$XDG_CONFIG_HOME"
+alias_jump "cfg" "$XDG_CONFIG_HOME"
 alias_jump "hub" "$GITHUB"
 alias_jump "lab" "$GITCJ"
-alias_jump "empire" "$GITCJ"
-alias_jump "icloud" "$ICLOUD"
-alias_jump "jeff" "$JEFF"
+alias_jump "emp" "$GITCJ"
+alias_jump "jef" "$JEFF"
 alias_jump "src" "$SRC"
 alias_jump "dot" "$DOTFILES"
-alias_jump "darwin" "$NIX_DARWIN_CONFIG"
+alias_jump "dar" "$NIX_DARWIN_CONFIG"
 alias_jump "nixos" "$NIXOS_CONFIG"
 # alias_jump "exo" "$EXOCORTEXT"
+alias icloud="cd $ICLOUD"
 
-# lowers confusion on target machines, they may not know Alacritty, Wezterm, etc
+# helps with remote machines display of colors
 alias ssh="TERM=xterm-256color ssh"
 
 #===============================================================================
