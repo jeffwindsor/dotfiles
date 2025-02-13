@@ -246,19 +246,12 @@ if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
 	eval "$(fzf --$SHELL_NAME)"
 fi
-if command -v tv &>/dev/null; then
-	alias src="cd \$(tv git-repos)"
-	alias srch="\$EDITOR \$(tv git-repos)"
-	alias srcz="\$VISUAL \$(tv git-repos)"
-fi
 
 #===============================================================================
 #== GREP replacement: https://github.com/BurntSushi/ripgrep
 if command -v rg &>/dev/null; then
 	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
 	alias grep="rg"
-	alias ar="alias | rg"
-	alias er="env | rg"
 	alias fr="declare -f | rg"
 
 fi
@@ -300,6 +293,17 @@ if command -v tmux &>/dev/null; then
 	alias tn="tmux new -s"     # new with name
 	alias tk="tmux kill-session"
 	alias tkn="tmux kill-session -t"
+fi
+
+#===============================================================================
+#== fuzzy finder tui
+if command -v tv &>/dev/null; then
+	alias src="cd \$(tv git-repos)"
+	alias srch="\$EDITOR \$(tv git-repos)"
+	alias srcz="\$VISUAL \$(tv git-repos)"
+	# -i auto fills search
+	alias ar="tv alias -i"
+	alias er="tv env -i"
 fi
 
 #===============================================================================
