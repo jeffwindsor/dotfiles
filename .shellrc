@@ -20,11 +20,12 @@ export DOTFILES="$JEFF/dotfiles"
 export NIXOS_CONFIG="$JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
 
-# Back Directories
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
 alias ..="cd .."
+alias icloud="cd $ICLOUD"
+alias ssh="TERM=xterm-256color ssh"
 
 # Jump Directories
 function alias_jump() {
@@ -37,20 +38,15 @@ function alias_jump() {
 	fi
 }
 
-alias_jump "cfg" "$XDG_CONFIG_HOME"
+alias_jump "config" "$XDG_CONFIG_HOME"
 alias_jump "hub" "$GITHUB"
 alias_jump "lab" "$GITCJ"
-alias_jump "emp" "$GITCJ"
-alias_jump "jef" "$JEFF"
+alias_jump "empire" "$GITCJ"
+alias_jump "jeff" "$JEFF"
 alias_jump "src" "$SRC"
-alias_jump "dot" "$DOTFILES"
-alias_jump "dar" "$NIX_DARWIN_CONFIG"
+alias_jump "d" "$DOTFILES"
+alias_jump "dw" "$NIX_DARWIN_CONFIG"
 alias_jump "nixos" "$NIXOS_CONFIG"
-# alias_jump "exo" "$EXOCORTEXT"
-alias icloud="cd $ICLOUD"
-
-# helps with remote machines display of colors
-alias ssh="TERM=xterm-256color ssh"
 
 #===============================================================================
 # Package Managers
