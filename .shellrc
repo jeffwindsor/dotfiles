@@ -113,7 +113,7 @@ EOF
 
 	if [ -d "/etc/nixos" ]; then
 		#nixos
-		alias clean_gens="nix-env --delete-generations +5 && nix-collect-garbage"
+		alias clean="nix-env --delete-generations +5 && nix-collect-garbage"
 		alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
 		alias optimize="nix optimise-store"
 		alias rebuild="sudo nixos-rebuild switch"
@@ -121,10 +121,12 @@ EOF
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin (macos) with flakes
-		alias rebuild="darwin-rebuild switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
+		export NIX_FLAKE="$NIX_DARWIN_CONFIG/$(hostname -s)"
+		alias clean="sudo nix-collect-garbage --delete-generations +5"
+		alias list_gens="darwin-rebuild --list-generations"
+		alias rebuild="darwin-rebuild switch --flake \$NIX_FLAKE"
 		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
-		alias clean="sudo nix-collect-garbage -d"
-
+		alias update="nix flake update --flake \$NIX_FLAKE"
 	fi
 fi
 
@@ -248,6 +250,8 @@ fi
 if command -v rg &>/dev/null; then
 	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
 	alias grep="rg"
+	alias ar="alias | rg"
+	alias er="env | rg"
 	alias fr="declare -f | rg"
 
 fi
@@ -298,8 +302,8 @@ if command -v tv &>/dev/null; then
 	alias srch="\$EDITOR \$(tv git-repos)"
 	alias srcz="\$VISUAL \$(tv git-repos)"
 	# -i auto fills search
-	alias ar="tv alias -i"
-	alias er="tv env -i"
+	alias art="tv alias -i"
+	alias ert="tv env -i"
 fi
 
 #===============================================================================
