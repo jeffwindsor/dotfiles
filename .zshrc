@@ -1,19 +1,9 @@
 #!/usr/bin/env zsh
+zmodload zsh/zprof
 
 # avoids insecure directories warning
 export ZSH_DISABLE_COMPFIX="true"
 
-#==============================================================================
-# ZSH plugin manager: https://github.com/zdharma-continuum/zinit
-#==============================================================================
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-	mkdir -p "$(dirname $ZINIT_HOME)"
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-# Initialize zinit
-source "${ZINIT_HOME}/zinit.zsh"
 #==============================================================================
 # Plugins
 # ZSH Completion Styling - FZF-TAB Suggested
@@ -34,6 +24,17 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 autoload compinit
 compinit
 
+#==============================================================================
+# ZSH plugin manager: https://github.com/zdharma-continuum/zinit
+#==============================================================================
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+	mkdir -p "$(dirname $ZINIT_HOME)"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+# Initialize zinit
+source "${ZINIT_HOME}/zinit.zsh"
 # FZF-TAB AFTER COMPINIT, BUT BEFORE WRAPPERS LIKE SYNTAX AND SUGGESTIONS
 zinit light Aloxaf/fzf-tab
 zinit light zdharma-continuum/fast-syntax-highlighting
