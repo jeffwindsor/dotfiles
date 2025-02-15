@@ -235,6 +235,11 @@ run = ['move-node-to-workspace 5']
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace a']
 
+# Slack
+[[on-window-detected]]
+if.app-id = 'com.valvesoftware.steam'
+run = ['move-node-to-workspace 8']
+
 # iCalendar
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
