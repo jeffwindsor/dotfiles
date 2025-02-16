@@ -148,24 +148,28 @@ if command -v git &>/dev/null; then
 		# git -C "$JEFF/ascii-art" pull -v
 	}
 
-	# used at work because there is a limit on how many pulls per sec
-	function dirs-git() {
-		if [[ "${1}" ]]; then
-			for d in */; do
-				echo "==> $d"
-				if [[ "${2}" ]]; then
-					sleep "$2"
-				fi
-				cd ./"$d" || return
-				git "$1"
-				cd ..
-			done
-		fi
+	# Function to find all directories containing a .git subdirectory
+	find_all_git_repos() {
+		find "$1" -type d -name ".git" -prune -print0 | xargs -0 -I{} dirname "{}"
 	}
 
+	# Function to execute a git command on each Git repository
+	#   optional sleep time as second parameter
+	git_exec_on() {
+		while IFS= read -r repo; do
+			echo "==> $repo"
+			git -C "$repo" "$@"
+		done
+	}
+
+	git_all() {
+		find_all_git_repos "$SRC" | git_exec_on "$@"
+	}
+	alias ga="git_all"
 	alias gclean="git clean -xdf"
 	alias gls="git ls-tree --full-tree --name-only -r HEAD."
 	alias gs="git status"
+	alias gss="git_all status -s"
 	alias gpl="git pull"
 	# git blame (more precise)
 	alias gb="git blame -w -C -C -C"
@@ -351,21 +355,6 @@ function exec-in-subdirs() {
 		eval "$1"
 		cd ..
 	done
-}
-function edit-via-fuzzy-search() {
-	cd "$1"
-	files=$(fzf_query ${2:-""})
-	[ -n "$files" ] && $EDITOR "$files"
-	cd -
-}
-
-# combined "upgrade" my stuff function
-function up() {
-	echo "==> Pull Important Repos"
-	dpl
-
-	echo "==> Dotfiles"
-	dsync
 }
 
 #===============================================================================
