@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+#===============================================================================
+# ENV
+#===============================================================================
 SHELL_NAME=${1:-"zsh"}
 
 export EDITOR="hx"
@@ -20,18 +24,20 @@ export DOTFILES="$JEFF/dotfiles"
 export NIXOS_CONFIG="$JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
 
+#===============================================================================
+# Jump Directories
+#===============================================================================
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
 alias ..="cd .."
 alias icloud="cd $ICLOUD"
-alias ssh="TERM=xterm-256color ssh"
 
 # Jump Directories
 function alias_jump() {
 	alias "${1}"="cd $2"
-	alias "${1}h"="$EDITOR $2"
-	alias "${1}z"="$VISUAL $2"
+	alias "${1}h"="\$EDITOR $2"
+	alias "${1}z"="\$VISUAL $2"
 	# if it is a git repo, add direct access via lazygit
 	if [ -d "${2}/.git" ]; then
 		alias "${1}g"="lazygit --path $2"
@@ -45,6 +51,7 @@ alias_jump "empire" "$GITCJ"
 alias_jump "jeff" "$JEFF"
 alias_jump "src" "$SRC"
 alias_jump "d" "$DOTFILES"
+alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
 alias_jump "dw" "$NIX_DARWIN_CONFIG"
 alias_jump "nixos" "$NIXOS_CONFIG"
 
@@ -131,8 +138,72 @@ EOF
 fi
 
 #===============================================================================
-# Development
+# Editors
 #===============================================================================
+#== Helix: https://github.com/helix-editor/helix
+if command -v hx &>/dev/null; then
+	alias h="hx"
+	alias h.="hx ."
+fi
+
+#== Zed: https://zed.dev/docs/
+if command -v zed &>/dev/null; then
+	alias z="zed"
+	alias z.="zed ."
+fi
+
+#===============================================================================
+# Terminal
+#===============================================================================
+#== cat replacement (rust): https://github.com/sharkdp/bat
+if command -v bat &>/dev/null; then
+	alias cat="bat --style=plain"
+fi
+
+#== environment management: https://github.com/direnv/direnv
+if command -v direnv &>/dev/null; then
+	eval "$(direnv hook $SHELL_NAME)"
+fi
+
+#== containers
+if command -v docker &>/dev/null; then
+	alias dcl='docker container ls --all'
+	alias dil='docker image ls'
+	alias dila='docker image ls --all'
+	alias dir='docker image rm -f'
+	alias dr='docker run -it '
+	alias drs="docker_run_on_git_repo \$SRC"
+fi
+
+#== ls replacement (rust): https://github.com/eza-community/eza
+if command -v eza &>/dev/null; then
+	alias la="eza -F --group-directories-first --git --all --no-user"
+	alias ll="eza -lF --group-directories-first --no-user"
+	alias lla="eza -lF --group-directories-first --git --all --no-user"
+	alias l="clear && lla"
+	alias tree="eza --tree --git --follow-symlinks"
+	alias treea="eza --tree --git --all --follow-symlinks"
+	alias treed="eza --tree --git --level --follow-symlinks"
+else
+	# default to using ls if not present (to keep the muscle memory)
+	alias l="ls --color=auto"
+	alias la="ls -a --color=auto"
+	alias ll="ls -l --color=auto"
+	alias lla="ls -la --color=auto"
+fi
+
+#== bling: https://github.com/fastfetch-cli/fastfetch
+if command -v fastfetch &>/dev/null; then
+	alias ff="fastfetch"
+fi
+
+#== fuzzy finder: https://github.com/junegunn/fzf
+if command -v fzf &>/dev/null; then
+	export FZF_DEFAULT_COMMAND='find . -type f -name ".*" -o -type f'
+	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
+	eval "$(fzf --$SHELL_NAME)"
+fi
+
 #==Git (Source Control): https://github.com/git/git
 if command -v git &>/dev/null; then
 
@@ -191,65 +262,6 @@ if command -v git &>/dev/null; then
 	fi
 fi
 
-#===============================================================================
-# Editors
-#===============================================================================
-#== Helix: https://github.com/helix-editor/helix
-if command -v hx &>/dev/null; then
-	alias h="hx"
-	alias h.="hx ."
-fi
-
-#== Zed: https://zed.dev/docs/
-if command -v zed &>/dev/null; then
-	alias z="zed"
-	alias z.="zed ."
-fi
-
-#===============================================================================
-# Terminal
-#===============================================================================
-#== cat replacement (rust): https://github.com/sharkdp/bat
-if command -v bat &>/dev/null; then
-	alias cat="bat --style=plain"
-fi
-
-if command -v direnv &>/dev/null; then
-	eval "$(direnv hook $SHELL_NAME)"
-fi
-
-#===============================================================================
-#== ls replacement (rust): https://github.com/eza-community/eza
-if command -v eza &>/dev/null; then
-	alias la="eza -F --group-directories-first --git --all --no-user"
-	alias ll="eza -lF --group-directories-first --no-user"
-	alias lla="eza -lF --group-directories-first --git --all --no-user"
-	alias l="clear && lla"
-	alias tree="eza --tree --git --follow-symlinks"
-	alias treea="eza --tree --git --all --follow-symlinks"
-	alias treed="eza --tree --git --level --follow-symlinks"
-else
-	alias l="ls --color=auto"
-	alias la="ls -a --color=auto"
-	alias ll="ls -l --color=auto"
-	alias lla="ls -la --color=auto"
-fi
-
-#===============================================================================
-#== bling: https://github.com/fastfetch-cli/fastfetch
-if command -v fastfetch &>/dev/null; then
-	alias ff="fastfetch"
-fi
-
-#===============================================================================
-#== fuzzy finder: https://github.com/junegunn/fzf
-if command -v fzf &>/dev/null; then
-	export FZF_DEFAULT_COMMAND='find . -type f -name ".*" -o -type f'
-	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
-	eval "$(fzf --$SHELL_NAME)"
-fi
-
-#===============================================================================
 #== GREP replacement: https://github.com/BurntSushi/ripgrep
 if command -v rg &>/dev/null; then
 	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
@@ -260,13 +272,13 @@ if command -v rg &>/dev/null; then
 
 fi
 
-#===============================================================================
+alias ssh="TERM=xterm-256color ssh"
+
 #== Prompt : https://github.com/starship/starship
 if command -v starship &>/dev/null; then
 	eval "$(starship init $SHELL_NAME)"
 fi
 
-#===============================================================================
 #== dotfiles:
 if command -v stow &>/dev/null; then
 
@@ -287,7 +299,6 @@ if command -v stow &>/dev/null; then
 	alias dsync="stow-location-sync $DOTFILES $HOME"
 fi
 
-#===============================================================================
 #== terminal multiplexer : https://github.com/tmux/tmux
 if command -v tmux &>/dev/null; then
 	alias t="tmux"
@@ -299,7 +310,6 @@ if command -v tmux &>/dev/null; then
 	alias tkn="tmux kill-session -t"
 fi
 
-#===============================================================================
 #== fuzzy finder tui
 if command -v tv &>/dev/null; then
 	alias src="cd \$(tv git-repos)"
@@ -310,7 +320,6 @@ if command -v tv &>/dev/null; then
 	alias ert="tv env -i"
 fi
 
-#===============================================================================
 #== tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
 	# open yazi and shell change to the selected directory on exit
@@ -329,35 +338,13 @@ if command -v yazi &>/dev/null; then
 
 fi
 
-#===============================================================================
+#== xsh packager manager
 if command -v zinit &>/dev/null; then
 	alias zclean="zinit delete --clean"
 	alias zup="zinit update --all"
 	alias zsync="zclean && zup"
 fi
 
-#===============================================================================
-if command -v docker &>/dev/null; then
-	alias dcl='docker container ls --all'
-	alias dil='docker image ls'
-	alias dila='docker image ls --all'
-	alias dir='docker image rm -f'
-	alias dr='docker run -it '
-	alias drs="docker_run_on_git_repo \$SRC"
-fi
-
-#===============================================================================
-# Functions
-function exec-in-subdirs() {
-	for d in */; do
-		cd ./"$d" || return
-		echo "=== Executing $1 on $(pwd)"
-		eval "$1"
-		cd ..
-	done
-}
-
-#===============================================================================
 # source machine specific aliases
 if test -f "$HOME/.shellrc.local"; then
 	source "$HOME/.shellrc.local"
