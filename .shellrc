@@ -23,6 +23,7 @@ export JEFF="$SRC/github.com/jeffwindsor"
 export DOTFILES="$JEFF/dotfiles"
 export NIXOS_CONFIG="$JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
+export NIX_SHELLS="$JEFF/nix-shells"
 
 #===============================================================================
 # Jump Directories
@@ -54,6 +55,7 @@ alias_jump "d" "$DOTFILES"
 alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
 alias_jump "dw" "$NIX_DARWIN_CONFIG"
 alias_jump "nixos" "$NIXOS_CONFIG"
+alias_jump "ns" "$NIX_SHELLS"
 
 #===============================================================================
 # Package Managers
@@ -113,21 +115,18 @@ EOF
 	}
 
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
-	alias npip="nix-package-install-to-profile"
 	alias nps="nix search nixpkgs"
-	alias ns="nix-shell"
-	alias nsi="nix-shell-init"
+	alias optimize="nix optimise-store"
 
 	if [ -d "/etc/nixos" ]; then
 		#nixos
 		alias clean="nix-env --delete-generations +5 && nix-collect-garbage"
 		alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
-		alias optimize="nix optimise-store"
 		alias rebuild="sudo nixos-rebuild switch"
 		alias upgrade="sudo nixos-rebuild switch --upgrade"
 
 	elif command -v darwin-rebuild &>/dev/null; then
-		# nix-darwin (macos) with flakes
+		# nix-darwin using flakes
 		export NIX_FLAKE="$NIX_DARWIN_CONFIG/$(hostname -s)"
 		alias clean="sudo nix-collect-garbage --delete-generations +5"
 		alias list_gens="darwin-rebuild --list-generations"
