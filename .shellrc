@@ -34,28 +34,27 @@ alias ...="cd ../../"
 alias ..="cd .."
 alias icloud="cd $ICLOUD"
 
-# Jump Directories
-function alias_jump() {
+function alias_dir() {
 	alias "${1}"="cd $2"
-	alias "${1}h"="\$EDITOR $2"
-	alias "${1}z"="\$VISUAL $2"
-	# if it is a git repo, add direct access via lazygit
+	alias "${1}e"="\$EDITOR $2"
+	alias "${1}v"="\$VISUAL $2"
+
+	# lazygit only if repo
 	if [ -d "${2}/.git" ]; then
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
 
-alias_jump "config" "$XDG_CONFIG_HOME"
-alias_jump "hub" "$GITHUB"
-alias_jump "lab" "$GITCJ"
-alias_jump "empire" "$GITCJ"
-alias_jump "jeff" "$JEFF"
-alias_jump "src" "$SRC"
-alias_jump "d" "$DOTFILES"
-alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
-alias_jump "dw" "$NIX_DARWIN_CONFIG"
-alias_jump "nixos" "$NIXOS_CONFIG"
-alias_jump "ns" "$NIX_SHELLS"
+alias_dir "config" "$XDG_CONFIG_HOME"
+alias_dir "hub" "$GITHUB"
+alias_dir "lab" "$GITCJ"
+alias_dir "empire" "$GITCJ/empire"
+alias_dir "jeff" "$JEFF"
+alias_dir "src" "$SRC"
+alias_dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
+alias_dir "dw" "$NIX_DARWIN_CONFIG"
+alias_dir "nixos" "$NIXOS_CONFIG"
+alias_dir "ns" "$NIX_SHELLS"
 
 #===============================================================================
 # Package Managers
@@ -85,38 +84,48 @@ fi
 
 #== Nix https://nixos.org/ ==
 if command -v nix &>/dev/null; then
+
 	function nix-package-install-to-profile() {
 		nix profile install nixpkgs#"${1}"
 	}
+
+	function nix-shell-from-file() {
+		local selection=$(fd -tf . "$NIX_SHELLS" | fzf-display-basenames)
+
+		[[ -n $selection ]] && nix-shell $selection
+
+	}
+
 	# create a blank shell.nix in currenct folder
 	function nix-shell-init() {
 		cat <<EOF >shell.nix
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
 	
-    # name (default: nix-shell). Set the name of the derivation.
-	# name = "";
+  # name (default: nix-shell). Set the name of the derivation.
+  # name = "";
   	
-    # packages (default: []). Add executable packages to the nix-shell environment.
-	packages = with pkgs; [
-	];
+  # packages (default: []). Add executable packages to the nix-shell environment.
+  packages = with pkgs; [];
 
-    # inputsFrom (default: []). Add build dependencies of the listed derivations to the nix-shell environment.
-	# inputsFrom = [ pkgs.hello ];
+  # inputsFrom (default: []). Add build dependencies of the listed derivations to the nix-shell environment.
+  # inputsFrom = [ pkgs.hello ];
 
-    # shellHook (default: ""). Bash statements that are executed by nix-shell.
-  	shellHook = ''
-    	echo -e "\e[1;33mDevelopment Environment\e[0;32m"
-    	# add --version or some other call to list dev packages
-		echo -e "\e[0m"
-  	'';
+  # shellHook (default: ""). Bash statements that are executed by nix-shell.
+  shellHook = ''
+    echo -e "\e[1;33mDevelopment Environment\e[0;32m"
+    # add --version or some other call to list dev packages
+	echo -e "\e[0m"
+  '';
 }
 EOF
 	}
 
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	alias nps="nix search nixpkgs"
-	alias optimize="nix optimise-store"
+	alias ns="nix-shell"
+	alias nsf="nix-shell-from-file"
+	alias optimise="nix optimise-store"
 
 	if [ -d "/etc/nixos" ]; then
 		#nixos
@@ -200,6 +209,11 @@ fi
 if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_COMMAND='find . -type f -name ".*" -o -type f'
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
+
+	function fzf-display-basenames() {
+		fzf --delimiter / --with-nth -1
+	}
+
 	eval "$(fzf --$SHELL_NAME)"
 fi
 
