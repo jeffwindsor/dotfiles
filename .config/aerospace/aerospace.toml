@@ -17,12 +17,12 @@ default-root-container-orientation = 'auto'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = [{ monitor.secondary = 0 }, 2]
-inner.vertical = [{ monitor.secondary = 0 }, 2]
-outer.left = [{ monitor.secondary = 0 }, 2]
-outer.bottom = [{ monitor.secondary = 0 }, 2]
-outer.top = [{ monitor.secondary = 0 }, 2]
-outer.right = [{ monitor.secondary = 0 }, 2]
+inner.horizontal = [{ monitor.secondary = 0 }, 4]
+inner.vertical = [{ monitor.secondary = 0 }, 4]
+outer.left = [{ monitor.secondary = 0 }, 4]
+outer.bottom = [{ monitor.secondary = 0 }, 4]
+outer.top = [{ monitor.secondary = 0 }, 4]
+outer.right = [{ monitor.secondary = 0 }, 4]
 
 
 # =======================================================
@@ -59,13 +59,11 @@ outer.right = [{ monitor.secondary = 0 }, 2]
 #
 # RULES:
 #   any move is coupled with focus change to target
+# =======================================================
 
 [mode.main.binding]
-alt-cmd-r = 'reload-config'
-
 # WINDOWS, LAYOUTS and WORKSPACES : ALT
 # windows
-alt-w = 'close'
 alt-f = 'fullscreen'
 
 alt-h = 'focus left'
@@ -73,10 +71,15 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 
-alt-shift-h = 'move left'
-alt-shift-j = 'move down'
-alt-shift-k = 'move up'
-alt-shift-l = 'move right'
+alt-shift-left = 'move left'
+alt-shift-down = 'move down'
+alt-shift-up = 'move up'
+alt-shift-right = 'move right'
+
+alt-shift-h = 'join-with left'
+alt-shift-j = 'join-with down'
+alt-shift-k = 'join-with up'
+alt-shift-l = 'join-with right'
 
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
@@ -135,8 +138,8 @@ alt-shift-u = ['move-node-to-workspace u', 'workspace u']
 alt-y = 'workspace y'
 alt-shift-y = ['move-node-to-workspace y', 'workspace y']
 
-alt-shift-right = 'workspace --wrap-around next'
-alt-shift-left = 'workspace --wrap-around prev'
+alt-right = 'workspace --wrap-around next'
+alt-left = 'workspace --wrap-around prev'
 
 # Monitors : ALT + CMD
 alt-cmd-1 = 'focus-monitor 1'
@@ -150,30 +153,25 @@ alt-cmd-right = 'focus-monitor --wrap-around next'
 alt-cmd-left = 'focus-monitor --wrap-around prev'
 
 # LAUNCHERS : alt-ctrl
-alt-ctrl-a = 'exec-and-forget open /Applications/Slack.app'
-alt-ctrl-b = 'exec-and-forget open /Applications/Safari.app'
-alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
-# alt-ctrl-f = 'exec-and-forget open -n /Applications/Firefox.app'
+alt-ctrl-space = 'exec-and-forget open ~'
+
+alt-ctrl-a = 'exec-and-forget open /Applications/Slack.app'
+alt-ctrl-s = 'exec-and-forget open /Applications/Safari.app'                        # web browser
+alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
+alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'             # web browser
+alt-ctrl-f = 'exec-and-forget open -n /Applications/Firefox.app'                    # web browser
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
-alt-ctrl-s = 'exec-and-forget open /Applications/Spotify.app'
-alt-ctrl-space = 'exec-and-forget open ~'
+alt-ctrl-p = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
-alt-ctrl-v = 'exec-and-forget wezterm start -- nvim'
-alt-ctrl-y = 'exec-and-forget wezterm start -- yazi'
 
 
 # alt-cmd-up = 'macos-native-fullscreen'
 # alt-cmd-down = 'macos-native-minimize'
 
-# JOIN 
-# alt-shift-h = 'join-with left'
-# alt-shift-j = 'join-with down'
-# alt-shift-k = 'join-with up'
-# alt-shift-l = 'join-with right'
 
 
 # OVERRIDE / DISABLE
@@ -196,7 +194,7 @@ c = 'secondary' # mac Calendar
 m = 'secondary' # mac Messages
 n = 'secondary' # mac Notes
 o = 'secondary' # ms office (work)
-s = 'secondary' # spotify
+p = 'secondary' # spotify
 t = 'secondary' # ms teams (work)
 u = 'secondary' # ms teams - meeting (work)
 
@@ -267,7 +265,7 @@ run = ['move-node-to-workspace o']  #, 'layout accordion horizontal']
 # Spotify
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace s']
+run = ['move-node-to-workspace p']
 
 # Teams - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
