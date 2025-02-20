@@ -25,6 +25,7 @@ export DOTFILES="$SOURCE_JEFF/dotfiles"
 export NIXOS_CONFIG="$SOURCE_JEFF/nixos-config"
 export NIX_DARWIN_CONFIG="$SOURCE_JEFF/nix-darwin-config"
 export NIX_SHELLS="$SOURCE_JEFF/nix-shells"
+export REPOS_TO_SYNC=("$DOTFILES" "$NIXOS_CONFIG" "$NIX_DARWIN_CONFIG" "$NIX_SHELLS")
 
 #===============================================================================
 # Jump Directories
@@ -58,6 +59,12 @@ alias_dir "dw" "$NIX_DARWIN_CONFIG"
 alias_dir "nixos" "$NIXOS_CONFIG"
 alias_dir "nss" "$NIX_SHELLS"
 
+function array_to_string() {
+	IFS=$'\n' # Use newline as delimiter
+	local array_string
+	array_string="${@[*]}"
+	echo "$array_string"
+}
 #===============================================================================
 # Package Managers
 #===============================================================================
@@ -228,14 +235,6 @@ if command -v git &>/dev/null; then
 	# 80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
 	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
 
-	# pull personal repositories that I want up to date
-	# "git -C" specifies location for git to act on, allows running of this command from anywhere
-	function dpl() {
-		git -C "$DOTFILES" pull -v
-		git -C "$NIXOS_CONFIG" pull -v
-		git -C "$NIX_DARWIN_CONFIG" pull -v
-	}
-
 	# Function to find all directories containing a .git subdirectory
 	git_find_all_repos() {
 		find "$1" -type d -name ".git" -prune -print0 | xargs -0 -I{} dirname "{}"
@@ -244,6 +243,7 @@ if command -v git &>/dev/null; then
 	# Function to execute a git command on each Git repository
 	#   optional sleep time as second parameter
 	git_exec_on() {
+		local repo
 		while IFS= read -r repo; do
 			echo "==> $repo"
 			git -C "$repo" "$@"
@@ -254,6 +254,8 @@ if command -v git &>/dev/null; then
 		git_find_all_repos "$SOURCE" | git_exec_on "$@"
 	}
 
+	# sync all listed git repos. escaping REPOS_TO_SYNC so it will run with run time value
+	alias gsync="array_to_string \$REPOS_TO_SYNC | git_exec_on pull -v"
 	alias ga="git_all"
 	# git blame (more precise)
 	alias gb="git blame -w -C -C -C"
