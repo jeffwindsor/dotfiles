@@ -14,16 +14,17 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
-export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 
-export SRC="$HOME/Source"
-export GITHUB="$SRC/github.com"
-export GITCJ="$SRC/gitlab.cj.dev"
-export JEFF="$SRC/github.com/jeffwindsor"
-export DOTFILES="$JEFF/dotfiles"
-export NIXOS_CONFIG="$JEFF/nixos-config"
-export NIX_DARWIN_CONFIG="$JEFF/nix-darwin-config"
-export NIX_SHELLS="$JEFF/nix-shells"
+export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
+export SOURCE="$HOME/Source"
+export SOURCE_GITHUB="$SOURCE/github.com"
+export SOURCE_GITCJ="$SOURCE/gitlab.cj.dev"
+export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
+
+export DOTFILES="$SOURCE_JEFF/dotfiles"
+export NIXOS_CONFIG="$SOURCE_JEFF/nixos-config"
+export NIX_DARWIN_CONFIG="$SOURCE_JEFF/nix-darwin-config"
+export NIX_SHELLS="$SOURCE_JEFF/nix-shells"
 
 #===============================================================================
 # Jump Directories
@@ -32,10 +33,12 @@ alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
 alias ..="cd .."
-alias icloud="cd $ICLOUD"
+alias icloud="cd $ICLOUD && l"
 
 function alias_dir() {
-	alias "${1}"="cd $2"
+	# create aliases for cd, edit, visual-edit and lazygit (if contains .git)
+	#
+	alias "${1}"="cd $2 && l"
 	alias "${1}e"="\$EDITOR $2"
 	alias "${1}v"="\$VISUAL $2"
 
@@ -44,17 +47,16 @@ function alias_dir() {
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
-
 alias_dir "config" "$XDG_CONFIG_HOME"
-alias_dir "hub" "$GITHUB"
-alias_dir "lab" "$GITCJ"
-alias_dir "empire" "$GITCJ/empire"
-alias_dir "jeff" "$JEFF"
-alias_dir "src" "$SRC"
+alias_dir "hub" "$SOURCE_GITHUB"
+alias_dir "lab" "$SOURCE_GITCJ"
+alias_dir "empire" "$SOURCE_GITCJ/empire"
+alias_dir "jeff" "$SOURCE_JEFF"
+alias_dir "src" "$SOURCE"
 alias_dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
 alias_dir "dw" "$NIX_DARWIN_CONFIG"
 alias_dir "nixos" "$NIXOS_CONFIG"
-alias_dir "ns" "$NIX_SHELLS"
+alias_dir "nss" "$NIX_SHELLS"
 
 #===============================================================================
 # Package Managers
@@ -90,7 +92,8 @@ if command -v nix &>/dev/null; then
 	}
 
 	function nix-shell-from-file() {
-		local selection=$(fd -tf . "$NIX_SHELLS" | fzf-display-basenames)
+		local selection
+		selection=$(fd -tf . "$NIX_SHELLS" | fzf-display-basenames)
 
 		[[ -n $selection ]] && nix-shell $selection
 
@@ -180,21 +183,21 @@ if command -v docker &>/dev/null; then
 	alias dila='docker image ls --all'
 	alias dir='docker image rm -f'
 	alias dr='docker run -it '
-	alias drs="docker_run_on_git_repo \$SRC"
+	alias drs="docker_run_on_git_repo \$SOURCE"
 fi
 
 #== ls replacement (rust): https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
+	alias l="clear && lla"
 	alias la="eza -F --group-directories-first --git --all --no-user"
 	alias ll="eza -lF --group-directories-first --no-user"
 	alias lla="eza -lF --group-directories-first --git --all --no-user"
-	alias l="clear && lla"
+
 	alias tree="eza --tree --git --follow-symlinks"
 	alias treea="eza --tree --git --all --follow-symlinks"
-	alias treed="eza --tree --git --level --follow-symlinks"
 else
-	# default to using ls if not present (to keep the muscle memory)
-	alias l="ls --color=auto"
+	# default to using ls
+	alias l="clear && ls --color=auto"
 	alias la="ls -a --color=auto"
 	alias ll="ls -l --color=auto"
 	alias lla="ls -la --color=auto"
@@ -210,30 +213,31 @@ if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_COMMAND='find . -type f -name ".*" -o -type f'
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
 
+	# shows the basename in the selection window, but returns full path
 	function fzf-display-basenames() {
 		fzf --delimiter / --with-nth -1
 	}
 
+	# initialize
 	eval "$(fzf --$SHELL_NAME)"
 fi
 
 #==Git (Source Control): https://github.com/git/git
 if command -v git &>/dev/null; then
 
+	# 80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
 	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
 
 	# pull personal repositories that I want up to date
+	# "git -C" specifies location for git to act on, allows running of this command from anywhere
 	function dpl() {
-		# -C specifies location for git to act on, allows running of this command from anywhere
 		git -C "$DOTFILES" pull -v
 		git -C "$NIXOS_CONFIG" pull -v
 		git -C "$NIX_DARWIN_CONFIG" pull -v
-		# git -C "$GNOME_CONFIG" pull -v
-		# git -C "$JEFF/ascii-art" pull -v
 	}
 
 	# Function to find all directories containing a .git subdirectory
-	find_all_git_repos() {
+	git_find_all_repos() {
 		find "$1" -type d -name ".git" -prune -print0 | xargs -0 -I{} dirname "{}"
 	}
 
@@ -247,26 +251,29 @@ if command -v git &>/dev/null; then
 	}
 
 	git_all() {
-		find_all_git_repos "$SRC" | git_exec_on "$@"
+		git_find_all_repos "$SOURCE" | git_exec_on "$@"
 	}
+
 	alias ga="git_all"
-	alias gclean="git clean -xdf"
-	alias gls="git ls-tree --full-tree --name-only -r HEAD."
-	alias gs="git status"
-	alias gss="git_all status -s"
-	alias gpl="git pull"
 	# git blame (more precise)
 	alias gb="git blame -w -C -C -C"
 	# git blame line range
 	alias gbl="git blame -w -C -C -C -L"
+	# alias gclean="git clean -xdf"
 	# git diff by words changed
 	alias gdw="git diff --word-diff"
-	alias gm="git maintenance start"
+	# logs with personal pretty format, escaped $ so any change to env-var would be reflected in next run
+	alias gl="git log --format=\$GIT_LOG_PRETTY_FORMAT"
+	# alias gm="git maintenance start"
+	alias gs="git status"
+	# shows terse status for all repositories
+	alias gss="git_all status -s"
+	alias gpl="git pull"
 
 	# git clone from git hub to my source directory
-	function ghub() { git clone git@github.com:"$1" "$SRC"/github.com/"$1"; }
+	function ghub() { git clone git@github.com:"$1" "$SOURCE"/github.com/"$1"; }
 	# git clone from git hub to my source directory
-	function glab() { git clone git@gitlab.cj.dev:"$1" "$SRC"/gitlab.cj.dev/"$1"; }
+	function glab() { git clone git@gitlab.cj.dev:"$1" "$SOURCE"/gitlab.cj.dev/"$1"; }
 
 	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
 	if command -v lazygit &>/dev/null; then
@@ -278,11 +285,12 @@ fi
 #== GREP replacement: https://github.com/BurntSushi/ripgrep
 if command -v rg &>/dev/null; then
 	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
-	alias grep="rg"
+	# aliases
 	alias ar="alias | rg"
+	# environment
 	alias er="env | rg"
+	# functions
 	alias fr="declare -f | rg"
-
 fi
 
 alias ssh="TERM=xterm-256color ssh"
@@ -325,12 +333,9 @@ fi
 
 #== fuzzy finder tui
 if command -v tv &>/dev/null; then
-	alias src="cd \$(tv git-repos)"
-	alias srch="\$EDITOR \$(tv git-repos)"
-	alias srcz="\$VISUAL \$(tv git-repos)"
-	# -i auto fills search
-	alias art="tv alias -i"
-	alias ert="tv env -i"
+	alias src="cd \$(tv git-repos) && l"
+	alias srce="\$EDITOR \$(tv git-repos)"
+	alias srcv="\$VISUAL \$(tv git-repos)"
 fi
 
 #== tui file manager: https://github.com/sxyazi/yazi
