@@ -36,7 +36,7 @@ alias ...="cd ../../"
 alias ..="cd .."
 alias icloud="cd $ICLOUD && l"
 
-function alias_dir() {
+function alias-dir() {
 	# create aliases for cd, edit, visual-edit and lazygit (if contains .git)
 	#
 	alias "${1}"="cd $2 && l"
@@ -48,18 +48,19 @@ function alias_dir() {
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
-alias_dir "config" "$XDG_CONFIG_HOME"
-alias_dir "hub" "$SOURCE_GITHUB"
-alias_dir "lab" "$SOURCE_GITCJ"
-alias_dir "empire" "$SOURCE_GITCJ/empire"
-alias_dir "jeff" "$SOURCE_JEFF"
-alias_dir "src" "$SOURCE"
-alias_dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
-alias_dir "dw" "$NIX_DARWIN_CONFIG"
-alias_dir "nixos" "$NIXOS_CONFIG"
-alias_dir "nss" "$NIX_SHELLS"
+alias-dir "config" "$XDG_CONFIG_HOME"
+alias-dir "hub" "$SOURCE_GITHUB"
+alias-dir "lab" "$SOURCE_GITCJ"
+alias-dir "empire" "$SOURCE_GITCJ/empire"
+alias-dir "jeff" "$SOURCE_JEFF"
+alias-dir "src" "\$(git-find-all-repos|fzf-display-basenames)"
 
-function array_to_string() {
+alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
+alias-dir "dw" "$NIX_DARWIN_CONFIG"
+alias-dir "nixos" "$NIXOS_CONFIG"
+alias-dir "nss" "$NIX_SHELLS"
+
+function array-to-string() {
 	IFS=$'\n' # Use newline as delimiter
 	local array_string
 	array_string="${@[*]}"
@@ -236,13 +237,15 @@ if command -v git &>/dev/null; then
 	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
 
 	# Function to find all directories containing a .git subdirectory
-	git_find_all_repos() {
-		find "$1" -type d -name ".git" -prune -print0 | xargs -0 -I{} dirname "{}"
+	git-find-all-repos() {
+		# default to my source directory
+		local root=${1:-$SOURCE}
+		# prune will stop recurse on match, sed removes the '/.git' from the end of the result
+		find "$root" -name .git -type d -prune | sed 's|/.git$||'
 	}
 
 	# Function to execute a git command on each Git repository
-	#   optional sleep time as second parameter
-	git_exec_on() {
+	git-exec-on() {
 		local repo
 		while IFS= read -r repo; do
 			echo "==> $repo"
@@ -250,13 +253,10 @@ if command -v git &>/dev/null; then
 		done
 	}
 
-	git_all() {
-		git_find_all_repos "$SOURCE" | git_exec_on "$@"
-	}
-
 	# sync all listed git repos. escaping REPOS_TO_SYNC so it will run with run time value
-	alias gsync="array_to_string \$REPOS_TO_SYNC | git_exec_on pull -v"
-	alias ga="git_all"
+	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v"
+	alias ga="git-find-all-repos"
+	alias gax="git-find-all-repos | git-exec-on"
 	# git blame (more precise)
 	alias gb="git blame -w -C -C -C"
 	# git blame line range
@@ -333,12 +333,6 @@ if command -v tmux &>/dev/null; then
 	alias tkn="tmux kill-session -t"
 fi
 
-#== fuzzy finder tui
-if command -v tv &>/dev/null; then
-	alias src="cd \$(tv git-repos) && l"
-	alias srce="\$EDITOR \$(tv git-repos)"
-	alias srcv="\$VISUAL \$(tv git-repos)"
-fi
 
 #== tui file manager: https://github.com/sxyazi/yazi
 if command -v yazi &>/dev/null; then
