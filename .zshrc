@@ -66,4 +66,3 @@ setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history fi
 if test -f $HOME/.shellrc; then
 	source "$HOME/.shellrc" zsh
 fi
-eval "$(tv init zsh)"
