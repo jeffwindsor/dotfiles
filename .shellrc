@@ -191,21 +191,20 @@ if command -v docker &>/dev/null; then
 	alias dila='docker image ls --all'
 	alias dir='docker image rm -f'
 	alias dr='docker run -it '
-	alias drs="docker_run_on_git_repo \$SOURCE"
 fi
 
 #== ls replacement (rust): https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
-	alias l="clear && lla"
-	alias la="eza -F --group-directories-first --git --all --no-user"
-	alias ll="eza -lF --group-directories-first --no-user"
-	alias lla="eza -lF --group-directories-first --git --all --no-user"
+	alias l="clear && eza -lF --header --group-directories-first --git --all --no-user --no-permissions"
+	alias la="eza -F --group-directories-first --git --all --no-user --no-permissions"
+	alias ll="eza -lF --group-directories-first --git --no-user --no-permissions"
+	alias lla="eza -lF --group-directories-first --git --all --no-user --no-permissions"
 
 	alias tree="eza --tree --git --follow-symlinks"
 	alias treea="eza --tree --git --all --follow-symlinks"
 else
 	# default to using ls
-	alias l="clear && ls --color=auto"
+	alias l="clear && ls -la --color=auto"
 	alias la="ls -a --color=auto"
 	alias ll="ls -l --color=auto"
 	alias lla="ls -la --color=auto"
@@ -269,7 +268,7 @@ if command -v git &>/dev/null; then
 	# alias gm="git maintenance start"
 	alias gs="git status"
 	# shows terse status for all repositories
-	alias gss="git_all status -s"
+	alias gss="git-find-all-repos | git-exec-on status -s"
 	alias gpl="git pull"
 
 	# git clone from git hub to my source directory
