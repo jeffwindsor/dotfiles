@@ -254,8 +254,9 @@ if command -v git &>/dev/null; then
 
 	# sync all listed git repos. escaping REPOS_TO_SYNC so it will run with run time value
 	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v"
-	alias ga="git-find-all-repos"
-	alias gax="git-find-all-repos | git-exec-on"
+	alias gar="git-find-all-repos"
+	alias garx="git-find-all-repos | git-exec-on"
+	alias gars="git-find-all-repos | git-exec-on status -s"
 	# git blame (more precise)
 	alias gb="git blame -w -C -C -C"
 	# git blame line range
@@ -268,7 +269,6 @@ if command -v git &>/dev/null; then
 	# alias gm="git maintenance start"
 	alias gs="git status"
 	# shows terse status for all repositories
-	alias gss="git-find-all-repos | git-exec-on status -s"
 	alias gpl="git pull"
 
 	# git clone from git hub to my source directory
