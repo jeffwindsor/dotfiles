@@ -279,6 +279,7 @@ if command -v git &>/dev/null; then
 	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
 	if command -v lazygit &>/dev/null; then
 		alias gg="lazygit"
+		alias ggs="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
 		alias lg="lazygit"
 	fi
 fi
