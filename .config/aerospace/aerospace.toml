@@ -88,85 +88,95 @@ alt-equal = 'resize smart +50'
 alt-slash = 'layout tiles horizontal vertical'
 alt-period = 'layout accordion horizontal vertical'
 
-# workspaces 
+# focus workspaces 
 alt-1 = 'workspace 1'
-cmd-1 = 'workspace 1'                                       # for others who use my machine and expect macos default
-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
 alt-2 = 'workspace 2'
-cmd-2 = 'workspace 2'                                       # for others who use my machine and expect macos default
-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
 alt-3 = 'workspace 3'
-cmd-3 = 'workspace 3'                                       # for others who use my machine and expect macos default
-alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
 alt-4 = 'workspace 4'
-cmd-4 = 'workspace 4'                                       # for others who use my machine and expect macos default
-alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
 alt-5 = 'workspace 5'
-cmd-5 = 'workspace 5'                                       # for others who use my machine and expect macos default
-alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
 alt-6 = 'workspace 6'
-cmd-6 = 'workspace 6'                                       # for others who use my machine and expect macos default
-alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
 alt-7 = 'workspace 7'
-cmd-7 = 'workspace 7'                                       # for others who use my machine and expect macos default
-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 alt-8 = 'workspace 8'
-cmd-8 = 'workspace 8'                                       # for others who use my machine and expect macos default
-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 alt-9 = 'workspace 9'
-cmd-9 = 'workspace 9'                                       # for others who use my machine and expect macos default
-alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 alt-0 = 'workspace 10'
-cmd-0 = 'workspace 10'                                      # for others who use my machine and expect macos default
-alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
-alt-a = 'workspace a'
-alt-shift-a = ['move-node-to-workspace a', 'workspace a']
-alt-c = 'workspace c'
-alt-shift-c = ['move-node-to-workspace c', 'workspace c']
-alt-m = 'workspace m'
-alt-shift-m = ['move-node-to-workspace m', 'workspace m']
-alt-n = 'workspace n'
-alt-shift-n = ['move-node-to-workspace n', 'workspace n']
-alt-o = 'workspace o'
-alt-shift-o = ['move-node-to-workspace o', 'workspace o']
-alt-s = 'workspace s'
-alt-shift-s = ['move-node-to-workspace s', 'workspace s']
-alt-t = 'workspace t'
-alt-shift-t = ['move-node-to-workspace t', 'workspace t']
-alt-u = 'workspace u'
-alt-shift-u = ['move-node-to-workspace u', 'workspace u']
-alt-y = 'workspace y'
-alt-shift-y = ['move-node-to-workspace y', 'workspace y']
 
+alt-a = 'workspace Slack'
+alt-b = 'workspace Browser'
+alt-c = 'workspace Calendar'
+alt-i = 'workspace IDE'
+alt-m = 'workspace Messages'
+alt-n = 'workspace Notes'
+alt-o = 'workspace Outlook'
+alt-s = 'workspace Spotify'
+alt-t = 'workspace Teams'
+alt-enter = 'workspace Term'
+
+# focus workspaces: mimic macos workspaces (for numbers only)
+cmd-1 = 'workspace 1'                                       
+cmd-2 = 'workspace 2'                                       
+cmd-3 = 'workspace 3'                                       
+cmd-4 = 'workspace 4'                                       
+cmd-5 = 'workspace 5'                                       
+cmd-6 = 'workspace 6'                                       
+cmd-7 = 'workspace 7'                                       
+cmd-8 = 'workspace 8'                                       
+cmd-9 = 'workspace 9'                                       
+cmd-0 = 'workspace 10'
+
+# move window to workspace                         
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
+
+alt-shift-a = ['move-node-to-workspace Slack', 'workspace Slack']
+alt-shift-b = ['move-node-to-workspace Browser', 'workspace Browser']
+alt-shift-c = ['move-node-to-workspace Calendar', 'workspace Calendar']
+alt-shift-i = ['move-node-to-workspace IDE', 'workspace IDE']
+alt-shift-m = ['move-node-to-workspace Messages', 'workspace Messages']
+alt-shift-n = ['move-node-to-workspace Notes', 'workspace Notes']
+alt-shift-o = ['move-node-to-workspace Outlook', 'workspace Outlook']
+alt-shift-s = ['move-node-to-workspace Spotify', 'workspace Spotify']
+alt-shift-t = ['move-node-to-workspace Teams', 'workspace Teams']
+alt-shift-enter = ['move-node-to-workspace Term', 'workspace Term']
+
+# focus next / prev workspaces
 alt-right = 'workspace --wrap-around next'
 alt-left = 'workspace --wrap-around prev'
 
 # Monitors : ALT + CMD
 alt-cmd-1 = 'focus-monitor 1'
-alt-cmd-shift-1 = ['move-node-to-monitor 1', 'focus-monitor 1']
 alt-cmd-2 = 'focus-monitor 2'
-alt-cmd-shift-2 = ['move-node-to-monitor 2', 'focus-monitor 2']
 alt-cmd-3 = 'focus-monitor 3'
+
+alt-cmd-shift-1 = ['move-node-to-monitor 1', 'focus-monitor 1']
+alt-cmd-shift-2 = ['move-node-to-monitor 2', 'focus-monitor 2']
 alt-cmd-shift-3 = ['move-node-to-monitor 3', 'focus-monitor 3']
 
 alt-cmd-right = 'focus-monitor --wrap-around next'
 alt-cmd-left = 'focus-monitor --wrap-around prev'
 
 # LAUNCHERS : alt-ctrl
-alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
-alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
-alt-ctrl-space = 'exec-and-forget open ~'
-
 alt-ctrl-a = 'exec-and-forget open /Applications/Slack.app'
-alt-ctrl-s = 'exec-and-forget open /Applications/Safari.app'                        # web browser
+alt-ctrl-b = 'exec-and-forget open /Applications/Safari.app'                        # web browser
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
 alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'             # web browser
 alt-ctrl-f = 'exec-and-forget open -n /Applications/Firefox.app'                    # web browser
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
-alt-ctrl-p = 'exec-and-forget open /Applications/Spotify.app'
+alt-ctrl-s = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
+alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
+alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+alt-ctrl-space = 'exec-and-forget open ~'
+
 
 
 # alt-cmd-up = 'macos-native-fullscreen'
@@ -189,85 +199,80 @@ cmd-m = [] # DISABLE NATIVE WINDOW MINIMIZE
 # 5 = '^built-in retina display$'  # Case insensitive regex match
 # 6 = ['secondary', 'dell']        # You can specify multiple patterns. The first matching pattern will be used
 [workspace-to-monitor-force-assignment]
-a = 'secondary' # slack
-c = 'secondary' # mac Calendar
-m = 'secondary' # mac Messages
-n = 'secondary' # mac Notes
-o = 'secondary' # ms office (work)
-p = 'secondary' # spotify
-t = 'secondary' # ms teams (work)
-u = 'secondary' # ms teams - meeting (work)
+Calendar = 'secondary' 
+Messages = 'secondary' 
+Notes = 'secondary' 
+Outlook = 'secondary' 
+Slack = 'secondary' 
+Spotify = 'secondary' 
+Teams = 'secondary' 
 
+#
 # osascript -e 'id of app "Application Name"'
 #
 # Terminal
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-run = ['move-node-to-workspace 1']
+run = ['move-node-to-workspace Term']
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
-run = ['move-node-to-workspace 1']
+run = ['move-node-to-workspace Term']
 
 # Browsers
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace Browser']
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace Broswer']
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace Browser']
 
 # Xcode
 [[on-window-detected]]
 if.app-id = 'com.apple.dt.Xcode'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace IDE']
 
 # IntelliJ
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.intellij'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace IDE']
 
 # Slack
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace a']
-
-# Slack
-[[on-window-detected]]
-if.app-id = 'com.valvesoftware.steam'
-run = ['move-node-to-workspace 8']
+run = ['move-node-to-workspace Slack']
 
 # iCalendar
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = ['move-node-to-workspace c']
+run = ['move-node-to-workspace Calendar']
 
 # iMessages
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
-run = ['move-node-to-workspace m']
+run = ['move-node-to-workspace Messages']
 
 # Notes
 [[on-window-detected]]
 if.app-id = 'com.apple.Notes'
-run = ['move-node-to-workspace n']
+run = ['move-node-to-workspace Notes']
 
 # Outlook - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = ['move-node-to-workspace o']  #, 'layout accordion horizontal']
+run = ['move-node-to-workspace Outlook']  #, 'layout accordion horizontal']
 
 # Spotify
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace p']
+run = ['move-node-to-workspace Spotify']
 
 # Teams - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['move-node-to-workspace t'] #, 'layout accordion horizontal']
+run = ['move-node-to-workspace Teams'] #, 'layout accordion horizontal']
