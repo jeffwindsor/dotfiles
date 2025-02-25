@@ -226,7 +226,7 @@ run = ['move-node-to-workspace Browser']
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
-run = ['move-node-to-workspace Broswer']
+run = ['move-node-to-workspace Browser']
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
