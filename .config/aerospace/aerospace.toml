@@ -85,8 +85,8 @@ alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
 
 # layouts
-alt-slash = 'layout tiles horizontal vertical'
-alt-period = 'layout accordion horizontal vertical'
+alt-slash = 'layout accordion horizontal vertical'
+alt-period = 'layout tiles horizontal vertical'
 
 # focus workspaces 
 alt-1 = 'workspace 1'
