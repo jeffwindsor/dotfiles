@@ -12,7 +12,7 @@ export VISUAL="zed"
 
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CACHE_HOME=$HOME/.cache
+export XDG_CACHE_HOME=$HOME/.local/cache
 export XDG_CONFIG_HOME=$HOME/.config
 
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
@@ -35,6 +35,7 @@ alias ....="cd ../../../"
 alias ...="cd ../../"
 alias ..="cd .."
 alias icloud="cd $ICLOUD && l"
+alias c="clear"
 
 function alias-dir() {
 	# create aliases for cd, edit, visual-edit and lazygit (if contains .git)
@@ -179,6 +180,11 @@ if command -v bat &>/dev/null; then
 	alias cat="bat --style=plain"
 fi
 
+#== diff
+# side by side, color, minimal output
+alias diffs="diff -dbBy --suppress-common-lines --color=always"
+
+
 #== environment management: https://github.com/direnv/direnv
 if command -v direnv &>/dev/null; then
 	eval "$(direnv hook $SHELL_NAME)"
@@ -217,13 +223,49 @@ fi
 
 #== fuzzy finder: https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
-	export FZF_DEFAULT_COMMAND='find . -type f -name ".*" -o -type f'
+	export FZF_DEFAULT_COMMAND='fd -H -t f'
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
 
 	# shows the basename in the selection window, but returns full path
 	function fzf-display-basenames() {
 		fzf --delimiter / --with-nth -1
 	}
+
+	# select functions that feed to an eval statement
+	# TODO consolidate functions???
+	# 
+	function fzf-select-eval(){
+		local exec_command="${@}"
+	
+		local one="$(fd -H -t d | fzf)"
+
+		[ -d $one ] || eval "$exec_command $one"
+	}
+
+	function fzf-select-dir-eval(){
+		local exec_command="${@}"
+	
+		local one="$(fzf)"
+
+		[ -d $one ] || eval "$exec_command $one"
+	}
+
+	function fzf-select2-eval(){
+		local exec_command="${@}"
+	
+		local one="$(fzf)"
+		local two="$(fzf)"
+
+		[ -d $one ] || [ -d $two ] || eval "$exec_command $one $two"
+	}
+
+	# fzf double select files then show diff
+	alias fdiff="fzf-select2-eval diffs"
+
+	# straight function alias
+	alias fdir="fzf-select-dir-eval"
+	alias ffile="fzf-select-eval"
+	alias ffiles="fzf-select2-eval"
 
 	# initialize
 	eval "$(fzf --$SHELL_NAME)"
