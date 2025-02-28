@@ -207,6 +207,7 @@ if command -v eza &>/dev/null; then
 	alias lla="eza -lF --group-directories-first --git --all --no-user --no-permissions"
 
 	alias tree="eza --tree --git --follow-symlinks"
+	alias treed="eza --tree -D --git --follow-symlinks"
 	alias treea="eza --tree --git --all --follow-symlinks"
 else
 	# default to using ls
