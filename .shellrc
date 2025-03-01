@@ -275,7 +275,7 @@ fi
 #==Git (Source Control): https://github.com/git/git
 if command -v git &>/dev/null; then
 
-	# 80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
+	#Example output:  80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
 	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
 
 	# Function to find all directories containing a .git subdirectory
@@ -299,7 +299,9 @@ if command -v git &>/dev/null; then
 	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v"
 	alias gar="git-find-all-repos"
 	alias garx="git-find-all-repos | git-exec-on"
-	alias gars="git-find-all-repos | git-exec-on status -s"
+	alias gars="garx status"
+	alias gss="garx status -s"
+	
 	# git blame (more precise)
 	alias gb="git blame -w -C -C -C"
 	# git blame line range
