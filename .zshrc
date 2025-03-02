@@ -1,36 +1,19 @@
 #!/usr/bin/env zsh
-zmodload zsh/zprof
+# zmodload zsh/zprof		# turn this on the profile load times. use `zprof` to get results
 
-# avoids insecure directories warning
-export ZSH_DISABLE_COMPFIX="true"
-
-autoload compinit
+autoload -Uz compinit
 compinit
 
-#==============================================================================
-# ZSH plugin manager: https://github.com/zdharma-continuum/zinit
-#==============================================================================
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-	mkdir -p "$(dirname $ZINIT_HOME)"
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-# Initialize zinit
-source "${ZINIT_HOME}/zinit.zsh"
-# plugins
-zinit light Aloxaf/fzf-tab									# FZF-TAB AFTER COMPINIT, BUT BEFORE WRAPPERS LIKE SYNTAX AND SUGGESTIONS
-zinit light zsh-users/zsh-syntax-highlighting
-#zinit light zdharma-continuum/fast-syntax-highlighting
+export ZSH_DISABLE_COMPFIX="true"		# avoids insecure directories warning
+export ZSH_PLUGIN_DIR="$HOME/.local/share/zsh/plugins"
 
-#==============================================================================
-# Shell OPTIONS
+#== Shell OPTIONS
 setopt no_beep         # no beep on error
 setopt GLOB_DOTS       # allows fzf-tab to show hidden files by default
 setopt completealiases # Autocomplete command line switches for aliases
 bindkey -e             # emacs bindings
 
-# History
+#== Zsh History
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=5000
 SAVEHIST=$HISTSIZE
@@ -44,8 +27,25 @@ setopt HIST_FIND_NO_DUPS      # Do not display a previously found event.
 setopt HIST_IGNORE_SPACE      # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history file.
 
-#==============================================================================
-# shared
-if test -f $HOME/.shellrc; then
-	source "$HOME/.shellrc" zsh
-fi
+
+#== Plugins
+function load_plugin(){
+	local plugin_repo=$1
+	local plugin_init_file=$2
+	
+	# if the plugin is not found clone it first	
+	if [[ ! -e "$ZSH_PLUGIN_DIR/$plugin_repo" ]]; then
+  		git clone --depth=1 "https://github.com/$plugin_repo.git" "$ZSH_PLUGIN_DIR/$plugin_repo"
+	fi
+
+	source "$ZSH_PLUGIN_DIR/$plugin_repo/$plugin_init_file"
+}
+
+load_plugin "Aloxaf/fzf-tab" "fzf-tab.plugin.zsh"
+load_plugin "zsh-users/zsh-syntax-highlighting" "zsh-syntax-highlighting.zsh"
+
+# keep load_plugin function local to zshrc
+unfunction load_plugin
+
+#== Personal multi-shell rc file
+[ -f $HOME/.shellrc ] &&  source "$HOME/.shellrc" zsh
