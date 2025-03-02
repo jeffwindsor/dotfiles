@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#===============================================================================
-# ENV
-#===============================================================================
+#== Enviroment Variables
 SHELL_NAME=${1:-"zsh"}
 
 export EDITOR="hx"
@@ -27,8 +25,7 @@ export NIX_DARWIN_CONFIG="$SOURCE_JEFF/nix-darwin-config"
 export NIX_SHELLS="$SOURCE_JEFF/nix-shells"
 export REPOS_TO_SYNC=("$DOTFILES" "$NIXOS_CONFIG" "$NIX_DARWIN_CONFIG" "$NIX_SHELLS")
 
-#===============================================================================
-# Jump Directories
+#== Jump Directories
 #===============================================================================
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
@@ -70,7 +67,7 @@ function array-to-string() {
 #===============================================================================
 # Package Managers
 #===============================================================================
-#== Homebrew: https://brew.sh/ ==
+#== Homebrew: https://brew.sh/
 if command -v brew &>/dev/null; then
 	# only auto-updates db every 12+ hours
 	export HOMEBREW_AUTO_UPDATE_SECS=43200
@@ -93,7 +90,7 @@ if command -v brew &>/dev/null; then
 	alias bsd="brew search --desc"
 fi
 
-#== Nix https://nixos.org/ ==
+#== Nix https://nixos.org/
 if command -v nix &>/dev/null; then
 
 	function nix-package-install-to-profile() {
@@ -157,6 +154,7 @@ EOF
 	fi
 fi
 
+
 #===============================================================================
 # Editors
 #===============================================================================
@@ -180,9 +178,11 @@ if command -v bat &>/dev/null; then
 	alias cat="bat --style=plain"
 fi
 
-#== diff
-# side by side, color, minimal output
-alias diffs="diff -dbBy --suppress-common-lines --color=always"
+#== content diff
+if command -v diff &>/dev/null; then
+	# side by side, color, minimal output
+	alias diffs="diff -dbBy --suppress-common-lines --color=always"
+fi
 
 
 #== environment management: https://github.com/direnv/direnv
@@ -215,11 +215,6 @@ else
 	alias la="ls -a --color=auto"
 	alias ll="ls -l --color=auto"
 	alias lla="ls -la --color=auto"
-fi
-
-#== bling: https://github.com/fastfetch-cli/fastfetch
-if command -v fastfetch &>/dev/null; then
-	alias ff="fastfetch"
 fi
 
 #== fuzzy finder: https://github.com/junegunn/fzf
@@ -275,7 +270,8 @@ fi
 #==Git (Source Control): https://github.com/git/git
 if command -v git &>/dev/null; then
 
-	#Example output:  80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
+	# Personal pretty format
+	#	Example output:  80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
 	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
 
 	# Function to find all directories containing a .git subdirectory
@@ -295,26 +291,19 @@ if command -v git &>/dev/null; then
 		done
 	}
 
-	# sync all listed git repos. escaping REPOS_TO_SYNC so it will run with run time value
-	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v"
-	alias gar="git-find-all-repos"
-	alias garx="git-find-all-repos | git-exec-on"
-	alias gars="garx status"
-	alias gss="garx status -s"
-	
-	# git blame (more precise)
-	alias gb="git blame -w -C -C -C"
-	# git blame line range
-	alias gbl="git blame -w -C -C -C -L"
-	# alias gclean="git clean -xdf"
-	# git diff by words changed
-	alias gdw="git diff --word-diff"
-	# logs with personal pretty format, escaped $ so any change to env-var would be reflected in next run
+	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v" # sync all listed git repos
+	alias gall="git-find-all-repos"  # list all repos
+	alias gallx="git-find-all-repos | git-exec-on" # exec git command on all repos	
+	alias gb="git blame -w -C -C -C" # git blame (more precise)
+	alias gbl="git blame -w -C -C -C -L" # git blame line range
+	alias gdw="git diff --word-diff" # git diff by words changed
 	alias gl="git log --format=\$GIT_LOG_PRETTY_FORMAT"
-	# alias gm="git maintenance start"
+	
 	alias gs="git status"
-	# shows terse status for all repositories
+	alias gss="gallx status -s"		# shows terse status for all repositories
+	alias gsss="gallx status"		# shows verbose status for all repositories
 	alias gpl="git pull"
+	alias gpls="gallx pull"
 
 	# git clone from git hub to my source directory
 	function ghub() { git clone git@github.com:"$1" "$SOURCE"/github.com/"$1"; }
@@ -324,8 +313,8 @@ if command -v git &>/dev/null; then
 	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
 	if command -v lazygit &>/dev/null; then
 		alias gg="lazygit"
-		alias ggs="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
-		alias lg="lazygit"
+		# alias ggs="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
+		# alias lg="lazygit"
 	fi
 fi
 
@@ -368,15 +357,15 @@ if command -v stow &>/dev/null; then
 fi
 
 #== terminal multiplexer : https://github.com/tmux/tmux
-if command -v tmux &>/dev/null; then
-	alias t="tmux"
-	alias tl="tmux ls"         # list
-	alias ta="tmux attach"     # attach all sessions or number
-	alias tan="tmux attach -t" # attach to named
-	alias tn="tmux new -s"     # new with name
-	alias tk="tmux kill-session"
-	alias tkn="tmux kill-session -t"
-fi
+# if command -v tmux &>/dev/null; then
+# 	alias t="tmux"
+# 	alias tl="tmux ls"         # list
+# 	alias ta="tmux attach"     # attach all sessions or number
+# 	alias tan="tmux attach -t" # attach to named
+# 	alias tn="tmux new -s"     # new with name
+# 	alias tk="tmux kill-session"
+# 	alias tkn="tmux kill-session -t"
+# fi
 
 
 #== tui file manager: https://github.com/sxyazi/yazi
@@ -397,14 +386,5 @@ if command -v yazi &>/dev/null; then
 
 fi
 
-#== xsh packager manager
-if command -v zinit &>/dev/null; then
-	alias zclean="zinit delete --clean"
-	alias zup="zinit update --all"
-	alias zsync="zclean && zup"
-fi
-
 # source machine specific aliases
-if test -f "$HOME/.shellrc.local"; then
-	source "$HOME/.shellrc.local"
-fi
+[ -f "$HOME/.shellrc.local" ] && source "$HOME/.shellrc.local"
