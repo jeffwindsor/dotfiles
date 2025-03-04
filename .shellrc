@@ -111,14 +111,11 @@ if command -v nix &>/dev/null; then
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
 	
-  # name (default: nix-shell). Set the name of the derivation.
+  # name (default: nix-shell).
   # name = "";
-  	
+	
   # packages (default: []). Add executable packages to the nix-shell environment.
   packages = with pkgs; [];
-
-  # inputsFrom (default: []). Add build dependencies of the listed derivations to the nix-shell environment.
-  # inputsFrom = [ pkgs.hello ];
 
   # shellHook (default: ""). Bash statements that are executed by nix-shell.
   shellHook = ''
@@ -126,6 +123,7 @@ pkgs.mkShell {
     # add --version or some other call to list dev packages
 	echo -e "\e[0m"
   '';
+  
 }
 EOF
 	}
@@ -184,19 +182,9 @@ if command -v diff &>/dev/null; then
 	alias diffs="diff -dbBy --suppress-common-lines --color=always"
 fi
 
-
 #== environment management: https://github.com/direnv/direnv
 if command -v direnv &>/dev/null; then
 	eval "$(direnv hook $SHELL_NAME)"
-fi
-
-#== containers
-if command -v docker &>/dev/null; then
-	alias dcl='docker container ls --all'
-	alias dil='docker image ls'
-	alias dila='docker image ls --all'
-	alias dir='docker image rm -f'
-	alias dr='docker run -it '
 fi
 
 #== ls replacement (rust): https://github.com/eza-community/eza
