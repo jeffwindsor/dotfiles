@@ -113,9 +113,7 @@ esc = ["collapse_selection", "normal_mode", ":write"] # vim like escape
 "H" = "goto_line_start"
 "L" = "goto_line_end"
 "V" = ["select_mode", "extend_to_line_bounds"]
-"`" = "switch_case"
 "y" = ["yank_main_selection_to_clipboard", "yank"]
-"~" = "switch_case"
 esc = ["collapse_selection", "keep_primary_selection", ":write"]
 
 [keys.select]
@@ -123,7 +121,5 @@ esc = ["collapse_selection", "keep_primary_selection", ":write"]
 "H" = "goto_line_start"
 "L" = "goto_line_end"
 "V" = ["select_mode", "extend_to_line_bounds"]
-"`" = "switch_case"
 "y" = ["yank_main_selection_to_clipboard", "yank"]
-"~" = "switch_case"
 esc = ["collapse_selection", "normal_mode", ":write"]
