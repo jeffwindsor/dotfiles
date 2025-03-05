@@ -164,7 +164,10 @@ alt-cmd-shift-3 = ['move-node-to-monitor 3', 'focus-monitor 3']
 alt-cmd-right = 'focus-monitor --wrap-around next'
 alt-cmd-left = 'focus-monitor --wrap-around prev'
 
-#== LAUNCHERS : alt-ctrl
+alt-cmd-shift-right = 'move-workspace-to-monitor --wrap-around next'
+alt-cmd-shift-left = 'move-workspace-to-monitor --wrap-around prev'
+
+#== Launchers : ALT + CTRL
 alt-ctrl-a = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-b = 'exec-and-forget open /Applications/Safari.app'                        # web browser
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
@@ -179,7 +182,7 @@ alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 alt-ctrl-space = 'exec-and-forget open ~'
 
-#== OVERRIDE / DISABLE
+#== Disable Default Window Macos shortcuts (to avoid confusion)
 cmd-h = [] # DISABLE NATIVE WINDOW HIDE
 cmd-m = [] # DISABLE NATIVE WINDOW MINIMIZE
 
