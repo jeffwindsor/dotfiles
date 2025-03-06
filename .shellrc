@@ -130,8 +130,8 @@ EOF
 
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	alias nps="nix search nixpkgs"
-	alias ns="nix-shell"
-	alias nsf="nix-shell-from-file"
+	alias ns="nix-shell-from-file"
+	alias nsp="nix-shell -p"
 	alias optimise="nix optimise-store"
 
 	if [ -d "/etc/nixos" ]; then
