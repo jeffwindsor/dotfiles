@@ -178,6 +178,7 @@ alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
 alt-ctrl-s = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
+alt-ctrl-z = 'exec-and-forget open /Applications/Zen.app'                            # web browser
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 alt-ctrl-space = 'exec-and-forget open ~'
