@@ -132,7 +132,7 @@ EOF
 	alias nps="nix search nixpkgs"
 	alias ns="nix-shell-from-file"
 	alias nsp="nix-shell -p"
-	alias optimise="nix optimise-store"
+	alias optimise="nix store optimise"
 
 	if [ -d "/etc/nixos" ]; then
 		#nixos
@@ -143,10 +143,10 @@ EOF
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin using flakes
-		export NIX_FLAKE="$NIX_DARWIN_CONFIG/$(hostname -s)"
-		alias clean="sudo nix-collect-garbage --delete-generations +5"
+		export NIX_FLAKE="$NIX_DARWIN_CONFIG"
+		alias clean="nix store gc"
 		alias list_gens="darwin-rebuild --list-generations"
-		alias rebuild="darwin-rebuild switch --flake \$NIX_FLAKE"
+		alias rebuild="darwin-rebuild switch --impure --flake \$NIX_FLAKE"
 		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
 		alias update="nix flake update --flake \$NIX_FLAKE"
 	fi
