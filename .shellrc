@@ -128,6 +128,7 @@ pkgs.mkShell {
 EOF
 	}
 
+	export NIXPKGS_ALLOW_UNFREE=1
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	alias nps="nix search nixpkgs"
 	alias ns="nix-shell-from-file"
