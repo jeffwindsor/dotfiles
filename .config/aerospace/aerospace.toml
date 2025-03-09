@@ -115,16 +115,16 @@ alt-enter = 'workspace Term'   # helix Picker: Open selected in the background w
 alt-backslash = 'workspace Term2'  # none: workspace for terminal on secondary monitor (without moving workspaces)
 
 # mimic macos workspaces (for other devs)
-cmd-1 = 'workspace Term'                                       
-cmd-2 = 'workspace Browser'                                       
-cmd-3 = 'workspace 3'                                       
-cmd-4 = 'workspace 4'                                       
-cmd-5 = 'workspace IDE'                                       
-cmd-6 = 'workspace 6'                                       
-cmd-7 = 'workspace 7'                                       
-cmd-8 = 'workspace 8'                                       
-cmd-9 = 'workspace 9'                                       
-cmd-0 = 'workspace 10'
+# cmd-1 = 'workspace Term'                                       
+# cmd-2 = 'workspace Browser'                                       
+# cmd-3 = 'workspace 3'                                       
+# cmd-4 = 'workspace 4'                                       
+# cmd-5 = 'workspace IDE'                                       
+# cmd-6 = 'workspace 6'                                       
+# cmd-7 = 'workspace 7'                                       
+# cmd-8 = 'workspace 8'                                       
+# cmd-9 = 'workspace 9'                                       
+# cmd-0 = 'workspace 10'
 
 # move window to workspace                         
 alt-shift-1 = ['move-node-to-workspace Term', 'workspace Term']
