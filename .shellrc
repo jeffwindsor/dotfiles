@@ -209,7 +209,7 @@ fi
 #== fuzzy finder: https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_COMMAND='fd -H -t f'
-	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window down'
+	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none' # --preview "bat {}" --preview-window down'
 
 	# shows the basename in the selection window, but returns full path
 	function fzf-display-basenames() {
@@ -254,6 +254,14 @@ if command -v fzf &>/dev/null; then
 
 	# initialize
 	eval "$(fzf --$SHELL_NAME)"
+	# map keys
+	if [[ $SHELL_NAME == "zsh" ]]; then
+		# use Ctrl-e instead of Alt-c for "fzf to cd"
+		zle     -N             fzf-cd-widget
+		bindkey -M emacs '\C-e' fzf-cd-widget
+		bindkey -rM emacs '\ec'
+	fi
+	
 fi
 
 #==Git (Source Control): https://github.com/git/git
