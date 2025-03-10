@@ -87,7 +87,9 @@ alt-equal = 'resize smart +50'
 
 #== LAYOUTS
 alt-slash = 'layout accordion horizontal vertical'
+alt-ctrl-slash = 'layout accordion horizontal vertical'
 alt-period = 'layout tiles horizontal vertical'
+alt-ctrl-period = 'layout tiles horizontal vertical'
 
 
 #== WORKSPACES
