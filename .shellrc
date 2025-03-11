@@ -110,20 +110,14 @@ if command -v nix &>/dev/null; then
 		cat <<EOF >shell.nix
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
-	
-  # name (default: nix-shell).
-  # name = "";
-	
-  # packages (default: []). Add executable packages to the nix-shell environment.
-  packages = with pkgs; [];
-
-  # shellHook (default: ""). Bash statements that are executed by nix-shell.
-  shellHook = ''
-    echo -e "\e[1;33mDevelopment Environment\e[0;32m"
-    # add --version or some other call to list dev packages
-	echo -e "\e[0m"
-  '';
-  
+    name = "";
+	# https://search.nixos.org/packages?channel=unstable
+    packages = with pkgs; [];
+  	shellHook = ''
+    	echo -e "\e[1;33mDevelopment Environment\e[0;32m"
+    	# add --version or some other call to list dev packages
+		echo -e "\e[0m"
+  	'';
 }
 EOF
 	}
