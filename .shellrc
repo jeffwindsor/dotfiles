@@ -140,10 +140,12 @@ EOF
 		# nix-darwin using flakes
 		export NIX_FLAKE="$NIX_DARWIN_CONFIG"
 		alias clean="nix store gc"
-		alias list_gens="darwin-rebuild --list-generations"
+		alias generations="darwin-rebuild --list-generations"
 		alias rebuild="darwin-rebuild switch --impure --flake \$NIX_FLAKE"
 		alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
 		alias update="nix flake update --flake \$NIX_FLAKE"
+		# will create links for nixos gui apps that will appear in Spotlight
+		alias trampoline="nix run github:hraban/mac-app-util -- sync-trampolines '/nix/store/pnivslr60mcz2bllm76jvc1w2f02xl4p-system-applications/Applications' '/Applications/Nix Trampolines'"
 	fi
 fi
 
