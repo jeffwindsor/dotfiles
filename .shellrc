@@ -215,7 +215,7 @@ if command -v fzf &>/dev/null; then
 	# select functions that feed to an eval statement
 	# TODO consolidate functions???
 	# 
-	function fzf-select-eval(){
+	function fzf-select-dir-eval(){
 		local exec_command="${@}"
 	
 		local one="$(fd -H -t d | fzf)"
@@ -223,7 +223,7 @@ if command -v fzf &>/dev/null; then
 		[ -d $one ] || eval "$exec_command $one"
 	}
 
-	function fzf-select-dir-eval(){
+	function fzf-select-eval(){
 		local exec_command="${@}"
 	
 		local one="$(fzf)"
