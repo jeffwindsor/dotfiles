@@ -127,6 +127,7 @@ EOF
 	alias nps="nix search nixpkgs"
 	alias ns="nix-shell-from-file"
 	alias nsp="nix-shell -p"
+	alias ninit="nix-shell-init"
 	alias optimise="nix store optimise"
 
 	if [ -d "/etc/nixos" ]; then
