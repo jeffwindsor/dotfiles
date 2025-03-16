@@ -95,7 +95,7 @@ alt-ctrl-period = 'layout tiles horizontal vertical'
 #== WORKSPACES
 # focus on window
 alt-1 = 'workspace Term'
-alt-2 = 'workspace Browser'
+alt-2 = 'workspace www'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
 alt-5 = 'workspace IDE'
@@ -105,8 +105,8 @@ alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-0 = 'workspace 10'
 alt-a = 'workspace Slack'      # helix Syntax Tree: select_all_siblings
-alt-b = 'workspace Browser'    # helix Prompt-Backward a word
-alt-c = 'workspace Calendar'   # helix Syntax Tree: toggle_line_comments
+alt-w = 'workspace www'    # helix Prompt-Backward a word
+alt-c = 'workspace Cal'   # helix Syntax Tree: toggle_line_comments
 alt-i = 'workspace IDE'        # helix Syntax Tree: shrink_selection 
 alt-m = 'workspace Messages'   # none
 alt-n = 'workspace Notes'      # helix Syntax Tree: select_next_sibling
@@ -118,7 +118,7 @@ alt-backslash = 'workspace Term2'  # none: workspace for terminal on secondary m
 
 # mimic macos workspaces (for other devs)
 cmd-1 = 'workspace Term'                                       
-cmd-2 = 'workspace Browser'                                       
+cmd-2 = 'workspace www'                                       
 cmd-3 = 'workspace 3'                                       
 cmd-4 = 'workspace 4'                                       
 cmd-5 = 'workspace IDE'                                       
@@ -130,7 +130,7 @@ cmd-0 = 'workspace 10'
 
 # move window to workspace                         
 alt-shift-1 = ['move-node-to-workspace Term', 'workspace Term']
-alt-shift-2 = ['move-node-to-workspace Browser', 'workspace Browser']
+alt-shift-2 = ['move-node-to-workspace www', 'workspace www']
 alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
 alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
 alt-shift-5 = ['move-node-to-workspace IDE', 'workspace IDE']
@@ -140,8 +140,8 @@ alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
 alt-shift-a = ['move-node-to-workspace Slack', 'workspace Slack']
-alt-shift-b = ['move-node-to-workspace Browser', 'workspace Browser']
-alt-shift-c = ['move-node-to-workspace Calendar', 'workspace Calendar']
+alt-shift-w = ['move-node-to-workspace www', 'workspace www']
+alt-shift-c = ['move-node-to-workspace Cal', 'workspace Cal']
 alt-shift-i = ['move-node-to-workspace IDE', 'workspace IDE']
 alt-shift-m = ['move-node-to-workspace Messages', 'workspace Messages']
 alt-shift-n = ['move-node-to-workspace Notes', 'workspace Notes']
@@ -191,7 +191,7 @@ cmd-m = [] # DISABLE NATIVE WINDOW MINIMIZE
 
 #== Assign workspaces to monitors if the monitor is present
 [workspace-to-monitor-force-assignment]
-Calendar = 'secondary' 
+Cal = 'secondary' 
 Messages = 'secondary' 
 Notes = 'secondary' 
 Outlook = 'secondary' 
@@ -214,22 +214,22 @@ if.app-id = 'org.alacritty'
 run = ['move-node-to-workspace Term']
 
 
-# Browsers
+# wwws
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
-run = ['move-node-to-workspace Browser']
+run = ['move-node-to-workspace www']
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
-run = ['move-node-to-workspace Browser']
+run = ['move-node-to-workspace www']
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = ['move-node-to-workspace Browser']
+run = ['move-node-to-workspace www']
 
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
-run = ['move-node-to-workspace Browser']
+run = ['move-node-to-workspace www']
 
 
 
@@ -251,7 +251,7 @@ run = ['move-node-to-workspace Slack']
 # Calendar
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = ['move-node-to-workspace Calendar']
+run = ['move-node-to-workspace Cal']
 
 # Messages
 [[on-window-detected]]
@@ -276,4 +276,4 @@ run = ['move-node-to-workspace Spotify']
 # Teams - set to accordian horiztontal because many windows may exist for app
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['move-node-to-workspace Teams'] #, 'layout accordion horizontal']
+run = ['move-node-to-workspace Teams'] #, 'layout accordion oooooooooooo
