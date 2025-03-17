@@ -54,8 +54,8 @@ alias-dir "jeff" "$SOURCE_JEFF"
 alias-dir "src" "\$(git-find-all-repos|fzf-display-basenames)"
 
 alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
-alias-dir "dw" "$NIX_DARWIN_CONFIG"
-alias-dir "nixos" "$NIXOS_CONFIG"
+alias-dir "dar" "$NIX_DARWIN_CONFIG"
+alias-dir "nos" "$NIXOS_CONFIG"
 alias-dir "nss" "$NIX_SHELLS"
 
 function array-to-string() {
@@ -290,7 +290,7 @@ if command -v git &>/dev/null; then
 
 	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v" # sync all listed git repos
 	alias gall="git-find-all-repos"  # list all repos
-	alias gallx="git-find-all-repos | git-exec-on" # exec git command on all repos	
+	alias gallx="clear && git-find-all-repos | git-exec-on" # exec git command on all repos	
 	alias gb="git blame -w -C -C -C" # git blame (more precise)
 	alias gbl="git blame -w -C -C -C -L" # git blame line range
 	alias gdw="git diff --word-diff" # git diff by words changed
