@@ -1,3 +1,15 @@
+#== RUST ==
+[[language]]
+name="rust"
+formatter = { command = "rustfmt" }
+auto-format = true
+
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+checkOnSave = {command = "clippy", extraArgs = ["--", "-W", "clippy::pedantic"]}
+cargo = {allFeatures = true}
+procMacro = {enable = true }
+
 #== BASH ==
 [[language]]
 name = "bash"
