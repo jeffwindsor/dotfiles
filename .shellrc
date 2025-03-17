@@ -126,6 +126,9 @@ EOF
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	alias nps="nix search nixpkgs"
 	alias ns="nix-shell-from-file"
+	alias nsr="nix-shell $NIX_SHELLS/rust.nix"
+	alias nsd="nix-shell $NIX_SHELLS/dotfiles.nix"
+	alias nsp="nix-shell $NIX_SHELLS/python312.nix"
 	alias nsp="nix-shell -p"
 	alias ninit="nix-shell-init"
 	alias optimise="nix store optimise"
