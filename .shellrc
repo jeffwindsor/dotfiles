@@ -293,7 +293,7 @@ if command -v git &>/dev/null; then
 	alias gallx="clear && git-find-all-repos | git-exec-on" # exec git command on all repos	
 	alias gb="git blame -w -C -C -C" # git blame (more precise)
 	alias gbl="git blame -w -C -C -C -L" # git blame line range
-	alias gdw="git diff --word-diff" # git diff by words changed
+	alias gdw="git diff --word-diff --unified=0" # git diff by words changed, minimal context
 	alias gl="git log --format=\$GIT_LOG_PRETTY_FORMAT"
 	
 	alias gs="git status"
