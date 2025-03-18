@@ -305,9 +305,17 @@ if command -v git &>/dev/null; then
 	alias gpls="gallx pull"
 
 	# git clone from git hub to my source directory
-	function ghub() { git clone git@github.com:"$1" "$SOURCE"/github.com/"$1"; }
+	function ghub() {
+		git clone git@github.com:"$1" "$SOURCE"/github.com/"$1";
+		cd "$SOURCE"/gitlab.cj.dev/"$1";
+		l
+	}
 	# git clone from git hub to my source directory
-	function glab() { git clone git@gitlab.cj.dev:"$1" "$SOURCE"/gitlab.cj.dev/"$1"; }
+	function glab() {
+		git clone git@gitlab.cj.dev:"$1" "$SOURCE"/gitlab.cj.dev/"$1";
+		cd "$SOURCE"/gitlab.cj.dev/"$1";
+		l
+	}
 
 	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
 	if command -v lazygit &>/dev/null; then
