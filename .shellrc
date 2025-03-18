@@ -146,7 +146,7 @@ EOF
 		export NIX_FLAKE="$NIX_DARWIN_CONFIG"
 		alias clean="nix store gc"
 		alias generations="darwin-rebuild --list-generations"
-		alias rebuild="darwin-rebuild switch --impure --flake \$NIX_FLAKE"
+		alias rebuild="darwin-rebuild build --impure --flake \$NIX_FLAKE"
 		alias switch="darwin-rebuild switch --impure --flake \$NIX_FLAKE"
 		# alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
 		alias update="nix flake update --flake \$NIX_FLAKE"
