@@ -20,9 +20,9 @@ export SOURCE_GITCJ="$SOURCE/gitlab.cj.dev"
 export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
 
 export DOTFILES="$SOURCE_JEFF/dotfiles"
-export NIX_CONFIG="$SOURCE_JEFF/nix-config"
-export NIX_SHELLS="$SOURCE_JEFF/nix-shells"
-export REPOS_TO_SYNC=("$DOTFILES" "$NIX_CONFIG" "$NIX_SHELLS")
+export NIXCONFIG="$SOURCE_JEFF/nix-config"
+export NIXSHELLS="$SOURCE_JEFF/nix-shells"
+export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG" "$NIXSHELLS")
 
 #== Jump Directories
 #===============================================================================
@@ -53,8 +53,8 @@ alias-dir "jeff" "$SOURCE_JEFF"
 alias-dir "src" "\$(git-find-all-repos|fzf-display-basenames)"
 
 alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
-alias-dir "n" "$NIX_CONFIG"
-alias-dir "s" "$NIX_SHELLS"
+alias-dir "n" "$NIXCONFIG"
+alias-dir "s" "$NIXSHELLS"
 
 function array-to-string() {
 	IFS=$'\n' # Use newline as delimiter
@@ -97,7 +97,7 @@ if command -v nix &>/dev/null; then
 
 	function nix-shell-from-file() {
 		local selection
-		selection=$(fd -tf . "$NIX_SHELLS" | fzf-display-basenames)
+		selection=$(fd -tf . "$NIXSHELLS" | fzf-display-basenames)
 
 		[[ -n $selection ]] && nix-shell $selection
 
@@ -124,9 +124,9 @@ EOF
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	# alias nps="nix search nixpkgs"
 	alias ns="nix-shell-from-file"
-	alias ns-r="nix-shell $NIX_SHELLS/rust.nix"
-	alias ns-d="nix-shell $NIX_SHELLS/dotfiles.nix"
-	alias ns-p="nix-shell $NIX_SHELLS/python312.nix"
+	alias ns-r="nix-shell $NIXSHELLS/rust.nix"
+	alias ns-d="nix-shell $NIXSHELLS/dotfiles.nix"
+	alias ns-p="nix-shell $NIXSHELLS/python312.nix"
 	alias nsp="nix-shell -p"
 	alias ninit="nix-shell-init"
 	alias optimise="nix store optimise"
@@ -141,13 +141,12 @@ EOF
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin using flakes
-		export NIX_FLAKE="$NIX_CONFIG"
 		alias clean="nix store gc"
 		alias generations="darwin-rebuild --list-generations"
-		alias rebuild="darwin-rebuild build --impure --flake \$NIX_FLAKE"
-		alias switch="darwin-rebuild switch --impure --flake \$NIX_FLAKE"
-		# alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_CONFIG/\$(hostname -s)"
-		alias update="nix flake update --flake \$NIX_FLAKE"
+		alias rebuild="darwin-rebuild build --impure --flake \$NIXCONFIG"
+		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG"
+		# alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIXCONFIG/\$(hostname -s)"
+		alias update="nix flake update --flake \$NIXCONFIG"
 		# will create links for nixos gui apps that will appear in Spotlight
 		alias trampoline="nix run github:hraban/mac-app-util -- sync-trampolines '/nix/store/pnivslr60mcz2bllm76jvc1w2f02xl4p-system-applications/Applications' '/Applications/Nix Trampolines'"
 	fi

@@ -58,3 +58,8 @@ $env.PROMPT_COMMAND_RIGHT = {date now | format date "%a, %b %d %I:%M:%S%p"}
 # ==================================================================
 # ALIASES
 # ==================================================================
+
+
+# STARSHIP PROMPT
+mkdir ($nu.data-dir | path join "vendor/autoload")
+starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
