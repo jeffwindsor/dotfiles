@@ -20,10 +20,9 @@ export SOURCE_GITCJ="$SOURCE/gitlab.cj.dev"
 export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
 
 export DOTFILES="$SOURCE_JEFF/dotfiles"
-export NIXOS_CONFIG="$SOURCE_JEFF/nixos-config"
-export NIX_DARWIN_CONFIG="$SOURCE_JEFF/nix-darwin-config"
+export NIX_CONFIG="$SOURCE_JEFF/nix-config"
 export NIX_SHELLS="$SOURCE_JEFF/nix-shells"
-export REPOS_TO_SYNC=("$DOTFILES" "$NIXOS_CONFIG" "$NIX_DARWIN_CONFIG" "$NIX_SHELLS")
+export REPOS_TO_SYNC=("$DOTFILES" "$NIX_CONFIG" "$NIX_SHELLS")
 
 #== Jump Directories
 #===============================================================================
@@ -54,9 +53,8 @@ alias-dir "jeff" "$SOURCE_JEFF"
 alias-dir "src" "\$(git-find-all-repos|fzf-display-basenames)"
 
 alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
-alias-dir "dar" "$NIX_DARWIN_CONFIG"
-alias-dir "nos" "$NIXOS_CONFIG"
-alias-dir "nss" "$NIX_SHELLS"
+alias-dir "n" "$NIX_CONFIG"
+alias-dir "s" "$NIX_SHELLS"
 
 function array-to-string() {
 	IFS=$'\n' # Use newline as delimiter
@@ -68,27 +66,27 @@ function array-to-string() {
 # Package Managers
 #===============================================================================
 #== Homebrew: https://brew.sh/
-if command -v brew &>/dev/null; then
-	# only auto-updates db every 12+ hours
-	export HOMEBREW_AUTO_UPDATE_SECS=43200
-	# initialize
-	eval "$($(which brew) shellenv)"
+# if command -v brew &>/dev/null; then
+# 	# only auto-updates db every 12+ hours
+# 	export HOMEBREW_AUTO_UPDATE_SECS=43200
+# 	# initialize
+# 	eval "$($(which brew) shellenv)"
 
-	function brew-list-all() {
-		echo '== Formula Leaves =='
-		brew leaves
-		echo
-		echo '== Casks =='
-		# -1 is to 'Force output to be one entry per line'
-		brew list -1 --casks
-	}
-	alias bi="brew info"
-	alias bl="brew-list-all"
-	alias blc="brew list --casks --versions"
-	alias blf="brew list --formula --versions"
-	alias bs="brew search"
-	alias bsd="brew search --desc"
-fi
+# 	function brew-list-all() {
+# 		echo '== Formula Leaves =='
+# 		brew leaves
+# 		echo
+# 		echo '== Casks =='
+# 		# -1 is to 'Force output to be one entry per line'
+# 		brew list -1 --casks
+# 	}
+# 	alias bi="brew info"
+# 	alias bl="brew-list-all"
+# 	alias blc="brew list --casks --versions"
+# 	alias blf="brew list --formula --versions"
+# 	alias bs="brew search"
+# 	alias bsd="brew search --desc"
+# fi
 
 #== Nix https://nixos.org/
 if command -v nix &>/dev/null; then
@@ -124,11 +122,11 @@ EOF
 
 	export NIXPKGS_ALLOW_UNFREE=1
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
-	alias nps="nix search nixpkgs"
+	# alias nps="nix search nixpkgs"
 	alias ns="nix-shell-from-file"
-	alias nsr="nix-shell $NIX_SHELLS/rust.nix"
-	alias nsd="nix-shell $NIX_SHELLS/dotfiles.nix"
-	alias nsp="nix-shell $NIX_SHELLS/python312.nix"
+	alias ns-r="nix-shell $NIX_SHELLS/rust.nix"
+	alias ns-d="nix-shell $NIX_SHELLS/dotfiles.nix"
+	alias ns-p="nix-shell $NIX_SHELLS/python312.nix"
 	alias nsp="nix-shell -p"
 	alias ninit="nix-shell-init"
 	alias optimise="nix store optimise"
@@ -143,12 +141,12 @@ EOF
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin using flakes
-		export NIX_FLAKE="$NIX_DARWIN_CONFIG"
+		export NIX_FLAKE="$NIX_CONFIG"
 		alias clean="nix store gc"
 		alias generations="darwin-rebuild --list-generations"
 		alias rebuild="darwin-rebuild build --impure --flake \$NIX_FLAKE"
 		alias switch="darwin-rebuild switch --impure --flake \$NIX_FLAKE"
-		# alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_DARWIN_CONFIG/\$(hostname -s)"
+		# alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIX_CONFIG/\$(hostname -s)"
 		alias update="nix flake update --flake \$NIX_FLAKE"
 		# will create links for nixos gui apps that will appear in Spotlight
 		alias trampoline="nix run github:hraban/mac-app-util -- sync-trampolines '/nix/store/pnivslr60mcz2bllm76jvc1w2f02xl4p-system-applications/Applications' '/Applications/Nix Trampolines'"
@@ -190,7 +188,7 @@ if command -v direnv &>/dev/null; then
 	eval "$(direnv hook $SHELL_NAME)"
 fi
 
-#== ls replacement (rust): https://github.com/eza-community/eza
+#== ls replacement: https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
 	alias l="clear && eza -lF --header --group-directories-first --git --all --no-user --no-permissions"
 	alias la="eza -F --group-directories-first --git --all --no-user --no-permissions"
@@ -320,7 +318,7 @@ if command -v git &>/dev/null; then
 	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
 	if command -v lazygit &>/dev/null; then
 		alias gg="lazygit"
-		# alias ggs="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
+		alias ggg="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
 		# alias lg="lazygit"
 	fi
 fi
