@@ -15,13 +15,17 @@ procMacro = {enable = true }
 name = "bash"
 auto-format = true
 indent = { tab-width = 4, unit = " " }
-language.formatter.command = "shfmt"
+
+[language.formatter]
+command = "shfmt"
 
 #== NIX ==
 [[language]]
 name = "nix"
 language-servers = ["nixd", "nil"]
-language-server.nixd.command = "nixd"
+
+[language-server.nixd]
+command = "nixd"
 
 #== PYTHON ==
 [[language]]
