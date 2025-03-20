@@ -185,9 +185,10 @@ alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 alt-ctrl-space = 'exec-and-forget open ~'
 
-#== Disable Default Window Macos shortcuts (to avoid confusion)
-cmd-h = [] # DISABLE NATIVE WINDOW HIDE
-cmd-m = [] # DISABLE NATIVE WINDOW MINIMIZE
+#== Disable Macos shortcuts (to avoid confusion)
+cmd-m = [] # disable native window minimize
+cmd-h = [] # disable "hide application"
+cmd-alt-h = [] # disable "hide others"
 
 #== Assign workspaces to monitors if the monitor is present
 [workspace-to-monitor-force-assignment]

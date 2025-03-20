@@ -194,7 +194,7 @@ if command -v eza &>/dev/null; then
 	alias ll="eza -lF --group-directories-first --git --no-user --no-permissions"
 	alias lla="eza -lF --group-directories-first --git --all --no-user --no-permissions"
 
-	alias tree="eza --tree --git"
+	alias tree="clear && eza --tree --git"
 	alias treed="eza --tree --git -D"
 	alias treea="eza --tree --git --all --follow-symlinks"
 else
