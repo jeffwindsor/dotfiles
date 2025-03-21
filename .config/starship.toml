@@ -1,14 +1,11 @@
 format = """
 [┌ ](blue)$directory$git_branch$git_status$jobs$nix_shell$container
-[└ ](blue)$shell$time$cmd_duration$character"""
+[└ ](blue)$shell$time$character"""
 
 [character]
 error_symbol = "[:](red)"
 success_symbol = "[:](green)"
 vicmd_symbol = "[>](yellow)"
-
-[cmd_duration]
-disabled = false
 
 [container]
 disabled = false
@@ -23,7 +20,7 @@ style = "cyan"
 symbol = ""
 
 [git_status]
-format = '([\[](dimmed yellow)[$all_status$ahead_behind](yellow)[\]](dimmed yellow)) '
+format = '([\[](dimmed yellow)[$all_status$ahead_behind](dimmed yellow)[\]](dimmed yellow)) '
 
 [jobs]
 disabled = false
@@ -40,6 +37,7 @@ style = "dimmed blue"
 bash_indicator = "💣"
 fish_indicator = "🐟"
 zsh_indicator = "🧟"
+nu_indicator = "🌑"
 
 [time]
 disabled = false
