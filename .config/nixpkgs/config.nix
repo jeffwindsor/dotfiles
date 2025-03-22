@@ -1,5 +1,5 @@
 {
   allowUnfree = true;
-  allowUnfreePredicate = pkg: true;
+  # allowUnfreePredicate = pkg: true;
   # allowUnsupportedSystem = true;
 }
