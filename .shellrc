@@ -62,31 +62,6 @@ function array-to-string() {
 	array_string="${@[*]}"
 	echo "$array_string"
 }
-#===============================================================================
-# Package Managers
-#===============================================================================
-#== Homebrew: https://brew.sh/
-# if command -v brew &>/dev/null; then
-# 	# only auto-updates db every 12+ hours
-# 	export HOMEBREW_AUTO_UPDATE_SECS=43200
-# 	# initialize
-# 	eval "$($(which brew) shellenv)"
-
-# 	function brew-list-all() {
-# 		echo '== Formula Leaves =='
-# 		brew leaves
-# 		echo
-# 		echo '== Casks =='
-# 		# -1 is to 'Force output to be one entry per line'
-# 		brew list -1 --casks
-# 	}
-# 	alias bi="brew info"
-# 	alias bl="brew-list-all"
-# 	alias blc="brew list --casks --versions"
-# 	alias blf="brew list --formula --versions"
-# 	alias bs="brew search"
-# 	alias bsd="brew search --desc"
-# fi
 
 #== Nix https://nixos.org/
 if command -v nix &>/dev/null; then
@@ -98,9 +73,7 @@ if command -v nix &>/dev/null; then
 	function nix-shell-from-file() {
 		local selection
 		selection=$(fd -tf . "$NIXSHELLS" | fzf-display-basenames)
-
 		[[ -n $selection ]] && nix-shell --extra-experimental-features flakes $selection
-
 	}
 
 	# create a blank shell.nix in currenct folder
@@ -124,20 +97,22 @@ EOF
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
 	# alias nps="nix search nixpkgs"
 	alias ns="nix-shell-from-file"
-	alias ns-r="nix-shell $NIXSHELLS/rust.nix"
-	alias ns-d="nix-shell $NIXSHELLS/dotfiles.nix"
-	alias ns-p="nix-shell $NIXSHELLS/python312.nix"
+	alias ns-r="nix-shell \$NIXSHELLS/rust.nix"
+	alias ns-d="nix-shell \$NIXSHELLS/dotfiles.nix"
+	alias ns-p="nix-shell \$NIXSHELLS/python312.nix"
 	alias nsp="nix-shell -p"
 	alias ninit="nix-shell-init"
+	
 	alias optimise="nix store optimise"
-
+	alias doctor="nix-store --verify --check-contents --repair"
+	
 	if [ -d "/etc/nixos" ]; then
 		#nixos
 		alias clean="nix-env --delete-generations +5 && nix-collect-garbage"
-		alias list_gens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
-		alias rebuild="sudo nixos-rebuild build"
-		alias switch="sudo nixos-rebuild switch"
-		alias upgrade="sudo nixos-rebuild switch --upgrade"
+		alias generations="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
+		alias rebuild="nixos-rebuild build --impure --flake \$NIXCONFIG"
+		alias switch="nixos-rebuild switch --impure --flake \$NIXCONFIG"
+		alias upgrade="nixos-rebuild switch --upgrade --impure --flake \$NIXCONFIG"
 
 	elif command -v darwin-rebuild &>/dev/null; then
 		# nix-darwin using flakes
@@ -145,10 +120,7 @@ EOF
 		alias generations="darwin-rebuild --list-generations"
 		alias rebuild="darwin-rebuild build --impure --flake \$NIXCONFIG"
 		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG"
-		# alias rebuild_from_scratch="nix run nix-darwin --extra-experimental-features \"nix-command flakes\"  -- switch --flake \$NIXCONFIG/\$(hostname -s)"
 		alias update="nix flake update --flake \$NIXCONFIG"
-		# will create links for nixos gui apps that will appear in Spotlight
-		alias trampoline="nix run github:hraban/mac-app-util -- sync-trampolines '/nix/store/pnivslr60mcz2bllm76jvc1w2f02xl4p-system-applications/Applications' '/Applications/Nix Trampolines'"
 	fi
 fi
 
