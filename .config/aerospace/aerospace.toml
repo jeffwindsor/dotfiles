@@ -205,6 +205,11 @@ Term2 = 'secondary'
 #== assign all app windows to appear on given workspace when created
 #   to find an app-id run:  osascript -e 'id of app "Application Name"'
 
+# System Preferences - push to tiling
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout tiling'
+
 # Terminal
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
