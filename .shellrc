@@ -32,6 +32,7 @@ alias ...="cd ../../"
 alias ..="cd .."
 alias icloud="cd $ICLOUD && l"
 alias c="clear"
+alias cc="cd && clear"
 
 function alias-dir() {
 	# create aliases for cd, edit, visual-edit and lazygit (if contains .git)
