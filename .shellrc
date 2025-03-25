@@ -111,7 +111,9 @@ EOF
 		alias clean="nix-env --delete-generations +5 && nix-collect-garbage"
 		alias generations="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
 		alias rebuild="nixos-rebuild build --impure --flake \$NIXCONFIG"
-		alias switch="sudo nixos-rebuild switch --impure --flake \$NIXCONFIG"
+		alias switch_only="sudo nixos-rebuild switch --impure --flake \$NIXCONFIG"
+		# build and switch nix, pull important git repos, sync dotfile links
+		alias switch="switch_only && gsync && dsync"
 		alias upgrade="sudo nixos-rebuild switch --upgrade --impure --flake \$NIXCONFIG"
 
 	elif command -v darwin-rebuild &>/dev/null; then
