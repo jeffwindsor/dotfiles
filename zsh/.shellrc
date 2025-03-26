@@ -1,0 +1,369 @@
+#!/usr/bin/env bash
+
+#== Enviroment Variables
+SHELL_NAME=${1:-"zsh"}
+
+export EDITOR="hx"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export PAGER="less -imMWR"
+export VISUAL="zed"
+
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.local/cache
+export XDG_CONFIG_HOME=$HOME/.config
+
+export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
+export SOURCE="$HOME/Source"
+export SOURCE_GITHUB="$SOURCE/github.com"
+export SOURCE_GITCJ="$SOURCE/gitlab.cj.dev"
+export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
+
+export DOTFILES="$SOURCE_JEFF/dotfiles"
+export NIXCONFIG="$SOURCE_JEFF/nix-config"
+export NIXSHELLS="$SOURCE_JEFF/nix-shells"
+export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG" "$NIXSHELLS")
+
+#== Jump Directories
+#===============================================================================
+alias .....="cd ../../../../"
+alias ....="cd ../../../"
+alias ...="cd ../../"
+alias ..="cd .."
+alias icloud="cd $ICLOUD && l"
+alias c="clear"
+alias cc="cd && clear"
+
+function alias-dir() {
+	# create aliases for cd, edit, visual-edit and lazygit (if contains .git)
+	#
+	alias "${1}"="cd $2 && l"
+	alias "${1}e"="\$EDITOR $2"
+	alias "${1}v"="\$VISUAL $2"
+
+	# lazygit only if repo
+	if [ -d "${2}/.git" ]; then
+		alias "${1}g"="lazygit --path $2"
+	fi
+}
+alias-dir "config" "$XDG_CONFIG_HOME"
+alias-dir "hub" "$SOURCE_GITHUB"
+alias-dir "lab" "$SOURCE_GITCJ"
+alias-dir "empire" "$SOURCE_GITCJ/empire"
+alias-dir "jeff" "$SOURCE_JEFF"
+alias-dir "src" "\$(git-find-all-repos|fzf-display-basenames)"
+
+alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
+alias-dir "n" "$NIXCONFIG"
+alias-dir "s" "$NIXSHELLS"
+
+function array-to-string() {
+	IFS=$'\n' # Use newline as delimiter
+	local array_string
+	array_string="${@[*]}"
+	echo "$array_string"
+}
+
+#== Nix https://nixos.org/
+if command -v nix &>/dev/null; then
+
+	function nix-package-install-to-profile() {
+		nix profile install nixpkgs#"${1}"
+	}
+
+	function nix-shell-from-file() {
+		local selection
+		selection=$(fd -tf . "$NIXSHELLS" | fzf-display-basenames)
+		[[ -n $selection ]] && nix-shell --extra-experimental-features flakes $selection
+	}
+
+	# create a blank shell.nix in currenct folder
+	function nix-shell-init() {
+		cat <<EOF >shell.nix
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.mkShell {
+    name = "";
+	# https://search.nixos.org/packages?channel=unstable
+    packages = with pkgs; [];
+  	shellHook = ''
+    	echo -e "\e[1;33mDevelopment Environment\e[0;32m"
+    	# add --version or some other call to list dev packages
+		echo -e "\e[0m"
+  	'';
+}
+EOF
+	}
+
+	export NIXPKGS_ALLOW_UNFREE=1
+	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
+	# alias nps="nix search nixpkgs"
+	alias ns="nix-shell-from-file"
+	alias ns-r="nix-shell \$NIXSHELLS/rust.nix"
+	alias ns-d="nix-shell \$NIXSHELLS/dotfiles.nix"
+	alias ns-p="nix-shell \$NIXSHELLS/python312.nix"
+	alias nsp="nix-shell -p"
+	alias ninit="nix-shell-init"
+	
+	alias optimise="nix store optimise"
+	alias doctor="nix-store --verify --check-contents --repair"
+	
+	if [ -d "/etc/nixos" ]; then
+		#nixos
+		alias clean="nix-env --delete-generations +5 && nix-collect-garbage"
+		alias generations="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
+		alias rebuild="nixos-rebuild build --impure --flake \$NIXCONFIG"
+		alias switch_only="sudo nixos-rebuild switch --impure --flake \$NIXCONFIG"
+		# build and switch nix, pull important git repos, sync dotfile links
+		alias switch="switch_only && gsync && dsync"
+		alias upgrade="sudo nixos-rebuild switch --upgrade --impure --flake \$NIXCONFIG"
+
+	elif command -v darwin-rebuild &>/dev/null; then
+		# nix-darwin using flakes
+		alias clean="nix store gc"
+		alias generations="darwin-rebuild --list-generations"
+		alias rebuild="darwin-rebuild build --impure --flake \$NIXCONFIG"
+		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG"
+		alias update="nix flake update --flake \$NIXCONFIG"
+	fi
+fi
+
+
+#===============================================================================
+# Editors
+#===============================================================================
+#== Helix: https://github.com/helix-editor/helix
+if command -v hx &>/dev/null; then
+	alias h="hx"
+	alias h.="hx ."
+fi
+
+#== Zed: https://zed.dev/docs/
+if command -v zed &>/dev/null; then
+	alias z="zed"
+	alias z.="zed ."
+fi
+
+#===============================================================================
+# Terminal
+#===============================================================================
+#== cat replacement (rust): https://github.com/sharkdp/bat
+if command -v bat &>/dev/null; then
+	alias cat="bat --style=plain"
+fi
+
+#== content diff
+if command -v diff &>/dev/null; then
+	# side by side, color, minimal output
+	alias diffs="diff -dbBy --suppress-common-lines --color=always"
+fi
+
+#== environment management: https://github.com/direnv/direnv
+if command -v direnv &>/dev/null; then
+	eval "$(direnv hook $SHELL_NAME)"
+fi
+
+#== ls replacement: https://github.com/eza-community/eza
+if command -v eza &>/dev/null; then
+	alias l="clear && eza -lF --header --group-directories-first --git --all --no-user --no-permissions"
+	alias la="eza -F --group-directories-first --git --all --no-user --no-permissions"
+	alias ll="eza -lF --group-directories-first --git --no-user --no-permissions"
+	alias lla="eza -lF --group-directories-first --git --all --no-user --no-permissions"
+
+	alias tree="clear && eza --tree --git"
+	alias treed="eza --tree --git -D"
+	alias treea="eza --tree --git --all --follow-symlinks"
+else
+	# default to using ls
+	alias l="clear && ls -la --color=auto"
+	alias la="ls -a --color=auto"
+	alias ll="ls -l --color=auto"
+	alias lla="ls -la --color=auto"
+fi
+
+#== fuzzy finder: https://github.com/junegunn/fzf
+if command -v fzf &>/dev/null; then
+	export FZF_DEFAULT_COMMAND='fd -H -t f'
+	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none' # --preview "bat {}" --preview-window down'
+
+	# shows the basename in the selection window, but returns full path
+	function fzf-display-basenames() {
+		fzf --delimiter / --with-nth -1
+	}
+
+	# select functions that feed to an eval statement
+	# TODO consolidate functions???
+	# 
+	function fzf-select-dir-eval(){
+		local exec_command="${@}"
+	
+		local one="$(fd -H -t d | fzf)"
+
+		[ -d $one ] || eval "$exec_command $one"
+	}
+
+	function fzf-select-eval(){
+		local exec_command="${@}"
+	
+		local one="$(fzf)"
+
+		[ -d $one ] || eval "$exec_command $one"
+	}
+
+	function fzf-select2-eval(){
+		local exec_command="${@}"
+	
+		local one="$(fzf)"
+		local two="$(fzf)"
+
+		[ -d $one ] || [ -d $two ] || eval "$exec_command $one $two"
+	}
+
+	# fzf double select files then show diff
+	alias fdiff="fzf-select2-eval diffs"
+
+	# straight function alias
+	alias fdir="fzf-select-dir-eval"
+	alias ffile="fzf-select-eval"
+	alias ffiles="fzf-select2-eval"
+
+	# initialize
+	eval "$(fzf --$SHELL_NAME)"
+	# map keys
+	if [[ $SHELL_NAME == "zsh" ]]; then
+		# use Ctrl-e instead of Alt-c for "fzf to cd"
+		zle     -N             fzf-cd-widget
+		bindkey -M emacs '\C-e' fzf-cd-widget
+		bindkey -rM emacs '\ec'
+	fi
+	
+fi
+
+#==Git (Source Control): https://github.com/git/git
+if command -v git &>/dev/null; then
+
+	# Personal pretty format
+	#	Example output:  80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
+	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
+
+	# Function to find all directories containing a .git subdirectory
+	git-find-all-repos() {
+		# default to my source directory
+		local root=${1:-$SOURCE}
+		# prune will stop recurse on match, sed removes the '/.git' from the end of the result
+		find "$root" -name .git -type d -prune | sed 's|/.git$||'
+	}
+
+	# Function to execute a git command on each Git repository
+	git-exec-on() {
+		local repo
+		while IFS= read -r repo; do
+			echo "==> $repo"
+			git -C "$repo" "$@"
+		done
+	}
+
+	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v" # sync all listed git repos
+	alias gall="git-find-all-repos"  # list all repos
+	alias gallx="clear && git-find-all-repos | git-exec-on" # exec git command on all repos	
+	alias gb="git blame -w -C -C -C" # git blame (more precise)
+	alias gbl="git blame -w -C -C -C -L" # git blame line range
+	alias gdw="git diff --word-diff --unified=0" # git diff by words changed, minimal context
+	alias gl="git log --format=\$GIT_LOG_PRETTY_FORMAT"
+	
+	alias gs="git status"
+	alias gss="gallx status -s"		# shows terse status for all repositories
+	alias gsss="gallx status"		# shows verbose status for all repositories
+	alias gpl="git pull"
+	alias gpls="gallx pull"
+
+	# git clone from git hub to my source directory
+	function ghub() {
+		git clone git@github.com:"$1" "$SOURCE"/github.com/"$1";
+		cd "$SOURCE"/gitlab.cj.dev/"$1";
+		l
+	}
+	# git clone from git hub to my source directory
+	function glab() {
+		git clone git@gitlab.cj.dev:"$1" "$SOURCE"/gitlab.cj.dev/"$1";
+		cd "$SOURCE"/gitlab.cj.dev/"$1";
+		l
+	}
+
+	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
+	if command -v lazygit &>/dev/null; then
+		alias gg="lazygit"
+		alias ggg="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
+		# alias lg="lazygit"
+	fi
+fi
+
+#== GREP replacement: https://github.com/BurntSushi/ripgrep
+if command -v rg &>/dev/null; then
+	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
+	# aliases
+	alias ar="alias | rg"
+	# environment
+	alias er="env | rg"
+	# functions
+	alias fr="declare -f | rg"
+fi
+
+alias ssh="TERM=xterm-256color ssh"
+
+#== Prompt : https://github.com/starship/starship
+if command -v starship &>/dev/null; then
+	eval "$(starship init $SHELL_NAME)"
+fi
+
+#== dotfiles:
+if command -v stow &>/dev/null; then
+
+	# cleans old links, and puts new links from a stow location ($1) to a root ($2)
+	function stow-location-sync() {
+		source=$1
+		target=$2
+
+		[ -d "$target" ] || mkdir -p "$target"
+		echo "Clean and Restore $1 into $target (with stow)"
+		# clean old links
+		stow -D . --dir="$source" --target="$target"
+		# link to source (no-folding forces links at folder level)
+		stow . --dir="$source" --target="$target"
+	}
+
+	# sync all dotfile repos to appropriate home locations
+	alias dsync="stow-location-sync $DOTFILES $HOME"
+fi
+
+#== terminal multiplexer : https://github.com/tmux/tmux
+# if command -v tmux &>/dev/null; then
+# 	alias t="tmux"
+# 	alias tl="tmux ls"         # list
+# 	alias ta="tmux attach"     # attach all sessions or number
+# 	alias tan="tmux attach -t" # attach to named
+# 	alias tn="tmux new -s"     # new with name
+# 	alias tk="tmux kill-session"
+# 	alias tkn="tmux kill-session -t"
+# fi
+
+
+#== tui file manager: https://github.com/sxyazi/yazi
+if command -v yazi &>/dev/null; then
+	# open yazi and shell change to the selected directory on exit
+	function yazi-change-dir() {
+		local tmp
+		tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+		yazi "$@" --cwd-file="$tmp"
+		if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+			cd -- "$cwd" || return
+		fi
+		rm -f -- "$tmp"
+	}
+
+	alias y="yazi"
+	alias yy="yazi-change-dir"
+
+fi
+
+# source machine specific aliases
+[ -f "$HOME/.shellrc.local" ] && source "$HOME/.shellrc.local"
