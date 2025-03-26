@@ -171,7 +171,7 @@ if command -v eza &>/dev/null; then
 
 	alias tree="clear && eza --tree --git"
 	alias treed="eza --tree --git -D"
-	alias treea="eza --tree --git --all --follow-symlinks"
+	alias treea="eza --tree --git --all --follow-symlinks --git-ignore"
 else
 	# default to using ls
 	alias l="clear && ls -la --color=auto"
