@@ -53,7 +53,7 @@ alias-dir "empire" "$SOURCE_GITCJ/empire"
 alias-dir "jeff" "$SOURCE_JEFF"
 alias-dir "src" "\$(git-find-all-repos|fzf-display-basenames)"
 
-alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$DOTFILES/.shellrc"
+alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$HOME/.shellrc"
 alias-dir "n" "$NIXCONFIG"
 alias-dir "s" "$NIXSHELLS"
 
@@ -122,7 +122,7 @@ EOF
 		alias clean="nix store gc"
 		alias generations="darwin-rebuild --list-generations"
 		alias rebuild="darwin-rebuild build --impure --flake \$NIXCONFIG"
-		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG"
+		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG && gsync && dsync"
 		alias update="nix flake update --flake \$NIXCONFIG"
 	fi
 fi
@@ -317,22 +317,8 @@ fi
 
 #== dotfiles:
 if command -v stow &>/dev/null; then
-
-	# cleans old links, and puts new links from a stow location ($1) to a root ($2)
-	function stow-location-sync() {
-		source=$1
-		target=$2
-
-		[ -d "$target" ] || mkdir -p "$target"
-		echo "Clean and Restore $1 into $target (with stow)"
-		# clean old links
-		stow -D . --dir="$source" --target="$target"
-		# link to source (no-folding forces links at folder level)
-		stow . --dir="$source" --target="$target"
-	}
-
 	# sync all dotfile repos to appropriate home locations
-	alias dsync="stow-location-sync $DOTFILES $HOME"
+	alias dsync="$DOTFILES/dsync.sh $DOTFILES $HOME"
 fi
 
 #== terminal multiplexer : https://github.com/tmux/tmux

@@ -9,6 +9,7 @@ overrides=(
   "nushell;nu"
   "ripgrep;rg"
   "television;tv"
+  "ghostty;ls"  # cannot seem to find ghostty in cli, so just punting with a known commands
 )
 
 echo "Source: $source"
