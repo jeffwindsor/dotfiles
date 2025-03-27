@@ -11,7 +11,7 @@ overrides=(
   "television;tv"
   "ghostty;ls"  # cannot seem to find ghostty in cli, so just punting with a known commands
 )
-
+echo -e "\e[94m== Dotfile Sync ( with stow) ==\e[0m"
 echo "Source: $source"
 echo "Target: $target"
 

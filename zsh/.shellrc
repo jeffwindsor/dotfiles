@@ -262,7 +262,7 @@ if command -v git &>/dev/null; then
 		done
 	}
 
-	alias gsync="array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v" # sync all listed git repos
+	alias gsync="echo -e '\e[94m== Spec Repo Sync ==\e[0m' && array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v" # sync all listed git repos
 	alias gall="git-find-all-repos"  # list all repos
 	alias gallx="clear && git-find-all-repos | git-exec-on" # exec git command on all repos	
 	alias gb="git blame -w -C -C -C" # git blame (more precise)
