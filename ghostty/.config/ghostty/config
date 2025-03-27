@@ -1,8 +1,8 @@
 theme = tokyonight
 
 auto-update = off
-# font-family="AtkinsonMonolegible"
-font-family="JetBrainsMono Nerd Font Mono"
+font-family="AtkinsonHyperlegibleMono"
+# font-family="JetBrainsMono Nerd Font Mono"
 font-size = 16
 quit-after-last-window-closed = true
 window-decoration = false
