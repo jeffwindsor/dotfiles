@@ -5,17 +5,16 @@ autoload -Uz compinit
 compinit
 
 export ZSH_DISABLE_COMPFIX="true"		# avoids insecure directories warning
-export ZSH_PLUGIN_DIR="$HOME/.local/share/zsh/plugins"
 
 #== Shell OPTIONS
 setopt no_beep         # no beep on error
 setopt GLOB_DOTS       # allows fzf-tab to show hidden files by default
-setopt completealiases # Autocomplete command line switches for aliases
+# setopt completealiases # Autocomplete command line switches for aliases
 bindkey -e             # emacs bindings
 
 #== Zsh History
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-HISTSIZE=5000
+HISTSIZE=1000
 SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
 setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when the shell exits.
@@ -29,6 +28,8 @@ setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history fi
 
 
 #== Plugins
+export ZSH_PLUGIN_DIR="$HOME/.local/share/zsh/plugins"
+
 function load_plugin(){
 	local plugin_repo=$1
 	local plugin_init_file=$2
