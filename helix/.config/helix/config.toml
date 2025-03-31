@@ -17,7 +17,7 @@ smart-tab.enable = false
 soft-wrap.enable = true
 # diagnostics after v2.25 
 end-of-line-diagnostics = "hint"
-inline-diagnostics.cursor-line = "error"
+inline-diagnostics.cursor-line = "warning"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -49,14 +49,44 @@ insert = "INSERT"
 select = "SELECT"
 
 ###################################################################
-# which key menus
+# key maps
 ###################################################################
+
+[keys.normal]
+"G" = "goto_file_end"
+"H" = "goto_line_start"
+"L" = "goto_line_end"
+"V" = ["select_mode", "extend_to_line_bounds"]
+"y" = ["yank_main_selection_to_clipboard", "yank"]
+esc = ["collapse_selection", "keep_primary_selection", ":write"]
+# Select All
+C-a = "@ggvG"
+# lazygit in place
+C-g = [
+  ":new",
+  ":insert-output lazygit",
+  ":buffer-close!",
+  ":redraw",
+  ":reload-all",
+]
+# yazi in place
+C-y = [
+    ':sh rm -f /tmp/unique-file',
+    ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+    ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+    ':open %sh{cat /tmp/unique-file}',
+    ':redraw',
+]
+
+# replace from clipboard
+C-q = ":clipboard-paste-replace"
+C-r = ":clipboard-paste-replace"
+
 [keys.normal.space]
 q = ":write-quit-all"
 # expected sort. ":sort" is different
 "down" = ":pipe sort"
 "up" = ":pipe sort --reverse"
-
 
 # config files (')
 [keys.normal."'"]
@@ -101,36 +131,8 @@ s = ":theme sonokai"
 t = ":theme tokyonight"
 z = ":theme zed_onedark"
 
-###################################################################
-# key maps
-###################################################################
-
 [keys.insert]
 esc = ["collapse_selection", "normal_mode", ":write"] # vim like escape
-
-[keys.normal]
-"G" = "goto_file_end"
-"H" = "goto_line_start"
-"L" = "goto_line_end"
-"V" = ["select_mode", "extend_to_line_bounds"]
-"y" = ["yank_main_selection_to_clipboard", "yank"]
-esc = ["collapse_selection", "keep_primary_selection", ":write"]
-# lazygit in place
-C-g = [
-  ":new",
-  ":insert-output lazygit",
-  ":buffer-close!",
-  ":redraw",
-  ":reload-all",
-]
-# yazi in place
-C-y = [
-    ':sh rm -f /tmp/unique-file',
-    ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
-    ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-    ':open %sh{cat /tmp/unique-file}',
-    ':redraw',
-  ]
 
 [keys.select]
 "G" = "goto_file_end"
