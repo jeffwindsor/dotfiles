@@ -84,6 +84,7 @@ C-r = ":clipboard-paste-replace"
 
 [keys.normal.space]
 q = ":write-quit-all"
+Q = ":quit!"
 # expected sort. ":sort" is different
 "down" = ":pipe sort"
 "up" = ":pipe sort --reverse"
