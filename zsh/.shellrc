@@ -4,7 +4,7 @@
 SHELL_NAME=${1:-"zsh"}
 
 export EDITOR="hx"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="sh -c 'bat -l man -p'"
 export PAGER="less -imMWR"
 export VISUAL="zed"
 
@@ -67,42 +67,19 @@ function array-to-string() {
 #== Nix https://nixos.org/
 if command -v nix &>/dev/null; then
 
-	function nix-package-install-to-profile() {
-		nix profile install nixpkgs#"${1}"
-	}
-
-	function nix-shell-from-file() {
+	function nix-develop-from-file() {
 		local selection
-		selection=$(fd -tf . "$NIXSHELLS" | fzf-display-basenames)
-		[[ -n $selection ]] && nix-shell --extra-experimental-features flakes $selection
-	}
-
-	# create a blank shell.nix in currenct folder
-	function nix-shell-init() {
-		cat <<EOF >shell.nix
-{ pkgs ? import <nixpkgs> {} }:
-pkgs.mkShell {
-    name = "";
-	# https://search.nixos.org/packages?channel=unstable
-    packages = with pkgs; [];
-  	shellHook = ''
-    	echo -e "\e[1;33mDevelopment Environment\e[0;32m"
-    	# add --version or some other call to list dev packages
-		echo -e "\e[0m"
-  	'';
-}
-EOF
+		selection=$(fd -tf . "$NIXSHELLS" | fzf --delimiter / --with-nth -2)
+		[[ -n $selection ]] && nix develop $selection
 	}
 
 	export NIXPKGS_ALLOW_UNFREE=1
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
-	# alias nps="nix search nixpkgs"
-	alias ns="nix-shell-from-file"
-	alias ns-r="nix-shell \$NIXSHELLS/rust.nix"
-	alias ns-d="nix-shell \$NIXSHELLS/dotfiles.nix"
-	alias ns-p="nix-shell \$NIXSHELLS/python312.nix"
-	alias nsp="nix-shell -p"
-	alias ninit="nix-shell-init"
+	alias ns="nix-develop-from-file"
+	alias ns-r="nix develop \$NIXSHELLS/rust"
+	alias ns-d="nix develop \$NIXSHELLS/dotfiles"
+	alias ns-p="nix develop \$NIXSHELLS/python312"
+	function nsp(){ nix develop nixpkgs#"$1"; }
 	
 	alias optimise="nix store optimise"
 	alias doctor="nix-store --verify --check-contents --repair"
