@@ -46,12 +46,12 @@ function alias-dir() {
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
-alias-dir "config" "$XDG_CONFIG_HOME"
-alias-dir "hub" "$SOURCE_GITHUB"
-alias-dir "lab" "$SOURCE_GITCJ"
-alias-dir "empire" "$SOURCE_GITCJ/empire"
-alias-dir "jeff" "$SOURCE_JEFF"
-alias-dir "src" "\$(git-find-all-repos|fzf-display-basenames)"
+alias config="$XDG_CONFIG_HOME"
+alias hub="$SOURCE_GITHUB"
+alias lab="$SOURCE_GITCJ"
+alias empire="$SOURCE_GITCJ/empire"
+alias jeff="$SOURCE_JEFF"
+alias src="\$(git-find-all-repos|fzf-display-basenames)"
 
 alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$HOME/.shellrc"
 alias-dir "n" "$NIXCONFIG"
@@ -67,6 +67,7 @@ function array-to-string() {
 #== Nix https://nixos.org/
 if command -v nix &>/dev/null; then
 
+	# create a nix shell based on selected file 
 	function nix-develop-from-file() {
 		local selection
 		selection=$(fd -tf . "$NIXSHELLS" | fzf --delimiter / --with-nth -2)
