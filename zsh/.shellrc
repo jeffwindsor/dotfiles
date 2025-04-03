@@ -64,6 +64,15 @@ function array-to-string() {
 	echo "$array_string"
 }
 
+#== Homebrew https://brew.sh/
+if command -v brew &>/dev/null; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  alias bl="brew list"
+  alias bn="brew install"
+  alias bi="brew info"
+  alias bs="brew search"
+fi
+
 #== Nix https://nixos.org/
 if command -v nix &>/dev/null; then
 
