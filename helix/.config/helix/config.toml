@@ -59,6 +59,10 @@ select = "SELECT"
 "V" = ["select_mode", "extend_to_line_bounds"]
 "y" = ["yank_main_selection_to_clipboard", "yank"]
 esc = ["collapse_selection", "keep_primary_selection", ":write"]
+"{" = ":buffer-next"
+"}" = ":buffer-previous"
+"\\" = ":buffer-close"
+
 # Select All
 C-a = "@ggvG"
 # lazygit in place
