@@ -69,6 +69,7 @@ function array-to-string() {
 #== Homebrew https://brew.sh/
 if command -v brew &>/dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  alias bsync="$NIXCONFIG/brews.sh"
   alias bl="brew list"
   alias bn="brew install"
   alias bi="brew info"
@@ -112,7 +113,7 @@ if command -v nix &>/dev/null; then
 		alias clean="nix store gc"
 		alias generations="darwin-rebuild --list-generations"
 		alias rebuild="darwin-rebuild build --impure --flake \$NIXCONFIG"
-		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG && gsync && dsync"
+		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG && bsync && gsync && dsync"
 		alias update="nix flake update --flake \$NIXCONFIG"
 	fi
 fi
