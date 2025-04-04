@@ -89,6 +89,7 @@ if command -v nix &>/dev/null; then
 	alias ns-r="nix develop \$NIXSHELLS/rust"
 	alias ns-d="nix develop \$NIXSHELLS/dotfiles"
 	alias ns-p="nix develop \$NIXSHELLS/python312"
+	alias ns-l="nix develop \$NIXSHELLS/ollama"
 	function nsp(){ nix develop nixpkgs#"$1"; }
 	
 	alias optimise="nix store optimise"
