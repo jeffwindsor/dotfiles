@@ -46,16 +46,18 @@ function alias-dir() {
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
-alias config="$XDG_CONFIG_HOME"
-alias hub="$SOURCE_GITHUB"
-alias lab="$SOURCE_GITCJ"
-alias empire="$SOURCE_GITCJ/empire"
-alias jeff="$SOURCE_JEFF"
-alias src="cd \$(git-find-all-repos|fzf-display-basenames)"
+alias config="cd $XDG_CONFIG_HOME && l"
+alias hub="cd $SOURCE_GITHUB && l"
+alias lab="cd $SOURCE_GITCJ && l"
+alias empire="cd $SOURCE_GITCJ/empire && l"
+alias jeff="cd $SOURCE_JEFF && l"
+alias src="cd \$(git-find-all-repos|fzf-display-basenames) && l"
 
 alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$HOME/.shellrc"
 alias-dir "n" "$NIXCONFIG"
 alias-dir "s" "$NIXSHELLS"
+
+unset -f alias-dir
 
 function array-to-string() {
 	IFS=$'\n' # Use newline as delimiter
