@@ -21,8 +21,8 @@ export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
 
 export DOTFILES="$SOURCE_JEFF/dotfiles"
 export NIXCONFIG="$SOURCE_JEFF/nix-config"
-export NIXSHELLS="$SOURCE_JEFF/nix-shells"
-export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG" "$NIXSHELLS")
+export NIXSHELLS="$NIXCONFIG/shells"  # no longer a separate repo
+export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG")
 
 #== Jump Directories
 #===============================================================================
@@ -33,10 +33,16 @@ alias ..="cd .."
 alias icloud="cd $ICLOUD && l"
 alias c="clear"
 alias cc="cd && clear"
+alias config="cd $XDG_CONFIG_HOME && l"
+alias hub="cd $SOURCE_GITHUB && l"
+alias lab="cd $SOURCE_GITCJ && l"
+alias empire="cd $SOURCE_GITCJ/empire && l"
+alias jeff="cd $SOURCE_JEFF && l"
+alias src="cd \$(git-find-all-repos|fzf-display-basenames) && l"
 
+# create aliases for cd, edit, visual-edit and lazygit (if contains .git)
 function alias-dir() {
-	# create aliases for cd, edit, visual-edit and lazygit (if contains .git)
-	#
+	
 	alias "${1}"="cd $2 && l"
 	alias "${1}e"="\$EDITOR $2"
 	alias "${1}v"="\$VISUAL $2"
@@ -46,25 +52,17 @@ function alias-dir() {
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
-alias config="cd $XDG_CONFIG_HOME && l"
-alias hub="cd $SOURCE_GITHUB && l"
-alias lab="cd $SOURCE_GITCJ && l"
-alias empire="cd $SOURCE_GITCJ/empire && l"
-alias jeff="cd $SOURCE_JEFF && l"
-alias src="cd \$(git-find-all-repos|fzf-display-basenames) && l"
-
-alias-dir "d" "$DOTFILES" && alias "ds"="\$EDITOR \$HOME/.shellrc"
+alias-dir "d" "$DOTFILES" 
 alias-dir "n" "$NIXCONFIG"
 alias-dir "s" "$NIXSHELLS"
 
-unset -f alias-dir
+# edit shellrc, shared aliases and functions
+alias "ds"="\$EDITOR \$HOME/.shellrc && source \$HOME/.shellrc"
+# source shellrc
+alias "ss"="source \$HOME/.shellrc"
 
-function array-to-string() {
-	IFS=$'\n' # Use newline as delimiter
-	local array_string
-	array_string="${@[*]}"
-	echo "$array_string"
-}
+# function not needed outside this script
+unset -f alias-dir
 
 #== Homebrew https://brew.sh/
 if command -v brew &>/dev/null; then
@@ -160,8 +158,8 @@ if command -v eza &>/dev/null; then
 	alias ll="eza -lF --group-directories-first --git --no-user --no-permissions"
 	alias lla="eza -lF --group-directories-first --git --all --no-user --no-permissions"
 
-	alias tree="clear && eza --tree --git"
-	alias treed="eza --tree --git -D"
+	alias tree="clear && eza --tree --git --all --git-ignore"
+	alias treed="eza --tree --git -D --all --git-ignore"
 	alias treea="eza --tree --git --all --follow-symlinks --git-ignore"
 else
 	# default to using ls
@@ -251,6 +249,13 @@ if command -v git &>/dev/null; then
 			echo "==> $repo"
 			git -C "$repo" "$@"
 		done
+	}
+
+	function array-to-string() {
+		IFS=$'\n' # Use newline as delimiter
+		local array_string
+		array_string="${@[*]}"
+		echo "$array_string"
 	}
 
 	alias gsync="echo -e '\e[94m== Spec Repo Sync ==\e[0m' && array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v" # sync all listed git repos
