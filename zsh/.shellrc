@@ -65,8 +65,8 @@ alias "ss"="source \$HOME/.shellrc"
 unset -f alias-dir
 
 #== Homebrew https://brew.sh/
+[[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 if command -v brew &>/dev/null; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
   alias bsync="$NIXCONFIG/brews.sh"
   alias bl="brew list"
   alias bn="brew install"
@@ -98,7 +98,7 @@ if command -v nix &>/dev/null; then
 	
 	if [ -d "/etc/nixos" ]; then
 		#nixos
-		alias clean="nix-env --delete-generations +5 && nix-collect-garbage"
+		alias clean="nix-env --delete-generations && nix-collect-garbage"
 		alias generations="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
 		alias rebuild="nixos-rebuild build --impure --flake \$NIXCONFIG"
 		alias switch_only="sudo nixos-rebuild switch --impure --flake \$NIXCONFIG"
