@@ -153,20 +153,20 @@ fi
 
 #== ls replacement: https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
-	alias l="clear && eza -lF --header --group-directories-first --git --all --no-user --no-permissions"
 	alias la="eza -F --group-directories-first --git --all --no-user --no-permissions"
 	alias ll="eza -lF --group-directories-first --git --no-user --no-permissions"
 	alias lla="eza -lF --group-directories-first --git --all --no-user --no-permissions"
+	alias l="clear && lla --header"
 
 	alias tree="clear && eza --tree --git --all --git-ignore"
 	alias treed="eza --tree --git -D --all --git-ignore"
 	alias treea="eza --tree --git --all --follow-symlinks --git-ignore"
 else
 	# default to using ls
-	alias l="clear && ls -la --color=auto"
 	alias la="ls -a --color=auto"
 	alias ll="ls -l --color=auto"
 	alias lla="ls -la --color=auto"
+	alias l="clear && lla"
 fi
 
 #== fuzzy finder: https://github.com/junegunn/fzf
@@ -282,13 +282,17 @@ if command -v git &>/dev/null; then
 		# remove any un-needed prefixes
 		repo=${repo_url#https://$base_domain/}
 		repo=${repo#git@$base_domain:}
+		repo=${repo%.git}
 
+		clear
+		echo -e "\e[94m==> cloning $repo_url into $SOURCE/$base_domain/$repo\e[0m"
+		
 		# clone repo to my source directory with full folder tree
-		git clone "git@$base_domain:$repo" "$SOURCE/$repo_url/$repo"
+		git clone "$repo_url" "$SOURCE/$base_domain/$repo"
 
 		# change to the repo local directory, clear and ls -la
-		cd "$SOURCE/$repo_url/$repo"
-		l
+		cd "$SOURCE/$base_domain/$repo"
+		lla
 	}
 
 	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
