@@ -1,10 +1,12 @@
 #!/usr/bin/env zsh
 # zmodload zsh/zprof		# turn this on the profile load times. use `zprof` to get results
 
-autoload -Uz compinit
+FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+#compaudit | xargs chmod g-w		# resolves unsecure directories warnings
+autoload -Uz compinit -u
 compinit
 
-export ZSH_DISABLE_COMPFIX="true"		# avoids insecure directories warning
 
 #== Shell OPTIONS
 setopt no_beep         # no beep on error
@@ -38,12 +40,14 @@ function load_plugin(){
 	if [[ ! -e "$ZSH_PLUGIN_DIR/$plugin_repo" ]]; then
   		git clone --depth=1 "https://github.com/$plugin_repo.git" "$ZSH_PLUGIN_DIR/$plugin_repo"
 	fi
-
-	source "$ZSH_PLUGIN_DIR/$plugin_repo/$plugin_init_file"
+	if [[ -v plugin_init_file ]]; then
+		source "$ZSH_PLUGIN_DIR/$plugin_repo/$plugin_init_file"
+	fi
 }
 
 load_plugin "Aloxaf/fzf-tab" "fzf-tab.plugin.zsh"
 load_plugin "zsh-users/zsh-syntax-highlighting" "zsh-syntax-highlighting.zsh"
+load_plugin "zsh-users/zsh-completions"
 
 # keep load_plugin function local to zshrc
 unfunction load_plugin
