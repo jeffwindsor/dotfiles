@@ -138,7 +138,7 @@ fi
 #===============================================================================
 #== cat replacement (rust): https://github.com/sharkdp/bat
 if command -v bat &>/dev/null; then
-	alias cat="bat --style=plain"
+	alias cat="bat" # --style=plain"
 fi
 
 #== content diff
