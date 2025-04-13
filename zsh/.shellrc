@@ -81,7 +81,7 @@ if command -v nix &>/dev/null; then
 	# create a nix shell based on selected file 
 	function nix-develop-from-file() {
 		local selection
-		selection=$(fd -tf --glob "flake.nix" "$NIXSHELLS" | fzf --delimiter / --with-nth -2)
+		selection=$(fd -tf --glob "flake.nix" "$NIXSHELLS" | fzf --delimiter / --with-nth -2 | sd '/flake.nix' '')
 		[[ -n $selection ]] && nix develop $selection
 	}
 
