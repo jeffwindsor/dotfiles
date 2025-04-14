@@ -1,12 +1,25 @@
 #!/usr/bin/env bash
+#===============================================================================
+# SHELL CONFIGURATION:
+# 	- shared among multiple shells
+# 	- represents my personal/opinionated approach to using the terminal
+# 	- Contains:
+# 		- Enviroment Variables
+# 		- Jump to Directories 
+# 		- Usage Aliases (added based on if app is installed)
+#===============================================================================
 
+
+#===============================================================================
 #== Enviroment Variables
+#===============================================================================
 SHELL_NAME=${1:-"zsh"}
 
-export EDITOR="hx"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 export PAGER="less -imMWR"
+
+export EDITOR="hx"
 export VISUAL="zed"
 
 export XDG_STATE_HOME=$HOME/.local/state
@@ -15,17 +28,18 @@ export XDG_CACHE_HOME=$HOME/.local/cache
 export XDG_CONFIG_HOME=$HOME/.config
 
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
+
 export SOURCE="$HOME/Source"
 export SOURCE_GITHUB="$SOURCE/github.com"
 export SOURCE_GITCJ="$SOURCE/gitlab.cj.dev"
 export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
-
 export DOTFILES="$SOURCE_JEFF/dotfiles"
 export NIXCONFIG="$SOURCE_JEFF/nix-config"
 export NIXSHELLS="$NIXCONFIG/shells"  # no longer a separate repo
 export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG")
 
-#== Jump Directories
+#===============================================================================
+#== Jump to Directories (prefer this over zoxide)
 #===============================================================================
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
@@ -33,17 +47,18 @@ alias ...="cd ../../"
 alias ..="cd .."
 alias icloud="cd $ICLOUD && l"
 alias c="clear"
+# clear and return to HOME
 alias cc="cd && clear"
 alias config="cd $XDG_CONFIG_HOME && l"
 alias hub="cd $SOURCE_GITHUB && l"
 alias lab="cd $SOURCE_GITCJ && l"
 alias empire="cd $SOURCE_GITCJ/empire && l"
 alias jeff="cd $SOURCE_JEFF && l"
+# list git repo directories, selection changes to that directory
 alias src="cd \$(git-find-all-repos|fzf-display-basenames) && l"
 
 # create aliases for cd, edit, visual-edit and lazygit (if contains .git)
 function alias-dir() {
-	
 	alias "${1}"="cd $2 && l"
 	alias "${1}e"="\$EDITOR $2"
 	alias "${1}v"="\$VISUAL $2"
@@ -57,19 +72,24 @@ alias-dir "d" "$DOTFILES"
 alias-dir "n" "$NIXCONFIG"
 alias-dir "s" "$NIXSHELLS"
 
-# edit shellrc, shared aliases and functions
-alias "ds"="\$EDITOR \$HOME/.shellrc && source \$HOME/.shellrc"
 # source shellrc
 alias "ss"="source \$HOME/.shellrc"
+# edit shellrc, shared aliases and functions
+alias "ds"="\$EDITOR \$HOME/.shellrc"
 
 # function not needed outside this script
 unset -f alias-dir
 
+#===============================================================================
+# Package Managers
+#===============================================================================
 #== Homebrew https://brew.sh/
 [[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 if command -v brew &>/dev/null; then
+  # sync brews via via nix config repo shell script
   alias bsync="$NIXCONFIG/brews.sh"
-  alias bl="brew list"
+  # list all installed brews, opting to only show top level formulae
+  alias bl="echo '== Formulae ==' && brew leaves && echo '== Casks ==' && brew list --casks"
   alias bn="brew install"
   alias bi="brew info"
   alias bs="brew search"
@@ -85,22 +105,27 @@ if command -v nix &>/dev/null; then
 		[[ -n $selection ]] && nix develop $selection
 	}
 
-	export NIXPKGS_ALLOW_UNFREE=1
-	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort" # list system packages
+	export NIXPKGS_ALLOW_UNFREE=1  # required for some use cases
+	# list all installed system packages
+	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort"
+	# create a new nix shell flake from a template.  usage: new <display-name>
 	alias nn="$NIXCONFIG/shells/new.sh"
 	alias nd="nix develop"
+	# select env to create
 	alias ns="nix-develop-from-file"
+	# direct access to env creation
 	alias ns-r="nix develop \$NIXSHELLS/rust"
 	alias ns-d="nix develop \$NIXSHELLS/dotfiles"
 	alias ns-p="nix develop \$NIXSHELLS/python312"
 	alias ns-l="nix develop \$NIXSHELLS/ollama"
+	# create an env including specific packages
 	function nsp(){ nix develop nixpkgs#"$1"; }
-	
+
+	# mix management aliases 
 	alias optimise="nix store optimise"
 	alias doctor="nix-store --verify --check-contents --repair"
-	
 	if [ -d "/etc/nixos" ]; then
-		#nixos
+		#== nixos
 		alias clean="nix-env --delete-generations && nix-collect-garbage"
 		alias generations="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
 		alias rebuild="nixos-rebuild build --impure --flake \$NIXCONFIG"
@@ -110,7 +135,7 @@ if command -v nix &>/dev/null; then
 		alias upgrade="sudo nixos-rebuild switch --upgrade --impure --flake \$NIXCONFIG"
 
 	elif command -v darwin-rebuild &>/dev/null; then
-		# nix-darwin using flakes
+		#== nix-darwin (using flakes)
 		alias clean="nix store gc"
 		alias generations="darwin-rebuild --list-generations"
 		alias rebuild="darwin-rebuild build --impure --flake \$NIXCONFIG"
@@ -143,13 +168,13 @@ if command -v bat &>/dev/null; then
 	alias cat="bat" # --style=plain"
 fi
 
-#== content diff
+#== file content diff
 if command -v diff &>/dev/null; then
 	# side by side, color, minimal output
 	alias diffs="diff -dbBy --suppress-common-lines --color=always"
 fi
 
-#== environment management: https://github.com/direnv/direnv
+#== automatic environment management: https://github.com/direnv/direnv
 if command -v direnv &>/dev/null; then
 	eval "$(direnv hook $SHELL_NAME)"
 fi
@@ -230,7 +255,7 @@ if command -v fzf &>/dev/null; then
 	
 fi
 
-#==Git (Source Control): https://github.com/git/git
+#== git (source control): https://github.com/git/git
 if command -v git &>/dev/null; then
 
 	# Personal pretty format
@@ -291,14 +316,14 @@ if command -v git &>/dev/null; then
 		echo -e "\e[94m==> cloning $repo_url into $SOURCE/$base_domain/$repo\e[0m"
 		
 		# clone repo to my source directory with full folder tree
-		git clone "$repo_url" "$SOURCE/$base_domain/$repo"
+		git clone "git@$base_domain:$repo.git" "$SOURCE/$base_domain/$repo"
 
 		# change to the repo local directory, clear and ls -la
 		cd "$SOURCE/$base_domain/$repo"
 		lla
 	}
 
-	#==Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
+	#== Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
 	if command -v lazygit &>/dev/null; then
 		alias gg="lazygit"
 		alias ggg="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
@@ -306,7 +331,7 @@ if command -v git &>/dev/null; then
 	fi
 fi
 
-#== GREP replacement: https://github.com/BurntSushi/ripgrep
+#== grep replacement: https://github.com/BurntSushi/ripgrep
 if command -v rg &>/dev/null; then
 	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
 	# aliases
@@ -317,9 +342,11 @@ if command -v rg &>/dev/null; then
 	alias fr="declare -f | rg"
 fi
 
+#== ssh
+# helps remote servers when using advanced terminals like Ghostty and Alacritty 
 alias ssh="TERM=xterm-256color ssh"
 
-#== Prompt : https://github.com/starship/starship
+#== prompt : https://github.com/starship/starship
 if command -v starship &>/dev/null; then
 	eval "$(starship init $SHELL_NAME)"
 fi
@@ -331,15 +358,15 @@ if command -v stow &>/dev/null; then
 fi
 
 #== terminal multiplexer : https://github.com/tmux/tmux
-# if command -v tmux &>/dev/null; then
-# 	alias t="tmux"
-# 	alias tl="tmux ls"         # list
-# 	alias ta="tmux attach"     # attach all sessions or number
-# 	alias tan="tmux attach -t" # attach to named
-# 	alias tn="tmux new -s"     # new with name
-# 	alias tk="tmux kill-session"
-# 	alias tkn="tmux kill-session -t"
-# fi
+ if command -v tmux &>/dev/null; then
+ 	alias t="tmux"
+ 	alias tl="tmux ls"         # list
+ 	alias ta="tmux attach"     # attach all sessions or number
+ 	alias tan="tmux attach -t" # attach to named
+ 	alias tn="tmux new -s"     # new with name
+ 	alias tk="tmux kill-session"
+ 	alias tkn="tmux kill-session -t"
+ fi
 
 
 #== tui file manager: https://github.com/sxyazi/yazi
@@ -360,5 +387,5 @@ if command -v yazi &>/dev/null; then
 
 fi
 
-# source machine specific aliases
+# source local machine specific shell configuration and overrides
 [ -f "$HOME/.shellrc.local" ] && source "$HOME/.shellrc.local"
