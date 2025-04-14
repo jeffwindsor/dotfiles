@@ -41,6 +41,14 @@ export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG")
 #===============================================================================
 #== Jump to Directories (prefer this over zoxide)
 #===============================================================================
+# emulate clifm 
+function cd-clear-list(){
+	cd $1
+	clear
+	l
+}
+alias cd="cd-clear-list"
+
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
 alias ...="cd ../../"
@@ -56,6 +64,7 @@ alias empire="cd $SOURCE_GITCJ/empire && l"
 alias jeff="cd $SOURCE_JEFF && l"
 # list git repo directories, selection changes to that directory
 alias src="cd \$(git-find-all-repos|fzf-display-basenames) && l"
+
 
 # create aliases for cd, edit, visual-edit and lazygit (if contains .git)
 function alias-dir() {
