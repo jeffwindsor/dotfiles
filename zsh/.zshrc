@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 # zmodload zsh/zprof		# turn this on the profile load times. use `zprof` to get results
 
-FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
 #compaudit | xargs chmod g-w		# resolves unsecure directories warnings
 autoload -Uz compinit -u
 compinit
