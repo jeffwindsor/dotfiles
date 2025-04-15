@@ -47,7 +47,6 @@ function cd-clear-list(){
 	clear
 	l
 }
-alias cd="cd-clear-list"
 
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
@@ -57,6 +56,7 @@ alias icloud="cd $ICLOUD && l"
 alias c="clear"
 # clear and return to HOME
 alias cc="cd && clear"
+alias ccc="cd-clear-list"
 alias config="cd $XDG_CONFIG_HOME && l"
 alias hub="cd $SOURCE_GITHUB && l"
 alias lab="cd $SOURCE_GITCJ && l"
@@ -88,6 +88,10 @@ alias "ds"="\$EDITOR \$HOME/.shellrc"
 
 # function not needed outside this script
 unset -f alias-dir
+
+# == exercism (temporary)
+alias e-gleam="cd $SOURCE_JEFF/exercism/gleam/ && nix develop"
+alias e-rust="cd $SOURCE_JEFF/exercism/rust/ && nix develop"
 
 #===============================================================================
 # Package Managers

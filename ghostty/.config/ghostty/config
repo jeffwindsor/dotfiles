@@ -1,10 +1,16 @@
+#== Theme ==
 theme = tokyonight
+#split-separator-color = light-green
 
-auto-update = off
+#== Font ==
+font-size = 16
 font-family="AtkinsonHyperlegibleMono"
 # font-family="JetBrainsMono Nerd Font Mono"
-font-size = 16
+
+#== Behavior ==
+auto-update = off
 quit-after-last-window-closed = true
 window-decoration = false
 
+#== Keybindings ==
 keybind = global:cmd+grave_accent=toggle_quick_terminal
