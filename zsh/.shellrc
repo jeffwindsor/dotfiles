@@ -194,6 +194,40 @@ if command -v direnv &>/dev/null; then
 	eval "$(direnv hook $SHELL_NAME)"
 fi
 
+#== docker
+if command -v docker &>/dev/null; then
+	function docker_run_on_git_repo() {
+
+		# pick from local git repos
+		local git_repo=$(git-find-all-repos|fzf-display-basenames)
+		if [ -n "$git_repo" ]; then
+
+			# pick from all images
+			local docker_image=$(docker images --format '{{.Repository}}:{{.Tag}}' | fzf --preview "docker image history --format '{{.CreatedBy}}' {}")
+			if [ -n "$docker_image" ]; then
+
+				# start a container of image with git repo mounted as /workspace
+				docker run -it \
+				--entrypoint /bin/bash \
+				-v $XDG_CONFIG_HOME:/home/.config \
+				-v $git_repo:/workspace \
+				$docker_image
+
+			else
+				echo "== No Docker Image Selected"
+			fi
+		else
+			echo "== No Git Repo Selected"
+		fi
+	}
+
+	alias dl="docker container ls && docker image ls"
+	alias dpl="docker pull"
+	alias dri="docker run -it"
+	alias dr="docker_run_on_git_repo \$SRC"
+fi
+
+
 #== ls replacement: https://github.com/eza-community/eza
 if command -v eza &>/dev/null; then
 	alias la="eza -F --group-directories-first --git --all --no-user --no-permissions"
@@ -217,46 +251,29 @@ if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_COMMAND='fd -H -t f'
 	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window right'
 
+	function fzf_query() {
+		# passed in query
+		if [ -n "$1" ]; then
+			fzf --query "$1"
+		else
+			fzf
+		fi
+	}
+	
+	function fzf_query_piped() {
+		# piped in query
+		if [ -n "$1" ]; then
+			fzf --query "$1" </dev/stdin
+		else
+			fzf </dev/stdin
+		fi
+	}
+
 	# shows the basename in the selection window, but returns full path
 	function fzf-display-basenames() {
-		fzf --delimiter / --with-nth -1
+		# previewing as directory
+		fzf --delimiter / --with-nth -1 --preview='eza -A {} | less'
 	}
-
-	# select functions that feed to an eval statement
-	# TODO consolidate functions???
-	# 
-	function fzf-select-dir-eval(){
-		local exec_command="${@}"
-	
-		local one="$(fd -H -t d | fzf)"
-
-		[ -d $one ] || eval "$exec_command $one"
-	}
-
-	function fzf-select-eval(){
-		local exec_command="${@}"
-	
-		local one="$(fzf)"
-
-		[ -d $one ] || eval "$exec_command $one"
-	}
-
-	function fzf-select2-eval(){
-		local exec_command="${@}"
-	
-		local one="$(fzf)"
-		local two="$(fzf)"
-
-		[ -d $one ] || [ -d $two ] || eval "$exec_command $one $two"
-	}
-
-	# fzf double select files then show diff
-	alias fdiff="fzf-select2-eval diffs"
-
-	# straight function alias
-	alias fdir="fzf-select-dir-eval"
-	alias ffile="fzf-select-eval"
-	alias ffiles="fzf-select2-eval"
 
 	# initialize
 	eval "$(fzf --$SHELL_NAME)"
