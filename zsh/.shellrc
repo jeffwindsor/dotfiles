@@ -43,7 +43,7 @@ export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG")
 #===============================================================================
 # emulate clifm 
 function cd-clear-list(){
-	cd $1
+	/usr/bin/cd $1
 	clear
 	l
 }
@@ -125,7 +125,7 @@ if command -v nix &>/dev/null; then
 	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort"
 	# create a new nix shell flake from a template.  usage: new <display-name>
 	alias nn="$NIXCONFIG/shells/new.sh"
-	alias nd="nix develop"
+	alias nd="clear && nix develop"
 	# select env to create
 	alias ns="nix-develop-from-file"
 	# direct access to env creation
@@ -215,7 +215,7 @@ fi
 #== fuzzy finder: https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
 	export FZF_DEFAULT_COMMAND='fd -H -t f'
-	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none' # --preview "bat {}" --preview-window down'
+	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window right'
 
 	# shows the basename in the selection window, but returns full path
 	function fzf-display-basenames() {
