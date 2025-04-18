@@ -102,7 +102,7 @@ if command -v brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   
   # sync brews via via nix config repo shell script
-  alias bsync="$NIXCONFIG/brews.sh"
+  alias bsync="$DOTFILES/brews.sh"
   # list all installed brews, opting to only show top level formulae
   alias bl="echo '== Formulae ==' && brew leaves && echo '== Casks ==' && brew list --casks"
   alias bn="brew install"
