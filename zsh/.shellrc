@@ -82,9 +82,11 @@ alias-dir "n" "$NIXCONFIG"
 alias-dir "s" "$NIXSHELLS"
 
 # source shellrc
-alias "ss"="source \$HOME/.shellrc"
+alias ss="source \$HOME/.shellrc"
 # edit shellrc, shared aliases and functions
-alias "ds"="\$EDITOR \$HOME/.shellrc"
+alias ds="\$EDITOR \$DOTFILES/.shellrc"
+# edit brews
+alias db="\$EDITOR \$DOTFILES/brews.sh"
 
 # function not needed outside this script
 unset -f alias-dir
@@ -196,28 +198,26 @@ fi
 
 #== docker
 if command -v docker &>/dev/null; then
+	function docker_run(){
+		git_repo="$1"
+		docker_image="$2"
+		
+		docker run -it \
+		-v $HOME:/home/usr \
+		-v $git_repo:/workspace \
+		$docker_image
+	}
+	
 	function docker_run_on_git_repo() {
-
 		# pick from local git repos
 		local git_repo=$(git-find-all-repos|fzf-display-basenames)
 		if [ -n "$git_repo" ]; then
-
 			# pick from all images
 			local docker_image=$(docker images --format '{{.Repository}}:{{.Tag}}' | fzf --preview "docker image history --format '{{.CreatedBy}}' {}")
 			if [ -n "$docker_image" ]; then
-
 				# start a container of image with git repo mounted as /workspace
-				docker run -it \
-				--entrypoint /bin/bash \
-				-v $XDG_CONFIG_HOME:/home/.config \
-				-v $git_repo:/workspace \
-				$docker_image
-
-			else
-				echo "== No Docker Image Selected"
+				docker_run $git_repo $docker_image
 			fi
-		else
-			echo "== No Git Repo Selected"
 		fi
 	}
 
