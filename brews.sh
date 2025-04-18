@@ -55,6 +55,11 @@ if [[ $machine == "WKMZTAFD6544" ]]; then
   FORMULAE=(
     "${FORMULAE[@]}"
     maven
+    colima
+    lima
+    docker
+    docker-buildx
+    lazydocker
   )
   CASK=(
     "${CASK[@]}"
