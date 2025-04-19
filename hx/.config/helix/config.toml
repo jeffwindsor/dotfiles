@@ -15,9 +15,10 @@ mouse = true
 shell = ["zsh", "-c"]
 smart-tab.enable = false
 soft-wrap.enable = true
+true-color = true
 # diagnostics after v2.25 
-end-of-line-diagnostics = "hint"
-inline-diagnostics.cursor-line = "warning"
+# end-of-line-diagnostics = "hint"
+# inline-diagnostics.cursor-line = "warning"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -64,7 +65,7 @@ esc = ["collapse_selection", "keep_primary_selection", ":write"]
 "\\" = ":buffer-close"
 
 # Select All
-C-a = "@ggvG"
+# C-a = "@ggvG"
 # lazygit in place
 C-g = [
   ":new",

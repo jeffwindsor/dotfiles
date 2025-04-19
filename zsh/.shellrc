@@ -34,6 +34,7 @@ export SOURCE_GITHUB="$SOURCE/github.com"
 export SOURCE_GITCJ="$SOURCE/gitlab.cj.dev"
 export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
 export DOTFILES="$SOURCE_JEFF/dotfiles"
+export DOCKER_FILES="$SOURCE_JEFF/docker-images"
 export NIXCONFIG="$SOURCE_JEFF/nix-config"
 export NIXSHELLS="$NIXCONFIG/shells"  # no longer a separate repo
 export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG")
@@ -84,16 +85,13 @@ alias-dir "s" "$NIXSHELLS"
 # source shellrc
 alias ss="source \$HOME/.shellrc"
 # edit shellrc, shared aliases and functions
-alias ds="\$EDITOR \$DOTFILES/.shellrc"
+alias ds="\$EDITOR \$HOME/.shellrc"
 # edit brews
 alias db="\$EDITOR \$DOTFILES/brews.sh"
 
 # function not needed outside this script
 unset -f alias-dir
 
-# == exercism (temporary)
-alias e-gleam="cd $SOURCE_JEFF/exercism/gleam/ && nix develop"
-alias e-rust="cd $SOURCE_JEFF/exercism/rust/ && nix develop"
 
 #===============================================================================
 # Package Managers
@@ -198,11 +196,13 @@ fi
 
 #== docker
 if command -v docker &>/dev/null; then
-	function docker_run(){
+	function docker_run_repo(){
 		git_repo="$1"
 		docker_image="$2"
 		
-		docker run -it \
+		docker run -it --rm \
+		-e HOME=/home/usr \
+		-e XDG_CONFIG_HOME=/home/usr/.config \
 		-v $HOME:/home/usr \
 		-v $git_repo:/workspace \
 		$docker_image
@@ -216,15 +216,31 @@ if command -v docker &>/dev/null; then
 			local docker_image=$(docker images --format '{{.Repository}}:{{.Tag}}' | fzf --preview "docker image history --format '{{.CreatedBy}}' {}")
 			if [ -n "$docker_image" ]; then
 				# start a container of image with git repo mounted as /workspace
-				docker_run $git_repo $docker_image
+				docker_run_repo $git_repo $docker_image
 			fi
 		fi
 	}
+		
+	function docker_build(){
+		# select from dockerfiles
+		local filepath=$(fd --glob "*.Dockerfile" $DOCKER_FILES | fzf --delimiter / --with-nth -1 --preview='eza -A {} | less')
+		# tag as filename without extension
+		local filename=$(basename "$filepath")
+		local tag="${filename%.*}"
+		# if filename given, build it
+		[[ -n $filepath ]] && docker build -t $tag -f $filepath $DOCKER_FILES	
+	}
 
+	alias dbf="docker_build"
 	alias dl="docker container ls && docker image ls"
 	alias dpl="docker pull"
-	alias dri="docker run -it"
+	alias dri="docker run -it --rm"
 	alias dr="docker_run_on_git_repo \$SRC"
+	alias dr-g="docker_run \$SOURCE_JEFF/exercism exercism-gleam"
+
+	if command -v lazydocker &>/dev/null; then
+		alias ld="lazydocker"
+	fi
 fi
 
 

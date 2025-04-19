@@ -26,7 +26,6 @@ FORMULAE=(
 )
 
 CASK=(
-  balenaetcher     # usb iso app 
   firefox
   ghostty
   google-chrome
@@ -39,11 +38,12 @@ CASK=(
 
 # add machine specific packages
 machine=$(networksetup -getcomputername)
-# echo $machine
+echo "machine name: $machine"
 
 if [[ $machine == "Midnight Air" ]]; then
   CASK=(
       "${CASK[@]}"
+      balenaetcher     # usb iso app 
       chatgpt
       iina
       spotify
@@ -82,6 +82,15 @@ function brew_command(){
   echo -e "\e[94m==> Brew Install $@ <==\e[0m"
   eval "brew $@"
 }
+echo "== MENU =="
+echo "formulae: ${FORMULAE[@]}"
+echo "cask: ${CASK[@]}"
+echo "== TO INSTALL =="
+echo "formulae: ${FORMULAE_TO_INSTALL[@]}"
+echo "cask: ${CASK_TO_INSTALL[@]}"
+echo "== TO REMOVE =="
+echo "formulae: ${FORMULAE_TO_REMOVE[@]}"
+echo "cask: ${CASK_TO_REMOVE[@]}"
 echo "== BREWS =="
 for f in "${FORMULAE_TO_INSTALL[@]}"; do brew_command "install --formulae $f"; done
 for f in "${FORMULAE_TO_REMOVE[@]}"; do brew_command "remove --formulae $f"; done
