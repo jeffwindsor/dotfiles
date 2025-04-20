@@ -45,6 +45,7 @@ if [[ $machine == "Midnight Air" ]]; then
       "${CASK[@]}"
       balenaetcher     # usb iso app 
       chatgpt
+      discord
       iina
       spotify
       transmission
