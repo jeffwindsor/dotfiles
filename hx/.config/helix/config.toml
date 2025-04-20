@@ -17,8 +17,8 @@ smart-tab.enable = false
 soft-wrap.enable = true
 true-color = true
 # diagnostics after v2.25 
-# end-of-line-diagnostics = "hint"
-# inline-diagnostics.cursor-line = "warning"
+end-of-line-diagnostics = "hint"
+inline-diagnostics.cursor-line = "warning"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -27,7 +27,7 @@ insert = "bar"
 hidden = false
 git-ignore = true
 git-global = true
-# max-depth  = 4
+max-depth  = 3
 
 [editor.indent-guides]
 render = true
@@ -65,7 +65,7 @@ esc = ["collapse_selection", "keep_primary_selection", ":write"]
 "\\" = ":buffer-close"
 
 # Select All
-# C-a = "@ggvG"
+C-a = "@ggvG"
 # lazygit in place
 C-g = [
   ":new",
