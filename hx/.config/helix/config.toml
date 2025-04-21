@@ -27,7 +27,7 @@ insert = "bar"
 hidden = false
 git-ignore = true
 git-global = true
-max-depth  = 3
+# max-depth  = 7
 
 [editor.indent-guides]
 render = true
