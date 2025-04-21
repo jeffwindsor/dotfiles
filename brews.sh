@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+GREEN='\033[0;92m'
+RED='\033[0;91m'
+NC='\033[0m'
 
 # bootstap brew
 if ! command -v brew &> /dev/null; then
@@ -64,7 +67,7 @@ if [[ $machine == "WKMZTAFD6544" ]]; then
   )
   CASK=(
     "${CASK[@]}"
-    intellij-idea
+    intellij-idea-ce
     slack
   )
 
@@ -87,11 +90,11 @@ echo "== MENU =="
 echo "formulae: ${FORMULAE[@]}"
 echo "cask: ${CASK[@]}"
 echo "== TO INSTALL =="
-echo "formulae: ${FORMULAE_TO_INSTALL[@]}"
-echo "cask: ${CASK_TO_INSTALL[@]}"
+echo -e "formulae:${GREEN} ${FORMULAE_TO_INSTALL[@]} ${NC}"
+echo -e "cask:${GREEN} ${CASK_TO_INSTALL[@]} ${NC}"
 echo "== TO REMOVE =="
-echo "formulae: ${FORMULAE_TO_REMOVE[@]}"
-echo "cask: ${CASK_TO_REMOVE[@]}"
+echo -e "formulae:${RED} ${FORMULAE_TO_REMOVE[@]} ${NC}"
+echo -e "cask:${RED} ${CASK_TO_REMOVE[@]} ${NC}"
 echo "== BREWS =="
 for f in "${FORMULAE_TO_INSTALL[@]}"; do brew_command "install --formulae $f"; done
 for f in "${FORMULAE_TO_REMOVE[@]}"; do brew_command "remove --formulae $f"; done
