@@ -66,6 +66,8 @@ esc = ["collapse_selection", "keep_primary_selection", ":write"]
 
 # Select All
 C-a = "@ggvG"
+# delete from here down
+C-x = "@VGd"
 # lazygit in place
 C-g = [
   ":new",
@@ -147,3 +149,7 @@ esc = ["collapse_selection", "normal_mode", ":write"] # vim like escape
 "V" = ["select_mode", "extend_to_line_bounds"]
 "y" = ["yank_main_selection_to_clipboard", "yank"]
 esc = ["collapse_selection", "normal_mode", ":write"]
+
+[keys.select.space]
+"down" = ":pipe sort"
+"up" = ":pipe sort --reverse"
