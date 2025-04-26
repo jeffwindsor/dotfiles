@@ -60,9 +60,6 @@ select = "SELECT"
 "V" = ["select_mode", "extend_to_line_bounds"]
 "y" = ["yank_main_selection_to_clipboard", "yank"]
 esc = ["collapse_selection", "keep_primary_selection", ":write"]
-"}" = ":buffer-next"
-"{" = ":buffer-previous"
-"\\" = ":buffer-close"
 
 # Select All
 C-a = "@ggvG"
@@ -88,6 +85,14 @@ C-y = [
 # replace from clipboard
 C-q = ":clipboard-paste-replace"
 C-r = ":clipboard-paste-replace"
+
+# buffer move and control [[ ]] \\
+[keys.normal."["]
+"[" = ":buffer-previous"
+[keys.normal."]"]
+"]" = ":buffer-next"
+[keys.normal."\\"]
+"\\" = ":buffer-close"
 
 [keys.normal.space]
 q = ":write-quit-all"
