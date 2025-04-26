@@ -339,7 +339,7 @@ if command -v git &>/dev/null; then
 	alias gall_x="clear && git-find-all-repos | git-exec-on" # exec git command on all repos	
 	alias gb="git blame -w -C -C -C" # git blame (more precise)
 	alias gbl="git blame -w -C -C -C -L" # git blame line range
-	alias gdw="git diff --word-diff --unified=0" # git diff by words changed, minimal context
+	alias gd="git diff --word-diff --unified=0" # git diff by words changed, minimal context
 	alias gl="git log --format=\$GIT_LOG_PRETTY_FORMAT"
 	
 	alias gs="git status"
@@ -347,6 +347,9 @@ if command -v git &>/dev/null; then
 	alias gsss="gall_x status"		# shows verbose status for all repositories
 	alias gpl="git pull"
 	alias gpls="gall_x pull"
+	alias gf="git fetch"
+	alias gph="git push"
+	alias gaa="git add --all"
 
 	
 	alias ghub="git_clone_source 'github.com' "  # git clone from git hub to my source directory
