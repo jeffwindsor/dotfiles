@@ -3,13 +3,12 @@
 # do this in home directory so .tool_version is used globally
 cd
 
-brew install asdf
-
-echo " validate this exists or add it"
-echo "export PATH='\${ASDF_DATA_DIR:-\$HOME/.asdf}/shims:\$PATH' >> .shellrc.local"
+echo -e "\e[33m warning: validate this exists or add it\e[0m"
+echo -e " export PATH='\${ASDF_DATA_DIR:-\$HOME/.asdf}/shims:\$PATH' >> .shellrc.local"
+echo -e "\e[94m == applying asdf config == \e[0m"
 
 function add_asdf(){
-  echo "==> adding $1 version $2"
+  echo -e "\e[95m ==> adding $1 version $2 \e[0m"
   asdf plugin add "$1"
   asdf install "$1" "$2"
   asdf set "$1" "$2"
@@ -22,3 +21,4 @@ add_asdf nodejs 20.19.1
 add_asdf awscli 2.27.0
 add_asdf shellcheck 0.10.0
 
+unset -f add_asdf
