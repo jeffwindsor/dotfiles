@@ -76,6 +76,7 @@ if [[ $machine == "WKMZTAFD6544" ]]; then
     "${CASK[@]}"
     intellij-idea
     slack
+    tuple
   )
 
 fi
