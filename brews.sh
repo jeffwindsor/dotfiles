@@ -26,6 +26,9 @@ FORMULAE=(
   television
   yazi
   zsh
+
+  exercism
+  gleam
 )
 
 CASK=(
@@ -37,6 +40,8 @@ CASK=(
   nikitabobko/tap/aerospace  #i3 like tiling
   zed
   zen-browser
+
+  claude 
 )
 
 # add machine specific packages
@@ -64,10 +69,11 @@ if [[ $machine == "WKMZTAFD6544" ]]; then
     docker
     docker-buildx
     lazydocker
+    asdf
   )
   CASK=(
     "${CASK[@]}"
-    intellij-idea-ce
+    intellij-idea
     slack
   )
 
