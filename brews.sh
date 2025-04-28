@@ -63,6 +63,7 @@ fi
 if [[ $machine == "WKMZTAFD6544" ]]; then
   FORMULAE=(
     "${FORMULAE[@]}"
+    aws-cdk
     maven
     colima
     lima
