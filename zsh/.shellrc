@@ -256,9 +256,9 @@ if command -v eza &>/dev/null; then
 	}
 	alias ccc="cd-clear-list"
 
-	alias tree="clear && eza --tree --git --all --git-ignore"
-	alias treed="eza --tree --git -D --all --git-ignore"
-	alias treea="eza --tree --git --all --follow-symlinks --git-ignore"
+	alias tree="clear && eza --tree --git --all --ignore-glob=.git"
+	alias treed="eza --tree --git -D --all --ignore-glob=.git"
+	alias treea="eza --tree --git --all --follow-symlinks --ignore-glob=.git"
 else
 	# default to using ls
 	alias la="ls -a --color=auto"
