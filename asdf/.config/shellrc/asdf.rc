@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#== ASDF  https://asdf-vm.com/
+an() {
+  local name
+  if [[ $# -eq 0 ]]; then
+    name=$(asdf plugin list | fzf)
+  else
+    name=$1
+  fi
+	asdf install $name $({ comm -23 <(asdf list all $name | sort --version-sort) <(asdf list $name | awk '{print $1}' | sort --version-sort); echo "latest"; } | fzf --preview="" --header="$name")
+}
+
+al="asdf latest --all"
+
