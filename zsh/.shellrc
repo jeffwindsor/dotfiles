@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#===============================================================================
 # SHELL CONFIGURATION:
 # 	- shared among multiple shells
 # 	- represents my personal/opinionated approach to using the terminal
@@ -7,13 +6,9 @@
 # 		- Enviroment Variables
 # 		- Jump to Directories 
 # 		- Usage Aliases (added based on if app is installed)
-#===============================================================================
 
 
-#===============================================================================
-#== Enviroment Variables
-#===============================================================================
-SHELL_NAME=${1:-"zsh"}
+export SHELL_NAME=${1:-"zsh"}
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
@@ -37,11 +32,13 @@ export DOTFILES="$SOURCE_JEFF/dotfiles"
 export DOCKER_FILES="$SOURCE_JEFF/docker-images"
 export NIXCONFIG="$SOURCE_JEFF/nix-config"
 export NIXSHELLS="$NIXCONFIG/shells"  # no longer a separate repo
-export REPOS_TO_SYNC=("$DOTFILES" "$NIXCONFIG")
+export REPOS_TO_SYNC=("$DOTFILES")
 
-#===============================================================================
 #== Jump to Directories (prefer this over zoxide)
-#===============================================================================
+alias la="ls -a --color=auto"
+alias ll="ls -l --color=auto"
+alias lla="ls -la --color=auto"
+alias l="clear && lla"
 
 alias .....="cd ../../../../"
 alias ....="cd ../../../"
@@ -56,9 +53,8 @@ alias hub="cd $SOURCE_GITHUB && l"
 alias lab="cd $SOURCE_GITCJ && l"
 alias empire="cd $SOURCE_GITCJ/empire && l"
 alias jeff="cd $SOURCE_JEFF && l"
-# list git repo directories, selection changes to that directory
-alias src="cd \$(git-find-all-repos|fzf-display-basenames) && l"
-
+# helps remote servers when using advanced terminals like ghostty and alacritty 
+alias ssh="term=xterm-256color ssh"
 
 # create aliases for cd, edit, visual-edit and lazygit (if contains .git)
 function alias-dir() {
@@ -72,376 +68,19 @@ function alias-dir() {
 	fi
 }
 alias-dir "d" "$DOTFILES" 
-alias-dir "n" "$NIXCONFIG"
-alias-dir "s" "$NIXSHELLS"
 
 # source shellrc
 alias ss="source \$HOME/.shellrc"
 # edit shellrc, shared aliases and functions
-alias ds="\$EDITOR \$HOME/.shellrc"
-# edit brews
-alias db="\$EDITOR \$DOTFILES/brews.sh"
+alias ds="\$EDITOR \$HOME/.config/shellrc/"
 
 # function not needed outside this script
 unset -f alias-dir
 
 
-#===============================================================================
-# Package Managers
-#===============================================================================
-#== Homebrew https://brew.sh/
-[[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-if command -v brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  
-  function bsync(){
-  	"$DOTFILES/brews.sh"
-  	if command -v asdf &>/dev/null; then
-  		"$DOTFILES/asdf.sh"
-  	fi
-  }
-  # list all installed brews, opting to only show top level formulae
-  alias bl="echo '== Formulae ==' && brew leaves && echo '== Casks ==' && brew list --casks"
-  alias bn="brew install"
-  alias bi="brew info"
-  alias bs="brew search"
-fi
-
-#== Nix https://nixos.org/
-if command -v nix &>/dev/null; then
-
-	# create a nix shell based on selected file 
-	function nix-develop-from-file() {
-		local selection
-		selection=$(fd -tf --glob "flake.nix" "$NIXSHELLS" | fzf --delimiter / --with-nth -2 | sd '/flake.nix' '')
-		[[ -n $selection ]] && nix develop $selection
-	}
-
-	export NIXPKGS_ALLOW_UNFREE=1  # required for some use cases
-	# list all installed system packages
-	alias nl="nix-store -q --references /run/current-system/sw | sd '/nix/store/.+?-' '' | sort"
-	# create a new nix shell flake from a template.  usage: new <display-name>
-	alias nn="$NIXCONFIG/shells/new.sh"
-	alias nd="clear && nix develop"
-	# select env to create
-	alias ns="nix-develop-from-file"
-	# direct access to env creation
-	alias ns-r="nix develop \$NIXSHELLS/rust"
-	alias ns-d="nix develop \$NIXSHELLS/dotfiles"
-	alias ns-p="nix develop \$NIXSHELLS/python312"
-	alias ns-l="nix develop \$NIXSHELLS/ollama"
-	# create an env including specific packages
-	function nsp(){ nix develop nixpkgs#"$1"; }
-
-	# mix management aliases 
-	alias optimise="nix store optimise"
-	alias doctor="nix-store --verify --check-contents --repair"
-	if [ -d "/etc/nixos" ]; then
-		#== nixos
-		alias clean="nix-env --delete-generations && nix-collect-garbage"
-		alias generations="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"
-		alias rebuild="nixos-rebuild build --impure --flake \$NIXCONFIG"
-		alias switch_only="sudo nixos-rebuild switch --impure --flake \$NIXCONFIG"
-		# build and switch nix, pull important git repos, sync dotfile links
-		alias switch="switch_only && gsync && dsync"
-		alias upgrade="sudo nixos-rebuild switch --upgrade --impure --flake \$NIXCONFIG"
-
-	elif command -v darwin-rebuild &>/dev/null; then
-		#== nix-darwin (using flakes)
-		alias clean="nix store gc"
-		alias generations="darwin-rebuild --list-generations"
-		alias rebuild="darwin-rebuild build --impure --flake \$NIXCONFIG"
-		alias switch="darwin-rebuild switch --impure --flake \$NIXCONFIG && bsync && gsync && dsync"
-		alias update="nix flake update --flake \$NIXCONFIG"
-	fi
-fi
-
-
-#===============================================================================
-# Editors
-#===============================================================================
-#== Helix: https://github.com/helix-editor/helix
-if command -v hx &>/dev/null; then
-	alias h="hx"
-	alias h.="hx ."
-fi
-
-#== Zed: https://zed.dev/docs/
-if command -v zed &>/dev/null; then
-	alias z="zed"
-	alias z.="zed ."
-fi
-
-#===============================================================================
-# Terminal
-#===============================================================================
-#== cat replacement (rust): https://github.com/sharkdp/bat
-if command -v bat &>/dev/null; then
-	alias cat="bat" # --style=plain"
-fi
-
-#== file content diff
-if command -v diff &>/dev/null; then
-	# side by side, color, minimal output
-	alias diffs="diff -dbBy --suppress-common-lines --color=always"
-fi
-
-#== automatic environment management: https://github.com/direnv/direnv
-if command -v direnv &>/dev/null; then
-	eval "$(direnv hook $SHELL_NAME)"
-fi
-
-#== docker
-if command -v docker &>/dev/null; then
-	function docker_run_repo(){
-		git_repo="$1"
-		docker_image="$2"
-		
-		docker run -it --rm \
-		-e HOME=/home/usr \
-		-e XDG_CONFIG_HOME=/home/usr/.config \
-		-v $HOME:/home/usr \
-		-v $git_repo:/workspace \
-		$docker_image
-	}
-	
-	function docker_run_on_git_repo() {
-		# pick from local git repos
-		local git_repo=$(git-find-all-repos|fzf-display-basenames)
-		if [ -n "$git_repo" ]; then
-			# pick from all images
-			local docker_image=$(docker images --format '{{.Repository}}:{{.Tag}}' | fzf --preview "docker image history --format '{{.CreatedBy}}' {}")
-			if [ -n "$docker_image" ]; then
-				# start a container of image with git repo mounted as /workspace
-				docker_run_repo $git_repo $docker_image
-			fi
-		fi
-	}
-		
-	function docker_build(){
-		# select from dockerfiles
-		local filepath=$(fd --glob "*.Dockerfile" $DOCKER_FILES | fzf --delimiter / --with-nth -1 --preview='eza -A {} | less')
-		# tag as filename without extension
-		local filename=$(basename "$filepath")
-		local tag="${filename%.*}"
-		# if filename given, build it
-		[[ -n $filepath ]] && docker build -t $tag -f $filepath $DOCKER_FILES	
-	}
-
-	alias dbf="docker_build"
-	alias dl="docker container ls && docker image ls"
-	alias dpl="docker pull"
-	alias dri="docker run -it --rm"
-	alias dr="docker_run_on_git_repo \$SRC"
-	alias dr-g="docker_run \$SOURCE_JEFF/exercism exercism-gleam"
-
-	if command -v lazydocker &>/dev/null; then
-		alias ld="lazydocker"
-	fi
-fi
-
-
-#== ls replacement: https://github.com/eza-community/eza
-if command -v eza &>/dev/null; then
-	alias la="eza -F --group-directories-first --git --all --no-user --no-permissions"
-	alias ll="eza -lF --group-directories-first --git --no-user --no-permissions"
-	alias lla="eza -lF --group-directories-first --git --all --no-user --no-permissions"
-	alias l="clear && lla --header"
-
-	function cd-clear-list(){
-		# emulate clifm 
-		/usr/bin/cd $1
-		clear
-		l
-	}
-	alias ccc="cd-clear-list"
-
-	alias tree="clear && eza --tree --git --all --ignore-glob=.git"
-	alias treed="eza --tree --git -D --all --ignore-glob=.git"
-	alias treea="eza --tree --git --all --follow-symlinks --ignore-glob=.git"
-else
-	# default to using ls
-	alias la="ls -a --color=auto"
-	alias ll="ls -l --color=auto"
-	alias lla="ls -la --color=auto"
-	alias l="clear && lla"
-fi
-
-#== fuzzy finder: https://github.com/junegunn/fzf
-if command -v fzf &>/dev/null; then
-	export FZF_DEFAULT_COMMAND='fd -H -t f'
-	export FZF_DEFAULT_OPTS='--info=inline --reverse --border none --preview "bat {}" --preview-window right'
-
-	function fzf_query() {
-		# passed in query
-		if [ -n "$1" ]; then
-			fzf --query "$1"
-		else
-			fzf
-		fi
-	}
-	
-	function fzf_query_piped() {
-		# piped in query
-		if [ -n "$1" ]; then
-			fzf --query "$1" </dev/stdin
-		else
-			fzf </dev/stdin
-		fi
-	}
-
-	# shows the basename in the selection window, but returns full path
-	function fzf-display-basenames() {
-		# previewing as directory
-		fzf --delimiter / --with-nth -1 --preview='eza -A {} | less'
-	}
-
-	# initialize
-	eval "$(fzf --$SHELL_NAME)"
-	# map keys
-	if [[ $SHELL_NAME == "zsh" ]]; then
-		# use Ctrl-e instead of Alt-c for "fzf to cd"
-		zle     -N             fzf-cd-widget
-		bindkey -M emacs '\C-e' fzf-cd-widget
-		bindkey -rM emacs '\ec'
-	fi
-	
-fi
-
-#== git (source control): https://github.com/git/git
-if command -v git &>/dev/null; then
-
-	# Personal pretty format
-	#	Example output:  80adbf1 - Add dotfiles | Windsor, Jeff | 3 hours ago (HEAD -> main, origin/main)
-	export GIT_LOG_PRETTY_FORMAT='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'
-
-	# Function to find all directories containing a .git subdirectory
-	git-find-all-repos() {
-		# default to my source directory
-		local root=${1:-$SOURCE}
-		# prune will stop recurse on match, sed removes the '/.git' from the end of the result
-		find "$root" -name .git -type d -prune | sed 's|/.git$||'
-	}
-
-	# Function to execute a git command on each Git repository
-	git-exec-on() {
-		local repo
-		while IFS= read -r repo; do
-			echo "==> $repo"
-			git -C "$repo" "$@"
-		done
-	}
-
-	function array-to-string() {
-		IFS=$'\n' # Use newline as delimiter
-		local array_string
-		array_string="${@[*]}"
-		echo "$array_string"
-	}
-
-	alias gsync="echo -e '\e[94m== Spec Repo Sync ==\e[0m' && array-to-string \$REPOS_TO_SYNC | git-exec-on pull -v" # sync all listed git repos
-	alias gall="git-find-all-repos"  # list all repos
-	alias gall_x="clear && git-find-all-repos | git-exec-on" # exec git command on all repos	
-	alias gb="git blame -w -C -C -C" # git blame (more precise)
-	alias gbl="git blame -w -C -C -C -L" # git blame line range
-	alias gd="git diff --word-diff --unified=0" # git diff by words changed, minimal context
-	alias gl="git log --format=\$GIT_LOG_PRETTY_FORMAT"
-	
-	alias gs="git status"
-	alias gss="gall_x status -s"		# shows terse status for all repositories
-	alias gsss="gall_x status"		# shows verbose status for all repositories
-	alias gpl="git pull"
-	alias gpls="gall_x pull"
-	alias gf="git fetch"
-	alias gph="git push"
-	alias gaa="git add --all"
-
-	
-	alias ghub="git_clone_source 'github.com' "  # git clone from git hub to my source directory
-	alias glab="git_clone_source 'gitlab.cj.dev' "  # git clone from git work gitlab to my source directory
-	function git_clone_source() {
-		local base_domain=$1  # 1 = base domain of source
-		local repo_url=$2     # 2 = repo url, with or without the protocol and base domain
-		
-		# remove any un-needed prefixes
-		repo=${repo_url#https://$base_domain/}
-		repo=${repo#git@$base_domain:}
-		repo=${repo%.git}
-
-		clear
-		echo -e "\e[94m==> cloning $repo_url into $SOURCE/$base_domain/$repo\e[0m"
-		
-		# clone repo to my source directory with full folder tree
-		git clone "git@$base_domain:$repo.git" "$SOURCE/$base_domain/$repo"
-
-		# change to the repo local directory, clear and ls -la
-		cd "$SOURCE/$base_domain/$repo"
-		lla
-	}
-
-	#== Lazygit (Git TUI): https://github.com/jesseduffield/lazygit ==
-	if command -v lazygit &>/dev/null; then
-		alias gg="lazygit"
-		alias ggg="lazygit --path \$( git-find-all-repos | fzf-display-basenames )"
-		# alias lg="lazygit"
-	fi
-fi
-
-#== grep replacement: https://github.com/BurntSushi/ripgrep
-if command -v rg &>/dev/null; then
-	export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
-	# aliases
-	alias ar="alias | rg"
-	# environment
-	alias er="env | rg"
-	# functions
-	alias fr="declare -f | rg"
-fi
-
-#== ssh
-# helps remote servers when using advanced terminals like Ghostty and Alacritty 
-alias ssh="TERM=xterm-256color ssh"
-
-#== prompt : https://github.com/starship/starship
-if command -v starship &>/dev/null; then
-	eval "$(starship init $SHELL_NAME)"
-fi
-
-#== dotfiles:
-if command -v stow &>/dev/null; then
-	# sync all dotfile repos to appropriate home locations
-	alias dsync="$DOTFILES/dsync.sh $DOTFILES $HOME"
-fi
-
-#== terminal multiplexer : https://github.com/tmux/tmux
- if command -v tmux &>/dev/null; then
- 	alias t="tmux"
- 	alias tl="tmux ls"         # list
- 	alias ta="tmux attach"     # attach all sessions or number
- 	alias tan="tmux attach -t" # attach to named
- 	alias tn="tmux new -s"     # new with name
- 	alias tk="tmux kill-session"
- 	alias tkn="tmux kill-session -t"
- fi
-
-
-#== tui file manager: https://github.com/sxyazi/yazi
-if command -v yazi &>/dev/null; then
-	# open yazi and shell change to the selected directory on exit
-	function yazi-change-dir() {
-		local tmp
-		tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-		yazi "$@" --cwd-file="$tmp"
-		if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-			cd -- "$cwd" || return
-		fi
-		rm -f -- "$tmp"
-	}
-
-	alias y="yazi"
-	alias yy="yazi-change-dir"
-
-fi
-
-# source local machine specific shell configuration and overrides
+#== load program aliases
+for f in $XDG_CONFIG_HOME/shellrc/*.rc; do
+	source $f
+done
+#== load local machine specific shell configuration and overrides
 [ -f "$HOME/.shellrc.local" ] && source "$HOME/.shellrc.local"
