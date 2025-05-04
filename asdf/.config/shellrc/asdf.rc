@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #== ASDF  https://asdf-vm.com/
-an() {
+function an() {
 	local name
 	if [[ $# -eq 0 ]]; then
 		name=$(asdf plugin list | fzf)
@@ -14,10 +14,18 @@ an() {
 	} | fzf --preview="" --header="$name")
 }
 
+function anp() {
+	local selection = $(asdf plugin list all | awk '{print $1}')
+	[[ -n $selection ]] && asdf plugin add $selection
+}
+
 al="asdf latest --all"
+all="asdf plugin list"
+apa="asdf plugin add"
+apl="asdf plugin list"
 
 function add_asdf() {
-	echo -e "\e[95m ==> adding $1 version $2 \e[0m"
+	echo -e "${FG_LIGHTBLUE} ==> adding $1 version $2 ${NC}"
 	asdf plugin add "$1"
 	asdf install "$1" "$2"
 	asdf set "$1" "$2"
