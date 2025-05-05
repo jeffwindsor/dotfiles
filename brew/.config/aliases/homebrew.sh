@@ -31,25 +31,27 @@ function brew_sync() {
 		bash
 		bat
 		eza
-		fd
+		# fd
 		fzf
 		git
 		helix
 		lazygit
 		ripgrep
-		sd
+		# sd
 		starship
 		stow
-		television
+		# television
 		yazi
 		zsh
+
+		nushell
 
 		bash-language-server
 		shfmt
 		shellcheck
 
-		exercism
-		gleam
+		# exercism
+		# gleam
 	)
 
 	CASK=(
@@ -67,7 +69,7 @@ function brew_sync() {
 
 	# add machine specific packages
 	machine=$(networksetup -getcomputername)
-	echo -e "${BG_LIGHTBLUE}${FG_BLACK} == machine name: $machine == ${NC}"
+	echo -e "${BG_LIGHTBLUE}${FG_BLACK} == brew sync on $machine == ${NC}"
 
 	if [[ $machine == "Midnight Air" ]]; then
 		CASK=(

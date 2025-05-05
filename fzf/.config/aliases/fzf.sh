@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #== fuzzy finder: https://github.com/junegunn/fzf
-export FZF_DEFAULT_COMMAND='fd -H -t f'
+export FZF_DEFAULT_COMMAND='find . -type f'
 export FZF_DEFAULT_OPTS='--info=inline --reverse --border none'
 # --preview "bat {}" --preview-window right'
 

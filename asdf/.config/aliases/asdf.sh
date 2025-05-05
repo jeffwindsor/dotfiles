@@ -36,10 +36,9 @@ function asdf_sync() {
 	cd
 
 	machine=$(networksetup -getcomputername)
-	echo "${FG_LIGHTBLUE}machine name: $machine ${NC}"
+	echo "${BG_LIGHTBLUE}${FG_BLACK} == asdf sync on $machine == ${NC}"
 	echo -e "${FG_YELLOW} warning: validate this exists or add it ${NC}"
 	echo -e "${FG_GRAY} export PATH='\${ASDF_DATA_DIR:-\$HOME/.asdf}/shims:\$PATH' >> .shellrc.local ${NC}"
-	echo -e "${FG_LIGHTBLUE} == applying asdf config == ${NC}"
 
 	# all machines - nothing yet
 
