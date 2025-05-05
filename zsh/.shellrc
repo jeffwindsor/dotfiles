@@ -1,49 +1,48 @@
 #!/usr/bin/env bash
 
-FG_BLACK='\033[0;30m'
-FG_BLUE='\033[0;34m'
-FG_CYAN='\033[0;36m'
-FG_GRAY='\033[0;90m'
-FG_GREEN='\033[0;32m'
-FG_LIGHTBLUE='\033[0;94m'
-FG_LIGHTCYAN='\033[0;96m'
-FG_LIGHTGRAY='\033[0;37m'
-FG_LIGHTGREEN='\033[0;92m'
-FG_LIGHTMAGENTA='\033[0;95m'
-FG_LIGHTRED='\033[0;91m'
-FG_LIGHTYELLOW='\033[0;93m'
-FG_MAGENTA='\033[0;35m'
-FG_RED='\033[0;31m'
-FG_WHITE='\033[0;97m'
-FG_YELLOW='\033[0;33m'
+export FG_BLACK='\e[01;30m'
+export FG_BLUE='\e[01;34m'
+export FG_CYAN='\e[01;36m'
+export FG_GRAY='\e[01;90m'
+export FG_GREEN='\e[01;32m'
+export FG_LIGHTBLUE='\e[01;94m'
+export FG_LIGHTCYAN='\e[01;96m'
+export FG_LIGHTGRAY='\e[01;37m'
+export FG_LIGHTGREEN='\e[01;92m'
+export FG_LIGHTMAGENTA='\e[01;95m'
+export FG_LIGHTRED='\e[01;91m'
+export FG_LIGHTYELLOW='\e[01;93m'
+export FG_MAGENTA='\e[01;35m'
+export FG_RED='\e[01;31m'
+export FG_WHITE='\e[01;97m'
+export FG_YELLOW='\e[01;33m'
 
-BG_BLACK='033[0;40m'
-BG_BLUE='033[0;44m'
-BG_CYAN='033[0;46m'
-BG_GRAY='033[0;100m'
-BG_GREEN='033[0;42m'
-BG_LIGHTBLUE='033[0;104m'
-BG_LIGHTCYAN='033[0;106m'
-BG_LIGHTGRAY='033[0;47m'
-BG_LIGHTGREEN='033[0;102m'
-BG_LIGHTMAGENTA='033[0;105m'
-BG_LIGHTRED='033[0;101m'
-BG_LIGHTYELLOW='033[0;103m'
-BG_MAGENTA='033[0;45m'
-BG_RED='033[0;41m'
-BG_WHITE='033[0;107m'
-BG_YELLOW='033[0;43m'
+export BG_BLACK='\e[01;40m'
+export BG_BLUE='\e[01;44m'
+export BG_CYAN='\e[01;46m'
+export BG_GRAY='\e[01;100m'
+export BG_GREEN='\e[01;42m'
+export BG_LIGHTBLUE='\e[01;104m'
+export BG_LIGHTCYAN='\e[01;106m'
+export BG_LIGHTGRAY='\e[01;47m'
+export BG_LIGHTGREEN='\e[01;102m'
+export BG_LIGHTMAGENTA='\e[01;105m'
+export BG_LIGHTRED='\e[01;101m'
+export BG_LIGHTYELLOW='\e[01;103m'
+export BG_MAGENTA='\e[01;45m'
+export BG_RED='\e[01;41m'
+export BG_WHITE='\e[01;107m'
+export BG_YELLOW='\e[01;43m'
 
-NC='\033[0m'
+export NC='\e[0m'
 
 # SHELL CONFIGURATION:
 # 	- shared among multiple shells
 # 	- represents my personal/opinionated approach to using the terminal
 # 	- Contains:
 # 		- Enviroment Variables
-# 		- Jump to Directories 
+# 		- Jump to Directories
 # 		- Usage Aliases (added based on if app is installed)
-
 
 export SHELL_NAME=${1:-"zsh"}
 
@@ -68,7 +67,7 @@ export SOURCE_JEFF="$SOURCE/github.com/jeffwindsor"
 export DOTFILES="$SOURCE_JEFF/dotfiles"
 export DOCKER_FILES="$SOURCE_JEFF/docker-images"
 export NIXCONFIG="$SOURCE_JEFF/nix-config"
-export NIXSHELLS="$NIXCONFIG/shells"  # no longer a separate repo
+export NIXSHELLS="$NIXCONFIG/shells" # no longer a separate repo
 export REPOS_TO_SYNC=("$DOTFILES")
 
 #== Jump to Directories (prefer this over zoxide)
@@ -90,7 +89,7 @@ alias hub="cd $SOURCE_GITHUB && l"
 alias lab="cd $SOURCE_GITCJ && l"
 alias empire="cd $SOURCE_GITCJ/empire && l"
 alias jeff="cd $SOURCE_JEFF && l"
-# helps remote servers when using advanced terminals like ghostty and alacritty 
+# helps remote servers when using advanced terminals like ghostty and alacritty
 alias ssh="term=xterm-256color ssh"
 
 # create aliases for cd, edit, visual-edit and lazygit (if contains .git)
@@ -104,7 +103,7 @@ function alias-dir() {
 		alias "${1}g"="lazygit --path $2"
 	fi
 }
-alias-dir "d" "$DOTFILES" 
+alias-dir "d" "$DOTFILES"
 
 # source shellrc
 alias ss="source \$HOME/.shellrc"
@@ -113,7 +112,6 @@ alias ds="\$EDITOR \$HOME/.config/shellrc/"
 
 # function not needed outside this script
 unset -f alias-dir
-
 
 #== load program aliases
 for f in $XDG_CONFIG_HOME/shellrc/*.rc; do
