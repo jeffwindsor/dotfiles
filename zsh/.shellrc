@@ -114,7 +114,7 @@ alias ds="\$EDITOR \$HOME/.config/shellrc/"
 unset -f alias-dir
 
 #== load program aliases
-for f in $XDG_CONFIG_HOME/shellrc/*.rc; do
+for f in $XDG_CONFIG_HOME/aliases/*.sh; do
 	source $f
 done
 #== load local machine specific shell configuration and overrides
