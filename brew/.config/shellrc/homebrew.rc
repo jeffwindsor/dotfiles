@@ -9,7 +9,7 @@ FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
 # Synchronize brews with dot file scripts
 function bsync() {
-	brew_sync
+	brew_sync "$@"
 	if command -v asdf &>/dev/null; then
 		asdf_sync
 	fi
@@ -67,7 +67,7 @@ function brew_sync() {
 
 	# add machine specific packages
 	machine=$(networksetup -getcomputername)
-	echo "machine name: $machine"
+	echo -e "${BG_LIGHTBLUE}${FG_BLACK} == machine name: $machine == ${NC}"
 
 	if [[ $machine == "Midnight Air" ]]; then
 		CASK=(
@@ -85,12 +85,12 @@ function brew_sync() {
 		FORMULAE=(
 			"${FORMULAE[@]}"
 			aws-cdk
-			maven
 			colima
-			lima
 			docker
 			docker-buildx
 			lazydocker
+			lima
+			maven
 		)
 		CASK=(
 			"${CASK[@]}"
@@ -110,21 +110,23 @@ function brew_sync() {
 	CASK_TO_REMOVE=($(comm -23 <(printf "%s\n" "${CASK_INSTALLED[@]}" | sort -u) <(printf "%s\n" "${CASK[@]}" | sort -u)))
 
 	function brew_command() {
-		echo -e "${FG_LIGHTBLUE}==> Brew Install $@ <==${NC}"
+		echo -e "${FG_LIGHTBLUE}==> Brew $@ <==${NC}"
 		eval "brew $@"
 	}
-	echo "== MENU =="
-	echo "formulae:${FG_LIGHTGRAY} ${FORMULAE[@]} ${NC}"
-	echo "cask:${FG_LIGHTGRAY} ${CASK[@]} ${NC}"
-	echo "== TO INSTALL =="
-	echo -e "formulae:${FG_LIGHTGREEN} ${FORMULAE_TO_INSTALL[@]} ${NC}"
-	echo -e "cask:${FG_LIGHTGREEN} ${CASK_TO_INSTALL[@]} ${NC}"
-	echo "== TO REMOVE =="
-	echo -e "formulae:${FG_LIGHTRED} ${FORMULAE_TO_REMOVE[@]} ${NC}"
-	echo -e "cask:${FG_LIGHTRED} ${CASK_TO_REMOVE[@]} ${NC}"
-	echo "== BREWS =="
+	echo -e "== REQUESTED =="
+	echo -e "${BG_GRAY}${FG_BLACK}formulaes${NC} ${FG_LIGHTGRAY} ${FORMULAE[@]} ${NC}"
+	echo -e "${BG_GRAY}${FG_BLACK}casks    ${NC} ${FG_LIGHTGRAY} ${CASK[@]} ${NC}"
+	echo -e "== INSTALL MISSING =="
+	echo -e "${BG_GRAY}${FG_BLACK}formulaes${NC} ${FG_LIGHTGREEN} ${FORMULAE_TO_INSTALL[@]} ${NC}"
+	echo -e "${BG_GRAY}${FG_BLACK}casks    ${NC} ${FG_LIGHTGREEN} ${CASK_TO_INSTALL[@]} ${NC}"
 	for f in "${FORMULAE_TO_INSTALL[@]}"; do brew_command "install --formulae $f"; done
-	for f in "${FORMULAE_TO_REMOVE[@]}"; do brew_command "remove --formulae $f"; done
 	for c in "${CASK_TO_INSTALL[@]}"; do brew_command "install --cask $c"; done
-	for c in "${CASK_TO_REMOVE[@]}"; do brew_command "remove --cask $c"; done
+
+	if [[ -n $1 ]]; then
+		echo -e "== REMOVE OTHERS =="
+		echo -e "${BG_GRAY}${FG_BLACK}formulaes${NC} ${FG_LIGHTRED} ${FORMULAE_TO_REMOVE[@]} ${NC}"
+		echo -e "${BG_GRAY}${FG_BLACK}casks    ${NC} ${FG_LIGHTRED} ${CASK_TO_REMOVE[@]} ${NC}"
+		for f in "${FORMULAE_TO_REMOVE[@]}"; do brew_command "remove --formulae $f"; done
+		for c in "${CASK_TO_REMOVE[@]}"; do brew_command "remove --cask $c"; done
+	fi
 }
