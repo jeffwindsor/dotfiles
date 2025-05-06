@@ -47,9 +47,9 @@
 # CONFIG
 # ==================================================================
 # editor for nushell configs (config nu OR config env )
-$env.config.buffer_editor = $env.EDITOR
+$env.config.buffer_editor = "hx"
 
-# turn off default welcome banner
+# default welcome banner
 $env.config.show_banner = false
 
 # path: Tue, Jan 1 01:34:56PM
