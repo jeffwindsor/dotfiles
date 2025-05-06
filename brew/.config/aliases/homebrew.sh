@@ -10,6 +10,7 @@ FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 # Synchronize brews with dot file scripts
 function bsync() {
 	brew_sync "$@"
+	brew upgrade
 	if command -v asdf &>/dev/null; then
 		asdf_sync
 	fi
@@ -23,6 +24,7 @@ alias bl="echo '== Formulae ==' && brew leaves && echo '== Casks ==' && brew lis
 alias bn="brew install"
 alias bi="brew info"
 alias bs="brew search"
+alias bup="brew upgrade"
 
 function brew_sync() {
 
