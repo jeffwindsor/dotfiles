@@ -28,7 +28,7 @@ function brew_sync() {
 
 	FORMULAE=(
 		asdf
-		bash
+		bash # macos has OLD version, replace
 		bat
 		eza
 		# fd
@@ -41,10 +41,11 @@ function brew_sync() {
 		starship
 		stow
 		# television
-		yazi
-		zsh
+		yazi # terminalfile manager
+		zsh  # macos has OLD version, replace
 
-		nushell
+		nushell  # modern shell
+		carapace # completion library
 
 		bash-language-server
 		shfmt
