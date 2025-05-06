@@ -1,10 +1,10 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 source="${1:-$DOTFILES}"
 target="${2:-$HOME}"
 
 echo -e "${BG_LIGHTBLUE}${FG_BLACK}== Dotfile Sync ==${NC}"
-echo -e "${BG_GRAY}${FG_BLACK} Source ${NC}${FG_GRAY} $source${NC}"
-echo -e "${BG_GRAY}${FG_BLACK} Target ${NC}${FG_GRAY} $target${NC}"
+echo -e "${FG_LIGHTBLUE}Source: $source${NC}"
+echo -e "${FG_LIGHTBLUE}Target: $target${NC}"
 
 # for each non-hidden directory in source
 # for path in $(fd -td -d1 "" "$source"); do
