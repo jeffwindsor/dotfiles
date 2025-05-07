@@ -33,13 +33,13 @@ function brew_sync() {
 		bash # macos has OLD version, replace
 		bat
 		eza
-		# fd
+		fd
 		fzf
 		git
 		helix
 		lazygit
 		ripgrep
-		# sd
+		sd
 		starship
 		stow
 		# television
@@ -94,7 +94,6 @@ function brew_sync() {
 			docker
 			docker-buildx
 			lazydocker
-			lima
 			maven
 		)
 		CASK=(
