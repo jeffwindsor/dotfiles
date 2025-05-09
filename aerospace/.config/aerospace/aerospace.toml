@@ -178,11 +178,10 @@ alt-cmd-shift-left = 'move-workspace-to-monitor --wrap-around prev'
 
 #== Launchers : ALT + CTRL
 alt-ctrl-a = 'exec-and-forget open /Applications/Claude.app'
-alt-ctrl-b = 'exec-and-forget open /Applications/Safari.app'                        # web browser
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
 alt-ctrl-d = 'exec-and-forget open /Applications/Discord.app'
-alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'             # web browser
-alt-ctrl-f = 'exec-and-forget open -n /Applications/Firefox.app'                    # web browser
+alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app || open /Applications/Safari.app'
+alt-ctrl-f = 'exec-and-forget open -n /Applications/Firefox.app || open /Applications/Safari.app'
 alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
 alt-ctrl-x = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
@@ -190,9 +189,9 @@ alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
 alt-ctrl-s = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
-alt-ctrl-z = 'exec-and-forget open /Applications/Zen.app'                            # web browser
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Ghostty.app --args "--command=bash"'
 alt-ctrl-space = 'exec-and-forget open ~'
 
 #== Disable Macos shortcuts (to avoid confusion)
@@ -249,11 +248,6 @@ run = ['move-node-to-workspace www']
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
 run = ['move-node-to-workspace www']
-
-[[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
-run = ['move-node-to-workspace www']
-
 
 
 # IDEs
