@@ -37,7 +37,7 @@ style = "dimmed blue"
 bash_indicator = "💣"
 fish_indicator = "🐟"
 zsh_indicator = "🧟"
-nu_indicator = "🌚"
+nu_indicator = "☘️"
 
 [time]
 disabled = false
