@@ -26,6 +26,9 @@ source navigation.nu
 source git.nu
 source sync.nu
 source starship.nu
+source git-completions.nu
+source rg-completions.nu
+source man-completions.nu
 
 # muscle memory coverage, reduce over time
 alias cat = open
