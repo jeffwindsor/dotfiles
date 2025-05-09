@@ -4,6 +4,7 @@
 # for hx to work in nushell: `sudo chown -R (whoami) /Users/(whoami)/.cache/`
 $env.config.buffer_editor = "hx"
 $env.config.show_banner = false
+$env.config.table.mode = "restructured"
 
 $env.XDG_STATE_HOME =  ($env.HOME | path join ".local/state")
 $env.XDG_DATA_HOME =  ($env.HOME | path join ".local/share")
@@ -21,14 +22,25 @@ $env.SOURCE_JEFF = ($env.SOURCE | path join "github.com/jeffwindsor")
 $env.DOTFILES = ($env.SOURCE_JEFF | path join "dotfiles")
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
 
+# includes (non-modules)
 source show.nu
 source navigation.nu 
 source git.nu
 source sync.nu
 source starship.nu
+
+# completions from nushell's github
 source git-completions.nu
 source rg-completions.nu
 source man-completions.nu
+
+
+# dotfiles
+alias d = cdl $env.DOTFILES
+alias de = edit $env.DOTFILES
+alias dv = visual-edit $env.DOTFILES
+alias ds = config nu
+alias dg = lazygit --path $env.DOTFILES 
 
 # muscle memory coverage, reduce over time
 alias cat = open
