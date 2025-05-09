@@ -25,9 +25,5 @@ alias lab = cdl $env.SOURCE_GITCJ
 alias empire = cdl ($env.SOURCE_GITCJ | path join "empire") 
 alias jeff = cdl $env.SOURCE_JEFF 
 
-# dotfiles
-alias d = cdl $env.DOTFILES
-alias de = edit $env.DOTFILES
-alias dv = visual-edit $env.DOTFILES
-alias ds = config nu
+
 
