@@ -124,29 +124,3 @@ def brew_sync_with [required_packages, installed_packages, package_type] {
     }
 }
 
-
-#== LAZYGIT
-alias gg = lazygit
-
-#== GIT
-alias gd = git diff --word-diff --unified=0
-alias gb = git blame -w -C -C -C
-alias gs = git status
-alias gph = git push
-alias gpl = git pull
-
-def git_clone [repo_url:string] {
-  # extract the host and repo path 
-	let parsed = ($repo_url | parse --regex '(?:git@(?P<git_host>[^:]+)):?(?P<repo_path>.+?)(?:\.git)?$')
-  let target = $'($env.SOURCE)/($parsed.git_host)/($parsed.repo_path)'
-  
-	# clone repo to my source directory with full folder tree
-	clear
-	print (section $'cloning ($repo_url) into ($target)')
-	git clone $repo_url $target
-
-	# change to the repo local directory, clear and ls -la
-	cd $target
-	ls -a
-}
-
