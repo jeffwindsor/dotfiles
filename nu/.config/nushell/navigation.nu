@@ -1,5 +1,11 @@
-def l [] { clear; ls -a }
-def cdl [path?:string] { cd $path; l }
+def l [] {
+  clear
+  ls -a
+}
+def --env cdl [path?:string] {
+  cd $path
+  l
+}
 def edit [path] { hx $path }
 def visual-edit [path] { zed $path }
 
