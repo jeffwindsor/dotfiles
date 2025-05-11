@@ -52,22 +52,4 @@ def af [query] {
   | select name params 
 }
 
-# research these:
-# AWESOME: https://github.com/nushell/awesome-nu?tab=readme-ov-file#plugins
-# 
-#   Plugins
-#   https://github.com/cptpiepmatz/nu-plugin-highlight
-#
-#   Scripts
-#   https://github.com/fj0r/ai.nu
-#
-#   Completions
-#   https://github.com/nushell/nu_scripts/tree/main/custom-completions
-#
-#   Integrations
-#   https://github.com/selfagency/bru
-#   https://github.com/carapace-sh/carapace-bin
-#   https://github.com/direnv/direnv/blob/master/docs/hook.md#nushell
-#   https://github.com/hustcer/deepseek-review
-#   https://github.com/kellyjonbrazil/jc
-
+# research these: https://github.com/nushell/awesome-nu?tab=readme-ov-file#plugins
