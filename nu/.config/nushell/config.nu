@@ -4,7 +4,7 @@
 # for hx to work in nushell: `sudo chown -R (whoami) /Users/(whoami)/.cache/`
 $env.config.buffer_editor = "hx"
 $env.config.show_banner = false
-$env.config.table.mode = "restructured"
+$env.config.table.mode = "none"
 
 $env.XDG_STATE_HOME =  ($env.HOME | path join ".local/state")
 $env.XDG_DATA_HOME =  ($env.HOME | path join ".local/share")
