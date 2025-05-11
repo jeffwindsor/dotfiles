@@ -6,7 +6,7 @@ alias gs = git status
 alias gph = git push
 alias gpl = git pull
 
-def git-clone [repo_url:string] {
+def --env git-clone [repo_url:string] {
 	let repo = ($repo_url | parse --regex '(?:git@(?P<git_host>[^:]+)):?(?P<repo_path>.+?)(?:\.git)?$')
   let target = $'($env.SOURCE)/($repo.git_host)/($repo.repo_path)'
   
