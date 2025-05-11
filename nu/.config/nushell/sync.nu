@@ -1,4 +1,11 @@
-brew-syncbrew-cleanbrew-cleanbrew-upbrew-up
+const asdf_packages = [
+  [ plugin, version];
+	[ "java","corretto-21.0.7.6.1"]
+	[ "maven","3.9.9"]
+	[ "scala","2.12.18"]
+	[ "nodejs","20.19.1"]
+	[ "awscli","2.27.0"]
+]
 const brew_packages = [
   [machine_name,   package_type, package_name];
   
@@ -50,18 +57,14 @@ def to-result [action, type, name, result, f: closure] {
 
 # sync and upgrade everything
 def up [] {
-
-  print (header "homebrew: sync")
-  (brew-up)
-  | append (brew-sync)
-  | append (brew-clean)
-  | print
-
-  print (header "dotfiles: sync")
-  (dot-up)
-  | append (dot-sync)
-  | print
-
+  dot-up
+  brew-up
+  
+  brew sync $brew_packages
+  brew-sync
+  brew-clean
+  
+  asdf-sync $asdf_packages
 }
 
 #== DOTFILES / STOW
@@ -123,3 +126,11 @@ def brew-sync-with [required_packages, installed_packages, package_type] {
     }
 }
 
+def asdf-sync [packages = $asdf_packages] {
+  $asdf_packages
+  | par-each {|pkg|
+  	asdf plugin add $pkg.plugin $pkg.version
+  	asdf install $pkg.plugin $pkg.version
+  	asdf set $pkg.plugin $pkg.version
+  }
+}
