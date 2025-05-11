@@ -34,6 +34,7 @@ source git-completions.nu
 source rg-completions.nu
 source man-completions.nu
 
+alias fg = job unfreeze
 
 # dotfiles
 alias d = cdl $env.DOTFILES
