@@ -93,6 +93,8 @@ c = ":theme catppuccin_mocha"
 e = ":theme ayu_evolve"
 g = ":theme gruvbox"
 k = ":theme kanagawa"
+m = ":theme murmur"
+s = ":theme solarized-osaka"
 t = ":theme tokyonight"
 
 # config files
