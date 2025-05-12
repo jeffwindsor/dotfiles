@@ -1,4 +1,4 @@
-def git-pull [path] { run-external "git" "-C" $path "pull" "--quiet" }
+def git-pull [path] { run-external "git" "-C" $path "pull" }
 alias gg = lazygit
 alias gd = git diff --word-diff --unified=0
 alias gb = git blame -w -C -C -C
