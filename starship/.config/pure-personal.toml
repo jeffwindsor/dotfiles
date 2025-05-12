@@ -1,22 +1,21 @@
 format = """
-$username\
-$hostname\
+$shell\
 $directory\
-$git_branch\
+$git_branch \
 $git_state\
 $git_status\
 $cmd_duration\
+$jobs\
 $line_break\
-$python\
 $character"""
 
 [directory]
-style = "blue"
+style = "dimmed blue"
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = "[❯](blue)"
+error_symbol = "[❯](dimmed red)"
+vimcmd_symbol = "[❮](dimmed purple)"
 
 [git_branch]
 format = "[$branch]($style)"
@@ -39,8 +38,12 @@ style = "bright-black"
 
 [cmd_duration]
 format = "[$duration]($style) "
-style = "yellow"
-
-[python]
-format = "[$virtualenv]($style) "
 style = "bright-black"
+
+[shell]
+disabled = false
+style = "dimmed blue"
+bash_indicator = "💣"
+fish_indicator = "🐟"
+zsh_indicator = "🧟"
+nu_indicator = "🌑"
