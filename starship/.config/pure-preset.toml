@@ -1,12 +1,13 @@
 format = """
-$shell\
+$username\
+$hostname\
 $directory\
 $git_branch\
 $git_state\
 $git_status\
 $cmd_duration\
-$jobs\
 $line_break\
+$python\
 $character"""
 
 [directory]
@@ -40,10 +41,6 @@ style = "bright-black"
 format = "[$duration]($style) "
 style = "yellow"
 
-[shell]
-disabled = false
-style = "dimmed blue"
-bash_indicator = "💣"
-fish_indicator = "🐟"
-zsh_indicator = "🧟"
-nu_indicator = "🌑"
+[python]
+format = "[$virtualenv]($style) "
+style = "bright-black"
