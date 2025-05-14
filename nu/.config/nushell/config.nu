@@ -44,6 +44,9 @@ alias dg = lazygit --path $env.DOTFILES
 # applications
 alias h = hx
 alias "h." = hx .
+alias bn = brew install
+alias bi = brew info
+alias bs = brew search
 
 # `sh` crutches
 alias cat = open
