@@ -95,6 +95,7 @@ function brew_sync() {
 			docker-buildx
 			lazydocker
 			maven
+			visual-studio-code
 		)
 		CASK=(
 			"${CASK[@]}"

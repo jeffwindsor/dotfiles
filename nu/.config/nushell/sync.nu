@@ -1,5 +1,6 @@
 const asdf_packages = [
   [ machine_name,   plugin,   version];
+  
 	[ "WKMZTAFD6544", "java",   "corretto-21.0.7.6.1"]
 	[ "WKMZTAFD6544", "maven",  "3.9.9"]
 	[ "WKMZTAFD6544", "scala",  "2.12.18"]
@@ -7,12 +8,15 @@ const asdf_packages = [
 	[ "WKMZTAFD6544", "awscli", "2.27.0"]
 ]
 const brew_packages = [
-  [machine_name, type,     packages];
-  [all_machines, formulae, ["asdf" "bash" "carapace" "fzf" "git" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
-  [all_machines, cask,     ["claude" "firefox" "ghostty" "google-chrome" "jordanbaird-ice" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
-  ["WKMZTAFD6544",formulae,["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "lima" "maven"]]
-  ["WKMZTAFD6544", cask,   ["intellij-idea" "slack" "tuple"]]
-  ["Midnight Air", cask,   ["balenaetcher" "chatgpt" "discord" "iina" "spotify" "transmission"]]
+  [machine_name,   type,     packages];
+  
+  [all_machines,   formulae, ["asdf" "bash" "carapace" "fzf" "git" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
+  ["Midnight Air", formulae, []]
+  ["WKMZTAFD6544", formulae, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "lima" "maven"]]
+  
+  [all_machines,   cask,     ["claude" "firefox" "ghostty" "google-chrome" "jordanbaird-ice" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
+  ["WKMZTAFD6544", cask,     ["intellij-idea" "slack" "tuple", "visual-studio-code"]]
+  ["Midnight Air", cask,     ["balenaetcher" "chatgpt" "discord" "iina" "spotify" "transmission"]]
 ]
 
 # sync and upgrade everything
