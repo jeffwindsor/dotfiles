@@ -6,16 +6,20 @@ $git_state\
 $git_status\
 $cmd_duration\
 $jobs\
+$java\
+$nodejs\
+$gleam\
+$haskell\
 $line_break\
 $character"""
 
 [directory]
-style = "dimmed blue"
+style = "blue"
 
 [character]
 success_symbol = "[❯](blue)"
 error_symbol = "[❯](dimmed red)"
-vimcmd_symbol = "[❮](dimmed purple)"
+vimcmd_symbol = "[❮](purple)"
 
 [git_branch]
 format = "[$branch]($style)"
@@ -47,3 +51,15 @@ bash_indicator = "💣"
 fish_indicator = "🐟"
 zsh_indicator = "🧟"
 nu_indicator = "🌑"
+
+[java]
+disabled = false
+
+[nodejs]
+disabled = false
+
+[gleam]
+disabled = false
+
+[haskell]
+disabled = false
