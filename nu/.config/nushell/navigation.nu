@@ -17,7 +17,7 @@ alias ".." = cd ..
 
 # list
 alias c = clear
-alias cc = cdl
+alias cc = cdl $env.HOME
 alias la = ls -a
 alias ll = ls -l
 alias lla = ls -la
