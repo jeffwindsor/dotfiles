@@ -183,12 +183,13 @@ alt-ctrl-d = 'exec-and-forget open /Applications/Discord.app'
 alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app || open /Applications/Safari.app'
 alt-ctrl-f = 'exec-and-forget open -n /Applications/Firefox.app || open /Applications/Safari.app'
 alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
-alt-ctrl-x = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
 alt-ctrl-s = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
+alt-ctrl-v = 'exec-and-forget open /Applications/Visual\ Studio\ Code.app'
+alt-ctrl-x = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Ghostty.app --args "--command=bash"'
@@ -261,6 +262,10 @@ run = ['move-node-to-workspace IDE']
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.intellij'
+run = ['move-node-to-workspace IDE']
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
 run = ['move-node-to-workspace IDE']
 
 
