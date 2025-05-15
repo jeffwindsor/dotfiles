@@ -31,7 +31,6 @@ def up [] {
   # reload application configs
   # run-external "ghostty" "+reload-config"  # not implemented yet
   run-external "aerospace" "reload-config"
-  | ignore
 }
 
 #== DOTFILES / STOW
@@ -106,12 +105,14 @@ def brew-sync-with [type, required_packages, installed_packages] {
 
 # ASDF
 def asdf-sync [packages = $asdf_packages] {
-  section $"Syncing ASDF"
-  cd $env.HOME
-  $asdf_packages
-  | par-each --keep-order {|pkg|
-  	asdf plugin add $pkg.plugin $pkg.version
-  	asdf install $pkg.plugin $pkg.version
-  	asdf set $pkg.plugin $pkg.version 
+  if (which asf | length) > 0 {
+    section $"Syncing ASDF"
+    cd $env.HOME
+    $asdf_packages
+    | par-each --keep-order {|pkg|
+    	asdf plugin add $pkg.plugin $pkg.version
+    	asdf install $pkg.plugin $pkg.version
+    	asdf set $pkg.plugin $pkg.version 
+    }
   }
 }
