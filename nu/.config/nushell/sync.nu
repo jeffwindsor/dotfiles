@@ -21,16 +21,21 @@ const brew_packages = [
 
 # sync and upgrade everything
 def up [] {
-  dot-up
+  dot-pull
   brew-up
   brew-sync 
   brew-clean
   dot-sync
-  asdf-sync | ignore
+  asdf-sync
+
+  # reload application configs
+  # run-external "ghostty" "+reload-config"  # not implemented yet
+  run-external "aerospace" "reload-config"
+  | ignore
 }
 
 #== DOTFILES / STOW
-def dot-up [] {
+def dot-pull [] {
   section "Pulling Dotfiles"
   dimmed $"to   $($env.DOTFILES)"
   git-pull $env.DOTFILES
