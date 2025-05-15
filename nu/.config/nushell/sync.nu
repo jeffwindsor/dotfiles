@@ -37,7 +37,7 @@ def up [] {
 #== DOTFILES / STOW
 def dot-pull [] {
   section "Pulling Dotfiles"
-  dimmed $"to   $($env.DOTFILES)"
+  dimmed $"to $($env.DOTFILES)"
   git-pull $env.DOTFILES
 }
 
@@ -95,9 +95,9 @@ def brew-sync-with [type, required_packages, installed_packages] {
     | get packages | flatten
     | par-each --keep-order {|pkg|
       if ($pkg in $installed_packages) { 
-        dimmed $pkg
+        dimmed $" ($pkg)"
       } else {
-        info $pkg 
+        info $" ($pkg)" 
         run-external "brew" "install" "--quiet" $"--($type)" $pkg
       }
     }
