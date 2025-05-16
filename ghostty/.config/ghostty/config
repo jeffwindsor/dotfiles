@@ -1,14 +1,16 @@
 #== Theme ==
-theme = tokyonight
-#split-separator-color = light-green
+theme = iceberg-dark
+# theme = rose-pine
+# theme = MaterialOcean
+# theme = Darkside
+# theme = tokyonight
+# split-separator-color = light-green
 
 #== Font ==
 font-size = 16
-font-family="AtkinsonHyperlegibleMono"
-# font-family="JetBrainsMono Nerd Font Mono"
+font-family="JetBrainsMono Nerd Font Mono"
 
 #== Behavior ==
-auto-update = off
 quit-after-last-window-closed = true
 window-decoration = false
 
