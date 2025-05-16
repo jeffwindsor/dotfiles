@@ -1,3 +1,5 @@
+#!/usr/bin/env nu
+
 const asdf_packages = [
   [ machine_name,   plugin,   version];
   
