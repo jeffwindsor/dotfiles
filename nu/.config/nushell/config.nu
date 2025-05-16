@@ -21,49 +21,12 @@ $env.SOURCE_JEFF = ($env.SOURCE | path join "github.com/jeffwindsor")
 $env.DOTFILES = ($env.SOURCE_JEFF | path join "dotfiles")
 $env.PATH = ($env.PATH | split row (char esep) | prepend '/opt/homebrew/bin')
 
-# includes (non-modules)
+# scripts, overlays and modules
 source show.nu
-source navigation.nu 
+source personal.nu  
 source git.nu
 source sync.nu
-source starship.nu
 
-# completions from nushell's github
-source git-completions.nu
-source rg-completions.nu
-source man-completions.nu
-
-
-# dotfiles
-alias d = cdl $env.DOTFILES
-alias de = edit $env.DOTFILES
-alias dv = visual-edit $env.DOTFILES
-alias ds = config nu
-alias dg = lazygit --path $env.DOTFILES 
-
-# applications
-alias h = hx
-alias "h." = hx .
-alias bn = brew install
-alias bi = brew info
-alias bs = brew search
-
-# `sh` crutches
-alias cat = open
-alias fg = job unfreeze
-alias jobs = job list
-alias a = scope aliases
-
-def ar [query] {
-  scope aliases
-  | where {|r| $r.expansion =~ $query or $r.name =~ $query}
-}
-
-def af [query] {
-  scope commands
-  | where command_type == "custom"
-  | where name =~ $query
-  | select name params 
-}
+# completions => carapace
 
 # research these: https://github.com/nushell/awesome-nu?tab=readme-ov-file#plugins
