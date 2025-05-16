@@ -5,12 +5,11 @@
 autoload -Uz compinit -u
 compinit
 
-
 #== Shell OPTIONS
-setopt no_beep         # no beep on error
-setopt GLOB_DOTS       # allows fzf-tab to show hidden files by default
+setopt no_beep   # no beep on error
+setopt GLOB_DOTS # allows fzf-tab to show hidden files by default
 # setopt completealiases # Autocomplete command line switches for aliases
-bindkey -e             # emacs bindings
+bindkey -e # emacs bindings
 
 #== Zsh History
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
@@ -26,29 +25,9 @@ setopt HIST_FIND_NO_DUPS      # Do not display a previously found event.
 setopt HIST_IGNORE_SPACE      # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history file.
 
-
-#== Plugins
-export ZSH_PLUGIN_DIR="$HOME/.local/share/zsh/plugins"
-
-function load_plugin(){
-	local plugin_repo=$1
-	local plugin_init_file=$2
-	
-	# if the plugin is not found clone it first	
-	if [[ ! -e "$ZSH_PLUGIN_DIR/$plugin_repo" ]]; then
-  		git clone --depth=1 "https://github.com/$plugin_repo.git" "$ZSH_PLUGIN_DIR/$plugin_repo"
-	fi
-	if [[ -v plugin_init_file ]]; then
-		source "$ZSH_PLUGIN_DIR/$plugin_repo/$plugin_init_file"
-	fi
-}
-
-load_plugin "Aloxaf/fzf-tab" "fzf-tab.plugin.zsh"
-load_plugin "zsh-users/zsh-syntax-highlighting" "zsh-syntax-highlighting.zsh"
-load_plugin "zsh-users/zsh-completions"
-
-# keep load_plugin function local to zshrc
-unfunction load_plugin
+# ~/.zshrc
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
 
 #== Personal multi-shell rc file
-[ -f $HOME/.shellrc ] &&  source "$HOME/.shellrc" zsh
+[ -f $HOME/.shellrc ] && source "$HOME/.shellrc" zsh
