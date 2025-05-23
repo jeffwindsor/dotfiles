@@ -32,37 +32,73 @@ def brew-up [] {
   section "Upgrading Brews"
   run-external "brew" "upgrade" | print
 }
+
 def brew-clean [] {
   section "Remove Orphaned Brews"
   run-external "brew" "autoremove" | print
   section "Clean up Cellar"
   run-external "brew" "cleanup" | print
 }
-def brew-sync [packages = $brew_packages] {
 
-  # filter packages for current machine
+def brew-sync [] {
+  brew-up
+  #brew-sync
+  brew-clean
+}
+
+def brews-required-for-machine [type] {
   let machine_name = (networksetup -getcomputername)
-  section $"Syncing Brews on ($machine_name)"
-  let packages = $packages
+  $brew_packages
     | where {|r| $r.machine_name == all_machines or $r.machine_name == $machine_name}
-    | select type packages
-  
-  # install any missing packages 
-  brew-sync-with cask $packages (brew list --cask --full-name | col)
-  brew-sync-with formulae $packages (brew leaves)
+    | where {|r| $r.type == $type}
+    | get packages
+    | flatten
 }
 
-def brew-sync-with [type, required_packages, installed_packages] {
-  # if required package is not installed then brew install else skip
-  $required_packages
-    | where type == $type
-    | get packages | flatten
-    | par-each --keep-order {|pkg|
-      if ($pkg in $installed_packages) { 
-        dimmed $" ($pkg)"
-      } else {
-        info $" ($pkg)" 
-        run-external "brew" "install" "--quiet" $"--($type)" $pkg
-      }
-    }
+def brews-installed-on-machine [type] {
+  match $type {
+    cask => (run-external "brew" "list" "--casks" "--full-name" | table),
+    formulae => (run-external "brew" "leaves" | table)
+  }
 }
+
+def brew-sync-cask [] {
+  let a = (brews-required-for-machine cask)
+  let b = (brews-installed-on-machine cask)
+  $a | where {|p| $p in $b}  
+}
+
+
+
+
+# def brew-package-sync [type, command, skip, packages] {
+#   section $"Brew Sync ($command)"
+#   $packages
+#   | par-each --keep-order {|pkg|
+#     if (skip $pkg) { 
+#       dimmed $" ($pkg)"
+#     } else {
+#       info $" ($pkg)" 
+#       run-external "brew" $command "--quiet" $"--($type)" $pkg
+#     }
+#   }
+# }
+
+# def brew-sync [packages = $brew_packages, remove = false] {
+#   let machine_formulaes = brews-for-machine $packages formulae
+#   let installed_formulae = brew leaves
+#   brew-exec-on-missing $command formulae $requested_packages $installed_formulae
+# }
+
+# def brew-exec-on-missing [command, type, required_packages, installed_packages] {
+#   # if required package is not installed then brew install else skip
+#   $required_packages
+#     | par-each --keep-order {|pkg|
+#       if ($pkg in $installed_packages) { 
+#         dimmed $" ($pkg)"
+#       } else {
+#         info $" ($pkg)" 
+#         run-external "brew" $command "--quiet" $"--($type)" $pkg
+#       }
+#     }
+# }

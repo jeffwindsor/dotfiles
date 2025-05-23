@@ -33,13 +33,11 @@ def normal  [text] { show $text reset }
 def show    [text, color] { print $"(ansi $color)($text)(ansi reset)" }
 
 # sync and upgrade everything
-def up [] {
+def sync [] {
   dot-pull
-  brew-up
-  brew-sync 
-  brew-clean
-  dot-sync
+  brew-sync
   asdf-sync
+  dot-sync
 
   # reload application configs
   # run-external "ghostty" "+reload-config"  # not implemented yet
