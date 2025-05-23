@@ -9,16 +9,17 @@ alias ds = config nu
 alias dg = lazygit --path $env.DOTFILES 
 
 #== SYNC FUNCTIONS
-def dot-pull [] {
+def dot-sync [] {
   section "Pulling Dotfiles"
-  dimmed $"to $($env.DOTFILES)"
-  git-pull $env.DOTFILES
+  git -C $env.DOTFILES pull
 
   source $nu.config-path
   source $nu.env-path
+
+  run-external "aerospace" "reload-config"
 }
 
-def dot-sync [] {
+def dot-stow [] {
   section "Syncing Dotfiles"
   dimmed $"from $($env.DOTFILES)"
   dimmed $"to   $($env.HOME)"

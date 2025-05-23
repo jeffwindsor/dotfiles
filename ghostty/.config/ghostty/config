@@ -1,10 +1,10 @@
 #== Theme ==
+# theme = MaterialDarker
+# theme = 0x96f
 theme = iceberg-dark
 # theme = rose-pine
 # theme = MaterialOcean
-# theme = Darkside
 # theme = tokyonight
-# split-separator-color = light-green
 
 #== Font ==
 font-size = 16

@@ -8,7 +8,7 @@ alias lab = cdl $env.SOURCE_GITCJ
 alias empire = cdl ($env.SOURCE_GITCJ | path join "empire") 
 alias jeff = cdl $env.SOURCE_JEFF 
 
-
+# git
 alias gg = lazygit
 alias gd = git diff --word-diff --unified=0
 alias gb = git blame -w -C -C -C
@@ -21,7 +21,9 @@ alias gl = git log --pretty=%h»¦«%aN»¦«%s»¦«%ch
 	| update merged {|x| $x.merged | into datetime }
 	| first 20
 
-def git-pull [path] { run-external "git" "-C" $path "pull" }
+def git-pull [path] {
+	git -C $path pull
+}
 
 def git-repos [root_path] {
 	let target = [$root_path "**/.git"] | str join "/" | into glob
