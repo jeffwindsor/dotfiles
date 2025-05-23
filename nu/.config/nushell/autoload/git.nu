@@ -9,7 +9,6 @@ alias empire = cdl ($env.SOURCE_GITCJ | path join "empire")
 alias jeff = cdl $env.SOURCE_JEFF 
 
 
-def git-pull [path] { run-external "git" "-C" $path "pull" }
 alias gg = lazygit
 alias gd = git diff --word-diff --unified=0
 alias gb = git blame -w -C -C -C
@@ -21,6 +20,13 @@ alias gl = git log --pretty=%h»¦«%aN»¦«%s»¦«%ch
 	| split column "»¦«" sha1 committer desc merged
 	| update merged {|x| $x.merged | into datetime }
 	| first 20
+
+def git-pull [path] { run-external "git" "-C" $path "pull" }
+
+def git-repos [root_path] {
+	let target = [$root_path "**/.git"] | str join "/" | into glob
+	ls -a $target
+}
 
 def --env git-clone [repo_url:string] {
 	let repo = ($repo_url | parse --regex '(?:git@(?P<git_host>[^:]+)):?(?P<repo_path>.+?)(?:\.git)?$')

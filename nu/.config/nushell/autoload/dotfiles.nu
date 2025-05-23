@@ -13,6 +13,9 @@ def dot-pull [] {
   section "Pulling Dotfiles"
   dimmed $"to $($env.DOTFILES)"
   git-pull $env.DOTFILES
+
+  source $nu.config-path
+  source $nu.env-path
 }
 
 def dot-sync [] {
