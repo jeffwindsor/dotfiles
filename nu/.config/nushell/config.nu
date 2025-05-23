@@ -32,17 +32,6 @@ def dimmed  [text] { show $text dark_gray }
 def normal  [text] { show $text reset }
 def show    [text, color] { print $"(ansi $color)($text)(ansi reset)" }
 
-# sync and upgrade everything
-def sync [] {
-  dot-pull
-  brew-sync
-  asdf-sync
-  dot-sync
-
-  # reload application configs
-  # run-external "ghostty" "+reload-config"  # not implemented yet
-  run-external "aerospace" "reload-config"
-}
 
 # helix - have not moved to file yet
 alias h = hx
