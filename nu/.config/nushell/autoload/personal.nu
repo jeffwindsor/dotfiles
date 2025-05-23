@@ -1,12 +1,8 @@
-#!/usr/bin/env nu
-
 $env.XDG_STATE_HOME = ($env.HOME | path join ".local/state")
 $env.XDG_DATA_HOME = ($env.HOME | path join ".local/share")
 $env.XDG_CACHE_HOME = ($env.HOME | path join ".cache")
 $env.XDG_CONFIG_HOME = ($env.HOME | path join ".config")
 alias config = cdl $env.XDG_CONFIG_HOME 
-
-
 
 # navigation
 alias "....." = cd ../../../../

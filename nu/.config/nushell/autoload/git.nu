@@ -1,5 +1,3 @@
-#!/usr/bin/env nu
-
 # repos / source files
 alias src = cdl $env.SOURCE 
 alias srcs = cdl (tv git-repos)
