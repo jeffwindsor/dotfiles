@@ -31,19 +31,3 @@ def warning [text] { show $text yellow }
 def dimmed  [text] { show $text dark_gray }
 def normal  [text] { show $text reset }
 def show    [text, color] { print $"(ansi $color)($text)(ansi reset)" }
-
-
-# helix - have not moved to file yet
-alias h = hx
-alias "h." = hx .
-
-# yazi
-def --env y [...args] {
-	let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-	yazi ...$args --cwd-file $tmp
-	let cwd = (open $tmp)
-	if $cwd != "" and $cwd != $env.PWD {
-		cd $cwd
-	}
-	rm -fp $tmp
-}
