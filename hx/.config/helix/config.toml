@@ -1,21 +1,22 @@
 ###################################################################
 # https://docs.helix-editor.com/master/commands.html
 ###################################################################
+
 theme = "catppuccin_mocha"
+
 [editor]
-auto-pairs = false                                  # do not auto pair symbols
+auto-pairs = false    # do not auto pair symbols
 auto-save = true
-bufferline = "always"                               # show buffer tabs at all times
-color-modes = true                                  # color status line MODE indicator (it's pretty)
-cursorline = true                                   # highlight all rows with cursor
+bufferline = "always"    # show buffer tabs at all times
+color-modes = true    # color status line MODE indicator (it's pretty)
+cursorline = true    # highlight all rows with cursor
 jump-label-alphabet = "asdfjkl;ghxcvbnmqweruioptyz" # home row outward
-line-number = "absolute"                            # relative absolute
+line-number = "absolute"    # relative absolute
 mouse = true
 shell = ["zsh", "-c"]
 smart-tab.enable = false
 soft-wrap.enable = true
-true-color = true
-# diagnostics after v2.25 
+true-color = true    # Force the theme to show colors
 end-of-line-diagnostics = "hint"
 inline-diagnostics.cursor-line = "warning"
 
@@ -33,18 +34,14 @@ render = true
 character = "|"
 
 [editor.lsp]
-auto-signature-help = false
+auto-signature-help = false  # Disable automatic popups
+display-messages = true    # Show LSP messages in the status line
 
 [editor.statusline]
-left = [
-  "mode",
-  "spinner",
-  "file-name",
-  "file-modification-indicator",
-  "version-control",
-]
-center = ["position", "selections"]
-right = ["diagnostics", "file-encoding", "file-line-ending", "file-type"]
+left = [ "mode", "file-modification-indicator", "file-name" ]
+center = ["selections"]
+right = ["diagnostics","position",  "file-type", "spinner",
+"version-control"]
 
 [editor.statusline.mode]
 normal = "NORMAL"
