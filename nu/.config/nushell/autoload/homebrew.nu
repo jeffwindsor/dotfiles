@@ -8,8 +8,3 @@ $env.HOMEBREW_NO_INSTALL_CLEANUP = "1"
 alias bn = brew install
 alias bi = brew info
 alias bs = brew search
-def bl [] {
-  let fs = brews-installed-on-machine formulae
-  let cs = brews-installed-on-machine cask
-  $fs | append $cs | sort
-}

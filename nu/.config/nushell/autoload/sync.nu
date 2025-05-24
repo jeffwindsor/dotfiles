@@ -23,14 +23,8 @@ const asdf_packages = [
 
 def sync [] {
   dot-sync
-
-  brew-up
-  brew-sync-install cask
-  brew-sync-install formulae
-  brew-clean
-
+  brew-sync 
   asdf-sync
-
   dot-stow
 }
 
@@ -53,8 +47,21 @@ def asdf-sync [packages = $asdf_packages] {
 }
 
 
-#== SYNC FUNCTIONS
-export def brew-up [] {
+#== HOME BREW
+def bl [] {
+  let fs = brews-installed-on-machine formulae
+  let cs = brews-installed-on-machine cask
+  $fs | append $cs | sort
+}
+
+def brew-sync [] {
+  brew-up
+  brew-sync-action install cask
+  brew-sync-action install formulae
+  brew-clean
+}
+
+def brew-up [] {
   section "Upgrading Brews"
   run-external "brew" "upgrade" | print
 }
@@ -62,10 +69,9 @@ export def brew-up [] {
 def brew-clean [] {
   section "Remove Orphaned Brews"
   run-external "brew" "autoremove" | print
-  section "Clean up Cellar"
+  section "Clean Up Cellar"
   run-external "brew" "cleanup" | print
 }
-
 
 def brews-required-for-machine [type] {
   let machine_name = (networksetup -getcomputername)
@@ -78,30 +84,24 @@ def brews-required-for-machine [type] {
 
 def brews-installed-on-machine [type] {
   match $type {
-    cask => (run-external "brew" "list" "--casks" "--full-name" | table),
-    formulae => (run-external "brew" "leaves" | table)
+    cask => (run-external "brew" "list" "--casks" "--full-name" | split row "\n"),
+    formulae => (run-external "brew" "leaves" | split row "\n")
   }
 }
 
-def brew-sync-install [type] {
+def brew-sync-action [command, type] {
   let installed = brews-installed-on-machine $type
   let required = brews-required-for-machine $type
+  let actionable = match $command {
+    install => ($required| where { |p| $p not-in $installed }),
+    remove => ($installed | where { |p| $p not-in $required })
+  }
 
-  $required
-  | where { |p| $p not-in $installed }
-  | par-each {|p| run-external "brew" "install" "--quiet" $"--($type)" $p }
+  $actionable
+  | each {|p| run-external "brew" $command "--quiet" $"--($type)" $p }
 }
 
-def brew-sync-remove [type] {
-  let installed = brews-installed-on-machine $type
-  let required = brews-required-for-machine $type
-
-  $installed
-  | where { |p| $p not-in $required }
-  | par-each {|p| run-external "brew" "remove" "--quiet" $"--($type)" $p }
-}
-
-#== SYNC FUNCTIONS
+# DOTFILES
 def dot-sync [] {
   section "Pulling Dotfiles"
   git -C $env.DOTFILES pull
