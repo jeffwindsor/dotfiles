@@ -19,15 +19,22 @@ alias gl = git log --pretty=%h»¦«%aN»¦«%s»¦«%ch
 	| update merged {|x| $x.merged | into datetime }
 	| first 20
 
+# Git pull applied to repo at path
 def git-pull [path] {
 	git -C $path pull
 }
 
+# List all git repos
 def git-repos [root_path] {
 	let target = [$root_path "**/.git"] | str join "/" | into glob
 	ls -a $target
 }
 
+# Personal Git Clone Wrapper
+#
+# will make sure the repo is put into my sourvce folder with this grammer:
+# source/<git host>/<repo name without .git>
+# for gitlab this can be a repo name with subfolders
 def --env git-clone [repo_url:string] {
 	let repo = ($repo_url | parse --regex '(?:git@(?P<git_host>[^:]+)):?(?P<repo_path>.+?)(?:\.git)?$')
   let target = $'($env.SOURCE)/($repo.git_host)/($repo.repo_path)'

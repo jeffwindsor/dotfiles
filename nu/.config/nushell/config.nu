@@ -12,12 +12,13 @@ $env.SOURCE_GITHUB = ($env.SOURCE | path join "github.com")
 $env.SOURCE_GITCJ  = ($env.SOURCE | path join "gitlab.cj.dev")
 $env.SOURCE_JEFF   = ($env.SOURCE | path join "github.com/jeffwindsor")
 
-def edit [path] { hx $path }
-def visual-edit [path] { zed $path }
+# Clear and list all
 def l [] {
   clear
   ls -a
 }
+
+# Change Directory with clear and list all
 def --env cdl [path:string = "~/"] {
   cd $path
   clear
@@ -34,14 +35,23 @@ alias la = ls -a
 alias ll = ls -l
 alias lla = ls -la
 
-# show / display helpers
+
+# Prints Reverse Cyan and adds bars
 def header  [text] { show $" == ($text) == " cyan_reverse }
+# Prints Cyan and adds bars
 def section [text] { show $"== ($text) ==" cyan }
+# Prints blue
 def info    [text] { show $text blue }
+# Prints green
 def success [text] { show $text green }
+# Prints red
 def fail    [text] { show $text red }
+# Prints yellow
 def warning [text] { show $text yellow }
+# Prints dark gray
 def dimmed  [text] { show $text dark_gray }
+# Prints default color
 def normal  [text] { show $text reset }
+# Prints text in color
 def show    [text, color] { print $"(ansi $color)($text)(ansi reset)" }
 
