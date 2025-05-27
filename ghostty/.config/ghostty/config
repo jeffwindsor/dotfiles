@@ -1,15 +1,10 @@
 #== Theme ==
-# theme = MaterialDarker
-# theme = 0x96f
-# theme = iceberg-dark
 theme = catppuccin-mocha
-# theme = rose-pine
-# theme = MaterialOcean
-# theme = tokyonight
+# catppuccin-mocha MaterialDarker 0x96f iceberg-dark rose-pine MaterialOcean tokyonight
 
 #== Font ==
-font-size = 16
-font-family="JetBrainsMono Nerd Font Mono"
+font-size = 14
+# font-family="JetBrainsMono Nerd Font Mono"
 
 #== Behavior ==
 quit-after-last-window-closed = true
