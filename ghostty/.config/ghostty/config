@@ -1,12 +1,9 @@
-#== Theme ==
-theme = catppuccin-mocha
-# catppuccin-mocha MaterialDarker 0x96f iceberg-dark rose-pine MaterialOcean tokyonight
-
-#== Font ==
+# themes:   catppuccin-mocha MaterialDarker 0x96f
+# 			iceberg-dark rose-pine MaterialOcean
+#			tokyonighttheme = catppuccin-mocha
+		
+background-opacity = 0.94
 font-size = 14
-# font-family="JetBrainsMono Nerd Font Mono"
-
-#== Behavior ==
 quit-after-last-window-closed = true
 window-decoration = false
 
