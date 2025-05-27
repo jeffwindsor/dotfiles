@@ -6,7 +6,7 @@ const brew_required_packages = [
   ["Midnight Air", formulae, []]
   ["WKMZTAFD6544", formulae, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "lima" "maven"]]
   
-  [all_machines,   cask,     ["claude" "firefox" "ghostty" "google-chrome" "jordanbaird-ice" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
+  [all_machines,   cask,     ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "jordanbaird-ice" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
   ["WKMZTAFD6544", cask,     ["intellij-idea" "slack" "tuple", "visual-studio-code"]]
   ["Midnight Air", cask,     ["balenaetcher" "chatgpt" "discord" "iina" "spotify" "transmission"]]
 ]
@@ -22,9 +22,12 @@ const asdf_packages = [
 ]
 
 def sync [] {
+  # pull dotfiles
   dot-sync
+  # sync required installs
   brew-sync 
   asdf-sync
+  # re run stow to get/remove any new apps dotfiles
   dot-stow
 }
 
@@ -93,8 +96,8 @@ def brew-sync-action [command, type] {
   let installed = brews-installed-on-machine $type
   let required = brews-required-for-machine $type
   let actionable = match $command {
-    install => ($required| where { |p| $p not-in $installed }),
-    remove => ($installed | where { |p| $p not-in $required })
+    install => ($required | where {|p| $p not-in $installed }),
+    remove => ($installed | where {|p| $p not-in $required })
   }
 
   $actionable
