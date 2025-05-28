@@ -2,11 +2,11 @@
 const brew_required_packages = [
   [machine_name,   type,     packages];
   
-  [all_machines,   formulae, ["asdf" "bash" "carapace" "fzf" "git" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
+  [all_machines,   formulae, ["asdf" "bash" "carapace" "git" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
   ["Midnight Air", formulae, []]
   ["WKMZTAFD6544", formulae, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "lima" "maven"]]
   
-  [all_machines,   cask,     ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "jordanbaird-ice" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
+  [all_machines,   cask,     ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
   ["WKMZTAFD6544", cask,     ["intellij-idea" "slack" "tuple", "visual-studio-code"]]
   ["Midnight Air", cask,     ["balenaetcher" "chatgpt" "discord" "iina" "spotify" "transmission"]]
 ]
