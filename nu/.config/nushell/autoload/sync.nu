@@ -2,9 +2,9 @@
 const brew_required_packages = [
   [machine_name,   type,     packages];
   
-  [all_machines,   formulae, ["asdf" "bash" "carapace" "git" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
+  [all_machines,   formulae, ["asdf" "bash" "carapace" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
   ["Midnight Air", formulae, []]
-  ["WKMZTAFD6544", formulae, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "lima" "maven"]]
+  ["WKMZTAFD6544", formulae, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "maven"]]
   
   [all_machines,   cask,     ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
   ["WKMZTAFD6544", cask,     ["intellij-idea" "slack" "tuple", "visual-studio-code"]]
@@ -67,9 +67,9 @@ def asdf-sync [packages = $asdf_packages] {
 
 # Homebrew: list installed packages
 def bl [] {
-  let fs = brews-installed-on-machine formulae
-  let cs = brews-installed-on-machine cask
-  $fs | append $cs | sort
+  let fs = brews-installed-on-machine formulae  | wrap package | each {insert type {"formulae"}}
+  let cs = brews-installed-on-machine cask  | wrap package | each {insert type {"cask"}}
+  $fs | append $cs | sort | move type --before package
 }
 
 # Homebrew: Upgrade, Sync Install and Clean
@@ -127,15 +127,18 @@ def brews-installed-on-machine [type] {
 # parameter [command] can be "install" or "remove"
 # parameter [type] can be "cask" or "formulae"
 def brew-sync-action [command, type] {
+  (brew-sync-list $command $type)
+  | each {|p| run-external "brew" $command $"--($type)" $p }
+}
+
+# Homebrew: packages for sync action
+def brew-sync-list [command, type] {
   let installed = brews-installed-on-machine $type
   let required = brews-required-for-machine $type
-  let actionable = match $command {
+  match $command {
     install => ($required | where {|p| $p not-in $installed }),
     remove => ($installed | where {|p| $p not-in $required })
   }
-
-  $actionable
-  | each {|p| run-external "brew" $command "--quiet" $"--($type)" $p }
 }
 
 # Pulls latest dotfiles and requests apps to reload configs where possible
@@ -172,9 +175,9 @@ def dot-stow [] {
 def stow-package [package: string, source: string, target: string] {
   if (which $package | length) > 0 {
     run-external "stow" "-S" "--dir" $source "--target" $target $package
-    success $"  ($package)"
+    $"(ansi green)($package)(ansi reset)"
   } else {
     run-external "stow" "-D" "--dir" $source "--target" $target $package
-    fail $"  ($package)"
+    $"(ansi dark_gray)($package)(ansi reset)"
   }
 }
