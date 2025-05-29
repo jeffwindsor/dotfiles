@@ -175,9 +175,9 @@ def dot-stow [] {
 def stow-package [package: string, source: string, target: string] {
   if (which $package | length) > 0 {
     run-external "stow" "-S" "--dir" $source "--target" $target $package
-    $"(ansi green)($package)(ansi reset)"
+    colorize $package green
   } else {
     run-external "stow" "-D" "--dir" $source "--target" $target $package
-    $"(ansi dark_gray)($package)(ansi reset)"
+    colorize $package dark_gray
   }
 }
