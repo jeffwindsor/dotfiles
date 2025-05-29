@@ -4,7 +4,7 @@
 $env.config.show_banner = false
 $env.config.buffer_editor = "hx"
 $env.config.table.mode = "none"
-$env.config.ls.use_ls_colors = true # use the LS_COLORS environment variable to colorize output
+# $env.config.ls.use_ls_colors = true # use the LS_COLORS environment variable to colorize output
 $env.config.ls.clickable_links = true # enable or disable clickable links. Your terminal has to support links.
 
 $env.SOURCE        = ($env.HOME | path join "Source")
@@ -39,7 +39,7 @@ alias lla = ls -la
 # Prints Reverse Cyan and adds bars
 def header  [text] { show $" == ($text) == " cyan_reverse }
 # Prints Cyan and adds bars
-def section [text] { show $"== ($text) ==" cyan }
+def section [text] { show $"== ($text)" cyan }
 # Prints blue
 def info    [text] { show $text blue }
 # Prints green
@@ -53,5 +53,8 @@ def dimmed  [text] { show $text dark_gray }
 # Prints default color
 def normal  [text] { show $text reset }
 # Prints text in color
-def show    [text, color] { print $"(ansi $color)($text)(ansi reset)" }
+def show [text, color] { print (colorize $text $color) }
+
+# return asni colored text
+def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
