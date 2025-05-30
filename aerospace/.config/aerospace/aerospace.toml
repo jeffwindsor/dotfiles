@@ -178,6 +178,7 @@ alt-cmd-shift-left = 'move-workspace-to-monitor --wrap-around prev'
 
 #== Launchers : ALT + CTRL
 alt-ctrl-a = 'exec-and-forget open /Applications/Claude.app'
+alt-ctrl-b = 'exec-and-forget open /Applications/Safari.app'
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
 alt-ctrl-d = 'exec-and-forget open /Applications/Discord.app'
 alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app || open /Applications/Safari.app'
