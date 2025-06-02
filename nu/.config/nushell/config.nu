@@ -37,9 +37,9 @@ alias lla = ls -la
 
 
 # Prints Reverse Cyan and adds bars
-def header  [text] { show $" == ($text) == " cyan_reverse }
+def header  [text] { show $"(emphasize $text)" cyan_reverse }
 # Prints Cyan and adds bars
-def section [text] { show $"== ($text)" cyan }
+def section [text] { show $"(emphasize $text)" cyan }
 # Prints blue
 def info    [text] { show $text blue }
 # Prints green
@@ -55,6 +55,13 @@ def normal  [text] { show $text reset }
 # Prints text in color
 def show [text, color] { print (colorize $text $color) }
 
+def emphasize [text] { $"== ($text)" }
 # return asni colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
+# Fuzzy Selection of list
+def fuzzy-select [prompt, list] {
+  $list
+  | lines --skip-empty
+  | input list --fuzzy (colorize (emphasize $prompt) blue)
+}
