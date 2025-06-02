@@ -162,8 +162,8 @@ def dot-sync [] {
 #   the dotfiles is removed from the machine
 def dot-stow [] {
   section "Syncing Dotfiles"
-  dimmed $"from $($env.DOTFILES)"
-  dimmed $"to   $($env.HOME)"
+  dimmed $"from ($env.DOTFILES)"
+  dimmed $"to   ($env.HOME)"
   
   ls --short-names $env.DOTFILES
   | where type == dir
