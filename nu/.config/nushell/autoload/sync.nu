@@ -2,7 +2,7 @@
 const brew_required_packages = [
   [machine_name,   type,     packages];
   
-  [all_machines,   formulae, ["asdf" "bash" "carapace" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
+  [all_machines,   formulae, ["asdf" "bat" "bash" "carapace" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
   ["Midnight Air", formulae, []]
   ["WKMZTAFD6544", formulae, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "maven"]]
   

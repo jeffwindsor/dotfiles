@@ -37,9 +37,9 @@ def git-repos [root_path] {
 # for gitlab this can be a repo name with subfolders
 def --env git-clone [repo_url:string] {
 	let repo = ($repo_url | parse --regex '(?:git@(?P<git_host>[^:]+)):?(?P<repo_path>.+?)(?:\.git)?$')
-  let target = $'($env.SOURCE)/($repo.git_host)/($repo.repo_path)'
+  let target = $'($env.SOURCE)/($repo.git_host.0)/($repo.repo_path.0)'
   
-	git clone $repo_url $target
+	git clone ($repo_url) ($target)
 	cd $target
 	ls -a
 }
