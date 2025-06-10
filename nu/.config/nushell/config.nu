@@ -19,10 +19,10 @@ def l [] {
 }
 
 # Change Directory with clear and list all
-def --env cdl [path:string = "~/"] {
+def --env cdl [path, execute_ls=true] {
   cd $path
   clear
-  ls -a
+  if $execute_ls { ls -a; }
 }
 
 alias "....." = cd ../../../../
@@ -30,7 +30,7 @@ alias "...." = cd ../../../
 alias "..." = cd ../../
 alias ".." = cd ..
 alias c = clear
-alias cc = cdl $env.HOME
+alias cc = cdl $env.HOME false
 alias la = ls -a
 alias ll = ls -l
 alias lla = ls -la
