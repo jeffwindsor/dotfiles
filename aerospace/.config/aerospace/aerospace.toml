@@ -113,6 +113,7 @@ alt-x = 'workspace Slack'
 alt-m = 'workspace Messages'   
 alt-n = 'workspace Notes'      
 alt-o = 'workspace Outlook'    
+alt-r = 'workspace Reminders'    
 alt-s = 'workspace Spotify'    
 alt-t = 'workspace Teams'      
 alt-w = 'workspace www'        
@@ -152,6 +153,7 @@ alt-shift-x = ['move-node-to-workspace Slack', 'workspace Slack']
 alt-shift-m = ['move-node-to-workspace Messages', 'workspace Messages']
 alt-shift-n = ['move-node-to-workspace Notes', 'workspace Notes']
 alt-shift-o = ['move-node-to-workspace Outlook', 'workspace Outlook']
+alt-shift-r = ['move-node-to-workspace Reminders', 'workspace Reminders']
 alt-shift-s = ['move-node-to-workspace Spotify', 'workspace Spotify']
 alt-shift-t = ['move-node-to-workspace Teams', 'workspace Teams']
 alt-shift-w = ['move-node-to-workspace www', 'workspace www']
@@ -187,6 +189,7 @@ alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
+alt-ctrl-r = 'exec-and-forget open /System/Applications/Reminders.app'
 alt-ctrl-s = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
 alt-ctrl-v = 'exec-and-forget open /Applications/Visual\ Studio\ Code.app'
@@ -209,6 +212,7 @@ Discord = 'secondary'
 Messages = 'secondary' 
 Notes = 'secondary' 
 Outlook = 'secondary' 
+Reminders = 'secondary' 
 Slack = 'secondary' 
 Spotify = 'secondary' 
 Teams = 'secondary'
@@ -304,6 +308,11 @@ run = ['move-node-to-workspace Notes']
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
 run = ['move-node-to-workspace Outlook']  #, 'layout accordion horizontal']
+
+# Reminders
+[[on-window-detected]]
+if.app-id = 'com.apple.reminders'
+run = ['move-node-to-workspace Reminders']
 
 # Spotify
 [[on-window-detected]]
