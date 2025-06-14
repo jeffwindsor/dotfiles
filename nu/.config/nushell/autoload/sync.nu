@@ -1,24 +1,26 @@
+const f = "formulae"
+const c = "cask"
+const all = "all_machines"
+const ma = "Midnight Air"
+const mp = "WKMZTAFD6544"
 
 const brew_required_packages = [
-  [machine_name,   type,     packages];
-  
-  [all_machines,   formulae, ["asdf" "bat" "bash" "carapace" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
-  ["Midnight Air", formulae, []]
-  ["WKMZTAFD6544", formulae, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "maven"]]
-  
-  [all_machines,   cask,     ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
-  ["WKMZTAFD6544", cask,     ["intellij-idea" "slack" "tuple", "visual-studio-code"]]
-  ["Midnight Air", cask,     ["balenaetcher" "chatgpt" "discord" "iina" "spotify" "transmission"]]
+  [machine_name, type, packages];
+  [$all, $f, ["asdf" "bat" "bash" "carapace" "clifm" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
+  [$ma,  $f, []]
+  [$mp,  $f, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "maven"]]
+  [$all, $c, ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
+  [$mp,  $c, ["intellij-idea" "slack" "tuple", "visual-studio-code"]]
+  [$ma,  $c, ["balenaetcher" "chatgpt" "discord" "iina" "spotify" "transmission"]]
 ]
 
 const asdf_packages = [
-  [ machine_name,   plugin,   version];
-  
-	[ "WKMZTAFD6544", "java",   "corretto-21.0.7.6.1"]
-	[ "WKMZTAFD6544", "maven",  "3.9.9"]
-	[ "WKMZTAFD6544", "scala",  "2.12.18"]
-	[ "WKMZTAFD6544", "nodejs", "20.19.1"]
-	[ "WKMZTAFD6544", "awscli", "2.27.0"]
+  [ machine_name, plugin, version];
+	[ $mp, "java", "corretto-21.0.7.6.1"]
+	[ $mp, "maven", "3.9.9"]
+	[ $mp, "scala", "2.12.18"]
+	[ $mp, "nodejs" "20.19.1"]
+	[ $mp, "awscli", "2.27.0"]
 ]
 
 # Synchronize packages and dotfiles
@@ -67,16 +69,16 @@ def asdf-sync [packages = $asdf_packages] {
 
 # Homebrew: list installed packages
 def bl [] {
-  let fs = brews-installed-on-machine formulae  | wrap package | each {insert type {"formulae"}}
-  let cs = brews-installed-on-machine cask  | wrap package | each {insert type {"cask"}}
+  let fs = brews-installed-on-machine $f  | wrap package | each {insert type {$f}}
+  let cs = brews-installed-on-machine $c  | wrap package | each {insert type {$c}}
   $fs | append $cs | sort | move type --before package
 }
 
 # Homebrew: Upgrade, Sync Install and Clean
 def brew-sync [] {
   brew-up
-  brew-sync-action install cask
-  brew-sync-action install formulae
+  brew-sync-action install $c
+  brew-sync-action install $f
   brew-clean
 }
 
@@ -102,7 +104,7 @@ def brew-clean [] {
 def brews-required-for-machine [type] {
   let machine_name = (networksetup -getcomputername)
   $brew_required_packages
-    | where {|r| $r.machine_name == all_machines or $r.machine_name == $machine_name}
+    | where {|r| $r.machine_name == $all or $r.machine_name == $machine_name}
     | where {|r| $r.type == $type}
     | get packages
     | flatten
@@ -113,8 +115,8 @@ def brews-required-for-machine [type] {
 # parameter [type] can be "cask" or "formulae"
 def brews-installed-on-machine [type] {
   match $type {
-    cask => (run-external "brew" "list" "--casks" "--full-name" | split row "\n"),
-    formulae => (run-external "brew" "leaves" | split row "\n")
+    $c => (run-external "brew" "list" "--casks" "--full-name" | split row "\n"),
+    $f => (run-external "brew" "leaves" | split row "\n")
   }
 }
 
