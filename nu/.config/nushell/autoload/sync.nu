@@ -6,8 +6,8 @@ const mp = "WKMZTAFD6544"
 
 const brew_required_packages = [
   [machine_name, type, packages];
-  [$all, $f, ["asdf" "bat" "bash" "carapace" "clifm" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
-  [$ma,  $f, []]
+  [$all, $f, ["asdf" "bat" "bash" "carapace" "eza" "fzf" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
+  [$ma,  $f, ["clifm"]]
   [$mp,  $f, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "maven"]]
   [$all, $c, ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
   [$mp,  $c, ["intellij-idea" "slack" "tuple", "visual-studio-code"]]
@@ -115,8 +115,8 @@ def brews-required-for-machine [type] {
 # parameter [type] can be "cask" or "formulae"
 def brews-installed-on-machine [type] {
   match $type {
-    $c => (run-external "brew" "list" "--casks" "--full-name" | split row "\n"),
-    $f => (run-external "brew" "leaves" | split row "\n")
+    cask => (run-external "brew" "list" "--casks" "--full-name" | split row "\n"),
+    formulae => (run-external "brew" "leaves" | split row "\n")
   }
 }
 
