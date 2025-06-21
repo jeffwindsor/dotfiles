@@ -6,7 +6,7 @@ const mp = "WKMZTAFD6544"
 
 const brew_required_packages = [
   [machine_name, type, packages];
-  [$all, $f, ["asdf" "bat" "bash" "carapace" "eza" "fzf" "glow" "evil-helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
+  [$all, $f, ["asdf" "bat" "bash" "carapace" "eza" "fd" "fzf" "glow" "evil-helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
   [$ma,  $f, ["clifm"]]
   [$mp,  $f, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "maven"]]
   [$all, $c, ["claude" "firefox" "ghostty" "google-chrome" "font-jetbrains-mono-nerd-font" "keepingyouawake" "nikitabobko/tap/aerospace" "zed"]]
