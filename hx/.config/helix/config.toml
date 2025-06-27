@@ -59,7 +59,7 @@ select = "SELECT"
 # select line, stay in selection mode
 "V" = ["select_mode", "extend_to_line_bounds"]
 # OVERRIDE: copy to both internal and external clipboards
-"y" = ["yank_main_selection_to_clipboard", "yank"]
+"Y" = ["yank_main_selection_to_clipboard", "yank"]
 # OVERRIDE: Vim like escape
 esc = ["collapse_selection", "keep_primary_selection", ":write"]
 
@@ -70,6 +70,8 @@ C-x = "@VGd"
 # replace from os clipboard  (shift-r from helix register)
 C-r = ":clipboard-paste-replace"
 
+[keys.normal."d"]
+d = "@Vd"
 # buffer move and control [[ ]] \\
 [keys.normal."["]
 "[" = ":buffer-previous"
