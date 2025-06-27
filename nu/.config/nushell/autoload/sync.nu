@@ -68,11 +68,20 @@ def asdf-sync [packages = $asdf_packages] {
 #== HOME BREW
 
 # Homebrew: list installed packages
-def bl [] {
+def brew-list [] {
   let fs = brews-installed-on-machine $f  | wrap package | each {insert type {$f}}
   let cs = brews-installed-on-machine $c  | wrap package | each {insert type {$c}}
-  $fs | append $cs | sort | move type --before package
+  $fs | append $cs | move type --before package | sort
 }
+alias bl = brew-list
+
+# Homebrew: list non required packages
+def brew-list-removable [] {
+  let fs = brews-sync-list $f  | wrap package | each {insert type {$f}}
+  let cs = brews-sync-list $c  | wrap package | each {insert type {$c}}
+  $fs | append $cs | move type --before package | sort
+ }
+alias blr = brew-list-removable 
 
 # Homebrew: Upgrade, Sync Install and Clean
 def brew-sync [] {
