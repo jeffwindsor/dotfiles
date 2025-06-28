@@ -1,9 +1,9 @@
 
-# Change IdeaVim Keymaps to vim
+# Change IdeaVim config files 
 def idea_key [file] {
-  let target = $env.HOME | path join .vimrc
+  let target = $env.HOME | path join .ideavimrc
   let source = $env.DOTFILES | path join idea .config jetbrains $file
-  ln -s $source $target
+  ln -sF $source $target
 }
 
 alias idea_key_vim = idea_key idea.vimrc
