@@ -1,4 +1,6 @@
+" OLD VERSION : Shamelessly copied and modified from here: https://www.cyberwizard.io/posts/the-ultimate-ideavim-setup/
 " This file was compiled by helix.vim/compile.sh
+" ========================================================
 
 """"""""""""""""""""""""""""""""
 " Disable default vim bindings "
@@ -73,9 +75,9 @@ noremap D <nop>
 " Find a character before the cursor in the line
 "noremap F <nop>
 " Go to the specified line (default: end of the file)
-noremap G <nop>
+" noremap G <nop>
 " Move the cursor to the top of the screen
-noremap H <nop>
+" noremap H <nop>
 " Insert text at the beginning of the line
 "noremap I <nop>
 " Join the current line with the next one
@@ -83,7 +85,7 @@ noremap H <nop>
 " Look up the keyword under the cursor (manpage, help file, etc.)
 noremap K <nop>
 " Move the cursor to the bottom of the screen
-noremap L <nop>
+" noremap L <nop>
 " Move the cursor to the middle of the screen
 noremap M <nop>
 " Repeat the last search, but in the opposite direction
@@ -116,9 +118,9 @@ noremap ZQ <nop>
 
 
 " Move to the end of the line
-noremap $ <nop>
+" noremap $ <nop>
 " Move to the first non-blank character of the line
-noremap ^ <nop>
+" noremap ^ <nop>
 " Search for the word under the cursor
 noremap * <nop>
 " Change the case of the character under the cursor
@@ -191,6 +193,12 @@ noremap <C-v> <nop>
 """""""""""""""""""
 " Helix emulation "
 """""""""""""""""""
+" PERSONAL HELIX CONFIG
+" G = goto end of file
+noremap H ^
+noremap L $
+
+
 " TODO: checkout https://vimhelp.org/options.txt.html#%27selection%27
 " and https://vimhelp.org/options.txt.html#%27virtualedit%27
 set notimeout
@@ -1613,4 +1621,3 @@ nmap <Space>wj <Action>(TabShiftActions.MoveFocusDown)
 xmap <Space>wj <Action>(TabShiftActions.MoveFocusDown)
 nmap <Space>wl <Action>(TabShiftActions.MoveFocusRight)
 xmap <Space>wl <Action>(TabShiftActions.MoveFocusRight)
-
