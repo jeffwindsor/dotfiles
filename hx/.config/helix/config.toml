@@ -70,8 +70,6 @@ C-x = "@VGd"
 # replace from os clipboard  (shift-r from helix register)
 C-r = ":clipboard-paste-replace"
 
-[keys.normal."d"]
-d = "@Vd"
 # buffer move and control [[ ]] \\
 [keys.normal."["]
 "[" = ":buffer-previous"
