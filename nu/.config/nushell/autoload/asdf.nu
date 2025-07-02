@@ -53,7 +53,9 @@ def asdf-list-plugin-versions-installed [plugin] {
 def asdf-install-plugin [add_with_a_version: bool = true] {
   let plugin = fuzzy-select "Select Plugin to Install" (asdf-list-plugins-all) 
   if (($plugin | is-not-empty) and $add_with_a_version) {
+    cd
     asdf plugin add $plugin
+    cd -
     asdf-install-plugin-version $plugin
   }
 }
@@ -62,7 +64,9 @@ def asdf-install-plugin [add_with_a_version: bool = true] {
 def asdf-install-plugin-version [plugin, set_as_current: bool = true] {
   let version = fuzzy-select $"Select ($plugin) Version to Install"  (asdf-list-plugin-versions-all $plugin)
   if ($version | is-not-empty) {
-    asdf install $plugin $version 
+    cd
+    asdf install $plugin $version
+    cd -
     if $set_as_current { asdf set $plugin $version }
   }
 }
@@ -74,7 +78,9 @@ def asdf-set-plugin-version [] {
     let version = fuzzy-select $"Select ($plugin) Version"  (asdf-list-versions-installed $plugin)
     if ($version | is-not-empty) {
       # currently selected version begins with *
+      cd
       asdf set $plugin ($version | str replace "*" "")
+      cd -
     }
   }
 }
