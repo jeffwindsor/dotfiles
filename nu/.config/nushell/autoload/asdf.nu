@@ -5,40 +5,62 @@
 # Set global version for a package: asdf global {{name}} {{version}}
 # Set local version for a package: asdf local {{name}} {{version}}
 
-alias anp = asdf-install-plugin
-alias anv = asdf-install-version 
-alias asv = asdf-set-current-version
-alias asdf-list-plugins-all = fuzzy-select "Select ASDF Available Plugin" (asdf plugin list all | parse "{package} {url}" | get package)
-alias asdf-list-plugins-installed = fuzzy-select "Select ASDF Plugin" (asdf plugin list)
-def asdf-list-versions-all [plugin] { fuzzy-select $"Select ($plugin) Available Version" (asdf list all $plugin) }
-def asdf-list-versions-installed [plugin] {fuzzy-select $"Select ($plugin) Version" (asdf list $plugin) }
+# Fuzzy Selection of list
+def fuzzy-select [prompt, list] {
+  let prompt = (colorize (emphasize $prompt) blue)
+  $list | input list --fuzzy $prompt
+}
 
+# ASDF installed plugins with current version
+def asdf-list-current [] {
+  # detect columns was used since command output has a header row and multiple columns
+  # example output:
+  # Name            Version         Source                            Installed
+  # nodejs          23.0.0          /Users/jeffwindsor/.tool-versions true
+  asdf current
+  | detect columns
+}
 
+# ASDF Plugins 
+def asdf-list-plugins-all [] {
+  # parse with column names was used since command output has two columns but no header row
+  # example output:
+  # java                           https://github.com/halcyon/asdf-java.git
+  # jb                             https://github.com/beardix/asdf-jb.git
+  asdf plugin list all
+  | parse "{package} {url}"
+  | get package
+}
+def asdf-list-plugins-installed [] {
+  # lines used to split stream into strings
+  asdf plugin list
+  | lines
+}
 
-# ASDF: Current Plugin Version
-export def asdf-current [] { asdf current | detect columns }
+# ASDF Versions for a Plugin
+def asdf-list-plugin-versions-all [plugin] {
+  # lines used to split stream into strings
+  asdf list all $plugin
+  | lines
+}
+def asdf-list-plugin-versions-installed [plugin] {
+  # lines used to split stream into strings
+  asdf list $plugin
+  | lines
+}
 
-
-# ASDF: Add available Plugin, optionally add Version
-export def asdf-install-plugin [add_version: bool = true] {
-  let plugin = asdf-list-plugins-all 
-  if (($plugin | is-not-empty) and $add_version) {
+# ASDF add available Plugin, optionally add a version as current
+def asdf-install-plugin [add_with_a_version: bool = true] {
+  let plugin = fuzzy-select "Select Plugin to Install" (asdf-list-plugins-all) 
+  if (($plugin | is-not-empty) and $add_with_a_version) {
     asdf plugin add $plugin
     asdf-install-plugin-version $plugin
   }
 }
 
-# ASDF: Add Version to Plugin
-export def asdf-install-version [] {
-  let plugin = asdf-list-plugins-installed
-  if ($plugin | is-not-empty) {
-    asdf-install-plugin-version $plugin
-  }
-}
-
-# ASDF: Add available Version for Plugin, optionally set version as current
+# ASDF Add available Version for Plugin, optionally set version as current
 def asdf-install-plugin-version [plugin, set_as_current: bool = true] {
-  let version = asdf-list-versions-all $plugin
+  let version = fuzzy-select $"Select ($plugin) Version to Install"  (asdf-list-plugin-versions-all $plugin)
   if ($version | is-not-empty) {
     asdf install $plugin $version 
     if $set_as_current { asdf set $plugin $version }
@@ -46,10 +68,10 @@ def asdf-install-plugin-version [plugin, set_as_current: bool = true] {
 }
 
 # ASDF: Select Plugin Version and set as current
-export def asdf-set-current-version [] {
-  let plugin = asdf-list-plugins-installed
+def asdf-set-plugin-version [] {
+  let plugin = fuzzy-select "Select Plugin" (asdf-list-plugins-installed)
   if ($plugin | is-not-empty) {
-    let version = asdf-list-versions-installed $plugin
+    let version = fuzzy-select $"Select ($plugin) Version"  (asdf-list-versions-installed $plugin)
     if ($version | is-not-empty) {
       # currently selected version begins with *
       asdf set $plugin ($version | str replace "*" "")
@@ -58,3 +80,6 @@ export def asdf-set-current-version [] {
 }
 
 
+alias anp = asdf-install-plugin
+alias anpv = asdf-install-plugin-version 
+alias aspv = asdf-set-plugin-version
