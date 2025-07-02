@@ -24,6 +24,8 @@ const asdf_packages = [
 	[ $mp, "awscli", "2.27.0"]
 ]
 
+# === NOTE: SYNC FUNCTION IS WHY ASDF, BREW AND DOT FUNCTIONS ARE NOT IN SEPARATE FILES ===
+# === Might need to move to modules that import/source other modules in the future
 # Synchronize packages and dotfiles
 #
 # Pulls dotfiles from repo
@@ -67,31 +69,6 @@ def asdf-sync [packages = $asdf_packages] {
 
 
 #== HOME BREW
-
-# Homebrew: list installed packages
-def brew-list [] {
-  let fs = brews-installed-on-machine $f  | wrap package | each {insert type {$f}}
-  let cs = brews-installed-on-machine $c  | wrap package | each {insert type {$c}}
-  $fs | append $cs | move type --before package | sort
-}
-alias bl = brew-list
-
-# Homebrew: list non required packages
-def brew-list-removable [] {
-  let fs = brews-sync-list $f  | wrap package | each {insert type {$f}}
-  let cs = brews-sync-list $c  | wrap package | each {insert type {$c}}
-  $fs | append $cs | move type --before package | sort
- }
-alias blr = brew-list-removable 
-
-# Homebrew: Upgrade, Sync Install and Clean
-def brew-sync [] {
-  brew-up
-  brew-sync-action install $c
-  brew-sync-action install $f
-  brew-clean
-}
-
 # Homebrew: Upgrade all packages
 def brew-up [] {
   section "Homebrews: Updating Database"
@@ -111,7 +88,7 @@ def brew-clean [] {
 #
 # Required packages are defined in the sync.nu file under brew_required_packages var
 # parameter [type] can be "cask" or "formulae"
-def brews-required-for-machine [type] {
+def brew-list-machine-required-by-type [type] {
   let machine_name = (networksetup -getcomputername)
   $brew_required_packages
     | where {|r| $r.machine_name == $all or $r.machine_name == $machine_name}
@@ -123,10 +100,28 @@ def brews-required-for-machine [type] {
 # Homebrew: Returns installed packages by type 
 # 
 # parameter [type] can be "cask" or "formulae"
-def brews-installed-on-machine [type] {
+def brew-list-machine-installed-by-type [type] {
   match $type {
     cask => (run-external "brew" "list" "--casks" "--full-name" | split row "\n"),
     formulae => (run-external "brew" "leaves" | split row "\n")
+  }
+}
+
+# Homebrew: list installed packages
+def brew-list-machine-installed [] {
+  let fs = brew-list-machine-installed-by-type $f  | wrap package | each {insert type {$f}}
+  let cs = brew-list-machine-installed-by-type $c  | wrap package | each {insert type {$c}}
+  $fs | append $cs | move type --before package | sort
+}
+alias bl = brew-list-machine-installed
+
+# Homebrew: packages for sync action
+def brew-list-unistalled-required [command, type] {
+  let installed = brew-list-machine-installed-by-type $type
+  let required = brew-list-machine-required-by-type $type
+  match $command {
+    install => ($required | where {|p| $p not-in $installed }),
+    remove => ($installed | where {|p| $p not-in $required })
   }
 }
 
@@ -138,19 +133,26 @@ def brews-installed-on-machine [type] {
 #
 # parameter [command] can be "install" or "remove"
 # parameter [type] can be "cask" or "formulae"
-def brew-sync-action [command, type] {
-  (brew-sync-list $command $type)
+def brew-apply-command [list, command, type] {
+  $list
   | each {|p| run-external "brew" $command $"--($type)" $p }
 }
 
-# Homebrew: packages for sync action
-def brew-sync-list [command, type] {
-  let installed = brews-installed-on-machine $type
-  let required = brews-required-for-machine $type
-  match $command {
-    install => ($required | where {|p| $p not-in $installed }),
-    remove => ($installed | where {|p| $p not-in $required })
-  }
+
+# Homebrew: list non required packages
+def brew-list-removable [] {
+  let fs = brews-sync-list $f  | wrap package | each {insert type {$f}}
+  let cs = brews-sync-list $c  | wrap package | each {insert type {$c}}
+  $fs | append $cs | move type --before package | sort
+ }
+alias blr = brew-list-removable 
+
+# Homebrew: Upgrade, Sync Install and Clean
+def brew-sync [] {
+  brew-up
+  brew-apply-command (brew-list-unistalled-required install $c) install $c
+  brew-apply-command (brew-list-unistalled-required install $f) install $f
+  brew-clean
 }
 
 # Pulls latest dotfiles and requests apps to reload configs where possible
@@ -166,8 +168,22 @@ def dot-sync [] {
   run-external "aerospace" "reload-config"
 }
 
+
+# === DOTFILES
 # refreshes machine dotfiles
-#
+
+# Sync dotfiles for package if application is installed, otherwise remove
+# 
+def stow-package [package: string, source: string, target: string] {
+  if (which $package | length) > 0 {
+    run-external "stow" "-S" "--dir" $source "--target" $target $package
+    colorize $package green
+  } else {
+    run-external "stow" "-D" "--dir" $source "--target" $target $package
+    colorize $package dark_gray
+  }
+}
+
 # If the application exists on this machine
 #   the dotfiles will be refreshed or added
 # Else
@@ -180,16 +196,4 @@ def dot-stow [] {
   ls --short-names $env.DOTFILES
   | where type == dir
   | par-each {|d| stow-package $d.name $env.DOTFILES $env.HOME }
-}
-
-# Sync dotfiles for package if application is installed, otherwise remove
-# 
-def stow-package [package: string, source: string, target: string] {
-  if (which $package | length) > 0 {
-    run-external "stow" "-S" "--dir" $source "--target" $target $package
-    colorize $package green
-  } else {
-    run-external "stow" "-D" "--dir" $source "--target" $target $package
-    colorize $package dark_gray
-  }
 }
