@@ -59,9 +59,3 @@ def emphasize [text] { $"== ($text)" }
 # return asni colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
-# Fuzzy Selection of list
-def fuzzy-select [prompt, list] {
-  $list
-  | lines --skip-empty
-  | input list --fuzzy (colorize (emphasize $prompt) blue)
-}
