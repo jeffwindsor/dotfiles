@@ -116,7 +116,7 @@ def brew-list-machine-installed [] {
 alias bl = brew-list-machine-installed
 
 # Homebrew: packages for sync action
-def brew-list-unistalled-required [command, type] {
+def brew-list-uninstalled-required [command, type] {
   let installed = brew-list-machine-installed-by-type $type
   let required = brew-list-machine-required-by-type $type
   match $command {
@@ -150,8 +150,8 @@ alias blr = brew-list-removable
 # Homebrew: Upgrade, Sync Install and Clean
 def brew-sync [] {
   brew-up
-  brew-apply-command (brew-list-unistalled-required install $c) install $c
-  brew-apply-command (brew-list-unistalled-required install $f) install $f
+  brew-apply-command (brew-list-uninstalled-required install $c) install $c
+  brew-apply-command (brew-list-uninstalled-required install $f) install $f
   brew-clean
 }
 
