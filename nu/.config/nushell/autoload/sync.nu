@@ -6,7 +6,7 @@ const mp = "WKMZTAFD6544"
 
 # TODO: start to use bundles, some of which have machine names? or machine names can have bundles...
 const brew_required_packages = [
-  [machine_name, type, packages];
+  [machine_name, type, package];
   [$all, $f, ["asdf" "bat" "bash" "carapace" "eza" "fd" "fzf" "glow" "helix" "lazygit" "nushell" "ripgrep" "starship" "stow" "television" "yazi" "zsh"]]
   [$ma,  $f, ["clifm"]]
   [$mp,  $f, ["aws-cdk" "colima" "docker-buildx" "docker" "lazydocker" "maven"]]
@@ -84,74 +84,46 @@ def brew-clean [] {
   run-external "brew" "cleanup" | print
 }
 
-# Homebrew: Returns machine required packages by type
-#
-# Required packages are defined in the sync.nu file under brew_required_packages var
-# parameter [type] can be "cask" or "formulae"
-def brew-list-machine-required-by-type [type] {
+# Homebrew: Returns machine required packages by type. see `brew_required_packages` variable
+def brew-list-machine-required [] {
   let machine_name = (networksetup -getcomputername)
   $brew_required_packages
     | where {|r| $r.machine_name == $all or $r.machine_name == $machine_name}
-    | where {|r| $r.type == $type}
-    | get packages
+    | select type package
     | flatten
-}
-
-# Homebrew: Returns installed packages by type 
-# 
-# parameter [type] can be "cask" or "formulae"
-def brew-list-machine-installed-by-type [type] {
-  match $type {
-    cask => (run-external "brew" "list" "--casks" "--full-name" | split row "\n"),
-    formulae => (run-external "brew" "leaves" | split row "\n")
-  }
 }
 
 # Homebrew: list installed packages
 def brew-list-machine-installed [] {
-  let fs = brew-list-machine-installed-by-type $f  | wrap package | each {insert type {$f}}
-  let cs = brew-list-machine-installed-by-type $c  | wrap package | each {insert type {$c}}
-  $fs | append $cs | move type --before package | sort
+  let formulaes = (run-external "brew" "leaves" | split row "\n")
+            | wrap package
+            | each {insert type {$f}}
+  let casks = (run-external "brew" "list" "--casks" "--full-name" | split row "\n")
+            | wrap package
+            | each {insert type {$c}}
+  $formulaes | append $casks | move type --before package | sort
 }
 alias bl = brew-list-machine-installed
 
 # Homebrew: packages for sync action
-def brew-list-uninstalled-required [command, type] {
-  let installed = brew-list-machine-installed-by-type $type
-  let required = brew-list-machine-required-by-type $type
-  match $command {
-    install => ($required | where {|p| $p not-in $installed }),
-    remove => ($installed | where {|p| $p not-in $required })
-  }
+def brew-list-machine-not-installed [] {
+  let installed = brew-list-machine-installed 
+  brew-list-machine-required | where {|p| $p not-in $installed }
 }
-
-# Homebrew: Applies sync action
-#
-# Sync actions
-#   install : will install any required packages of type that are missing from the machine
-#   remove : will remove any installed packages not in the required list
-#
-# parameter [command] can be "install" or "remove"
-# parameter [type] can be "cask" or "formulae"
-def brew-apply-command [list, command, type] {
-  $list
-  | each {|p| run-external "brew" $command $"--($type)" $p }
+# 
+# Homebrew: packages for sync action
+def brew-list-machine-not-required [] {
+  let required = brew-list-machine-required 
+  brew-list-machine-installed | where {|p| $p not-in $required }
 }
-
-
-# Homebrew: list non required packages
-def brew-list-removable [] {
-  let fs = brews-sync-list $f  | wrap package | each {insert type {$f}}
-  let cs = brews-sync-list $c  | wrap package | each {insert type {$c}}
-  $fs | append $cs | move type --before package | sort
- }
-alias blr = brew-list-removable 
 
 # Homebrew: Upgrade, Sync Install and Clean
 def brew-sync [] {
   brew-up
-  brew-apply-command (brew-list-uninstalled-required install $c) install $c
-  brew-apply-command (brew-list-uninstalled-required install $f) install $f
+
+  brew-list-machine-not-installed
+  | each {|row| run-external "brew" "install" $"--($row.type)" $row.package }
+  
   brew-clean
 }
 
