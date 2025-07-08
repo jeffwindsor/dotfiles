@@ -8,16 +8,13 @@ alias jeff = cdl $env.SOURCE_JEFF
 
 # git
 alias gg = lazygit
-alias gd = git diff --word-diff --unified=0
+alias gd = tv git-diff
 alias gb = git blame -w -C -C -C
 alias gs = git status
 alias gph = git push
 alias gpl = git pull
-alias gl = git log --pretty=%h»¦«%aN»¦«%s»¦«%ch
-	| lines
-	| split column "»¦«" sha1 committer desc merged
-	| update merged {|x| $x.merged | into datetime }
-	| first 20
+alias gl = tv git-log
+alias gr = tv git-reflog
 
 # Git pull applied to repo at path
 def git-pull [path] {
@@ -32,7 +29,7 @@ def git-repos [root_path] {
 
 # Personal Git Clone Wrapper
 #
-# will make sure the repo is put into my sourvce folder with this grammer:
+# will make sure the repo is put into my source folder with this grammer:
 # source/<git host>/<repo name without .git>
 # for gitlab this can be a repo name with subfolders
 def --env git-clone [repo_url:string] {
