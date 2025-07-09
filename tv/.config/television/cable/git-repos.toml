@@ -9,8 +9,8 @@ This channel uses `fd` to find directories that contain a `.git` subdirectory, a
 
 [source]
 # this is a macos version of the command. While perfectly usable on linux, you may want to tweak it a bit.
-command = "fd -g .git -HL -t d -d 10 --prune ~ -E 'Library' -E 'Application Support' --exec dirname {}"
+command = "fd -g .git -HLI -t d -d 5 --prune $SOURCE -E 'Library' -E 'Application Support' --exec dirname {} | sort"
 display = "{split:/:-1}"
 
 [preview]
-command = "cd {}; git log -n 200 --pretty=medium --all --graph --color"
+command = "cd {}; git log -n 200 --color --format='%C(green)%h%C(reset) - %s%C(cyan) | %an%C(dim) | %ch%C(auto)%d%C(reset)'"
