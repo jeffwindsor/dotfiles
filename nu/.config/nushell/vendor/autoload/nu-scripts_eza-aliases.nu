@@ -1,8 +1,8 @@
-export alias x = eza --icons
-export alias xa = eza --icons --all
+export alias x = eza
+export alias xa = eza --all
 export alias xl	= eza --long
 export alias xla = eza --long --all
-export alias xt	= eza --icons --tree
-export alias tree	= eza --icons --tree
-export alias xta = eza --icons --tree --all
-export alias treea = eza --icons --tree --all
+export alias xt	= eza --tree
+export alias tree	= eza --tree
+export alias xta = eza --tree --all
+export alias treea = eza --tree --all
