@@ -1,0 +1,7 @@
+[metadata]
+name = "nu-history"
+requirements = ["nu"]
+
+[source]
+command = "cat ~/.config/nushell/history.txt"
+
