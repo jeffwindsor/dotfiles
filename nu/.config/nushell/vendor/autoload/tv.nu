@@ -45,16 +45,16 @@ $env.config = (
                 cmd: "tv_smart_autocomplete"
             }
         }
-        {
-            name: tv_history,
-            modifier: Control,
-            keycode: char_r,
-            mode: [vi_normal, vi_insert, emacs],
-            event: {
-                send: executehostcommand,
-                cmd: "tv_shell_history"
-            }
-        }
+        # {
+        #     name: tv_history,
+        #     modifier: Control,
+        #     keycode: char_r,
+        #     mode: [vi_normal, vi_insert, emacs],
+        #     event: {
+        #         send: executehostcommand,
+        #         cmd: "tv_shell_history"
+        #     }
+        # }
     ]
 )
 
