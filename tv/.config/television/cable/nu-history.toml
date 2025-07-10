@@ -3,5 +3,5 @@ name = "nu-history"
 requirements = ["nu"]
 
 [source]
-command = "cat ~/.config/nushell/history.txt"
+command = "bat -p ~/.config/nushell/history.txt"
 
