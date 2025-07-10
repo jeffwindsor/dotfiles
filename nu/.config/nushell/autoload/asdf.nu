@@ -7,8 +7,13 @@
 
 # Fuzzy Selection of list
 def fuzzy-select [prompt, list] {
-  let prompt = (colorize (emphasize $prompt) blue)
-  $list | input list --fuzzy $prompt
+  $list
+  | to text
+  | run-external "tv" "--input-header" $prompt
+
+  
+  # let prompt = (colorize (emphasize $prompt) blue)
+  # $list | input list --fuzzy $prompt
 }
 
 # ASDF installed plugins with current version
@@ -51,6 +56,7 @@ def asdf-list-plugin-versions-installed [plugin] {
 
 # ASDF add available Plugin, optionally add a version as current
 def asdf-install-plugin [add_with_a_version: bool = true] {
+  # let plugin = fuzzy-select "Select Plugin to Install" (asdf-list-plugins-all) 
   let plugin = fuzzy-select "Select Plugin to Install" (asdf-list-plugins-all) 
   if (($plugin | is-not-empty) and $add_with_a_version) {
     cd
