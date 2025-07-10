@@ -1,16 +1,12 @@
-# themes:   catppuccin-mocha MaterialDarker 0x96f
-# 			iceberg-dark rose-pine MaterialOcean
-#  default: tokyonight
 
 #== Appearance ==
-
-theme = tokyonight-storm		
 background-opacity = 0.94
+font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 14
 quit-after-last-window-closed = true
+theme = tokyonight-storm		
 window-decoration = false
 
 
 #== Keybindings ==
-
 keybind = global:cmd+grave_accent=toggle_quick_terminal
