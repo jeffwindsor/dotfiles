@@ -1,11 +1,16 @@
 # themes:   catppuccin-mocha MaterialDarker 0x96f
 # 			iceberg-dark rose-pine MaterialOcean
-#			tokyonighttheme = catppuccin-mocha
-		
+#  default: tokyonight
+
+#== Appearance ==
+
+theme = tokyonight-storm		
 background-opacity = 0.94
 font-size = 14
 quit-after-last-window-closed = true
 window-decoration = false
 
+
 #== Keybindings ==
+
 keybind = global:cmd+grave_accent=toggle_quick_terminal
