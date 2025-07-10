@@ -17,26 +17,24 @@ def sync [] {
   dot-sync
 }
 
-# Homebrew: Upgrade all packages
-def brew-up [] {
-  section "Homebrews: Updating Database"
-  run-external "brew" "update" | print
-  section "Homebrews: Upgrading All Packages"
-  run-external "brew" "upgrade" | print
-}
-# Homebrew: Autoremove and Cleanup
-def brew-clean [] {
-  section "Homebrews: Removing Orphaned Packages"
-  run-external "brew" "autoremove" | print
-  section "Homebrews: Cleaning Up Package Cache"
-  run-external "brew" "cleanup" | print
-}
 # Homebrew: Upgrade, Sync Install and Clean
 def brew-sync [] {
+  
+  section "Homebrews: Updating Database"
+  brew update
+  
+  section "Homebrews: Upgrading All Packages"
+  brew upgrade
+
+  section "Homebrew: Installing Bundle"
   let brewfile = ($env.DOTFILES) | path join "brew" ".config" "homebrew" (networksetup -getcomputername) "Brewfile"
-  brew-up
   run-external "brew" "bundle" "install" $"--file=($brewfile)"
-  brew-clean 
+
+  section "Homebrews: Removing Orphaned Packages"
+  brew autoremove
+  
+  section "Homebrews: Cleaning Up Package Cache"
+  brew cleanup
 }
 
 
