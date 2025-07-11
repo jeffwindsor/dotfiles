@@ -1,4 +1,16 @@
+# CJ M4 Brewfile
+brew "aws-cdk"
+brew "colima"
+brew "docker-buildx"
+brew "docker"
+brew "lazydocker"
+brew "maven"  
+cask "intellij-idea"
+cask "slack"
+cask "tuple",
+cask "visual-studio-code"
 
+# Common Brewfile
 brew "bash"
 brew "bat"
 brew "carapace"
@@ -14,24 +26,11 @@ brew "stow"
 brew "television"
 brew "yazi"
 brew "zsh"
-
-brew "aws-cdk"
-brew "colima"
-brew "docker-buildx"
-brew "docker"
-brew "lazydocker"
-brew "maven"
-  
 cask "claude"
 cask "firefox"
+cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
 cask "google-chrome"
-cask "font-jetbrains-mono-nerd-font"
 cask "keepingyouawake"
-cask "nikitabobko/tap/aerospace"
+cask "nikitabobko\/tap\/aerospace"
 cask "zed"
-
-cask "intellij-idea"
-cask "slack"
-cask "tuple",
-cask "visual-studio-code"
