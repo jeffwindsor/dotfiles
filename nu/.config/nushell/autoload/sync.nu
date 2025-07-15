@@ -1,20 +1,39 @@
 
 
 # === NOTE: SYNC FUNCTION IS WHY ASDF, BREW AND DOT FUNCTIONS ARE NOT IN SEPARATE FILES ===
-# === Might need to move to modules that import/source other modules in the future
+# ===       Might need to move to modules that import/source other modules in the future
+
 # Synchronize packages and dotfiles
-#
-# Pulls dotfiles from repo
-# Install any missing brews
-# Install and set any asdf defined tools
-# Stows dotfiles to home directory
 def sync [] {
-  cd $env.HOME
-  let brewfile = $"($env.DOTFILES)/(networksetup -getcomputername).Brewfile"
   dot-pull
   brew-sync
-  mise install
+  mise-sync
+  ai-sync 
   dot-sync
+}
+
+# Claude: Sync Preference Files
+def ai-sync [] {
+  section "AI: Syncing Claude"
+  let	machine = networksetup -getcomputername
+  let source =  $env.DOTFILES | path join "claude" ".config" "claude" $machine ".claude_preferences.md"
+  let target = $env.HOME | path join ".claude_preferences.md"
+  ln -s $source $target
+}
+
+# Mise: Sync Plugins and Versions
+def mise-sync [] {
+  section "Mise: Syncing Global"
+  let	machine = (networksetup -getcomputername)
+  let source = $env.DOTFILES | path join "mise" ".config" "mise" $machine "mise.local.toml"
+  let target = $env.HOME | path join "mise.local.toml"
+  ln -s $source $target
+  
+  # operating on home directory to trust newly linked file and have install come from global file
+  cd $env.HOME
+  mise trust
+  mise install
+  cd -
 }
 
 # Homebrew: Upgrade, Sync Install and Clean
@@ -27,7 +46,8 @@ def brew-sync [] {
   brew upgrade
 
   section "Homebrew: Installing Bundle"
-  let brewfile = ($env.DOTFILES) | path join "brew" ".config" "homebrew" (networksetup -getcomputername) "Brewfile"
+  let	machine = (networksetup -getcomputername)
+  let brewfile = ($env.DOTFILES) | path join "brew" ".config" "homebrew" $machine "Brewfile"
   run-external "brew" "bundle" "install" $"--file=($brewfile)"
 
   section "Homebrews: Removing Orphaned Packages"

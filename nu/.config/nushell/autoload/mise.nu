@@ -1,12 +1,3 @@
-
-def mise-set-local [] {
-  let	machine = (networksetup -getcomputername)
-  
-  ln -s ($env.DOTFILES | path join "mise" ".config" "mise" $machine "mise.local.toml")  ($env.HOME | path join "mise.local.toml")
-
-  mise trust
-}
-
 def mise-install-version [plugin] {
   # if input or selection available, pick version
   if ($plugin | is-not-empty) {
