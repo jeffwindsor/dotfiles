@@ -10,4 +10,3 @@ window-decoration = false
 
 #== Keybindings ==
 keybind = global:cmd+grave_accent=toggle_quick_terminal
-keybind = shift+enter=text:\n

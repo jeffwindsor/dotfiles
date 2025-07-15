@@ -7,7 +7,7 @@ brew "lazydocker"
 brew "maven"  
 cask "intellij-idea"
 cask "slack"
-cask "tuple",
+cask "tuple"
 cask "visual-studio-code"
 
 # Common Brewfile
