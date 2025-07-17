@@ -1,5 +1,3 @@
-
-
 # === NOTE: SYNC FUNCTION IS WHY ASDF, BREW AND DOT FUNCTIONS ARE NOT IN SEPARATE FILES ===
 # ===       Might need to move to modules that import/source other modules in the future
 
@@ -18,7 +16,7 @@ def ai-sync [] {
   let	machine = networksetup -getcomputername
   let source =  $env.DOTFILES | path join "claude" ".config" "claude" $machine ".claude_preferences.md"
   let target = $env.HOME | path join ".claude_preferences.md"
-  ln -s $source $target
+  ln -sf $source $target
 }
 
 # Mise: Sync Plugins and Versions
@@ -27,7 +25,7 @@ def mise-sync [] {
   let	machine = (networksetup -getcomputername)
   let source = $env.DOTFILES | path join "mise" ".config" "mise" $machine "mise.local.toml"
   let target = $env.HOME | path join "mise.local.toml"
-  ln -s $source $target
+  ln -sf $source $target
   
   # operating on home directory to trust newly linked file and have install come from global file
   cd $env.HOME
