@@ -113,10 +113,10 @@ e = ":open ~/Documents/personal/exocortex"
 esc = ["collapse_selection", "normal_mode", ":write"] # vim like escape
 
 [keys.select]
-"G" = "goto_file_end"
-"H" = "goto_line_start"
-"L" = "goto_line_end"
-"V" = ["select_mode", "extend_to_line_bounds"]
+"G" = "extend_to_file_end"
+"H" = "extend_to_line_start"
+"L" = "extend_to_line_end"
+"V" = "extend_to_line_bounds"
 "y" = ["yank_main_selection_to_clipboard", "yank"]
 esc = ["collapse_selection", "normal_mode", ":write"]
 "~" = "switch_to_uppercase"
