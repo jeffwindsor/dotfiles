@@ -18,6 +18,9 @@ def l [] {
   ls -a
 }
 
+# Claude (move to its own file)
+alias x = claude 
+
 # Change Directory with clear and list all
 def --env cdl [path, execute_ls=true] {
   cd $path
