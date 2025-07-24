@@ -8,7 +8,12 @@ keybinding:
   universal:
     optionMenu: '~' # show help menu
     optionMenu-alt1: '?' # show help menu
-    quit-alt1: <esc>
+    # quit-alt1: <esc>
+    quit: 'q'
+    return: <esc>
+    prevItem: 'k'
+    nextItem: 'j'
+    commitChanges: 'C'
 
 update:
   method: never
