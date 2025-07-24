@@ -4,4 +4,4 @@
 "asdf:mise-plugins/mise-scala" = "2.12.18"
 "core:node" = "20.19.1"
 "asdf:MetricMike/asdf-awscli" = "2.27.0"
-
+"go" = "latest"
