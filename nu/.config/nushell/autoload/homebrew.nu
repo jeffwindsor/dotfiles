@@ -8,3 +8,5 @@ $env.HOMEBREW_NO_INSTALL_CLEANUP = "1"
 alias bn = brew install
 alias bi = brew info
 alias bs = brew search
+alias bsd = brew search --desc
+
