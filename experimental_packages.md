@@ -8,11 +8,12 @@
 
 ### Current
 
+* grex - 🦀A command-line tool and library for generating regular expressions from user-provided test cases
 * clifm - Terminal File Manager: https://github.com/leo-arch/clifm
 * fselect - 🦀find with sql syntax
 * ncspot - 🦀spotify client
 * xh - 🦀curl replacement
-* evil-helix - 🦀 helix with vim bindings 
+* ~~evil-helix - 🦀 helix with vim bindings~~
 
 
 ### Future
