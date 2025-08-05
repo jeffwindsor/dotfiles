@@ -6,5 +6,5 @@ def idea_key [file] {
   ln -sF $source $target
 }
 
-alias idea_key_vim = idea_key idea.vimrc
-alias idea_key_helix = idea_key idea.helixrc
+alias idea_key_vim = idea_key ideavimrc
+alias idea_key_helix = idea_key helix.vim
