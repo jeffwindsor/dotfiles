@@ -1,7 +1,7 @@
 [tools]
-"core:java" = "corretto-21.0.7.6.1"
+"core:java" = ["corretto-21.0.7.6.1", "corretto-8.452.09.1"]
 "asdf:mise-plugins/mise-maven" = "3.9.9"
-"asdf:mise-plugins/mise-scala" = "2.12.18"
+"asdf:mise-plugins/mise-scala" = "2.13.16"
 "core:node" = "20.19.1"
 "asdf:MetricMike/asdf-awscli" = "2.27.0"
 "go" = "latest"
