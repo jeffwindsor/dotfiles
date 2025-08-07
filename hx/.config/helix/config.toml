@@ -88,6 +88,32 @@ Q = ":quit!"
 "down" = ":pipe sort"
 "up" = ":pipe sort --reverse"
 
+# Case conversion
+[keys.normal.space.-]
+# snake_case
+s = ":pipe sed 's/\\([a-z]\\)\\([A-Z]\\)/\\1_\\2/g; s/-/_/g' | tr '[:upper:]' '[:lower:]'"
+
+# camelCase
+c = ":pipe sed 's/[-_]\\([a-z]\\)/\\U\\1/g; s/^\\([A-Z]\\)/\\l\\1/'"
+
+# PascalCase
+p = ":pipe sed 's/[-_]\\([a-z]\\)/\\U\\1/g; s/^./\\U&/'"
+
+# kebab-case
+k = ":pipe sed 's/\\([a-z]\\)\\([A-Z]\\)/\\1-\\2/g; s/_/-/g' | tr '[:upper:]' '[:lower:]'"
+
+# SCREAMING_SNAKE_CASE
+S = ":pipe sed 's/\\([a-z]\\)\\([A-Z]\\)/\\1_\\2/g; s/-/_/g' | tr '[:lower:]' '[:upper:]'"
+
+# UPPERCASE
+u = ":pipe tr '[:lower:]' '[:upper:]'"
+
+# lowercase
+l = ":pipe tr '[:upper:]' '[:lower:]'"
+
+# Title Case
+t = ":pipe sed 's/\\b\\(\\w\\)/\\u\\1/g'"
+
 # themes  
 [keys.normal.space.t]
 a = ":theme autumn_night"
