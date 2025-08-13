@@ -2,7 +2,7 @@
 # Change IdeaVim config files 
 def idea_key [file] {
   let target = $env.HOME | path join .ideavimrc
-  let source = $env.DOTFILES | path join idea .config jetbrains $file
+  let source = $env.DOTFILES | path join idea-ce .config jetbrains $file
   ln -sF $source $target
 }
 
