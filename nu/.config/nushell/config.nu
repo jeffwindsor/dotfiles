@@ -95,3 +95,7 @@ def show [text, color] { print (colorize $text $color) }
 def emphasize [text] { $"== ($text)" }
 # return asni colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
+
+if ("~/config_local.nu" | path exists) {
+    source "~/config_local.nu"
+}
