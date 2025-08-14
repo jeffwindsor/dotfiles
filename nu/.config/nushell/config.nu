@@ -66,9 +66,8 @@ alias aq = alias-query
 # query current commands
 def commands-query [query] {
   scope commands
-  # | where command_type == "custom"
+  | where type == "custom"
   | where name like $query
-  | select name params 
 }
 alias cq = commands-query
 
@@ -96,6 +95,30 @@ def emphasize [text] { $"== ($text)" }
 # return asni colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
-if ("~/config_local.nu" | path exists) {
-    source "~/config_local.nu"
+# machine specific config
+let	machine = networksetup -getcomputername
+if ($machine == "WKMZTAFD6544") {
+  echo "sqlplus"
+  def sqlplus_run_file [connection: string, file: string] {
+      rlwrap sqlplus $connection $"@($file)"
+  }
+
+  def shopcart [file: string] {
+      sqlplus_run_file "jwindsor@shopcart.db.cj.com:1531/shopcart" $file
+  }
+
+  def t1 [file: string] {
+      sqlplus_run_file "cj@tcjoweb1.db.cj.com:1521/tcjoweb1" $file
+  }
+
+  def t5 [file: string] {
+      sqlplus_run_file "cj@tcjoweb5.db.cj.com:1521/tcjoweb5" $file
+  }
+
+
+  # CJ Claude Bedrock Experiment
+  $env.CLAUDE_CODE_USE_BEDROCK = "1"
+  $env.AWS_REGION = "us-west-2"
+  $env.ANTHROPIC_MODEL = "us.anthropic.claude-sonnet-4-20250514-v1:0"
+  $env.ANTHROPIC_SMALL_FAST_MODEL = "us.anthropic.claude-3-5-haiku-20241022-v1:0"
 }
