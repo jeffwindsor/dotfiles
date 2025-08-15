@@ -56,20 +56,29 @@ alias lla = ls -la
 
 # == QUERIES ==
 # query current alias
-def alias-query [query] {
+def query-aliases [query] {
   scope aliases
   | where {|r| $r.expansion =~ $query or $r.name =~ $query}
 }
 # alias ar = alias-query
-alias aq = alias-query
+alias qa = alias-query
 
 # query current commands
-def commands-query [query] {
+def query-commands [query] {
   scope commands
   | where type == "custom"
   | where name like $query
 }
-alias cq = commands-query
+alias qa = commands-query
+
+def query-everything [query] {
+  {
+    aliases: (query-aliases $query),
+    commands: (query-commands $query)
+  }
+}
+alias qq = query-everything
+
 
 # == PRINT / ECHO ==
 # Prints Reverse Cyan and adds bars
@@ -92,30 +101,60 @@ def normal  [text] { show $text reset }
 def show [text, color] { print (colorize $text $color) }
 
 def emphasize [text] { $"== ($text)" }
-# return asni colored text
+# return ansi colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
-# machine specific config
-let	machine = networksetup -getcomputername
-if ($machine == "WKMZTAFD6544") {
-  echo "sqlplus"
-  def sqlplus_run_file [connection: string, file: string] {
-      rlwrap sqlplus $connection $"@($file)"
+
+
+def sqlcl-file [tns_name: string, filename: string, exit_on_completion: bool = true] {
+  let sql = (open ($filename | path expand))
+  let connection_string = sqlcl-connection $tns_name
+  sqlcl-execute $connection_string $sql true
+}
+
+def sqlcl-query [tns_name: string, sql: string, exit_on_completion: bool = false] {
+  let connection_string = sqlcl-connection $tns_name
+  sqlcl-execute $connection_string $sql false
+}
+
+def sqlcl-connection [tns_name: string] {
+  # Determine user based on TNS name
+  let user = if ($tns_name | str starts-with "t") or ($tns_name | str starts-with "T") {
+    "cj"
+  } else {
+    input "Enter username"
   }
-
-  def shopcart [file: string] {
-      sqlplus_run_file "jwindsor@shopcart.db.cj.com:1531/shopcart" $file
+  
+  # Check for password in environment, prompt if not found
+  let password = if ($env.DB_PASS? | is-not-empty) {
+    $env.DB_PASS
+  } else {
+    input --suppress-output "Enter database password: "
   }
+  
+  $"($user)/\"($password)\"@($tns_name)"
+}
 
-  def t1 [file: string] {
-      sqlplus_run_file "cj@tcjoweb1.db.cj.com:1521/tcjoweb1" $file
+def sqlcl-execute [connection_string: string, sql: string, exit_on_completion: bool] {
+  let sql = $"SET PAGESIZE 0
+              SET LINESIZE 32767
+              SET SQLFORMAT CSV
+              SET FEEDBACK OFF
+              SET HEADING ON
+              SET ECHO OFF
+              WHENEVER SQLERROR EXIT SQL.SQLCODE
+              WHENEVER OSERROR EXIT FAILURE
+              ($sql)"
+
+  if $exit_on_completion {
+    let sql = $"($sql)
+                EXIT"
   }
+  
+  $sql | run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
+}
 
-  def t5 [file: string] {
-      sqlplus_run_file "cj@tcjoweb5.db.cj.com:1521/tcjoweb5" $file
-  }
-
-
+def claude_bedrock [] {
   # CJ Claude Bedrock Experiment
   $env.CLAUDE_CODE_USE_BEDROCK = "1"
   $env.AWS_REGION = "us-west-2"
