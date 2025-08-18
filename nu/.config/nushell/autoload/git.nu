@@ -7,14 +7,14 @@ alias empire = cdl ($env.SOURCE_GITCJ | path join "empire")
 alias jeff = cdl $env.SOURCE_JEFF 
 
 # git
-alias gg = lazygit
-alias gd = tv git-diff
 alias gb = git blame -w -C -C -C
-alias gs = git status
+alias gd = tv git-diff
+alias gg = lazygit
+alias gl = tv git-log
 alias gph = git push
 alias gpl = git pull
-alias gl = tv git-log
 alias gr = tv git-reflog
+alias gs = git status
 
 # Git pull applied to repo at path
 def git-pull [path] {

@@ -21,16 +21,6 @@ $env.SOURCE_GITCJ  = ($env.SOURCE | path join "gitlab.cj.dev")
 $env.SOURCE_JEFF   = ($env.SOURCE | path join "github.com/jeffwindsor")
 
 
-# jump to config directory
-alias config = cdl $env.XDG_CONFIG_HOME
-# reroute to nushell version
-alias cat = open
-# emulate bash
-alias fg = job unfreeze
-alias jobs = job list
-
-
-# == LISTINGS ==
 # Clear and list all
 def l [] {
   clear
@@ -53,6 +43,15 @@ alias cc = cdl $env.HOME false
 alias la = ls -a
 alias ll = ls -l
 alias lla = ls -la
+# jump to config directory
+alias config = cdl $env.XDG_CONFIG_HOME
+# reroute to nushell version
+alias cat = open
+# emulate bash
+alias fg = job unfreeze
+alias jobs = job list
+
+
 
 # == QUERIES ==
 # query current alias
@@ -104,20 +103,11 @@ def emphasize [text] { $"== ($text)" }
 # return ansi colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
+
+
 def sqlcl-connection [tns_name: string] {
-  # Determine user based on TNS name
-  let user = if ($tns_name | str starts-with "t") or ($tns_name | str starts-with "T") {
-    "cj"
-  } else {
-    input "Enter username"
-  }
-  
-  # Check for password in environment, prompt if not found
-  let password = if ($env.DB_PASS? | is-not-empty) {
-    $env.DB_PASS
-  } else {
-    input --suppress-output "Enter database password: "
-  }
+  let user = input -d "cj" "Enter username: " 
+  let password = input --suppress-output "Enter database password: "
   
   $"($user)/\"($password)\"@($tns_name)"
 }
@@ -148,9 +138,9 @@ def sqlcl-file [tns_name: string, filename: string, exit_on_completion: bool = t
   sqlcl-execute $connection_string $sql true
 }
 
-def sqlcl-query [tns_name: string, sql: string, exit_on_completion: bool = false] {
+def sqlcl-open [tns_name: string] {
   let connection_string = sqlcl-connection $tns_name
-  sqlcl-execute $connection_string $sql false
+  run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
 }
 
 def sqlcl [] {
@@ -160,6 +150,9 @@ def sqlcl [] {
   run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
 }
 
+alias shopcart = sqlcl-open "SHOPCART"
+alias t5 = sqlcl-open "TCJOWEB5"
+alias t1 = sqlcl-open "TCJOWEB1"
 
 
 def claude_bedrock [] {
