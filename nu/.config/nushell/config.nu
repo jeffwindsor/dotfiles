@@ -104,19 +104,6 @@ def emphasize [text] { $"== ($text)" }
 # return ansi colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
-
-
-def sqlcl-file [tns_name: string, filename: string, exit_on_completion: bool = true] {
-  let sql = (open ($filename | path expand))
-  let connection_string = sqlcl-connection $tns_name
-  sqlcl-execute $connection_string $sql true
-}
-
-def sqlcl-query [tns_name: string, sql: string, exit_on_completion: bool = false] {
-  let connection_string = sqlcl-connection $tns_name
-  sqlcl-execute $connection_string $sql false
-}
-
 def sqlcl-connection [tns_name: string] {
   # Determine user based on TNS name
   let user = if ($tns_name | str starts-with "t") or ($tns_name | str starts-with "T") {
@@ -153,6 +140,27 @@ def sqlcl-execute [connection_string: string, sql: string, exit_on_completion: b
   
   $sql | run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
 }
+
+def sqlcl-file [tns_name: string, filename: string, exit_on_completion: bool = true] {
+  let sql = (open ($filename | path expand))
+  let connection_string = sqlcl-connection $tns_name
+  
+  sqlcl-execute $connection_string $sql true
+}
+
+def sqlcl-query [tns_name: string, sql: string, exit_on_completion: bool = false] {
+  let connection_string = sqlcl-connection $tns_name
+  sqlcl-execute $connection_string $sql false
+}
+
+def sqlcl [] {
+  let tnsname_list = "awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, \"\", \$1); print \$1}' tnsnames.ora"
+  let tns_name = tv --source-command $tnsname_list
+  let connection_string = sqlcl-connection $tns_name
+  run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
+}
+
+
 
 def claude_bedrock [] {
   # CJ Claude Bedrock Experiment
