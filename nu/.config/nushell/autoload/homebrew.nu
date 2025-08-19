@@ -9,4 +9,11 @@ alias bn = brew install
 alias bi = brew info
 alias bs = brew search
 alias bsd = brew search --desc
+def bl [] {
+  section "Formulae"
+  brew leaves
+  print ""
+  section "Casks"
+  brew list --casks | col
+}
 
