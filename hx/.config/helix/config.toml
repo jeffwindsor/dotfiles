@@ -53,15 +53,18 @@ select = "SELECT"
 ###################################################################
 
 [keys.normal]
-"G" = "goto_file_end"
-"H" = "goto_line_start"
-"L" = "goto_line_end"
-# select line, stay in selection mode
-"V" = ["select_mode", "extend_to_line_bounds"]
-# OVERRIDE: copy to both internal and external clipboards
-"y" = ["yank_main_selection_to_clipboard", "yank"]
-# OVERRIDE: Vim like escape
-esc = ["collapse_selection", "keep_primary_selection", ":write"]
+G = "goto_file_end"    # not assigned by default
+H = "goto_line_start"  # same as Home 
+L = "goto_line_end"    # same as End
+W	= "move_next_word_start"   # Swap long and normal
+w	= "move_next_long_word_start"   # Swap long and normal
+B	= "move_prev_word_start"   # Swap long and normal
+b	= "move_prev_long_word_start"   # Swap long and normal
+e	= "move_next_long_word_end"   # Swap long and normal
+E	= "move_next_word_end"   # Swap long and normal
+V = ["select_mode", "extend_to_line_bounds"]  # select line, stay in selection mode
+y = ["yank_main_selection_to_clipboard", "yank"]  # OVERRIDE: copy to both internal and external clipboards
+esc = ["collapse_selection", "keep_primary_selection", ":write"]  # OVERRIDE: Vim like escape
 
 # Select All
 C-a = "@ggvG"
