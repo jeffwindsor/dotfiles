@@ -21,6 +21,8 @@ $env.SOURCE_GITCJ  = ($env.SOURCE | path join "gitlab.cj.dev")
 $env.SOURCE_JEFF   = ($env.SOURCE | path join "github.com/jeffwindsor")
 
 
+alias ff = fastfetch
+
 # Clear and list all
 def l [] {
   clear
