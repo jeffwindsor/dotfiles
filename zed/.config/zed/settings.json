@@ -12,7 +12,7 @@
   "helix_mode": true,
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
   }
 }
