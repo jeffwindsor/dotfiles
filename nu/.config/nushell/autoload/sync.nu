@@ -34,45 +34,50 @@ def mise-sync [] {
   cd -
 }
 
-# Homebrew:
-def brew-diff [brewfile_path: string] {
-  # Helper to extract packages from Brewfile by type
-  def extract-from-brewfile [type: string, file: string] {
-    open $file | lines | where ($it | str starts-with $'($type) "') | parse $'($type) "{name}"' | get name | sort
-  }
-  
-  # Helper to display section with right-justified numbers
-  def display-section [title: string, installed: list, in_brewfile: list, max_width: int] {
-    let not_in_brewfile = ($installed | where $it not-in $in_brewfile)
+def brew-diff [brewfile_path?: string] {
+    # assume config brew file under machine name folder
+    let brewfile_path = $brewfile_path | default (
+        $env.HOME | path join ".config" "homebrew" (networksetup -getcomputername | str trim) "Brewfile"
+    )
     
-    info $"($title):"
-    if ($not_in_brewfile | length) > 0 {
-      $not_in_brewfile | each { |pkg| normal $"  ($pkg)" }
-    } else {
-      normal "  (none)"
+    def extract [type: string] { 
+        open $brewfile_path 
+        | lines 
+        | where ($it | str starts-with $'($type) "') 
+        | parse $'($type) "{name}"' 
+        | get name 
+        | sort 
     }
-    normal $"  Installed: ($installed | length | into string | fill --alignment right --width $max_width)"
-    normal $"  Bundeled:     ($in_brewfile | length | into string | fill --alignment right --width $max_width)"
-    normal $"  Extra: ($not_in_brewfile | length | into string | fill --alignment right --width $max_width)"
-    if $title == "Formulae" { normal "\n" }
-  }
+    
+    def show [title: string, installed: list, bundled: list, width: int] {
+        let extra = ($installed | where $it not-in $bundled)
+        
+        info $"($title):"
+        if ($extra | is-empty) { 
+            dimmed "  (none)" 
+        } else { 
+            $extra | each { |pkg| warning $"  ($pkg)" } 
+        }
+        
+        let outputs = [ ["Installed" ($installed | length)]  ["Bundled  " ($bundled | length)]  ["Extra    " ($extra | length)] ]
+        $outputs | each { |row|  normal $"  ($row.0): ($row.1 | into string | fill --alignment right --width $width)" }
+        
+        normal "\n"
+    }
 
-  # Get data
-  let installed_formulae = (brew leaves | lines | sort)
-  let installed_casks = (brew list --cask | lines | sort)
-  let brewfile_formulae = (extract-from-brewfile "brew" $brewfile_path)
-  let brewfile_casks = (extract-from-brewfile "cask" $brewfile_path)
-  
-  # Calculate max width for alignment
-  let max_width = ([
-    ($installed_formulae | length) ($brewfile_formulae | length) (($installed_formulae | where $it not-in $brewfile_formulae) | length)
-    ($installed_casks | length) ($brewfile_casks | length) (($installed_casks | where $it not-in $brewfile_casks) | length)
-  ] | each { into string | str length } | math max)
-  
-  # Display results
-  display-section "Formulae" $installed_formulae $brewfile_formulae $max_width
-  display-section "Casks" $installed_casks $brewfile_casks $max_width
+    let formulae = [(brew leaves | lines | sort) (extract "brew")]
+    let casks = [(brew list --cask | lines | sort) (extract "cask")]
+    let width = (
+        [$formulae $casks] 
+        | flatten 
+        | each { length | into string | str length } 
+        | math max
+    )
+    
+    show "Formulae" $formulae.0 $formulae.1 $width
+    show "Casks" $casks.0 $casks.1 $width
 }
+
 
 def brew-sync [] {
   
