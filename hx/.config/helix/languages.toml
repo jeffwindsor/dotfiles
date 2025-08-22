@@ -15,6 +15,7 @@ procMacro = {enable = true }
 name = "bash"
 auto-format = true
 indent = { tab-width = 4, unit = " " }
+file-types = ["sh","bash","ini","conf"]
 
 [language.formatter]
 command = "shfmt"
