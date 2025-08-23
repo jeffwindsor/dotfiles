@@ -1,0 +1,3 @@
+
+alias ff = fastfetch
+

@@ -56,7 +56,7 @@ def brew-diff [brewfile_path?: string] {
         if ($extra | is-empty) { 
             dimmed "  (none)" 
         } else { 
-            $extra | each { |pkg| warning $"  ($pkg)" } 
+            $extra | each { |pkg| warning $"  (brew desc $pkg)" } 
         }
         
         let outputs = [ ["Installed" ($installed | length)]  ["Bundled  " ($bundled | length)]  ["Extra    " ($extra | length)] ]
