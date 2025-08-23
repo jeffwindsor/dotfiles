@@ -77,6 +77,7 @@ def brew-diff [brewfile_path?: string] {
     show "Formulae" $formulae.0 $formulae.1 $width
     show "Casks" $casks.0 $casks.1 $width
 }
+alias bd = brew-diff
 
 
 def brew-sync [] {
