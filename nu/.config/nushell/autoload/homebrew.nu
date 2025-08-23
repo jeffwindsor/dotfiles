@@ -11,10 +11,10 @@ alias bs = brew search
 alias bsd = brew search --desc
 def bl [] {
   section "Formulae"
-  brew leaves | lines | sort
+  print (brew leaves | lines | sort)
   print ""
   section "Casks"
-    brew list --cask | lines | sort
+  print (brew list --cask | lines | sort)
 }
 
 
