@@ -91,16 +91,16 @@ def brew-sync [] {
   section "Homebrew: Installing Bundle"
   let	machine = (networksetup -getcomputername)
   let brewfile = ($env.DOTFILES) | path join "brew" ".config" "homebrew" $machine "Brewfile"
-  run-external "brew" "bundle" "install" $"--file=($brewfile)"
-
-  section "Homebrew: Extra Installed Packages"
-  brew-diff $brewfile
+  brew bundle install --file=($brewfile)
 
   section "Homebrews: Removing Orphaned Packages"
   brew autoremove
   
   section "Homebrews: Cleaning Up Package Cache"
   brew cleanup
+  
+  section "Homebrew: Extra Installed Packages"
+  brew-diff $brewfile
 }
 
 
@@ -114,18 +114,24 @@ def dot-pull [] {
   source $nu.env-path
   
   # reload app configs
-  run-external "aerospace" "reload-config"
+  aerospace reload-config
 }
+
 # Dotfiles: Sync dotfiles for package if application is installed, otherwise remove
 def stow-package [package: string, source: string, target: string] {
   if (which $package | length) > 0 {
-    run-external "stow" "-S" "--dir" $source "--target" $target $package
+  
+    stow -S --dir $source --target $target $package
     colorize $package green
+    
   } else {
-    run-external "stow" "-D" "--dir" $source "--target" $target $package
+  
+    stow -D --dir $source --target $target $package
     colorize $package dark_gray
+    
   }
 }
+
 # Dotfiles: sync all available dotfiles
 def dot-sync [] {
   section "Syncing Dotfiles"
