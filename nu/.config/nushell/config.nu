@@ -21,10 +21,11 @@ $env.SOURCE_GITCJ  = ($env.SOURCE | path join "gitlab.cj.dev")
 $env.SOURCE_JEFF   = ($env.SOURCE | path join "github.com/jeffwindsor")
 
 # == baskstop old muscle memory ==
-alias cat = open
 alias fg = job unfreeze
 alias jobs = job list
-
+alias cat = bat --plain || open
+alias find = fd
+alias grep = rg
 
 # Change Directory with clear and list all (used in autolad files)
 def --env cdl [path, execute_ls=true] {
