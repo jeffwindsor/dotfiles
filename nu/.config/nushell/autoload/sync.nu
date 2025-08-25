@@ -44,12 +44,15 @@ def brew-diff [brewfile_path?: string] {
         open $brewfile_path 
         | lines 
         | where ($it | str starts-with $'($type) "') 
-        | parse $'($type) "{name}"' 
+        | parse $'{_}"{name}"{_}' 
         | get name 
         | sort 
     }
     
     def show [title: string, installed: list, bundled: list, width: int] {
+        # warning $installed
+        # warning $bundled
+    
         let extra = ($installed | where $it not-in $bundled)
         
         info $"($title):"
