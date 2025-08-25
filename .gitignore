@@ -1,8 +1,7 @@
 # nushell - dont save the current history file
 nu/.config/nushell/history.txt
 
-.DS_Store
-.DS_Store?
+**/.DS_Store
 ._*
 .Spotlight-V100
 .Trashes
