@@ -38,7 +38,7 @@ def sqlcl-open [tns_name: string] {
 }
 
 def sqlcl [] {
-  let tnsname_list = "awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, \"\", \$1); print \$1}' tnsnames.ora"
+  let tnsname_list = "awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, \"\", \$1); print \$1}' ~/tnsnames.ora"
   let tns_name = tv --source-command $tnsname_list
   let connection_string = sqlcl-connection $tns_name
   run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
