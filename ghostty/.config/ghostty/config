@@ -1,6 +1,7 @@
 
 #== Appearance ==
 background-opacity = 0.94
+confirm-close-surface = false  # do not ask to close ghostty
 font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 14
 quit-after-last-window-closed = true
