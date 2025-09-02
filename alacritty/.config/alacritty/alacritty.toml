@@ -1,0 +1,15 @@
+general.import = ["./theme.toml"]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font Mono", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
+
+[window]
+padding.x = 10
+padding.y = 10
+decoration = "None"
