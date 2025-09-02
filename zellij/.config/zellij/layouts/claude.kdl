@@ -1,0 +1,10 @@
+layout {
+    pane split_direction="vertical" {
+        pane size="50%"
+        pane size="50%" {
+            command "claude"
+            args "--permission-mode" "plan"
+            close_on_exit true
+        }
+    }
+}
