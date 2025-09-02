@@ -197,8 +197,8 @@ alt-ctrl-x = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space = 'exec-and-forget open ~'
 
-alt-ctrl-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
-alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Kitty.app'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 
 
 #== Disable Macos shortcuts (to avoid confusion)
