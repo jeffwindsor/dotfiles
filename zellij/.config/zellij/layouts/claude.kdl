@@ -1,10 +1,26 @@
 layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
     pane split_direction="vertical" {
-        pane size="50%"
+        pane size="50%" stacked=true {
+            pane name="lazygit" {
+                command "lazygit"
+                close_on_exit true
+            }
+            pane name="helix" {
+                command "hx"
+                close_on_exit true
+            }
+            pane name="prompt"
+        }
         pane size="50%" {
             command "claude"
             args "--permission-mode" "plan"
             close_on_exit true
         }
+    }
+    pane size=2 borderless=true {
+        plugin location="zellij:status-bar"
     }
 }
