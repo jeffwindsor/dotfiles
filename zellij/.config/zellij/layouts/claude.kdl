@@ -8,6 +8,7 @@ layout {
                 command "claude"
                 args "--permission-mode" "plan"
                 close_on_exit true
+                focus true
             }            
             pane name="helix" {
                 command "hx"
@@ -18,6 +19,7 @@ layout {
             pane name="lazygit" {
                 command "lazygit"
                 close_on_exit true
+                focus true
             }
             pane name="prompt"
         }
