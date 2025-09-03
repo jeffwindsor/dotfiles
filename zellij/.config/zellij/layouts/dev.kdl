@@ -13,6 +13,7 @@ layout {
             pane name="lazygit" {
                 command "lazygit"
                 close_on_exit true
+                focus true
             }
             pane name="prompt"
         }
