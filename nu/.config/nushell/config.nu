@@ -57,3 +57,5 @@ def show [text, color] { print (colorize $text $color) }
 def emphasize [text] { $"== ($text) ==" }
 # Return ansi colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
+
+$env.MANPAGER = "sh -c 'col -bx | bat -l man -p'"
