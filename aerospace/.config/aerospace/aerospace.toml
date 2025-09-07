@@ -2,71 +2,114 @@ start-at-login = true
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
+[workspace-to-monitor-force-assignment]
+'🤖' = 'secondary' #a - ai (claude)
+'🌐' = 'primary'   #b
+'📅' = 'secondary' #c - calender
+'🧬' = 'primary'   #e (h,v) - editors (helix, nvim)
+'📂' = 'primary'   #f (y) - file managers (yazi, superfile)
+'󰻾e' = 'primary'   #i - ide (intellij, )
+'🍀' = 'secondary' #k - slack
+'💬' = 'secondary' #m - messages
+'📒' = 'secondary' #n - notes
+'📫' = 'secondary' #o - outlook
+'🎸' = 'secondary' #p - spotify
+'❗' = 'secondary' #r - reminders
+'🐚' = 'primary'   #s - shell
+'🙈' = 'secondary' #t - teams
+
+# extra workspaces
+1 = 'primary'
+2 = 'primary'
+3 = 'primary'
+4 = 'primary'
+5 = 'primary'
+6 = 'primary'
+7 = 'primary'
+8 = 'primary'
+9 = 'primary'
+0 = 'primary'
+
 [gaps]
 inner.horizontal = [{ monitor.secondary = 0 }, 4]
-inner.vertical = [{ monitor.secondary = 0 }, 4]
-outer.left = [{ monitor.secondary = 0 }, 4]
-outer.bottom = [{ monitor.secondary = 0 }, 4]
-outer.top = [{ monitor.secondary = 0 }, 4]
-outer.right = [{ monitor.secondary = 0 }, 4]
-
-[workspace-to-monitor-force-assignment]
-AI = 'secondary' 
-Cal = 'secondary' 
-Discord = 'secondary' 
-Messages = 'secondary' 
-Notes = 'secondary' 
-Outlook = 'secondary' 
-Reminders = 'secondary' 
-Slack = 'secondary' 
-Spotify = 'secondary' 
-Teams = 'secondary'
+inner.vertical   = [{ monitor.secondary = 0 }, 4]
+outer.left       = [{ monitor.secondary = 0 }, 4]
+outer.bottom     = [{ monitor.secondary = 0 }, 4]
+outer.top        = [{ monitor.secondary = 0 }, 4]
+outer.right      = [{ monitor.secondary = 0 }, 4]
 
 # https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-# - Letters.        a, b, c, ..., z
-# - Numbers.        0, 1, 2, ..., 9
-# - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
-# - F-keys.         f1, f2, ..., f20
-# - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
-#                   leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
-# - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
-#                   keypadMinus, keypadMultiply, keypadPlus
-# - Arrows.         left, down, up, right
-# - Modifiers: cmd, alt, ctrl, shift
+# a, b, c, ..., z,f1, f2, ..., f20
+# 0, 1, 2, ..., 9, keypad0, keypad1, keypad2, ..., keypad9
+# minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
+# leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
+# keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
+# keypadMinus, keypadMultiply, keypadPlus
+# left, down, up, right
+# cmd, alt, ctrl, shift
 
 [mode.main.binding]
 # Launchers
 alt-ctrl-a = 'exec-and-forget open /Applications/Claude.app'
 alt-ctrl-b = 'exec-and-forget open /Applications/Safari.app'
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
-alt-ctrl-d = 'exec-and-forget open /Applications/Discord.app'
-alt-ctrl-f = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
+# alt-ctrl-d = 'exec-and-forget open -n /Applications/Alacritty.app --args --title dotfiles -e hx $SOURCE'
 alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
 alt-ctrl-h = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
 alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
+alt-ctrl-k = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
+alt-ctrl-p = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-r = 'exec-and-forget open /System/Applications/Reminders.app'
-alt-ctrl-s = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
 alt-ctrl-v = 'exec-and-forget open -n /Applications/Alacritty.app --args --title nvim -e nvim'
-alt-ctrl-x = 'exec-and-forget open /Applications/Slack.app'
+alt-ctrl-y = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space = 'exec-and-forget open ~'
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 
 # Workspaces
+alt-a = 'workspace 🤖'        
+alt-shift-a = ['move-node-to-workspace 🤖', 'workspace 🤖']
+alt-b = 'workspace 🌐'        
+alt-shift-b = ['move-node-to-workspace 🌐', 'workspace 🌐']
+alt-c = 'workspace 📅'        
+alt-shift-c = ['move-node-to-workspace 📅', 'workspace 📅']
+alt-e = 'workspace 🧬'   
+alt-shift-e = ['move-node-to-workspace 🧬', 'workspace 🧬']
+alt-f = 'workspace 📂'   
+alt-shift-f = ['move-node-to-workspace 📂', 'workspace 📂']
+alt-i = 'workspace 󰻾e'   
+alt-shift-i = ['move-node-to-workspace 󰻾e', 'workspace 󰻾e']
+alt-k = 'workspace 🍀'   
+alt-shift-k = ['move-node-to-workspace 🍀', 'workspace 🍀']
+alt-m = 'workspace 💬'   
+alt-shift-m = ['move-node-to-workspace 💬', 'workspace 💬']
+alt-n = 'workspace 📒'   
+alt-shift-n = ['move-node-to-workspace 📒', 'workspace 📒']
+alt-o = 'workspace 📫'   
+alt-shift-o = ['move-node-to-workspace 📫', 'workspace 📫']
+alt-p = 'workspace 🎸'   
+alt-shift-p = ['move-node-to-workspace 🎸', 'workspace 🎸']
+alt-r = 'workspace ❗'   
+alt-shift-r = ['move-node-to-workspace ❗', 'workspace ❗']
+alt-s = 'workspace 🐚'   
+alt-shift-s = ['move-node-to-workspace 🐚', 'workspace 🐚']
+alt-t = 'workspace 🙈'   
+alt-shift-t = ['move-node-to-workspace 🙈', 'workspace 🙈']
+
 alt-1 = 'workspace 1'
-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1'] # Terminals
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1'] 
 alt-2 = 'workspace 2'
-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2'] # Editors
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2'] 
 alt-3 = 'workspace 3'
-alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3'] # Files
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
 alt-4 = 'workspace 4'
 alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
 alt-5 = 'workspace 5'
-alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5'] # Ides
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
 alt-6 = 'workspace 6'
 alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
 alt-7 = 'workspace 7'
@@ -76,27 +119,7 @@ alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 alt-9 = 'workspace 9'
 alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 alt-0 = 'workspace 10'
-alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10'] # Browsers
-alt-a = 'workspace AI'        
-alt-shift-a = ['move-node-to-workspace AI', 'workspace AI']
-alt-c = 'workspace Cal'        
-alt-shift-c = ['move-node-to-workspace Cal', 'workspace Cal']
-alt-d = 'workspace Discord'    
-alt-shift-d = ['move-node-to-workspace Discord', 'workspace Discord']
-alt-m = 'workspace Messages'   
-alt-shift-m = ['move-node-to-workspace Messages', 'workspace Messages']
-alt-n = 'workspace Notes'      
-alt-shift-n = ['move-node-to-workspace Notes', 'workspace Notes']
-alt-o = 'workspace Outlook'    
-alt-shift-o = ['move-node-to-workspace Outlook', 'workspace Outlook']
-alt-r = 'workspace Reminders'    
-alt-shift-r = ['move-node-to-workspace Reminders', 'workspace Reminders']
-alt-s = 'workspace Spotify'
-alt-shift-s = ['move-node-to-workspace Spotify', 'workspace Spotify']
-alt-t = 'workspace Teams'      
-alt-shift-t = ['move-node-to-workspace Teams', 'workspace Teams']
-alt-x = 'workspace Slack'        
-alt-shift-x = ['move-node-to-workspace Slack', 'workspace Slack']
+alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
 
 # move workspace to monitor
 alt-ctrl-cmd-right = 'move-workspace-to-monitor next'
@@ -140,7 +163,7 @@ cmd-alt-h = [] # disable "hide others"
 # AI
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
-run = ['move-node-to-workspace AI']
+run = ['move-node-to-workspace 🤖']
 
 # System Preferences - push to tiling
 [[on-window-detected]]
@@ -151,78 +174,73 @@ run = 'layout tiling'
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
 if.window-title-regex-substring = 'yazi'
-run = ['move-node-to-workspace 3']
+run = ['move-node-to-workspace 📂']
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
 if.window-title-regex-substring = 'helix'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 🧬']
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
 if.window-title-regex-substring = 'nvim'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 🧬']
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
-run = ['move-node-to-workspace 1']
+run = ['move-node-to-workspace 🐚']
 
 # Browsers
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
-run = ['move-node-to-workspace 0']
+run = ['move-node-to-workspace 🌐']
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = ['move-node-to-workspace 0']
+run = ['move-node-to-workspace 🌐']
 
 # IDEs
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.intellij.ce'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 󰻾e']
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.intellij'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 󰻾e']
 
 # Messages
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace Slack']
+run = ['move-node-to-workspace 🍀']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
-run = ['move-node-to-workspace Messages']
+run = ['move-node-to-workspace 💬']
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['move-node-to-workspace Teams'] #, 'layout accordion
+run = ['move-node-to-workspace 🙈'] #, 'layout accordion
 
 # Calendar
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = ['move-node-to-workspace Cal']
-
-# Discord
-[[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
-run = ['move-node-to-workspace Discord']
+run = ['move-node-to-workspace 📅']
 
 # Notes
 [[on-window-detected]]
 if.app-id = 'com.apple.Notes'
-run = ['move-node-to-workspace Notes']
+run = ['move-node-to-workspace 📒']
 
 # Outlook
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = ['move-node-to-workspace Outlook']
+run = ['move-node-to-workspace 📫']
 
 # Reminders
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
-run = ['move-node-to-workspace Reminders']
+run = ['move-node-to-workspace ❗']
 
 # Music
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace Spotify']
+run = ['move-node-to-workspace 🎸']
 
