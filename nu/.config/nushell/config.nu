@@ -9,25 +9,27 @@ $env.config.table.mode = "none"
 $env.config.ls.clickable_links = true # enable or disable clickable links. Your terminal has to support links.
 
 # == ENVIRONMENT ==
-$env.EDITOR = "hx"
-$env.VISUAL = "zed"
-$env.XDG_STATE_HOME = ($env.HOME | path join ".local/state")
-$env.XDG_DATA_HOME = ($env.HOME | path join ".local/share")
-$env.XDG_CACHE_HOME = ($env.HOME | path join ".cache")
+$env.EDITOR          = "hx"
+$env.VISUAL          = "zed"
+$env.MANPAGER        = "sh -c 'col -bx | bat -l man -p'"
+
+$env.XDG_STATE_HOME  = ($env.HOME | path join ".local/state")
+$env.XDG_DATA_HOME   = ($env.HOME | path join ".local/share")
+$env.XDG_CACHE_HOME  = ($env.HOME | path join ".cache")
 $env.XDG_CONFIG_HOME = ($env.HOME | path join ".config")
-$env.SOURCE        = ($env.HOME | path join "Source")
-$env.SOURCE_GITHUB = ($env.SOURCE | path join "github.com")
-$env.SOURCE_GITCJ  = ($env.SOURCE | path join "gitlab.cj.dev")
-$env.SOURCE_JEFF   = ($env.SOURCE | path join "github.com/jeffwindsor")
+$env.SOURCE          = ($env.HOME | path join "Source")
+$env.SOURCE_GITHUB   = ($env.SOURCE | path join "github.com")
+$env.SOURCE_GITCJ    = ($env.SOURCE | path join "gitlab.cj.dev")
+$env.SOURCE_JEFF     = ($env.SOURCE | path join "github.com/jeffwindsor")
 
 # == baskstop old muscle memory ==
-alias fg = job unfreeze
+alias fg   = job unfreeze
 alias jobs = job list
-alias cat = bat --plain || open
+alias cat  = bat --plain
 alias find = fd
 alias grep = rg
 
-# Change Directory with clear and list all (used in autolad files)
+# Change Directory with clear and list all (used in autoload files)
 def --env cdl [path, execute_ls=true] {
   cd $path
   clear
@@ -58,4 +60,3 @@ def emphasize [text] { $"== ($text) ==" }
 # Return ansi colored text
 def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
-$env.MANPAGER = "sh -c 'col -bx | bat -l man -p'"

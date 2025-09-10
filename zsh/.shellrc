@@ -63,6 +63,11 @@ function alias-dir() {
 	fi
 }
 alias-dir "d" "$DOTFILES"
+alias de = hx $env.DOTFILES
+alias dv = zed $env.DOTFILES
+alias ds = config nu
+alias dg = lazygit --path $env.DOTFILES 
+
 
 # source shellrc
 alias ss="source \$HOME/.shellrc"
