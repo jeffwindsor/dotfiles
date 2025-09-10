@@ -14,7 +14,7 @@ default-root-container-orientation = 'auto'
 '📫' = 'secondary' #o - outlook
 '🎸' = 'secondary' #p - spotify
 '❗' = 'secondary' #r - reminders
-'🐚' = 'primary'   #s - shell
+# '🐚' = 'primary'   #s - shell
 '🙈' = 'secondary' #t - teams
 
 # extra workspaces
@@ -94,8 +94,8 @@ alt-p = 'workspace 🎸'
 alt-shift-p = ['move-node-to-workspace 🎸', 'workspace 🎸']
 alt-r = 'workspace ❗'   
 alt-shift-r = ['move-node-to-workspace ❗', 'workspace ❗']
-alt-s = 'workspace 🐚'   
-alt-shift-s = ['move-node-to-workspace 🐚', 'workspace 🐚']
+# alt-s = 'workspace 🐚'   
+# alt-shift-s = ['move-node-to-workspace 🐚', 'workspace 🐚']
 alt-t = 'workspace 🙈'   
 alt-shift-t = ['move-node-to-workspace 🙈', 'workspace 🙈']
 
@@ -182,9 +182,9 @@ run = ['move-node-to-workspace 🧬']
 if.app-id = 'org.alacritty'
 if.window-title-regex-substring = 'nvim'
 run = ['move-node-to-workspace 🧬']
-[[on-window-detected]]
-if.app-id = 'org.alacritty'
-run = ['move-node-to-workspace 🐚']
+# [[on-window-detected]]
+# if.app-id = 'org.alacritty'
+# run = ['move-node-to-workspace 🐚']
 
 # Browsers
 [[on-window-detected]]
