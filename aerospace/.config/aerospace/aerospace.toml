@@ -8,7 +8,6 @@ default-root-container-orientation = 'auto'
 '📅' = 'secondary' #c - calender
 '🧬' = 'primary'   #e (h,v) - editors (helix, nvim)
 '📂' = 'primary'   #f (y) - file managers (yazi, superfile)
-'󰻾e' = 'primary'   #i - ide (intellij, )
 '🍀' = 'secondary' #k - slack
 '💬' = 'secondary' #m - messages
 '📒' = 'secondary' #n - notes
@@ -183,7 +182,6 @@ run = ['move-node-to-workspace 🧬']
 if.app-id = 'org.alacritty'
 if.window-title-regex-substring = 'nvim'
 run = ['move-node-to-workspace 🧬']
-
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
 run = ['move-node-to-workspace 🐚']
@@ -198,13 +196,13 @@ if.app-id = 'com.google.Chrome'
 run = ['move-node-to-workspace 🌐']
 
 # IDEs
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.intellij.ce'
-run = ['move-node-to-workspace 󰻾e']
+# [[on-window-detected]]
+# if.app-id = 'com.jetbrains.intellij.ce'
+# run = ['move-node-to-workspace ']
 
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.intellij'
-run = ['move-node-to-workspace 󰻾e']
+# [[on-window-detected]]
+# if.app-id = 'com.jetbrains.intellij'
+# run = ['move-node-to-workspace ']
 
 # Messages
 [[on-window-detected]]
