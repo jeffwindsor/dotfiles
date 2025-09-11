@@ -121,8 +121,8 @@ alt-0 = 'workspace 10'
 alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
 
 # move workspace to monitor
-alt-ctrl-cmd-right = 'move-workspace-to-monitor next'
-alt-ctrl-cmd-left = 'move-workspace-to-monitor prev'
+alt-ctrl-cmd-right = 'move-workspace-to-monitor next --wrap-around'
+alt-ctrl-cmd-left = 'move-workspace-to-monitor prev --wrap-around'
 
 # move window focus
 alt-left = 'focus left'
