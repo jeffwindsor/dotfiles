@@ -22,6 +22,7 @@ cask "alacritty"
 cask "claude"
 cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
+cask "raycast"
 cask "spotify"
 cask "zed"
 
