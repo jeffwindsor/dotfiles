@@ -16,7 +16,6 @@ default-root-container-orientation = 'auto'
 '❗' = 'secondary' #r - reminders
 # '🐚' = 'primary'   #s - shell
 '🙈' = 'secondary' #t - teams
-
 # extra workspaces
 1 = 'primary'
 2 = 'primary'
@@ -38,23 +37,19 @@ outer.top        = [{ monitor.secondary = 0 }, 4]
 outer.right      = [{ monitor.secondary = 0 }, 4]
 
 # https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-# a, b, c, ..., z,f1, f2, ..., f20
-# 0, 1, 2, ..., 9, keypad0, keypad1, keypad2, ..., keypad9
-# minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
-# leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
-# keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
-# keypadMinus, keypadMultiply, keypadPlus
-# left, down, up, right
-# cmd, alt, ctrl, shift
+# cmd, alt, ctrl, shift a - z, 0-9,  f1 - f20 
+# left, down, up, right, minus, equal, period, comma, slash, backslash, quote, semicolon, backtick, leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
+# keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual, keypadMinus, keypadMultiply, keypadPlus, keypad0 - keypad9
 
 [mode.main.binding]
 # Launchers
 alt-ctrl-a = 'exec-and-forget open /Applications/Claude.app'
+alt-ctrl-shift-a = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij -l ~/.config/zellij/layouts/claude.kdl'
 alt-ctrl-b = 'exec-and-forget open /Applications/Safari.app'
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
-# alt-ctrl-d = 'exec-and-forget open -n /Applications/Alacritty.app --args --title dotfiles -e hx $SOURCE'
 alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
 alt-ctrl-h = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
+alt-ctrl-shift-h = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij -l ~/.config/zellij/layouts/dev.kdl'
 alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
 alt-ctrl-k = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
@@ -68,6 +63,7 @@ alt-ctrl-y = 'exec-and-forget open -n /Applications/Alacritty.app --args --title
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space = 'exec-and-forget open ~'
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
 
 # Workspaces
 alt-a = 'workspace 🤖'        
