@@ -1,2 +1,12 @@
 [mgr]
 show_hidden = true
+
+[opener]
+edit = [
+    { run = 'open "$@"', desc = "Open with default app", block = false }
+]
+
+[open]
+rules = [
+    { mime = "*", use = "edit" }
+]
