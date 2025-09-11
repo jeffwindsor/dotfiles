@@ -4,6 +4,7 @@
 
 - Lucky Number Slevin
 - Animatrix
+- Robocop
 
 ## Favorites
 
