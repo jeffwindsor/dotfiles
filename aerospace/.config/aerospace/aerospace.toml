@@ -183,13 +183,13 @@ run = ['move-node-to-workspace 🧬']
 # run = ['move-node-to-workspace 🐚']
 
 # Browsers
-[[on-window-detected]]
-if.app-id = 'com.apple.Safari'
-run = ['move-node-to-workspace 🌐']
+# [[on-window-detected]]
+# if.app-id = 'com.apple.Safari'
+# run = ['move-node-to-workspace 🌐']
 
-[[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-run = ['move-node-to-workspace 🌐']
+# [[on-window-detected]]
+# if.app-id = 'com.google.Chrome'
+# run = ['move-node-to-workspace 🌐']
 
 # IDEs
 # [[on-window-detected]]
