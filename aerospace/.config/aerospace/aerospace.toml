@@ -13,7 +13,7 @@ default-root-container-orientation = 'auto'
 '📒' = 'secondary' #n - notes
 '📫' = 'secondary' #o - outlook
 '🎸' = 'secondary' #p - spotify
-'❗' = 'secondary' #r - reminders
+'🎗️' = 'secondary' #r - reminders🎗️
 # '🐚' = 'primary'   #s - shell
 '🙈' = 'secondary' #t - teams
 # extra workspaces
@@ -88,8 +88,8 @@ alt-o = 'workspace 📫'
 alt-shift-o = ['move-node-to-workspace 📫', 'workspace 📫']
 alt-p = 'workspace 🎸'   
 alt-shift-p = ['move-node-to-workspace 🎸', 'workspace 🎸']
-alt-r = 'workspace ❗'   
-alt-shift-r = ['move-node-to-workspace ❗', 'workspace ❗']
+alt-r = 'workspace 🎗️'   
+alt-shift-r = ['move-node-to-workspace 🎗️', 'workspace 🎗️']
 # alt-s = 'workspace 🐚'   
 # alt-shift-s = ['move-node-to-workspace 🐚', 'workspace 🐚']
 alt-t = 'workspace 🙈'   
@@ -231,7 +231,7 @@ run = ['move-node-to-workspace 📫']
 # Reminders
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
-run = ['move-node-to-workspace ❗']
+run = ['move-node-to-workspace 🎗️']
 
 # Music
 [[on-window-detected]]
