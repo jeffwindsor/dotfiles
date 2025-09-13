@@ -1,4 +1,4 @@
-general.import = ["./catppuccin_mocha.toml"]
+general.import = ["./themes/tender.toml"]
 
 [env]
 TERM = "xterm-256color"
