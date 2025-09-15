@@ -2,7 +2,7 @@
 # https://docs.helix-editor.com/master/commands.html
 ###################################################################
 
-theme = "tokyonight_storm"
+theme = "catppuccin_mocha"
 
 [editor]
 auto-pairs = false    # do not auto pair symbols
