@@ -62,8 +62,8 @@ alt-ctrl-v = 'exec-and-forget open -n /Applications/Alacritty.app --args --title
 alt-ctrl-y = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space = 'exec-and-forget open ~'
-alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
-alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
+alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
 
 # Workspaces
 alt-a = 'workspace 🤖'        
