@@ -50,6 +50,10 @@ alias empire="cd $SOURCE_GITCJ/empire && l"
 alias jeff="cd $SOURCE_JEFF && l"
 # helps remote servers when using advanced terminals like ghostty and alacritty
 alias ssh="term=xterm-256color ssh"
+alias de="hx $env.DOTFILES"
+alias dv="zed $env.DOTFILES"
+alias ds="config nu"
+alias dg="lazygit --path $env.DOTFILES"
 
 # create aliases for cd, edit, visual-edit and lazygit (if contains .git)
 function alias-dir() {
@@ -63,10 +67,6 @@ function alias-dir() {
 	fi
 }
 alias-dir "d" "$DOTFILES"
-alias de = hx $env.DOTFILES
-alias dv = zed $env.DOTFILES
-alias ds = config nu
-alias dg = lazygit --path $env.DOTFILES 
 
 
 # source shellrc
