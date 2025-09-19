@@ -7,8 +7,8 @@ default-root-container-orientation = 'auto'
 '🤖' = 'secondary' #a - ai (claude)
 '🌐' = 'primary'   #b
 '📅' = 'secondary' #c - calender
-'🧬' = 'primary'   #e (h,v) - editors (helix, nvim)
-'📂' = 'primary'   #f (y) - file managers (yazi, superfile)
+# '🧬' = 'primary'   #e (h,v) - editors (helix, nvim)
+# '📂' = 'primary'   #f (y) - file managers (yazi, superfile)
 '🍀' = 'secondary' #k - slack
 '💬' = 'secondary' #m - messages
 '📒' = 'secondary' #n - notes
@@ -70,16 +70,16 @@ alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 # Workspaces
 alt-a        = 'workspace 🤖'        
 alt-shift-a  = ['move-node-to-workspace 🤖', 'workspace 🤖']
-alt-b        = 'workspace 🌐'        
-alt-shift-b  = ['move-node-to-workspace 🌐', 'workspace 🌐']
+# alt-b        = 'workspace 🌐'        
+# alt-shift-b  = ['move-node-to-workspace 🌐', 'workspace 🌐']
 alt-c        = 'workspace 📅'        
 alt-shift-c  = ['move-node-to-workspace 📅', 'workspace 📅']
-alt-e        = 'workspace 🧬'   
-alt-shift-e  = ['move-node-to-workspace 🧬', 'workspace 🧬']
-alt-f        = 'workspace 📂'   
-alt-shift-f  = ['move-node-to-workspace 📂', 'workspace 📂']
-alt-i        = 'workspace 󰻾e'   
-alt-shift-i  = ['move-node-to-workspace 󰻾e', 'workspace 󰻾e']
+# alt-e        = 'workspace 🧬'   
+# alt-shift-e  = ['move-node-to-workspace 🧬', 'workspace 🧬']
+# alt-f        = 'workspace 📂'   
+# alt-shift-f  = ['move-node-to-workspace 📂', 'workspace 📂']
+# alt-i        = 'workspace 󰻾e'   
+# alt-shift-i  = ['move-node-to-workspace 󰻾e', 'workspace 󰻾e']
 alt-k        = 'workspace 🍀'   
 alt-shift-k  = ['move-node-to-workspace 🍀', 'workspace 🍀']
 alt-m        = 'workspace 💬'   
@@ -168,18 +168,18 @@ if.app-id = 'com.apple.systempreferences'
 run = 'layout tiling'
 
 # Terminal
-[[on-window-detected]]
-if.app-id = 'org.alacritty'
-if.window-title-regex-substring = 'yazi'
-run = ['move-node-to-workspace 📂']
-[[on-window-detected]]
-if.app-id = 'org.alacritty'
-if.window-title-regex-substring = 'helix'
-run = ['move-node-to-workspace 🧬']
-[[on-window-detected]]
-if.app-id = 'org.alacritty'
-if.window-title-regex-substring = 'nvim'
-run = ['move-node-to-workspace 🧬']
+# [[on-window-detected]]
+# if.app-id = 'org.alacritty'
+# if.window-title-regex-substring = 'yazi'
+# run = ['move-node-to-workspace 📂']
+# [[on-window-detected]]
+# if.app-id = 'org.alacritty'
+# if.window-title-regex-substring = 'helix'
+# run = ['move-node-to-workspace 🧬']
+# [[on-window-detected]]
+# if.app-id = 'org.alacritty'
+# if.window-title-regex-substring = 'nvim'
+# run = ['move-node-to-workspace 🧬']
 # [[on-window-detected]]
 # if.app-id = 'org.alacritty'
 # run = ['move-node-to-workspace 🐚']
