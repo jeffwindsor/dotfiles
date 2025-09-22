@@ -66,6 +66,8 @@ let autocompletion_root = ($env.HOME | path join '.local' 'share' 'argc-completi
 if not ($autocompletion_root | path exists) {
     print "Cloning Argc Completions to local share"
     git clone https://github.com/sigoden/argc-completions.git $autocompletion_root
+    ($autocompletion_root)/scripts/download-tools.sh
+    
 }
 $env.ARGC_COMPLETIONS_ROOT = $autocompletion_root
 $env.ARGC_COMPLETIONS_PATH = ($env.ARGC_COMPLETIONS_ROOT + '/completions/macos:' + $env.ARGC_COMPLETIONS_ROOT + '/completions')
