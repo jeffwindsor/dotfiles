@@ -3,6 +3,7 @@ gui:
     'Jeff Windsor': 'blue'
     'Windsor, Jeff': 'cyan'
     '*': 'yellow'
+  screenMode: 'half'
 
 keybinding:
   universal:
