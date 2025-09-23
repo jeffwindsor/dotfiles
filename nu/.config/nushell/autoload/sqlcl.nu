@@ -1,41 +1,25 @@
 
 def sqlcl-connection [tns_name: string] {
-  let user = input -d "cj" "Enter username: " 
-  let password = input --suppress-output "Enter database password: "
+  let user = if ($env.SQLCL_USERNAME? | is-empty) {
+    input -d "cj" "Enter username: "
+  } else {
+    $env.SQLCL_USERNAME
+  }
+  
+  let password = if ($env.SQLCL_PASSWORD? | is-empty) {
+    input --suppress-output "Enter database password: "
+  } else {
+    $env.SQLCL_PASSWORD
+  }
   
   $"($user)/\"($password)\"@($tns_name)"
 }
 
-def sqlcl-execute [connection_string: string, sql: string, exit_on_completion: bool] {
-  let sql = $"SET PAGESIZE 0
-              SET LINESIZE 32767
-              SET SQLFORMAT CSV
-              SET FEEDBACK OFF
-              SET HEADING ON
-              SET ECHO OFF
-              WHENEVER SQLERROR EXIT SQL.SQLCODE
-              WHENEVER OSERROR EXIT FAILURE
-              ($sql)"
-
-  if $exit_on_completion {
-    let sql = $"($sql)
-                EXIT"
-  }
-  
-  $sql | run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
-}
-
-def sqlcl-file [tns_name: string, filename: string, exit_on_completion: bool = true] {
-  let sql = (open ($filename | path expand))
-  let connection_string = sqlcl-connection $tns_name
-  
-  sqlcl-execute $connection_string $sql true
-}
-
-def sqlcl-open [tns_name: string] {
-  let connection_string = sqlcl-connection $tns_name
-  run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
-}
+# def sqlcl-file [tns_name: string, filename: string, exit_on_completion: bool = true] {
+#   let sql = (open ($filename | path expand))
+#   let connection_string = sqlcl-connection $tns_name
+#   $sql | run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
+# }
 
 def sqlcl [] {
   let tnsname_list = "awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, \"\", \$1); print \$1}' ~/tnsnames.ora"
