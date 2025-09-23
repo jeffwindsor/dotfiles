@@ -3,10 +3,25 @@ show_hidden = true
 
 [opener]
 edit = [
+    { run = '$EDITOR "$@"', desc = "Edit in $EDITOR", block = true }
+]
+text = [
+    { run = '$EDITOR "$@"', desc = "Edit in $EDITOR", block = true }
+]
+default = [
     { run = 'open "$@"', desc = "Open with default app", block = false }
 ]
 
 [open]
 rules = [
-    { mime = "*", use = "edit" }
+    # Text and code files
+    { mime = "text/*", use = "text" },
+    { mime = "application/json", use = "text" },
+    { mime = "application/javascript", use = "text" },
+    { mime = "application/x-sql", use = "text" },
+    { mime = "application/xml", use = "text" },
+    { name = "*.{md,txt,py,js,ts,html,css,yaml,yml,toml,ini,conf,sh,zsh,fish,vim,lua,rs,go,c,cpp,h,hpp,java,php,rb,pl,sql}", use = "text" },
+    
+    # Everything else uses default app
+    { mime = "*", use = "default" }
 ]
