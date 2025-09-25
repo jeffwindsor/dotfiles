@@ -1,4 +1,12 @@
 
+def c [] {
+  let source = tv git-repos
+  cd $source
+  claude
+}
+
+alias cc = claude
+
 def claude_bedrock [] {
   # CJ Claude Bedrock Experiment
   $env.CLAUDE_CODE_USE_BEDROCK = "1"
