@@ -1,11 +1,11 @@
 
-def c [] {
+def a [] {
   let source = tv git-repos
   cd $source
   claude
 }
 
-alias cc = claude
+alias aa = claude
 
 def claude_bedrock [] {
   # CJ Claude Bedrock Experiment
