@@ -63,7 +63,7 @@ def colorize [text, color] { $"(ansi $color)($text)(ansi reset)" }
 
 # auto complete framework
 # https://github.com/sigoden/argc-completions
-let autocompletion_root = ($env.HOME | path join 'Source' 'github.com' 'sigoden' 'argc-completions')
+let autocompletion_root = ($env.SOURCE_GITHUB | path join 'sigoden' 'argc-completions')
 $env.ARGC_COMPLETIONS_ROOT = $autocompletion_root
 $env.ARGC_COMPLETIONS_PATH = ($env.ARGC_COMPLETIONS_ROOT + '/completions/macos:' + $env.ARGC_COMPLETIONS_ROOT + '/completions')
 $env.PATH = ($env.PATH
@@ -72,7 +72,7 @@ $env.PATH = ($env.PATH
 
 if not ($autocompletion_root | path exists) {
     print "Cloning Argc Completions to local share"
-    git-clone git@github.com:sigoden/argc-completions.git
+    git clone git@github.com:sigoden/argc-completions.git $autocompletion_root
     ($autocompletion_root)/scripts/download-tools.sh
 }
 argc --argc-completions nushell | save -f ~/.config/nushell/vendor/autoload/argc-completions.nu

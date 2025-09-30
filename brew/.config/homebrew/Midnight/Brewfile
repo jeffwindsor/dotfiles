@@ -1,5 +1,8 @@
 tap "nikitabobko/tap"
 
+brew "argc"
+brew "yq"
+
 brew "bat"
 brew "carapace"
 brew "eza"
