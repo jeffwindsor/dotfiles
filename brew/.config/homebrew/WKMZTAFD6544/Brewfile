@@ -1,5 +1,8 @@
 tap "nikitabobko/tap"
 
+brew "argc"
+brew "yq"
+
 brew "bat"
 brew "carapace"
 brew "eza"
@@ -33,7 +36,6 @@ brew "zellij"
 cask "ghostty"
 
 
-brew "aws-cdk"
 brew "colima", restart_service: :changed
 brew "docker-buildx"
 brew "docker"
