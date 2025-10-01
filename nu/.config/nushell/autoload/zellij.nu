@@ -13,4 +13,5 @@ def zdelete [] {
   | each { |line| ($line | split row " " | get 0) }
   | each { |session| zellij delete-session $session }
 }
-# alias zdelete = zellij list-sessions --no-formatting | grep "EXITED" | cut -d' ' -f1 | xargs -I {} zellij delete-session {}
+
+zdelete
