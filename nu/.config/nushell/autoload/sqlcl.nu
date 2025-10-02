@@ -21,14 +21,19 @@ def sqlcl-connection [tns_name: string] {
 #   $sql | run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
 # }
 
-def sqlcl [] {
-  let tnsname_list = "awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, \"\", \$1); print \$1}' ~/tnsnames.ora"
-  let tns_name = tv --source-command $tnsname_list
+def sqlcl [tns_name?: string] {
+  let tns_name = if ($tns_name == null or $tns_name == "") {
+    let tnsname_list = "awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, \"\", \$1); print \$1}' ~/tnsnames.ora"
+    tv --source-command $tnsname_list
+  } else {
+    $tns_name
+  }
+  
   let connection_string = sqlcl-connection $tns_name
   run-external ($env.HOME | path join "bin" "sqlcl" "bin" "sql") "-S" $connection_string
 }
 
-alias shopcart = sqlcl-open "SHOPCART"
-alias t5 = sqlcl-open "TCJOWEB5"
-alias t1 = sqlcl-open "TCJOWEB1"
+alias shopcart = sqlcl "SHOPCART"
+alias t5 = sqlcl "TCJOWEB5"
+alias t1 = sqlcl "TCJOWEB1"
 
