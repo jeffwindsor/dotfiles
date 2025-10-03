@@ -27,7 +27,6 @@ default-root-container-orientation = 'auto'
 7    = 'primary'
 8    = 'primary'
 9    = 'primary'
-0    = 'primary'
 
 [gaps]
 inner.horizontal = [{ monitor.secondary = 0 }, 4]
@@ -70,16 +69,8 @@ alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 # Workspaces
 alt-a        = 'workspace 🤖'        
 alt-shift-a  = ['move-node-to-workspace 🤖', 'workspace 🤖']
-# alt-b        = 'workspace 🌐'        
-# alt-shift-b  = ['move-node-to-workspace 🌐', 'workspace 🌐']
 alt-c        = 'workspace 📅'        
 alt-shift-c  = ['move-node-to-workspace 📅', 'workspace 📅']
-# alt-e        = 'workspace 🧬'   
-# alt-shift-e  = ['move-node-to-workspace 🧬', 'workspace 🧬']
-# alt-f        = 'workspace 📂'   
-# alt-shift-f  = ['move-node-to-workspace 📂', 'workspace 📂']
-# alt-i        = 'workspace 󰻾e'   
-# alt-shift-i  = ['move-node-to-workspace 󰻾e', 'workspace 󰻾e']
 alt-k        = 'workspace 🍀'   
 alt-shift-k  = ['move-node-to-workspace 🍀', 'workspace 🍀']
 alt-m        = 'workspace 💬'   
@@ -92,8 +83,6 @@ alt-p        = 'workspace 🎸'
 alt-shift-p  = ['move-node-to-workspace 🎸', 'workspace 🎸']
 alt-r        = 'workspace 🎗️'   
 alt-shift-r  = ['move-node-to-workspace 🎗️', 'workspace 🎗️']
-# alt-s       = 'workspace 🐚'   
-# alt-shift-s = ['move-node-to-workspace 🐚', 'workspace 🐚']
 alt-t        = 'workspace 🙈'   
 alt-shift-t  = ['move-node-to-workspace 🙈', 'workspace 🙈']
 
@@ -115,8 +104,6 @@ alt-8       = 'workspace 8'
 alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 alt-9       = 'workspace 9'
 alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
-alt-0       = 'workspace 10'
-alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
 
 # move workspace to monitor
 alt-ctrl-cmd-right = 'move-workspace-to-monitor next --wrap-around'
