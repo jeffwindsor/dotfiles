@@ -2,7 +2,7 @@
 
 # Enables displaying colors in the terminal
 export TERM=xterm-color
-export EDITOR="$(which hx)"
+export EDITOR="$(which nvim)"
 export VISUAL="$(which zed)"
 
 source <(carapace _carapace)
