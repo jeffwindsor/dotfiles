@@ -3,13 +3,13 @@
 
 # == CONFIGURATION == 
 $env.config.show_banner = false
-$env.config.buffer_editor = "hx"
+$env.config.buffer_editor = "nvim"
 $env.config.table.mode = "none"
 # $env.config.ls.use_ls_colors = true # use the LS_COLORS environment variable to colorize output
 $env.config.ls.clickable_links = true # enable or disable clickable links. Your terminal has to support links.
 
 # == ENVIRONMENT ==
-$env.EDITOR          = "hx"
+$env.EDITOR          = "nvim"
 $env.VISUAL          = "zed"
 $env.MANPAGER        = "sh -c 'col -bx | bat -l man -p'"
 

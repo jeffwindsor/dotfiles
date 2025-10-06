@@ -13,7 +13,7 @@ export SHELL_NAME=${1:-"zsh"}
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 export PAGER="less -imMWR"
-export EDITOR="hx"
+export EDITOR="nvim"
 export VISUAL="zed"
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_DATA_HOME=$HOME/.local/share
@@ -50,7 +50,7 @@ alias empire="cd $SOURCE_GITCJ/empire && l"
 alias jeff="cd $SOURCE_JEFF && l"
 # helps remote servers when using advanced terminals like ghostty and alacritty
 alias ssh="term=xterm-256color ssh"
-alias de="hx $env.DOTFILES"
+alias de="nvim $env.DOTFILES"
 alias dv="zed $env.DOTFILES"
 alias ds="config nu"
 alias dg="lazygit --path $env.DOTFILES"
