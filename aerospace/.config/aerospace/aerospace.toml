@@ -5,28 +5,14 @@ default-root-container-orientation = 'auto'
 [workspace-to-monitor-force-assignment]
 # spec workspaces
 '🤖' = 'secondary' #a - ai (claude)
-'🌐' = 'primary'   #b
 '📅' = 'secondary' #c - calender
-# '🧬' = 'primary'   #e (h,v) - editors (helix, nvim)
-# '📂' = 'primary'   #f (y) - file managers (yazi, superfile)
 '🍀' = 'secondary' #k - slack
 '💬' = 'secondary' #m - messages
 '📒' = 'secondary' #n - notes
 '📫' = 'secondary' #o - outlook
 '🎸' = 'secondary' #p - spotify
 '🎗️' = 'secondary' #r - reminders🎗️
-# '🐚' = 'primary'   #s - shell
 '🙈' = 'secondary' #t - teams
-# extra workspaces
-1    = 'primary'
-2    = 'primary'
-3    = 'primary'
-4    = 'primary'
-5    = 'primary'
-6    = 'primary'
-7    = 'primary'
-8    = 'primary'
-9    = 'primary'
 
 [gaps]
 inner.horizontal = [{ monitor.secondary = 0 }, 4]
@@ -44,13 +30,9 @@ outer.right      = [{ monitor.secondary = 0 }, 4]
 [mode.main.binding]
 # Launchers
 alt-ctrl-a       = 'exec-and-forget open /Applications/Claude.app'
-# zellij ai layout
-alt-ctrl-shift-a = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij -l ~/.config/zellij/layouts/claude.kdl'
 alt-ctrl-b       = 'exec-and-forget open /Applications/Safari.app'
 alt-ctrl-c       = 'exec-and-forget open /System/Applications/Calendar.app'
 alt-ctrl-g       = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
-alt-ctrl-h       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
-alt-ctrl-shift-h = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij -l ~/.config/zellij/layouts/dev.kdl'
 alt-ctrl-i       = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
 alt-ctrl-k       = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m       = 'exec-and-forget open /System/Applications/Messages.app'
@@ -59,12 +41,17 @@ alt-ctrl-o       = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
 alt-ctrl-p       = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-r       = 'exec-and-forget open /System/Applications/Reminders.app'
 alt-ctrl-t       = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
-alt-ctrl-v       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title nvim -e nvim'
-alt-ctrl-y       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
 alt-ctrl-comma   = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space   = 'exec-and-forget open ~'
+
 alt-ctrl-enter   = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
 alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
+
+alt-ctrl-shift-a = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij -l ~/.config/zellij/layouts/claude.kdl'
+alt-ctrl-h       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
+alt-ctrl-shift-h = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij -l ~/.config/zellij/layouts/dev.kdl'
+alt-ctrl-v       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title nvim -e nvim'
+alt-ctrl-y       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
 
 # Workspaces
 alt-a        = 'workspace 🤖'        
@@ -153,41 +140,6 @@ run = ['move-node-to-workspace 🤖']
 [[on-window-detected]]
 if.app-id = 'com.apple.systempreferences'
 run = 'layout tiling'
-
-# Terminal
-# [[on-window-detected]]
-# if.app-id = 'org.alacritty'
-# if.window-title-regex-substring = 'yazi'
-# run = ['move-node-to-workspace 📂']
-# [[on-window-detected]]
-# if.app-id = 'org.alacritty'
-# if.window-title-regex-substring = 'helix'
-# run = ['move-node-to-workspace 🧬']
-# [[on-window-detected]]
-# if.app-id = 'org.alacritty'
-# if.window-title-regex-substring = 'nvim'
-# run = ['move-node-to-workspace 🧬']
-# [[on-window-detected]]
-# if.app-id = 'org.alacritty'
-# run = ['move-node-to-workspace 🐚']
-
-# Browsers
-# [[on-window-detected]]
-# if.app-id = 'com.apple.Safari'
-# run = ['move-node-to-workspace 🌐']
-
-# [[on-window-detected]]
-# if.app-id = 'com.google.Chrome'
-# run = ['move-node-to-workspace 🌐']
-
-# IDEs
-# [[on-window-detected]]
-# if.app-id = 'com.jetbrains.intellij.ce'
-# run = ['move-node-to-workspace ']
-
-# [[on-window-detected]]
-# if.app-id = 'com.jetbrains.intellij'
-# run = ['move-node-to-workspace ']
 
 # Messages
 [[on-window-detected]]
