@@ -246,7 +246,7 @@ plugins {
     }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    status-bar location="zellij:status-bar"
+    // status-bar location="zellij:status-bar"
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
@@ -273,9 +273,8 @@ web_client {
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "atelier-sulphurpool"
-// theme "solarized-dark"
-// theme "nord"
+// theme "atelier-sulphurpool"
+theme "iceberg-dark"
 
  
 // Choose the base input mode of zellij.
