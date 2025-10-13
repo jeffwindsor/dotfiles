@@ -1,12 +1,11 @@
-
 #== Appearance ==
-background-opacity = 0.94
+# background-opacity = 0.94
 confirm-close-surface = false
 font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 14
 quit-after-last-window-closed = true
-theme = catppuccin-mocha
-# theme = tokyonight-storm		
+# themes: catppuccin-mocha, tokyonight-storm
+theme = "Tomorrow Night Bright"	
 window-decoration = false
 
 
