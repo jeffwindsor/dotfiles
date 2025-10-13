@@ -5,7 +5,7 @@ def query-aliases [query] {
   | where {|r| $r.expansion =~ $query or $r.name =~ $query}
 }
 # alias ar = alias-query
-alias qa = alias-query
+alias qa = query-aliases
 
 # query current commands
 def query-commands [query] {
@@ -13,7 +13,7 @@ def query-commands [query] {
   | where type == "custom"
   | where name like $query
 }
-alias qa = commands-query
+alias qc = query-commands
 
 def query-everything [query] {
   {
