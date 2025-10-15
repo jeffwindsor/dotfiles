@@ -46,6 +46,9 @@ $env.PATH = ($env.PATH
   | prepend ($env.ARGC_COMPLETIONS_ROOT)
   | prepend ($env.ARGC_COMPLETIONS_ROOT + '/bin'))
 
+# MISE
+$env.PATH = ($env.PATH | split row (char esep) | prepend '/Users/jefwinds/.local/bin')
+
 
 # ═══════════════════════════════════════════════════
 #  ALIASES
