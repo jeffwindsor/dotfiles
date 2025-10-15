@@ -3,7 +3,14 @@ return {
 	opts = {
 		dashboard = { enabled = false },
 		explorer = { files = { hidden = true } },
-		-- puts the explorer cursor in the search box
-		picker = { sources = { explorer = { focus = "input" } } },
+		picker = {
+			sources = {
+				-- puts the explorer cursor in the search box
+				explorer = { focus = "input" },
+				-- Show hidden files in file pickers
+				files = { hidden = true },
+				git_files = { untracked = true },
+			},
+		},
 	},
 }

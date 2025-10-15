@@ -10,8 +10,8 @@ layout {
                 close_on_exit true
                 focus true
             }            
-            pane name="helix" {
-                command "hx"
+            pane name="edit" {
+                command "nvim"
                 close_on_exit true
             }
         }
