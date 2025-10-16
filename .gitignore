@@ -1,5 +1,6 @@
 # nushell - dont save the current history file
 nu/.config/nushell/history.txt
+.serena
 
 **/.DS_Store
 ._*
