@@ -5,11 +5,12 @@ confirm-close-surface = false
 font-family = "CodeNewRoman Nerd Font Mono"
 font-size = 14
 quit-after-last-window-closed = true
-# themes: catppuccin-mocha, tokyonight-storm
 theme = "Tomorrow Night Bright"	
+# theme = "Tomorrow"	
 window-decoration = false
 
 
 #== Keybindings ==
+keybind = clear
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 keybind = shift+enter=text:\n
