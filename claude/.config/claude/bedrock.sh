@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 
-# Script to fetch AWS credentials from operations console API and export them as environment variables
+# CJ Bedrock backed Claude session
+#   script uses a personal access token (https://developers.cj.com/account/personal-access-tokens)
+#   to obtain AWS credentials from operations console API and bootstrap a claude bedrock session
 
-# CJ_PAT is your personal access token from https://developers.cj.com/account/personal-access-tokens
-while [[ -z "$CJ_PAT" ]]; do
-  # prompt for PAT
-  read -rp "Please enter a value for CJ_PAT: " CJ_PAT
-done
+if [[ -z "$CJ_PAT" ]]; then
+  # Keychain lookup
+  CJ_PAT=$(security find-generic-password -a "$USER" -s "cj-pat" -w 2>/dev/null)
+
+  if [[ -z "$CJ_PAT" ]]; then
+    echo "personal access token not found environment variable nor in macOS Keychain"
+    echo "  Store it permanently in Keychain with: "
+    echo "  security add-generic-password -a \"\$USER\" -s \"cj-pat\" -w \"your-token-value\""
+    echo ""
+    read -rp "Please enter a personal access token: " CJ_PAT
+  else
+    echo "personal access token obtained from macOS Keychain"
+  fi
+
+fi
 
 echo "Fetching AWS credentials..."
 
