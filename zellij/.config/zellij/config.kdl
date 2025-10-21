@@ -246,7 +246,7 @@ plugins {
     }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    // status-bar location="zellij:status-bar"
+    status-bar location="zellij:status-bar"
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
@@ -293,8 +293,9 @@ theme "iceberg-dark"
  
 // The name of the default layout to load on startup
 // Default: "default"
-// 
-default_layout "compact"
+// Options: "default", "compact"
+//
+default_layout "default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
