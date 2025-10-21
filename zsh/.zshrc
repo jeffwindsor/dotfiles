@@ -1,33 +1,70 @@
-#!/usr/bin/env zsh
-# zmodload zsh/zprof		# turn this on the profile load times. use `zprof` to get results
 
-#compaudit | xargs chmod g-w		# resolves unsecure directories warnings
-autoload -Uz compinit -u
-compinit
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # If you're using macOS, you'll want this enabled
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-#== Shell OPTIONS
-setopt no_beep   # no beep on error
-setopt GLOB_DOTS # allows fzf-tab to show hidden files by default
-# setopt completealiases # Autocomplete command line switches for aliases
-bindkey -e # emacs bindings
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-#== Zsh History
-HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-HISTSIZE=1000
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# # Add in snippets
+# zinit snippet OMZL::git.zsh
+# zinit snippet OMZP::git
+# zinit snippet OMZP::sudo
+# zinit snippet OMZP::archlinux
+# zinit snippet OMZP::aws
+# zinit snippet OMZP::kubectl
+# zinit snippet OMZP::kubectx
+# zinit snippet OMZP::command-not-found
+
+# Load completions
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
+
+# Keybindings
+bindkey -e
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
-setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when the shell exits.
-setopt SHARE_HISTORY          # Share history between all sessions.
-setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history.
-setopt HIST_IGNORE_DUPS       # Do not record an event that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS   # Delete an old recorded event if a new event is a duplicate.
-setopt HIST_FIND_NO_DUPS      # Do not display a previously found event.
-setopt HIST_IGNORE_SPACE      # Do not record an event starting with a space.
-setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history file.
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# ~/.zshrc
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-source <(carapace _carapace)
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-#== Personal multi-shell rc file
-[ -f $HOME/.shellrc ] && source "$HOME/.shellrc" zsh
+# Aliases
+alias ls='ls --color'
+alias vim='nvim'
+alias c='clear'
+
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(starship init zsh)"
