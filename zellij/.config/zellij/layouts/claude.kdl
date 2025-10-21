@@ -4,24 +4,22 @@ layout {
     }
     pane split_direction="vertical" {
         pane size="50%" stacked=true {
-            pane {
-                command "claude"
-                args "--permission-mode" "plan"
-                close_on_exit true
-                focus true
-            }            
-            pane name="edit" {
+            pane name="editor" {
                 command "nvim"
-                close_on_exit true
+            }
+            pane name="ai"{
+                command "~/.config/claude/bedrock.sh"
+                focus true
             }
         }
         pane size="50%" stacked=true {
-            pane name="lazygit" {
+            pane name="source control" {
                 command "lazygit"
                 close_on_exit true
+            }
+            pane name="prompt" {
                 focus true
             }
-            pane name="prompt"
         }
     }
     pane size=2 borderless=true {

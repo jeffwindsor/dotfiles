@@ -4,13 +4,13 @@ layout {
     }
     pane split_direction="vertical" {
         pane size="50%" stacked=true {
-            pane name="helix" {
+            pane name="code" {
                 command "nvim"
                 close_on_exit true
             }
         }
         pane size="50%" stacked=true {
-            pane name="lazygit" {
+            pane name="source control" {
                 command "lazygit"
                 close_on_exit true
                 focus true
