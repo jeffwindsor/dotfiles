@@ -1,42 +1,36 @@
+#!/usr/bin/env zsh
+# .zshrc - Main Zsh Configuration
+  # zmodload zsh/zprof
 
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  # If you're using macOS, you'll want this enabled
+# ═══════════════════════════════════════════════════
+# ZINIT PLUGIN MANAGER
+# ═══════════════════════════════════════════════════
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
    mkdir -p "$(dirname $ZINIT_HOME)"
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in zsh plugins
+# Zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# # Add in snippets
-# zinit snippet OMZL::git.zsh
-# zinit snippet OMZP::git
-# zinit snippet OMZP::sudo
-# zinit snippet OMZP::archlinux
-# zinit snippet OMZP::aws
-# zinit snippet OMZP::kubectl
-# zinit snippet OMZP::kubectx
-# zinit snippet OMZP::command-not-found
-
 # Load completions
 autoload -Uz compinit && compinit
-
 zinit cdreplay -q
 
+# ═══════════════════════════════════════════════════
+# ZSH OPTIONS
+# ═══════════════════════════════════════════════════
 # Keybindings
 bindkey -e
 
@@ -60,11 +54,96 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Aliases
-alias ls='ls --color'
-alias vim='nvim'
-alias c='clear'
+# ═══════════════════════════════════════════════════
+# ENVIRONMENT VARIABLES
+# ═══════════════════════════════════════════════════
+export EDITOR="nvim"
+export VISUAL="zed"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# Shell integrations
-eval "$(fzf --zsh)"
-eval "$(starship init zsh)"
+# XDG Base Directory
+export XDG_STATE_HOME="${HOME}/.local/state"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+
+# Source Control
+export SOURCE="${HOME}/Source"
+export SOURCE_GITHUB="${SOURCE}/github.com"
+export SOURCE_GITCJ="${SOURCE}/gitlab.cj.dev"
+export SOURCE_JEFF="${SOURCE_GITHUB}/jeffwindsor"
+export DOTFILES="${SOURCE_JEFF}/dotfiles"
+
+# Homebrew
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+export HOMEBREW_NO_AUTO_UPDATE="1"
+export HOMEBREW_NO_INSTALL_CLEANUP="1"
+
+# Autocompletion (ARGC)
+ARGC_COMPLETIONS_ROOT="${SOURCE_GITHUB}/sigoden/argc-completions"
+export ARGC_COMPLETIONS_ROOT
+export ARGC_COMPLETIONS_PATH="${ARGC_COMPLETIONS_ROOT}/completions/macos:${ARGC_COMPLETIONS_ROOT}/completions"
+
+# PATH Configuration
+path=(
+  "/opt/homebrew/bin"
+  "${ARGC_COMPLETIONS_ROOT}"
+  "${ARGC_COMPLETIONS_ROOT}/bin"
+  "${HOME}/.local/bin"
+  $path
+)
+export PATH
+
+# ═══════════════════════════════════════════════════
+# CORE FUNCTIONS (needed by aliases)
+# ═══════════════════════════════════════════════════
+
+# Change directory with clear and list
+cdl() {
+  local target="$1"
+  local execute_ls="${2:-true}"
+  cd "$target" || return 1
+  clear
+  [[ "$execute_ls" == "true" ]] && eza -la
+}
+
+# ═══════════════════════════════════════════════════
+# LOAD MODULES
+# ═══════════════════════════════════════════════════
+
+# Source all module files
+ZSH_CONFIG_DIR="${DOTFILES}/zsh/.config/zsh"
+
+[[ -f "${ZSH_CONFIG_DIR}/functions.zsh" ]] && source "${ZSH_CONFIG_DIR}/functions.zsh"
+[[ -f "${ZSH_CONFIG_DIR}/aliases.zsh" ]] && source "${ZSH_CONFIG_DIR}/aliases.zsh"
+
+# ═══════════════════════════════════════════════════
+# EXTERNAL INTEGRATIONS
+# ═══════════════════════════════════════════════════
+
+# FZF
+if command -v fzf &> /dev/null; then
+  eval "$(fzf --zsh)"
+fi
+
+# Starship prompt
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# Mise (runtime manager)
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
+# Clean up zellij exited sessions on startup
+if command -v zellij &> /dev/null; then
+  zellij list-sessions --no-formatting 2>/dev/null | \
+    grep "EXITED" | \
+    awk '{print $1}' | \
+    xargs -I {} zellij delete-session {} 2>/dev/null
+fi
+
+# zprof
