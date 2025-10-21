@@ -2,10 +2,11 @@
 
 # Script to fetch AWS credentials from operations console API and export them as environment variables
 
-if [ -z "$CJ_PAT" ]; then
-  echo "Error: CJ_PAT environment variable is required"
-  exit 1
-fi
+# CJ_PAT is your personal access token from https://developers.cj.com/account/personal-access-tokens
+while [[ -z "$CJ_PAT" ]]; do
+  # prompt for PAT
+  read -rp "Please enter a value for CJ_PAT: " CJ_PAT
+done
 
 echo "Fetching AWS credentials..."
 
@@ -50,6 +51,6 @@ if [ -z "$ACCESS_KEY_ID" ] || [ -z "$SECRET_ACCESS_KEY" ] || [ -z "$SESSION_TOKE
   exit 1
 fi
 echo "saving to /tmp/aws.dev.architects.creds"
-echo -e "export AWS_ACCESS_KEY_ID='{$ACCESS_KEY_ID}'\nexport AWS_SECRET_ACCESS_KEY='${SECRET_ACCESS_KEY}'\nexport AWS_SESSION_TOKEN='${SESSION_TOKEN}'" >/tmp/aws.dev.architects.creds
+echo -e "CLAUDE_CODE_USE_BEDROCK=1\nAWS_REGION=us-east-1\nAWS_ACCESS_KEY_ID='{$ACCESS_KEY_ID}'\nAWS_SECRET_ACCESS_KEY='${SECRET_ACCESS_KEY}'\nAWS_SESSION_TOKEN='${SESSION_TOKEN}'" >/tmp/aws.dev.architects.creds
 
-AWS_ACCESS_KEY_ID="$ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$SECRET_ACCESS_KEY" AWS_SESSION_TOKEN="$SESSION_TOKEN" claude "$@"
+CLAUDE_CODE_USE_BEDROCK=1 AWS_REGION="us-east-1" AWS_ACCESS_KEY_ID="$ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$SECRET_ACCESS_KEY" AWS_SESSION_TOKEN="$SESSION_TOKEN" claude "$@"
