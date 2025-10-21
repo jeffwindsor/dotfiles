@@ -102,11 +102,10 @@ export PATH
 
 # Change directory with clear and list
 cdl() {
-  local target="$1"
-  local execute_ls="${2:-true}"
-  cd "$target" || return 1
+  cd "$1"
   clear
-  [[ "$execute_ls" == "true" ]] && eza -la
+  [[ "${2:-true}" == "true" ]] && eza -la
+  return 0
 }
 
 # ═══════════════════════════════════════════════════
