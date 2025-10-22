@@ -1,12 +1,8 @@
 #!/usr/bin/env zsh
-# aliases.zsh - All shell aliases
-
 # ═══════════════════════════════════════════════════
 # BASIC UTILITIES
 # ═══════════════════════════════════════════════════
 alias p='pwd | pbcopy'
-
-# Muscle memory helpers
 alias cat='bat --plain'
 alias find='fd'
 alias grep='rg'
@@ -14,16 +10,16 @@ alias grep='rg'
 # ═══════════════════════════════════════════════════
 # DIRECTORY NAVIGATION
 # ═══════════════════════════════════════════════════
-alias c='clear'
-alias l='clear && ls -A'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+alias c='clear'
 alias cc='cdl $HOME false'
-alias la='ls -A'
-alias ll='ls -l'
-alias lla='ls -lA'
+alias l='clear && eza -A'
+alias la='eza -A'
+alias ll='eza -l'
+alias lla='eza -lA'
 alias config='cdl $XDG_CONFIG_HOME'
 
 # ═══════════════════════════════════════════════════
@@ -47,7 +43,7 @@ alias h='hx'
 alias h.='hx .'
 
 # ═══════════════════════════════════════════════════
-# GIT & SOURCE CONTROL
+# SOURCE CONTROL
 # ═══════════════════════════════════════════════════
 alias src='cdl $SOURCE'
 alias hub='cdl $SOURCE_GITHUB'
@@ -61,6 +57,9 @@ alias gg='lazygit'
 alias gs='git status'
 alias gph='git push'
 alias gpl='git pull'
+alias gd='git-diff'
+alias gl='git-log'
+alias gr='git-reflog'
 
 # ═══════════════════════════════════════════════════
 # DOTFILES
@@ -79,6 +78,7 @@ alias bi='brew info'
 alias bs='brew search'
 alias bsd='brew search --desc'
 alias bd='brew-diff'
+alias bl='brew-list'
 
 # ═══════════════════════════════════════════════════
 # ZELLIJ (terminal multiplexer)
@@ -98,6 +98,7 @@ alias y='yazi'
 # ═══════════════════════════════════════════════════
 alias ff='fastfetch'
 alias aa='claude'
+alias a='claude-dev'
 
 # SQLCL database shortcuts
 alias shopcart='sqlcl "SHOPCART"'
