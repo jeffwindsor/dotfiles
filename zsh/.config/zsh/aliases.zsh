@@ -21,17 +21,7 @@ alias la='eza -A'
 alias ll='eza -l'
 alias lla='eza -lA'
 alias config='cdl $XDG_CONFIG_HOME'
-
-# ═══════════════════════════════════════════════════
-# EZA (modern ls replacement)
-# ═══════════════════════════════════════════════════
-alias x='eza'
-alias xa='eza --all'
-alias xl='eza --long'
-alias xla='eza --long --all'
-alias xt='eza --tree'
 alias tree='eza --tree'
-alias xta='eza --tree --all'
 alias treea='eza --tree --all'
 
 # ═══════════════════════════════════════════════════
