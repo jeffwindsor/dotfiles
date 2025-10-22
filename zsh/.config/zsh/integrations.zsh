@@ -15,9 +15,13 @@ if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# Mise - Runtime manager
+# Mise - Runtime manager (lazy-loaded for fast startup)
 if command -v mise &> /dev/null; then
-  eval "$(mise activate zsh)"
+  function mise() {
+    unset -f mise                        # Remove this wrapper function, exposing the real mise binary
+    eval "$(command mise activate zsh)"  # Run the real mise and install its hook system
+    mise "$@"                            # Execute the real mise with original arguments
+  }
 fi
 
 # Zellij - Terminal multiplexer cleanup

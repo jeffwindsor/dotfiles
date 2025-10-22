@@ -24,5 +24,11 @@ zinit light Aloxaf/fzf-tab
 # ═══════════════════════════════════════════════════
 # LOAD COMPLETIONS
 # ═══════════════════════════════════════════════════
-autoload -Uz compinit && compinit
+# Only run expensive security check once per 24 hours
+autoload -Uz compinit                                    # Load the compinit function
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then      # If dump file is >24 hours old
+  compinit                                               # Full initialization (slow)
+else                                                     # If dump file is fresh
+  compinit -C                                            # Skip security check (fast)
+fi
 zinit cdreplay -q
