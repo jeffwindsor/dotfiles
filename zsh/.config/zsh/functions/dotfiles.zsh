@@ -1,30 +1,7 @@
 #!/usr/bin/env zsh
 # dotfiles.zsh - Dotfiles synchronization system
 
-# ═══════════════════════════════════════════════════
-# SYNC SYSTEM
-# ═══════════════════════════════════════════════════
-
-# Main sync function
-sync() {
-  dot-pull
-  brew-sync
-  mise-sync
-  ai-sync
-  dot-sync
-}
-
-# Claude sync
-ai-sync() {
-  section "AI: Syncing Claude"
-  local machine=$(networksetup -getcomputername | tr -d '\n')
-  local source="${DOTFILES}/claude/.config/claude/${machine}/.claude_preferences.md"
-  local target="${HOME}/.claude_preferences.md"
-  ln -sf "$source" "$target"
-}
-
-# Dotfiles pull
-dot-pull() {
+dots-pull() {
   section "Pulling Dotfiles"
   git -C "$DOTFILES" pull
 
@@ -35,30 +12,32 @@ dot-pull() {
   command -v aerospace &> /dev/null && aerospace reload-config 2>/dev/null
 }
 
-# Stow individual package
-stow-package() {
-  local package="$1"
-  local source="$2"
-  local target="$3"
+dots-sync() {
+    local source="$DOTFILES"
+    local target="$HOME"
+    local machine_name=$(networksetup -getcomputername | tr -d '\n')
+    local dirs=("$DOTFILES"/*/)
 
-  if command -v "$package" &> /dev/null; then
-    stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
-    colorize "$package" "green"
-  else
-    stow -D --dir "$source" --target "$target" "$package" 2>/dev/null
-    colorize "$package" "dark_gray"
-  fi
-}
+    # print a header with useful information
+    section "Syncing Dotfiles"
+    dimmed "from $source"
+    dimmed "to   $target"
+    dimmed "on $machine_name"
 
-# Dotfiles sync
-dot-sync() {
-  section "Syncing Dotfiles"
-  dimmed "from $DOTFILES"
-  dimmed "to   $HOME"
+    # dotfiles separated by command name (or machine name)
+    for dir in "${dirs[@]}"; do
+      [[ -d "$dir" ]] || continue
 
-  for dir in "$DOTFILES"/*/; do
-    [[ -d "$dir" ]] || continue
-    local package=$(basename "$dir")
-    stow-package "$package" "$DOTFILES" "$HOME"
-  done
-}
+      # Make sure all installed packages (and machine) have dot files "installed" in home
+      local package=$(basename "$dir")
+      if command -v "$package" &> /dev/null || [[ "$package" == "$machine_name" ]]; then
+        # add/replace
+        stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
+        colorize "$package" "green"
+      else
+        # remove
+        stow -D --dir "$source" --target "$target" "$package" 2>/dev/null
+        colorize "$package" "dark_gray"
+      fi
+    done
+  }

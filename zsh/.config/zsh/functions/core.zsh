@@ -2,8 +2,16 @@
 # core.zsh - Core utilities, print functions, and query commands
 
 # ═══════════════════════════════════════════════════
-# CORE UTILITIES
+# MISC
 # ═══════════════════════════════════════════════════
+
+# Syncs machine with latest config and installs
+sync() {
+  dots-pull
+  brew-sync
+  mise-sync
+  dots-sync
+}
 
 # Change directory with clear and list
 cdl() {
@@ -19,7 +27,7 @@ zsh-load-time() {
 }
 
 # ═══════════════════════════════════════════════════
-# PRINT UTILITIES
+# PRINT FUNCTIONS
 # ═══════════════════════════════════════════════════
 
 # Colorize text with ANSI codes
