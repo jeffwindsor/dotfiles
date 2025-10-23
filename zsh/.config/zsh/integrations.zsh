@@ -32,11 +32,3 @@ if command -v claude &> /dev/null; then
     command claude "$@"                  # Execute the real claude with original arguments
   }
 fi
-
-# Zellij - Terminal multiplexer cleanup
-if command -v zellij &> /dev/null; then
-  zellij list-sessions --no-formatting 2>/dev/null | \
-    grep "EXITED" | \
-    awk '{print $1}' | \
-    xargs -I {} zellij delete-session {} 2>/dev/null
-fi
