@@ -51,8 +51,20 @@ git-reflog() {
   tv git-reflog
 }
 
-# Select git repo with tv
-srcs() {
+
+git-goto-repo() {
   local repo=$(tv git-repos)
-  [[ -n "$repo" ]] && cdl "$repo"
+  if [[ -n "$repo" ]]; then 
+    cd "$repo"
+    eza -la
+  fi
+}
+
+# Select git repo with tv
+git-workon-repo() {
+  local repo=$(tv git-repos)
+  if [[ -n "$repo" ]]; then 
+    cd "$repo"
+    zellij --layout claude
+  fi
 }

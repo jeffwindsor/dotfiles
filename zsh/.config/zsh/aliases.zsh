@@ -36,17 +36,20 @@ alias h.='hx .'
 # SOURCE CONTROL
 # ═══════════════════════════════════════════════════
 alias src='cdl $SOURCE'
+alias srcs='git-goto-repo'
+alias srcx='git-workon-repo'
+
 alias hub='cdl $SOURCE_GITHUB'
 alias lab='cdl $SOURCE_GITCJ'
 alias empire='cdl $SOURCE_GITCJ/empire'
 alias jeff='cdl $SOURCE_JEFF'
 
-# Git commands
 alias gb='git blame -w -C -C -C'
 alias gg='lazygit'
 alias gs='git status'
 alias gph='git push'
 alias gpl='git pull'
+
 alias gd='git-diff'
 alias gl='git-log'
 alias gr='git-reflog'
@@ -65,8 +68,10 @@ alias dg='lazygit --path $DOTFILES'
 # ═══════════════════════════════════════════════════
 alias bn='brew install'
 alias bi='brew info'
+alias br='brew remove'
 alias bs='brew search'
 alias bsd='brew search --desc'
+
 alias bd='brew-diff'
 alias bl='brew-list'
 
