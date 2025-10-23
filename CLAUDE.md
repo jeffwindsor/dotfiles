@@ -14,14 +14,14 @@ Each tool directory follows this structure:
   .config/<tool-name>/...   # XDG-compliant configuration files
 ```
 
-The directory name (e.g., `nu/`, `zellij/`, `nvim/`) maps to what will be stowed into `$HOME`.
+The directory name (e.g., `zsh/`, `zellij/`, `nvim/`) maps to what will be stowed into `$HOME`.
 
 ### Key Tool Directories
 
-- **nu/** - Nushell shell configuration with modular autoload system
+- **zsh/** - Zsh shell configuration with modular functions system (PRIMARY SHELL)
+- **bash/** - Bash shell configuration (fallback)
 - **nvim/** - LazyVim-based Neovim configuration
 - **zellij/** - Terminal multiplexer with custom layouts and keybindings
-- **bash/**, **zsh/** - Shell configurations for Bash and Zsh
 - **git/** - Git configuration
 - **brew/** - Homebrew bundle files (per-machine Brewfiles)
 - **ghostty/**, **alacritty/**, **kitty/** - Terminal emulator configs
@@ -31,36 +31,33 @@ The directory name (e.g., `nu/`, `zellij/`, `nvim/`) maps to what will be stowed
 - **mise/** - Development environment/runtime manager
 - **exocortex/** - Personal notes and documentation
 
-## Nushell Configuration Architecture
+## Zsh Configuration Architecture
 
-The primary shell is **Nushell**. The configuration uses an **autoload module system**:
+The primary shell is **Zsh**. The configuration uses a **modular functions system**:
 
 ### Main Config Files
-- `nu/.config/nushell/config.nu` - Main configuration (84 lines)
-- `nu/.config/nushell/env.nu` - Environment variables (mostly deferred to config.nu)
-- `nu/.config/nushell/autoload/*.nu` - 16 modular configuration files
+- `zsh/.config/zsh/.zshrc` - Main configuration
+- `zsh/.config/zsh/.zshenv` - Environment variables
+- `zsh/.config/zsh/functions/*.zsh` - Modular function files
 
 ### Important Environment Variables
-```nushell
-$env.SOURCE = ~/Source                              # All source code
-$env.SOURCE_GITHUB = ~/Source/github.com
-$env.SOURCE_JEFF = ~/Source/github.com/jeffwindsor
-$env.DOTFILES = ~/Source/github.com/jeffwindsor/dotfiles
+```bash
+export SOURCE=~/Source
+export SOURCE_GITHUB=~/Source/github.com
+export SOURCE_JEFF=~/Source/github.com/jeffwindsor
+export DOTFILES=~/Source/github.com/jeffwindsor/dotfiles
 
-$env.EDITOR = "hx"                                  # Helix editor
-$env.VISUAL = "zed"                                 # Zed editor
+export EDITOR="hx"                                  # Helix editor
+export VISUAL="zed"                                 # Zed editor
 ```
 
-### Key Autoload Modules
-- `dotfiles.nu` - Dotfiles management aliases (`d`, `de`, `dv`, `ds`, `dg`)
-- `git.nu` - Git workflow helpers
-- `neovim.nu`, `helix.nu` - Editor shortcuts
-- `zellij.nu`, `yazi.nu` - TUI application helpers
-- `homebrew.nu`, `mise.nu` - Package/runtime management
-
-### Custom Functions in config.nu
-- `cdl [path]` - Change directory with auto-clear and list
-- Color/print utilities: `header`, `section`, `info`, `warning`, `fail`, `success`
+### Key Function Modules
+- `claude.zsh` - Claude AI functions (`claude-dev`, `claude_bedrock`)
+- `dotfiles.zsh` - Dotfiles management functions
+- `git.zsh` - Git workflow helpers
+- `zellij.zsh`, `yazi.zsh` - TUI application helpers
+- `homebrew.zsh`, `mise.zsh` - Package/runtime management
+- `core.zsh` - Core utilities and helpers
 
 ## Zellij Configuration
 
@@ -74,13 +71,19 @@ Terminal multiplexer configured in `zellij/.config/zellij/config.kdl`:
 
 ## Common Development Commands
 
-### Dotfiles Management (Nushell aliases)
+### Dotfiles Management (Zsh functions)
 ```bash
-d       # cd to $DOTFILES with list
-de      # Edit dotfiles in Helix
+# Functions available from dotfiles.zsh
+d       # cd to $DOTFILES
+de      # Edit dotfiles in default editor
 dv      # Edit dotfiles in Zed
-ds      # Edit Nushell config specifically
 dg      # Launch lazygit in dotfiles directory
+```
+
+### Claude AI Functions (from claude.zsh)
+```bash
+claude-dev      # Open dev layout in selected repo with Zellij
+claude_bedrock  # Configure Claude Bedrock with Sonnet/Haiku models
 ```
 
 ### Working with Configurations
@@ -90,11 +93,11 @@ This repository uses **GNU Stow** for deployment:
 ```bash
 # Stow a single tool configuration
 cd ~/Source/github.com/jeffwindsor/dotfiles
-stow nu              # Deploy Nushell config to ~/.config/nushell/
+stow zsh             # Deploy Zsh config to ~/.config/zsh/
 stow nvim            # Deploy Neovim config to ~/.config/nvim/
 
 # Unstow (remove symlinks)
-stow -D nu           # Remove Nushell symlinks
+stow -D zsh          # Remove Zsh symlinks
 
 # Restow (refresh symlinks)
 stow -R nvim         # Refresh Neovim symlinks
@@ -111,13 +114,13 @@ Per-machine Brewfiles located at:
 ### XDG Base Directory Compliance
 All configurations follow XDG standards with paths in `.config/` subdirectories.
 
-### Modular Nushell Configuration
-When modifying Nushell config, prefer adding new modules to `autoload/` rather than expanding `config.nu`. Each autoload file should focus on a single tool or concern.
+### Modular Zsh Configuration
+When modifying Zsh config, prefer adding new function modules to `functions/` rather than expanding `.zshrc`. Each function file should focus on a single tool or concern.
 
 ### Machine-Specific Configurations
 Some tools (like Homebrew, Claude) have machine-specific subdirectories named with machine identifiers.
 
 ### Git Workflow
 The repository tracks configuration files but ignores:
-- Nushell history (`nu/.config/nushell/history.txt`)
+- Zsh history files (`.zsh_history`, `.zsh_sessions/`)
 - macOS metadata (`.DS_Store`, `._*`, `.Spotlight-V100`, `.Trashes`)
