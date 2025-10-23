@@ -19,7 +19,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
 
 # ═══════════════════════════════════════════════════
 # LOAD COMPLETIONS
@@ -31,4 +30,8 @@ if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then      # If dump file is >24 ho
 else                                                     # If dump file is fresh
   compinit -C                                            # Skip security check (fast)
 fi
+
+# Load fzf-tab AFTER compinit (it needs to override the completion system)
+zinit light Aloxaf/fzf-tab
+
 zinit cdreplay -q

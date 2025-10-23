@@ -19,10 +19,10 @@ brew-list() {
 
 # Brew diff - compare installed vs Brewfile
 brew-diff() {
-  local brewfile_path="${1:-$HOME/.config/homebrew/$(networksetup -getcomputername | tr -d '\n')/Brewfile}"
+  local brewfile_path="${1:-$HOME/Brewfile}"
 
   if [[ ! -f "$brewfile_path" ]]; then
-    fail "Brewfile not found at: $brewfile_path"
+    fail "Brewfile not found at: $brewfile_path, skipping auto install of packages"
     return 1
   fi
 
@@ -74,23 +74,25 @@ brew-diff() {
 
 # Brew sync - update and install from Brewfile
 brew-sync() {
-  section "Homebrews: Updating Database"
+  local machine=$(networksetup -getcomputername | tr -d '\n')
+  local brewfile="${HOME}/Brewfile"
+
+  section "Homebrew"
+  info "   Updating Database (update)"
   brew update
 
-  section "Homebrews: Upgrading All Packages"
+  info "   Upgrading Packages (upgrade)"
   brew upgrade
 
-  section "Homebrew: Installing Bundle"
-  local machine=$(networksetup -getcomputername | tr -d '\n')
-  local brewfile="${DOTFILES}/brew/.config/homebrew/${machine}/Brewfile"
+  info "   Installing Bundle described in $brewfile"
   brew bundle install --file="$brewfile"
 
-  section "Homebrews: Removing Orphaned Packages"
+  info "   Removing Orphaned Packages (autoremove)"
   brew autoremove
 
-  section "Homebrews: Cleaning Up Package Cache"
+  info "   Cleaning Up Package Cache (cleanup)"
   brew cleanup
 
-  section "Homebrew: Extra Installed Packages"
+  info "   List installed but not bundled packages"
   brew-diff "$brewfile"
 }
