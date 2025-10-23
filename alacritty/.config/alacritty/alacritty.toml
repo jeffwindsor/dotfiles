@@ -14,7 +14,8 @@ padding.x = 10
 padding.y = 10
 decorations = "None"
 option_as_alt = "Both"
-    
+opacity = 0.777
+
 [keyboard]
 bindings = [
     { key = "Return", mods = "Shift", chars = "\n" },
