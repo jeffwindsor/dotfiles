@@ -1,10 +1,6 @@
 tap "nikitabobko/tap"
 
-brew "argc"
-brew "yq"
-
 brew "bat"
-brew "carapace"
 brew "eza"
 brew "fd"
 brew "git"
@@ -12,12 +8,10 @@ brew "helix"
 brew "lazygit"
 brew "mise"
 brew "neovim"
-brew "nushell"
 brew "ripgrep"
 brew "starship"
 brew "stow"
 brew "television"
-brew "tmux"
 brew "yazi"
 brew "zsh"
 cask "aerospace"
@@ -33,7 +27,6 @@ cask "zed"
 brew "bash"
 brew "fastfetch"
 brew "zellij"
-cask "ghostty"
 
 
 brew "colima", restart_service: :changed
