@@ -15,20 +15,16 @@ if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# Mise - Runtime manager (lazy-loaded for fast startup)
+# Mise - Runtime manager (hybrid: eager PATH, lazy hooks)
 if command -v mise &> /dev/null; then
+  # Eagerly add mise shims to PATH for immediate tool availability (fast, ~5ms)
+  eval "$(command mise activate zsh --shims)"
+
+  # Lazy-load full mise hook system (cd hooks, auto-install, etc.)
   function mise() {
     unset -f mise                        # Remove this wrapper function, exposing the real mise binary
-    eval "$(command mise activate zsh)"  # Run the real mise and install its hook system
+    eval "$(command mise activate zsh)"  # Run the real mise and install its full hook system
     mise "$@"                            # Execute the real mise with original arguments
   }
 fi
 
-# Claude - Lazy-load
-if command -v claude &> /dev/null; then
-  function claude() {
-    unset -f claude                      # Remove this wrapper function
-    mise                                 # Ensure mise is activated, since claude needs node
-    command claude "$@"                  # Execute the real claude with original arguments
-  }
-fi
