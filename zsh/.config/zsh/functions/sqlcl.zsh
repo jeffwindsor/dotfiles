@@ -31,7 +31,7 @@ sqlcl() {
   fi
 
   if [[ -z "$tns_name" ]]; then
-    fail "No TNS name selected"
+    print_error "No TNS name selected"
     return 1
   fi
 

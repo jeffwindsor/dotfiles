@@ -30,8 +30,8 @@ zsh-load-time() {
 # PRINT FUNCTIONS
 # ═══════════════════════════════════════════════════
 
-# Colorize text with ANSI codes
-colorize() {
+# Internal colorize helper (private)
+_colorize() {
   local text="$1"
   local color="$2"
   case "$color" in
@@ -46,41 +46,14 @@ colorize() {
   esac
 }
 
-emphasize() {
-  echo "== $1 =="
-}
-
-dimmed() {
-  colorize "$1" "dark_gray"
-}
-
-fail() {
-  colorize "$1" "red"
-}
-
-header() {
-  colorize "$(emphasize "$1")" "cyan_reverse"
-}
-
-info() {
-  colorize "$1" "blue"
-}
-
-normal() {
-  echo "$1"
-}
-
-section() {
-  colorize "$(emphasize "$1")" "cyan"
-}
-
-success() {
-  colorize "$1" "green"
-}
-
-warning() {
-  colorize "$1" "yellow"
-}
+# Public namespaced print functions
+print_error()   { _colorize "$1" "red" }
+print_success() { _colorize "$1" "green" }
+print_warning() { _colorize "$1" "yellow" }
+print_info()    { _colorize "$1" "blue" }
+print_muted()   { _colorize "$1" "dark_gray" }
+print_header()  { _colorize "== $1 ==" "cyan_reverse" }
+print_section() { _colorize "== $1 ==" "cyan" }
 
 # ═══════════════════════════════════════════════════
 # QUERIES
