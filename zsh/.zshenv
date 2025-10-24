@@ -50,6 +50,11 @@ export HOMEBREW_NO_AUTO_UPDATE="1"
 export HOMEBREW_NO_INSTALL_CLEANUP="1"
 
 # ═══════════════════════════════════════════════════
+# ZSH CONFIGURATION
+# ═══════════════════════════════════════════════════
+export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/.zcompdump"
+
+# ═══════════════════════════════════════════════════
 # AUTOCOMPLETION (ARGC)
 # ═══════════════════════════════════════════════════
 export ARGC_COMPLETIONS_ROOT="${SOURCE_GITHUB}/sigoden/argc-completions"

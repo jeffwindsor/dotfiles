@@ -25,10 +25,10 @@ zinit light zsh-users/zsh-autosuggestions
 # ═══════════════════════════════════════════════════
 # Only run expensive security check once per 24 hours
 autoload -Uz compinit                                    # Load the compinit function
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then      # If dump file is >24 hours old
-  compinit                                               # Full initialization (slow)
+if [[ -n ${ZSH_COMPDUMP}(#qN.mh+24) ]]; then            # If dump file is >24 hours old
+  compinit -d "${ZSH_COMPDUMP}"                          # Full initialization (slow)
 else                                                     # If dump file is fresh
-  compinit -C                                            # Skip security check (fast)
+  compinit -C -d "${ZSH_COMPDUMP}"                       # Skip security check (fast)
 fi
 
 # Load fzf-tab AFTER compinit (it needs to override the completion system)

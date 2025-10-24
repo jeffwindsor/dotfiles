@@ -35,11 +35,6 @@ mise-install() {
 # Mise sync
 mise-sync() {
   section "Mise: Syncing Global"
-  local machine=$(networksetup -getcomputername | tr -d '\n')
-  local source="${DOTFILES}/mise/.config/mise/${machine}/mise.local.toml"
-  local target="${HOME}/mise.local.toml"
-  ln -sf "$source" "$target"
-
   cd "$HOME"
   mise trust
   mise install
