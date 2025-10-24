@@ -30,10 +30,16 @@ dots-sync() {
 
       # Make sure all installed packages (and machine) have dot files "installed" in home
       local package=$(basename "$dir")
-      if command -v "$package" &> /dev/null || [[ "$package" == "$machine_name" ]]; then
+      if command -v "$package" &> /dev/null; then
         # add/replace
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
         print_success "$package"
+
+      elif  [[ "$package" == "$machine_name" ]]; then
+        # add/replace
+        stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
+        print_info "** $package **"
+
       else
         # remove
         stow -D --dir "$source" --target "$target" "$package" 2>/dev/null
