@@ -41,5 +41,9 @@ return {
 				types = "italic,bold",
 			},
 		},
+		config = function(_, opts)
+			require("nightfox").setup(opts)
+			vim.cmd.colorscheme("duskfox")
+		end,
 	},
 }
