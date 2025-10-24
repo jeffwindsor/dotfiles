@@ -20,9 +20,9 @@ alias l='clear && eza -A'
 alias la='eza -A'
 alias ll='eza -l'
 alias lla='eza -lA'
+alias lt='eza --tree --all --git-ignore'
 alias config='cdl $XDG_CONFIG_HOME'
-alias tree='eza --tree'
-alias treea='eza --tree --all'
+alias tree='eza --tree --all --git-ignore'
 
 # ═══════════════════════════════════════════════════
 # EDITORS

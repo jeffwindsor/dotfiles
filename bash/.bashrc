@@ -30,9 +30,8 @@ alias l='clear && eza -A'
 alias la='eza -A'
 alias ll='eza -l'
 alias lla='eza -lA'
-
-alias tree='eza --tree'
-alias treea='eza --tree --all'
+alias lt='eza --tree --all --git-ignore'
+alias tree='eza --tree --all --git-ignore'
 
 # Editors
 alias v='nvim'
