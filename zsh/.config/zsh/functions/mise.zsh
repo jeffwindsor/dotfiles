@@ -34,7 +34,7 @@ mise-install() {
 
 # Mise sync
 mise-sync() {
-  section "Mise: Syncing Global"
+  print_section "Mise: Syncing Global"
   cd "$HOME"
   mise trust
   mise install

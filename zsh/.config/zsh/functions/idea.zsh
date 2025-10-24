@@ -11,10 +11,10 @@ idea_key() {
   local source="${DOTFILES}/idea-ce/.config/jetbrains/${file}"
 
   if [[ ! -f "$source" ]]; then
-    fail "Source file not found: $source"
+    print_error "Source file not found: $source"
     return 1
   fi
 
   ln -sF "$source" "$target"
-  success "Linked ${file} to ${target}"
+  print_success "Linked ${file} to ${target}"
 }

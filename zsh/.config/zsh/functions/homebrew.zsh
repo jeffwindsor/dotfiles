@@ -7,13 +7,13 @@
 
 # List installed packages
 brew-list() {
-  section "Brew Formulae"
+  print_section "Brew Formulae"
   brew leaves | sort
   echo ""
-  section "Brew Casks"
+  print_section "Brew Casks"
   brew list --cask | sort
   echo ""
-  section "Mise Installed"
+  print_section "Mise Installed"
   mise ls | tail -n +2 | awk 'NF'
 }
 
@@ -22,7 +22,7 @@ brew-diff() {
   local brewfile_path="${1:-$HOME/Brewfile}"
 
   if [[ ! -f "$brewfile_path" ]]; then
-    fail "Brewfile not found at: $brewfile_path, skipping auto install of packages"
+    print_error "Brewfile not found at: $brewfile_path, skipping auto install of packages"
     return 1
   fi
 
@@ -53,18 +53,18 @@ brew-diff() {
       fi
     done
 
-    info "${title}:"
+    print_info "${title}:"
     if [[ ${#extra[@]} -eq 0 ]]; then
-      dimmed "  (none)"
+      print_muted "  (none)"
     else
       for pkg in "${extra[@]}"; do
-        warning "  $(brew desc "$pkg" 2>/dev/null || echo "$pkg")"
+        print_warning "  $(brew desc "$pkg" 2>/dev/null || echo "$pkg")"
       done
     fi
 
-    normal "  Installed: ${#inst[@]}"
-    normal "  Bundled:   ${#bund[@]}"
-    normal "  Extra:     ${#extra[@]}"
+    echo "  Installed: ${#inst[@]}"
+    echo "  Bundled:   ${#bund[@]}"
+    echo "  Extra:     ${#extra[@]}"
     echo ""
   }
 
@@ -77,22 +77,22 @@ brew-sync() {
   local machine=$(networksetup -getcomputername | tr -d '\n')
   local brewfile="${HOME}/Brewfile"
 
-  section "Homebrew"
-  info "   Updating Database (update)"
+  print_section "Homebrew"
+  print_info "   Updating Database (update)"
   brew update
 
-  info "   Upgrading Packages (upgrade)"
+  print_info "   Upgrading Packages (upgrade)"
   brew upgrade
 
-  info "   Installing Bundle described in $brewfile"
+  print_info "   Installing Bundle described in $brewfile"
   brew bundle install --file="$brewfile"
 
-  info "   Removing Orphaned Packages (autoremove)"
+  print_info "   Removing Orphaned Packages (autoremove)"
   brew autoremove
 
-  info "   Cleaning Up Package Cache (cleanup)"
+  print_info "   Cleaning Up Package Cache (cleanup)"
   brew cleanup
 
-  info "   List installed but not bundled packages"
+  print_info "   List installed but not bundled packages"
   brew-diff "$brewfile"
 }

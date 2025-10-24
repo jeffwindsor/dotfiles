@@ -2,7 +2,7 @@
 # dotfiles.zsh - Dotfiles synchronization system
 
 dots-pull() {
-  section "Pulling Dotfiles"
+  print_section "Pulling Dotfiles"
   git -C "$DOTFILES" pull
 
   # Reload zsh config
@@ -19,10 +19,10 @@ dots-sync() {
     local dirs=("$DOTFILES"/*/)
 
     # print a header with useful information
-    section "Syncing Dotfiles"
-    dimmed "from $source"
-    dimmed "to   $target"
-    dimmed "on $machine_name"
+    print_section "Syncing Dotfiles"
+    print_muted "from $source"
+    print_muted "to   $target"
+    print_muted "on $machine_name"
 
     # dotfiles separated by command name (or machine name)
     for dir in "${dirs[@]}"; do
@@ -33,11 +33,11 @@ dots-sync() {
       if command -v "$package" &> /dev/null || [[ "$package" == "$machine_name" ]]; then
         # add/replace
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
-        colorize "$package" "green"
+        print_success "$package"
       else
         # remove
         stow -D --dir "$source" --target "$target" "$package" 2>/dev/null
-        colorize "$package" "dark_gray"
+        print_muted "$package"
       fi
     done
   }
