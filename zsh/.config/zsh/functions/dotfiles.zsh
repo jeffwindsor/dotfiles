@@ -20,9 +20,9 @@ dots-sync() {
 
     # print a header with useful information
     print_section "Syncing Dotfiles"
-    print_muted "from $source"
-    print_muted "to   $target"
-    print_muted "on $machine_name"
+    print_muted "from: $source"
+    print_muted "  to: $target"
+    print_info  "  on: $machine_name"
 
     # dotfiles separated by command name (or machine name)
     for dir in "${dirs[@]}"; do
