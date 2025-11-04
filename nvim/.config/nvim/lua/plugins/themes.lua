@@ -1,18 +1,24 @@
 -- lazy = false, -- Make sure to load this during startup
 -- priority = 1000, -- Make sure it loads before other start plugins
 
+-- previous
+-- { "oxfist/night-owl.nvim", lazy = false, priority = 1000 },
+-- { "jacoborus/tender.vim", lazy = false, priority = 1000 },
+-- { "marko-cerovac/material.nvim", lazy = false, priority = 1000 },
+-- { "ribru17/bamboo.nvim", opts = { theme = "multiplex" }, lazy = false, priority = 1000 },
+-- { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000 },
+
 return {
 	{
-		"oxfist/night-owl.nvim",
+		"EdenEast/nightfox.nvim",
 		lazy = false,
 		priority = 1000,
-		opts = {
-			bold = true,
-			italics = false,
-			underline = true,
-			undercurl = true,
-			transparent_background = false,
-		},
+		opts = { options = { dim_inactive = true } },
+		config = function(_, opts)
+			require("nightfox").setup(opts)
+			vim.cmd.colorscheme("duskfox")
+			vim.cmd.highlight({ "WinSeparator", "guifg=#54546d" })
+		end,
 	},
 	{
 		"rebelot/kanagawa.nvim",
@@ -23,27 +29,13 @@ return {
 			transparent = false,
 			undercurl = true,
 			dimInactive = true,
-			-- Style predicates: bold, italic, underline, undercurl,
 			commentStyle = { italic = true },
 			functionStyle = {},
 			keywordStyle = {},
 			statementStyle = { bold = true },
 		},
 	},
-	{
-		"EdenEast/nightfox.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {
-			styles = {
-				comments = "italic",
-				keywords = "bold",
-				types = "italic,bold",
-			},
-		},
-		config = function(_, opts)
-			require("nightfox").setup(opts)
-			vim.cmd.colorscheme("duskfox")
-		end,
-	},
+	{ "vague-theme/vague.nvim", lazy = false, priority = 1000 },
+	{ "savq/melange-nvim", lazy = false, priority = 1000 },
+	{ "sainnhe/everforest", lazy = false, priority = 1000 },
 }
