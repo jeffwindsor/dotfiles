@@ -21,11 +21,9 @@ cask "claude"
 cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "raycast"
-cask "spotify"
 cask "zed"
 
 brew "bash"
-brew "fastfetch"
 brew "zellij"
 
 brew "colima", restart_service: :changed
