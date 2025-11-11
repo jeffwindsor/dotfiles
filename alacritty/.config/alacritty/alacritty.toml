@@ -1,4 +1,4 @@
-general.import = ["./themes/tomorrow_night_bright.toml"]
+general.import = ["./themes/nightfox.toml"]
 
 [env]
 TERM = "alacritty"
@@ -14,7 +14,7 @@ padding.x = 10
 padding.y = 10
 decorations = "None"
 option_as_alt = "Both"
-opacity = 0.777
+# opacity = 0.92
 
 [keyboard]
 bindings = [
