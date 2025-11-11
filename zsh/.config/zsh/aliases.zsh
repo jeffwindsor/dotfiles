@@ -58,8 +58,7 @@ alias gr='git-reflog'
 # DOTFILES
 # ═══════════════════════════════════════════════════
 alias d='cdl $DOTFILES'
-alias de='cd $DOTFILES && nvim'
-alias def='cd $DOTFILES && nvim .'
+alias de='cd $DOTFILES && nvim .'
 alias dv='zed $DOTFILES'
 alias dg='lazygit --path $DOTFILES'
 

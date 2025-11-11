@@ -7,21 +7,19 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
--- when nvim is opened with a directory, use dir as root then open the file picker
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		local args = vim.fn.argv()
-		if #args > 0 then
-			local arg = args[1]
-			if vim.fn.isdirectory(arg) == 1 then
-				-- The vim.schedule() wrapper ensures the picker opens after Neovim fully initializes
-				vim.schedule(function()
-					-- make directory the root
-					vim.cmd.cd(vim.fn.fnameescape(arg))
-					-- open a file picker in that directory
-					require("snacks").picker.files()
-				end)
-			end
+-- use file picker not explorer
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function(ev)
+		local buf_path = vim.fn.expand("%")
+		if vim.fn.isdirectory(buf_path) == 1 then
+			vim.schedule(function()
+				-- make directory the root
+				vim.cmd.cd(vim.fn.fnameescape(buf_path))
+				-- delete the directory buffer using snacks
+				require("snacks").bufdelete.delete(ev.buf)
+				-- open the file picker
+				require("snacks").picker.files()
+			end)
 		end
 	end,
 })
