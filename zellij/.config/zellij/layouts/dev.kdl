@@ -6,13 +6,11 @@ layout {
         pane size="50%" stacked=true {
             pane name="code" {
                 command "nvim"
-                close_on_exit true
             }
         }
         pane size="50%" stacked=true {
             pane name="source control" {
                 command "lazygit"
-                close_on_exit true
                 focus true
             }
             pane name="prompt"

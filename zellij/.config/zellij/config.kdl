@@ -442,23 +442,13 @@ plugins {
     welcome-screen location="zellij:session-manager"
 
     // Added external plugins
-    zjstatus location="file:~/.local/share/zellij/plugins/zjstatus.wasm"
-    zellij-pane-picker location="file:~/.local/share/zellij/plugins/zellij-pane-picker.wasm"
-    zellij-workspaces location="file:~/.local/share/zellij/plugins/zellij-workspaces.wasm"
     zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
-    zellij-choose-tree location="file:~/.local/share/zellij/plugins/zellij-choose-tree.wasm"
 }
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
-load_plugins {
-    // zjstatus
-    // zellij-pane-picker
-    // zellij-workspaces
-    // zellij-forgot
-    // zellij-choose-tree
-}
+load_plugins { }
 
 web_client {
     font "monospace"
