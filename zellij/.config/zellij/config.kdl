@@ -14,6 +14,7 @@
 // ├─ Ctrl-]         → Next swap layout
 // ├─ Ctrl-n         → New pane
 // ├─ Ctrl-q         → Quit
+// ├─ Ctrl-/         → Open zellij-forgot plugin (available in all modes)
 // ├─ Ctrl-m         → Enter MOVE mode
 // ├─ Ctrl-o         → Enter SESSION mode
 // ├─ Ctrl-p         → Enter PANE mode
@@ -356,12 +357,12 @@ keybinds clear-defaults=true {
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Ctrl n" { NewPane; }
         bind "Ctrl q" { Quit; }
-
-        // Custom plugin hotkeys
-        // bind "Alt p" { LaunchOrFocusPlugin "zellij-pane-picker"; }
-        // bind "Alt w" { LaunchOrFocusPlugin "zellij-workspaces"; }
-        // bind "Alt f" { LaunchOrFocusPlugin "zellij-forgot"; }
-        // bind "Alt t" { LaunchOrFocusPlugin "zellij-choose-tree"; }
+        bind "Ctrl /" {
+            LaunchOrFocusPlugin "zellij-forgot" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
 
     }
     shared_except "locked" "move" {
