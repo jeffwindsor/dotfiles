@@ -1,3 +1,211 @@
+// ════════════════════════════════════════════════════════════════════════════
+// KEYBINDING REFERENCE
+// ════════════════════════════════════════════════════════════════════════════
+//
+// NORMAL MODE (always active except in locked mode)
+// ├─ Ctrl-g         → Enter locked mode
+// ├─ Ctrl-h         → Move focus/tab left
+// ├─ Ctrl-j         → Move focus down
+// ├─ Ctrl-k         → Move focus up
+// ├─ Ctrl-l         → Move focus/tab right
+// ├─ Ctrl--         → Decrease size
+// ├─ Ctrl-=         → Increase size
+// ├─ Ctrl-[         → Previous swap layout
+// ├─ Ctrl-]         → Next swap layout
+// ├─ Ctrl-n         → New pane
+// ├─ Ctrl-q         → Quit
+// ├─ Ctrl-m         → Enter MOVE mode
+// ├─ Ctrl-o         → Enter SESSION mode
+// ├─ Ctrl-p         → Enter PANE mode
+// ├─ Ctrl-r         → Enter RESIZE mode
+// ├─ Ctrl-s         → Enter SCROLL mode
+// └─ Ctrl-t         → Enter TAB mode
+//
+// LOCKED MODE (Ctrl-g to enter)
+// └─ Ctrl-g         → Return to normal mode
+//
+// PANE MODE (Ctrl-p to enter)
+// ├─ Ctrl-p         → Return to normal mode
+// ├─ Esc            → Return to normal mode
+// ├─ Enter          → Return to normal mode
+// ├─ Ctrl-h         → Move focus/tab left (shared)
+// ├─ Ctrl-j         → Move focus down (shared)
+// ├─ Ctrl-k         → Move focus up (shared)
+// ├─ Ctrl-l         → Move focus/tab right (shared)
+// ├─ Ctrl--         → Decrease size (shared)
+// ├─ Ctrl-=         → Increase size (shared)
+// ├─ Ctrl-[         → Previous swap layout (shared)
+// ├─ Ctrl-]         → Next swap layout (shared)
+// ├─ Ctrl-n         → New pane (shared)
+// ├─ Ctrl-q         → Quit (shared)
+// ├─ ←/→/↑/↓        → Move focus in direction
+// ├─ h/j/k/l        → Move focus in direction (vim)
+// ├─ e              → Toggle pane embed/floating
+// ├─ f              → Toggle focus fullscreen
+// ├─ i              → Toggle pane pinned
+// ├─ n              → New pane
+// ├─ N              → New pane (stay in mode)
+// ├─ p              → Switch focus
+// ├─ r              → Rename pane
+// ├─ s              → New pane down (horizontal split)
+// ├─ S              → New pane stacked
+// ├─ v              → New pane right (vertical split)
+// ├─ w              → Toggle floating panes
+// ├─ x              → Close focused pane
+// └─ z              → Toggle pane frames
+//
+// TAB MODE (Ctrl-t to enter)
+// ├─ Ctrl-t         → Return to normal mode
+// ├─ Esc            → Return to normal mode
+// ├─ Enter          → Return to normal mode
+// ├─ Ctrl-h         → Move focus/tab left (shared)
+// ├─ Ctrl-j         → Move focus down (shared)
+// ├─ Ctrl-k         → Move focus up (shared)
+// ├─ Ctrl-l         → Move focus/tab right (shared)
+// ├─ Ctrl--         → Decrease size (shared)
+// ├─ Ctrl-=         → Increase size (shared)
+// ├─ Ctrl-[         → Previous swap layout (shared)
+// ├─ Ctrl-]         → Next swap layout (shared)
+// ├─ Ctrl-n         → New pane (shared)
+// ├─ Ctrl-q         → Quit (shared)
+// ├─ ←/→/↑/↓        → Navigate tabs
+// ├─ h/j/k/l        → Navigate tabs (vim)
+// ├─ 1-9            → Go to tab number
+// ├─ [              → Break pane left
+// ├─ ]              → Break pane right
+// ├─ b              → Break pane
+// ├─ n              → New tab
+// ├─ N              → New tab (stay in mode)
+// ├─ r              → Rename tab
+// ├─ s              → Toggle active sync tab
+// ├─ x              → Close tab
+// └─ Tab            → Toggle between tabs
+//
+// RESIZE MODE (Ctrl-r to enter)
+// ├─ Ctrl-r         → Return to normal mode
+// ├─ Esc            → Return to normal mode
+// ├─ Enter          → Return to normal mode
+// ├─ Ctrl-h         → Move focus/tab left (shared)
+// ├─ Ctrl-j         → Move focus down (shared)
+// ├─ Ctrl-k         → Move focus up (shared)
+// ├─ Ctrl-l         → Move focus/tab right (shared)
+// ├─ Ctrl--         → Decrease size (shared)
+// ├─ Ctrl-=         → Increase size (shared)
+// ├─ Ctrl-[         → Previous swap layout (shared)
+// ├─ Ctrl-]         → Next swap layout (shared)
+// ├─ Ctrl-n         → New pane (shared)
+// ├─ Ctrl-q         → Quit (shared)
+// ├─ ←/→/↑/↓        → Increase size in direction
+// ├─ h/j/k/l        → Increase size in direction (vim)
+// ├─ H/J/K/L        → Decrease size in direction (vim shift)
+// ├─ +/=            → Increase size
+// └─ -              → Decrease size
+//
+// MOVE MODE (Ctrl-m to enter)
+// ├─ Ctrl-m         → Return to normal mode
+// ├─ Esc            → Return to normal mode
+// ├─ Enter          → Return to normal mode
+// ├─ Ctrl-h         → Move focus/tab left (shared)
+// ├─ Ctrl-j         → Move focus down (shared)
+// ├─ Ctrl-k         → Move focus up (shared)
+// ├─ Ctrl-l         → Move focus/tab right (shared)
+// ├─ Ctrl--         → Decrease size (shared)
+// ├─ Ctrl-=         → Increase size (shared)
+// ├─ Ctrl-[         → Previous swap layout (shared)
+// ├─ Ctrl-]         → Next swap layout (shared)
+// ├─ Ctrl-n         → New pane (shared)
+// ├─ Ctrl-q         → Quit (shared)
+// ├─ ←/→/↑/↓        → Move pane in direction
+// ├─ h/j/k/l        → Move pane in direction (vim)
+// ├─ n              → Move pane forward
+// ├─ p              → Move pane backwards
+// └─ Tab            → Move pane forward
+//
+// SCROLL MODE (Ctrl-s to enter)
+// ├─ Ctrl-s         → Return to normal mode
+// ├─ Ctrl-c         → Scroll to bottom and return to normal
+// ├─ Esc            → Return to normal mode
+// ├─ Enter          → Return to normal mode
+// ├─ Ctrl-h         → Move focus/tab left (shared)
+// ├─ Ctrl-j         → Move focus down (shared)
+// ├─ Ctrl-k         → Move focus up (shared)
+// ├─ Ctrl-l         → Move focus/tab right (shared)
+// ├─ Ctrl-n         → New pane (shared)
+// ├─ Ctrl-q         → Quit (shared)
+// ├─ e              → Edit scrollback in editor
+// ├─ s              → Enter search mode
+// ├─ PageUp/PageDn  → Page scroll
+// ├─ ←/→/↑/↓        → Scroll (← page up, → page down)
+// ├─ h/l            → Page scroll (vim)
+// ├─ j/k            → Line scroll (vim)
+// ├─ Ctrl-b         → Page scroll up
+// ├─ Ctrl-f         → Page scroll down
+// ├─ d              → Half page scroll down
+// └─ u              → Half page scroll up
+//
+// SEARCH MODE (s from scroll mode)
+// ├─ Ctrl-s         → Return to normal mode
+// ├─ Ctrl-c         → Scroll to bottom and return to normal
+// ├─ Esc            → Return to normal mode
+// ├─ Enter          → Return to normal mode
+// ├─ Ctrl-h         → Move focus/tab left (shared)
+// ├─ Ctrl-j         → Move focus down (shared)
+// ├─ Ctrl-k         → Move focus up (shared)
+// ├─ Ctrl-l         → Move focus/tab right (shared)
+// ├─ Ctrl-n         → New pane (shared)
+// ├─ Ctrl-q         → Quit (shared)
+// ├─ c              → Toggle case sensitivity
+// ├─ n              → Search down
+// ├─ o              → Toggle whole word
+// ├─ p              → Search up
+// ├─ w              → Toggle wrap
+// ├─ PageUp/PageDn  → Page scroll
+// ├─ ←/→/↑/↓        → Scroll (← page up, → page down)
+// ├─ h/l            → Page scroll (vim)
+// ├─ j/k            → Line scroll (vim)
+// ├─ Ctrl-b         → Page scroll up
+// ├─ Ctrl-f         → Page scroll down
+// ├─ d              → Half page scroll down
+// └─ u              → Half page scroll up
+//
+// ENTERSEARCH MODE (automatic when entering search)
+// ├─ Enter          → Start searching
+// ├─ Esc            → Return to scroll mode
+// └─ Ctrl-c         → Return to scroll mode
+//
+// SESSION MODE (Ctrl-o to enter)
+// ├─ Ctrl-o         → Return to normal mode
+// ├─ Esc            → Return to normal mode
+// ├─ Enter          → Return to normal mode
+// ├─ Ctrl-h         → Move focus/tab left (shared)
+// ├─ Ctrl-j         → Move focus down (shared)
+// ├─ Ctrl-k         → Move focus up (shared)
+// ├─ Ctrl-l         → Move focus/tab right (shared)
+// ├─ Ctrl--         → Decrease size (shared)
+// ├─ Ctrl-=         → Increase size (shared)
+// ├─ Ctrl-[         → Previous swap layout (shared)
+// ├─ Ctrl-]         → Next swap layout (shared)
+// ├─ Ctrl-n         → New pane (shared)
+// ├─ Ctrl-q         → Quit (shared)
+// ├─ a              → About plugin
+// ├─ c              → Configuration plugin
+// ├─ d              → Detach session
+// ├─ p              → Plugin manager
+// ├─ s              → Share plugin
+// └─ w              → Session manager (workspaces)
+//
+// RENAMETAB MODE (r from tab mode)
+// ├─ Enter          → Confirm rename
+// ├─ Esc            → Undo rename and return to tab mode
+// └─ Ctrl-c         → Cancel and return to normal mode
+//
+// RENAMEPANE MODE (c from pane mode)
+// ├─ Enter          → Confirm rename
+// ├─ Esc            → Undo rename and return to pane mode
+// └─ Ctrl-c         → Cancel and return to normal mode
+//
+// ════════════════════════════════════════════════════════════════════════════
+
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
@@ -7,8 +215,6 @@ keybinds clear-defaults=true {
         bind "down" { MoveFocus "down"; }
         bind "up" { MoveFocus "up"; }
         bind "right" { MoveFocus "right"; }
-        bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
-        bind "d" { NewPane "down"; SwitchToMode "normal"; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; }
@@ -20,8 +226,10 @@ keybinds clear-defaults=true {
         bind "N" { NewPane; }
         bind "p" { SwitchFocus; }
         bind "Ctrl p" { SwitchToMode "normal"; }
-        bind "r" { NewPane "right"; SwitchToMode "normal"; }
-        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
+        bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
+        bind "s" { NewPane "down"; SwitchToMode "normal"; }
+        bind "S" { NewPane "stacked"; SwitchToMode "normal"; }
+        bind "v" { NewPane "right"; SwitchToMode "normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "x" { CloseFocus; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
@@ -48,6 +256,7 @@ keybinds clear-defaults=true {
         bind "k" { GoToPreviousTab; }
         bind "l" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "normal"; }
+        bind "N" { NewTab; }
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
         bind "Ctrl t" { SwitchToMode "normal"; }
