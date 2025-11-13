@@ -1,22 +1,25 @@
 layout {
-    pane size=1 borderless=true {
-        plugin location="zellij:tab-bar"
+    default_tab_template {
+        pane size=2 borderless=true {
+            plugin location="zjstatus"
+        }
+        children
     }
-    pane split_direction="vertical" {
-        pane size="50%" stacked=true {
-            pane name="code" {
-                command "nvim"
+
+    tab name="Dev" {
+        pane split_direction="vertical" {
+            pane size="50%" stacked=true {
+                pane name="code" {
+                    command "nvim"
+                }
+            }
+            pane size="50%" stacked=true {
+                pane name="source control" {
+                    command "lazygit"
+                    focus true
+                }
+                pane name="prompt"
             }
         }
-        pane size="50%" stacked=true {
-            pane name="source control" {
-                command "lazygit"
-                focus true
-            }
-            pane name="prompt"
-        }
-    }
-    pane size=2 borderless=true {
-        plugin location="zellij:status-bar"
     }
 }
