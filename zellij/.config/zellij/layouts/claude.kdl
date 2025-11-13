@@ -6,7 +6,6 @@ layout {
         pane size="50%" stacked=true {
             pane name="editor" {
                 command "nvim"
-                close_on_exit true
             }
             pane name="prompt" {
             }
@@ -14,7 +13,6 @@ layout {
         pane size="50%" stacked=true {
             pane name="source control" {
                 command "lazygit"
-                close_on_exit true
             }
             pane name="ai"{
                 command "zsh"
