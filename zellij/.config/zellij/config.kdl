@@ -23,6 +23,7 @@ keybinds clear-defaults=true {
         bind "r" { NewPane "right"; SwitchToMode "normal"; }
         bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
     }
     tab {
@@ -146,15 +147,19 @@ keybinds clear-defaults=true {
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Ctrl n" { NewPane; }
         bind "Ctrl q" { Quit; }
+
+        // Custom plugin hotkeys
+        // bind "Alt p" { LaunchOrFocusPlugin "zellij-pane-picker"; }
+        // bind "Alt w" { LaunchOrFocusPlugin "zellij-workspaces"; }
+        // bind "Alt f" { LaunchOrFocusPlugin "zellij-forgot"; }
+        // bind "Alt t" { LaunchOrFocusPlugin "zellij-choose-tree"; }
+
     }
     shared_except "locked" "move" {
         bind "Ctrl m" { SwitchToMode "move"; }
     }
     shared_except "locked" "session" {
         bind "Ctrl o" { SwitchToMode "session"; }
-    }
-    shared_except "locked" "scroll" "search" "tmux" {
-        bind "Ctrl b" { SwitchToMode "tmux"; }
     }
     shared_except "locked" "scroll" "search" {
         bind "Ctrl s" { SwitchToMode "scroll"; }
@@ -173,9 +178,6 @@ keybinds clear-defaults=true {
     }
     shared_except "normal" "locked" "entersearch" "renametab" "renamepane" {
         bind "esc" { SwitchToMode "normal"; }
-    }
-    shared_among "pane" "tmux" {
-        bind "x" { CloseFocus; SwitchToMode "normal"; }
     }
     shared_among "scroll" "search" {
         bind "PageDown" { PageScrollDown; }
@@ -209,56 +211,45 @@ keybinds clear-defaults=true {
     renamepane {
         bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
     }
-    shared_among "session" "tmux" {
+    session {
         bind "d" { Detach; }
-    }
-    tmux {
-        bind "left" { MoveFocus "left"; SwitchToMode "normal"; }
-        bind "down" { MoveFocus "down"; SwitchToMode "normal"; }
-        bind "up" { MoveFocus "up"; SwitchToMode "normal"; }
-        bind "right" { MoveFocus "right"; SwitchToMode "normal"; }
-        bind "space" { NextSwapLayout; }
-        bind "\"" { NewPane "down"; SwitchToMode "normal"; }
-        bind "%" { NewPane "right"; SwitchToMode "normal"; }
-        bind "," { SwitchToMode "renametab"; }
-        bind "[" { SwitchToMode "scroll"; }
-        bind "Ctrl b" { Write 2; SwitchToMode "normal"; }
-        bind "c" { NewTab; SwitchToMode "normal"; }
-        bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
-        bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
-        bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
-        bind "l" { MoveFocus "right"; SwitchToMode "normal"; }
-        bind "n" { GoToNextTab; SwitchToMode "normal"; }
-        bind "o" { FocusNextPane; }
-        bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
-        bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
     }
 }
 
 // Plugin aliases - can be used to change the implementation of Zellij
 // changing these requires a restart to take effect
+
 plugins {
     about location="zellij:about"
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
-    filepicker location="zellij:strider" {
-        cwd "/"
-    }
+    filepicker location="zellij:strider" 
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    status-bar location="zellij:status-bar"
+    // status-bar location="zellij:status-bar"   // Disabled: replaced by zjstatus
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
-    welcome-screen location="zellij:session-manager" {
-        welcome_screen true
-    }
+    welcome-screen location="zellij:session-manager"
+
+    // Added external plugins
+    zjstatus location="file:~/.local/share/zellij/plugins/zjstatus.wasm"
+    zellij-pane-picker location="file:~/.local/share/zellij/plugins/zellij-pane-picker.wasm"
+    zellij-workspaces location="file:~/.local/share/zellij/plugins/zellij-workspaces.wasm"
+    zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
+    zellij-choose-tree location="file:~/.local/share/zellij/plugins/zellij-choose-tree.wasm"
 }
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    // zjstatus
+    // zellij-pane-picker
+    // zellij-workspaces
+    // zellij-forgot
+    // zellij-choose-tree
 }
+
 web_client {
     font "monospace"
 }
