@@ -24,6 +24,7 @@ zdelete() {
 # Plugin list - add new plugins here as "owner/repo"
 _zellij_plugins=(
   "karimould/zellij-forgot"
+  "dj95/zjstatus"
 )
 
 # Internal helper: Download a zellij plugin from GitHub
