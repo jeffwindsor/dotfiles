@@ -466,11 +466,37 @@ web_client {
  
 // Choose the theme that is specified in the themes section.
 // Default: default
-// 
-// theme "atelier-sulphurpool"
+// ansi
+// ao
+// atelier-sulphurpool
+// ayu_mirage
+// ayu_dark
+// catppuccin-frappe
+// catppuccin-macchiato
+// cyber-noir
+// blade-runner
+// retro-wave
+// dracula
+// everforest-dark
+// gruvbox-dark
+// iceberg-dark
+// kanagawa
+// lucario
+// menace
+// molokai-dark
+// night-owl
+// nightfox
+// nord
+// one-half-dark
+// onedark
+// solarized-dark
+// tokyo-night-dark
+// tokyo-night-storm
+// tokyo-night
+// vesper
+//
+
 theme "iceberg-dark"
-// theme "catppuccin-macchiato"
-// theme "night-owl"
  
 // Choose the base input mode of zellij.
 // Default: normal
