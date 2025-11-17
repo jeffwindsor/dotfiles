@@ -52,7 +52,7 @@ export VISUAL="zed"                                 # Zed editor
 ```
 
 ### Key Function Modules
-- `claude.zsh` - Claude AI functions (`claude-dev`, `claude_bedrock`)
+- `claude.zsh` - Claude AI functions (`claude-dev`, `claude-bedrock`)
 - `dotfiles.zsh` - Dotfiles management functions
 - `git.zsh` - Git workflow helpers
 - `zellij.zsh`, `yazi.zsh` - TUI application helpers
@@ -83,7 +83,7 @@ dg      # Launch lazygit in dotfiles directory
 ### Claude AI Functions (from claude.zsh)
 ```bash
 claude-dev      # Open dev layout in selected repo with Zellij
-claude_bedrock  # Configure Claude Bedrock with Sonnet/Haiku models
+claude-bedrock  # Configure Claude Bedrock with Sonnet/Haiku models
 ```
 
 ### Working with Configurations
