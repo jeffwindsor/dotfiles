@@ -1,5 +1,5 @@
 # general.import = ["./themes/doom_one.toml"]
-general.import = ["./themes/duskfox.toml"]
+# general.import = ["./themes/duskfox.toml"]
 # general.import = ["./themes/palenight.toml"]
 # general.import = ["./themes/tender.toml"]
 # general.import = ["./themes/wombat.toml"]
