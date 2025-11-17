@@ -7,6 +7,7 @@
 -- { "marko-cerovac/material.nvim", lazy = false, priority = 1000 },
 -- { "ribru17/bamboo.nvim", opts = { theme = "multiplex" }, lazy = false, priority = 1000 },
 -- { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000 },
+-- { "vague-theme/vague.nvim" },
 
 return {
 	{
@@ -35,7 +36,7 @@ return {
 			statementStyle = { bold = true },
 		},
 	},
-	{ "vague-theme/vague.nvim", lazy = false, priority = 1000 },
-	{ "savq/melange-nvim", lazy = false, priority = 1000 },
-	{ "sainnhe/everforest", lazy = false, priority = 1000 },
+	{ "savq/melange-nvim" },
+	{ "sainnhe/everforest" },
+	{ "navarasu/onedark.nvim" },
 }
