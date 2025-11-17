@@ -12,8 +12,18 @@ claude-dev() {
   zellij --layout claude
 }
 
+
+claude-bedrock() {
+  # Keychain lookup
+  if [[ -z "$CJ_PAT" ]]; then
+    export CJ_PAT=$(security find-generic-password -a "$USER" -s "cj-pat" -w 2>/dev/null)
+  fi
+
+  ~/bin/claudecode
+}
+
 # Claude Bedrock configuration
-claude_bedrock() {
+claude-bedrock-direct() {
   export ANTHROPIC_MODEL="sonnet"
   export ANTHROPIC_SMALL_FAST_MODEL="haiku"
 

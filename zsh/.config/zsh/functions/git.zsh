@@ -21,14 +21,20 @@ git-repos() {
 git-clone() {
   local repo_url="$1"
 
-  # Parse git URL using regex
-  if [[ "$repo_url" =~ git@([^:]+):(.+?)(\.git)?$ ]]; then
+  # Parse git URL using regex - handles both SSH and HTTPS formats
+  if [[ "$repo_url" =~ ^git@([^:]+):(.+)(\.git)?$ ]]; then
+    local git_host="${match[1]}"
+    local repo_path="${match[2]}"
+  elif [[ "$repo_url" =~ ^https?://([^/]+)/(.+)(\.git)?$ ]]; then
     local git_host="${match[1]}"
     local repo_path="${match[2]}"
   else
-    echo "Invalid git URL format"
+    echo "Invalid git URL format. Expected: git@host:path or https://host/path"
     return 1
   fi
+
+  # Remove trailing .git if present
+  repo_path="${repo_path%.git}"
 
   local target="${SOURCE}/${git_host}/${repo_path}"
 

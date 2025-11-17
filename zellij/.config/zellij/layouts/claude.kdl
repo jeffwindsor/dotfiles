@@ -21,7 +21,7 @@ layout {
                 }
                 pane name="ai"{
                     command "zsh"
-                    args "-i" "-c" "claude_bedrock"
+                    args "-i" "-c" "claude-bedrock"
                     close_on_exit true
                     focus true
                 }
