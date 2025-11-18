@@ -2,7 +2,7 @@
 # https://docs.helix-editor.com/master/commands.html
 ###################################################################
 
-theme = "night_owl"
+# theme = "night_owl"
 
 [editor]
 auto-pairs = false    # do not auto pair symbols
