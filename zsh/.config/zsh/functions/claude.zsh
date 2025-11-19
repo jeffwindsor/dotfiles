@@ -14,11 +14,6 @@ claude-dev() {
 
 
 claude-bedrock() {
-  # Keychain lookup
-  if [[ -z "$CJ_PAT" ]]; then
-    export CJ_PAT=$(security find-generic-password -a "$USER" -s "cj-pat" -w 2>/dev/null)
-  fi
-
   ~/bin/claudecode
 }
 
