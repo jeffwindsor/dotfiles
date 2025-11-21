@@ -44,8 +44,8 @@ alt-ctrl-t       = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
 alt-ctrl-comma   = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space   = 'exec-and-forget open ~'
 
-alt-ctrl-enter   = 'exec-and-forget open -n /Applications/Alacritty.app'
-alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
+alt-ctrl-shift-enter   = 'exec-and-forget open -n /Applications/Alacritty.app'
+alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
 
 alt-ctrl-h       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
 alt-ctrl-v       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title nvim -e nvim'
