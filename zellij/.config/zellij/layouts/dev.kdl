@@ -9,16 +9,15 @@ layout {
     tab name="Dev" {
         pane split_direction="vertical" {
             pane size="50%" stacked=true {
-                pane name="code" {
-                    command "nvim"
-                }
+                pane name="maven"
+                pane name="ai"
             }
             pane size="50%" stacked=true {
-                pane name="source control" {
-                    command "lazygit"
-                    focus true
+                pane name="git"
+                pane name="code"
+                pane name="prompt" {
+                  focus true
                 }
-                pane name="prompt"
             }
         }
     }
