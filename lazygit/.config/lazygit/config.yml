@@ -1,9 +1,39 @@
 gui:
-  authorColors:
-    'Jeff Windsor': 'blue'
-    'Windsor, Jeff': 'cyan'
-    '*': 'yellow'
   screenMode: 'half'
+
+  theme:
+    activeBorderColor:
+      - "#99FFE4"
+    inactiveBorderColor:
+      - "#343434"
+    searchingActiveBorderColor:
+      - "#99FFE4"
+    optionsTextColor:
+      - "#99FFE4"
+    selectedLineBgColor:
+      - "#343434"
+    inactiveViewSelectedLineBgColor:
+      - "#343434"
+    cherryPickedCommitFgColor:
+      - "#000000"
+    cherryPickedCommitBgColor:
+      - "#99FFE4"
+    markedBaseCommitFgColor:
+      - "#000000"
+    markedBaseCommitBgColor:
+      - "#99FFE4"
+    unstagedChangesColor:
+      - "#99FFE4"
+    defaultFgColor:
+      - "#FEFEFE"
+
+  authorColors:
+    '*': '#505050'
+    'Jeff Windsor': '#babbf1'
+    'Windsor, Jeff': "#99FFE4"
+
+  branchColorPatterns:
+    'CJPM-\d+': '#FFC799'
 
 keybinding:
   universal:
