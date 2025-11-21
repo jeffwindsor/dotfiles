@@ -5,15 +5,15 @@ gui:
     activeBorderColor:
       - "#99FFE4"
     inactiveBorderColor:
-      - "#343434"
+      - "#505050"
     searchingActiveBorderColor:
       - "#99FFE4"
     optionsTextColor:
       - "#99FFE4"
     selectedLineBgColor:
-      - "#343434"
+      - "#505050"
     inactiveViewSelectedLineBgColor:
-      - "#343434"
+      - "#505050"
     cherryPickedCommitFgColor:
       - "#000000"
     cherryPickedCommitBgColor:
@@ -33,7 +33,7 @@ gui:
     'Windsor, Jeff': "#99FFE4"
 
   branchColorPatterns:
-    'CJPM-\d+': '#FFC799'
+    'CJPM-\d+': '#FFBF00'
 
 keybinding:
   universal:

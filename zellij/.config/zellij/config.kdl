@@ -496,7 +496,7 @@ web_client {
 // vesper
 //
 
-theme "iceberg-dark"
+theme "nord"
  
 // Choose the base input mode of zellij.
 // Default: normal
