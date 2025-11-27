@@ -29,10 +29,16 @@ outer.right      = [{ monitor.secondary = 0 }, 4]
 
 [mode.main.binding]
 # Launchers
-alt-ctrl-a       = 'exec-and-forget open /Applications/Claude.app'
-alt-ctrl-b       = 'exec-and-forget open /Applications/Safari.app'
-alt-ctrl-c       = 'exec-and-forget open /System/Applications/Calendar.app'
+alt-ctrl-enter       = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
+
+alt-ctrl-b       = 'exec-and-forget open -n /Applications/Brave\ Browser.app/'
 alt-ctrl-g       = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
+alt-ctrl-s       = 'exec-and-forget open /Applications/Safari.app'
+
+alt-ctrl-a       = 'exec-and-forget open /Applications/Claude.app'
+alt-ctrl-c       = 'exec-and-forget open /System/Applications/Calendar.app'
+alt-ctrl-h       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
 alt-ctrl-i       = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
 alt-ctrl-k       = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m       = 'exec-and-forget open /System/Applications/Messages.app'
@@ -41,40 +47,35 @@ alt-ctrl-o       = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
 alt-ctrl-p       = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-r       = 'exec-and-forget open /System/Applications/Reminders.app'
 alt-ctrl-t       = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
+alt-ctrl-v       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title nvim -e nvim'
+alt-ctrl-y       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
 alt-ctrl-comma   = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space   = 'exec-and-forget open ~'
 
-alt-ctrl-shift-enter   = 'exec-and-forget open -n /Applications/Alacritty.app'
-alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
-
-alt-ctrl-h       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
-alt-ctrl-v       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title nvim -e nvim'
-alt-ctrl-y       = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
-
 # Workspaces
-alt-a        = 'workspace 🤖'        
+alt-a        = 'workspace 🤖'
 alt-shift-a  = ['move-node-to-workspace 🤖', 'workspace 🤖']
-alt-c        = 'workspace 📅'        
+alt-c        = 'workspace 📅'
 alt-shift-c  = ['move-node-to-workspace 📅', 'workspace 📅']
-alt-k        = 'workspace 🍀'   
+alt-k        = 'workspace 🍀'
 alt-shift-k  = ['move-node-to-workspace 🍀', 'workspace 🍀']
-alt-m        = 'workspace 💬'   
+alt-m        = 'workspace 💬'
 alt-shift-m  = ['move-node-to-workspace 💬', 'workspace 💬']
-alt-n        = 'workspace 📒'   
+alt-n        = 'workspace 📒'
 alt-shift-n  = ['move-node-to-workspace 📒', 'workspace 📒']
-alt-o        = 'workspace 📫'   
+alt-o        = 'workspace 📫'
 alt-shift-o  = ['move-node-to-workspace 📫', 'workspace 📫']
-alt-p        = 'workspace 🎸'   
+alt-p        = 'workspace 🎸'
 alt-shift-p  = ['move-node-to-workspace 🎸', 'workspace 🎸']
-alt-r        = 'workspace 🎗️'   
+alt-r        = 'workspace 🎗️'
 alt-shift-r  = ['move-node-to-workspace 🎗️', 'workspace 🎗️']
-alt-t        = 'workspace 🙈'   
+alt-t        = 'workspace 🙈'
 alt-shift-t  = ['move-node-to-workspace 🙈', 'workspace 🙈']
 
 alt-1       = 'workspace 1'
-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1'] 
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
 alt-2       = 'workspace 2'
-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2'] 
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
 alt-3       = 'workspace 3'
 alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
 alt-4       = 'workspace 4'
