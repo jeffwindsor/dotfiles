@@ -1,5 +1,6 @@
 tap "nikitabobko/tap"
 
+brew "bash"
 brew "bat"
 brew "eza"
 brew "fd"
@@ -15,16 +16,16 @@ brew "stow"
 brew "television"
 brew "yazi"
 brew "zsh"
+brew "zellij"
 cask "aerospace"
 cask "alacritty"
+cask "brave-browser"
 cask "claude"
 cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "raycast"
 cask "zed"
 
-brew "bash"
-brew "zellij"
 
 brew "colima", restart_service: :changed
 brew "docker-buildx"
