@@ -8,16 +8,15 @@ layout {
 
     tab name="Dev" {
         pane split_direction="vertical" {
-            pane size="50%" stacked=true {
-                pane name="maven"
-                pane name="ai"
-            }
-            pane size="50%" stacked=true {
+            pane size="60%" stacked=true {
                 pane name="git"
-                pane name="code"
                 pane name="prompt" {
                   focus true
                 }
+            }
+            pane size="40%" stacked=true {
+                pane name="tests"
+                pane name="ai"
             }
         }
     }
