@@ -7,8 +7,8 @@ return {
 		picker = {
 			sources = {
 				explorer = { focus = "input", hidden = true, ignored = false },
-				grep = { hidden = true, ignored = false },
-				files = { hidden = true, ignored = false },
+				grep = { hidden = true, ignored = true },
+				files = { hidden = true, ignored = true },
 				git_files = { untracked = true },
 			},
 		},
