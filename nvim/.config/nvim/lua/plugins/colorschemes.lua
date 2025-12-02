@@ -33,18 +33,19 @@ local function apply_random_favorite_colorscheme()
 	vim.notify("Colorscheme: " .. choice, vim.log.levels.INFO)
 end
 
+-- Apply random colorscheme on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.schedule(apply_random_favorite_colorscheme)
+	end,
+})
+
 return {
 	{ "EdenEast/nightfox.nvim", opts = { options = { dim_inactive = true } } },
 	{ "rebelot/kanagawa.nvim", opts = { theme = "wave" } },
 	{ "savq/melange-nvim" },
 	{ "sainnhe/everforest" },
 	{ "navarasu/onedark.nvim" },
-	{
-		name = "apply-random-favorite-colorscheme-on-load",
-		lazy = false,
-		priority = 1000,
-		config = apply_random_favorite_colorscheme(),
-	},
 }
 
 -- previously interesting colroschemes
