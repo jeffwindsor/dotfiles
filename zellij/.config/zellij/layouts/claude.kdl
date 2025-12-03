@@ -12,11 +12,10 @@ layout {
                 pane name="editor" {
                     command "nvim"
                 }
-                pane name="prompt" {
-                }
+                pane name="prompt" { }
             }
             pane size="50%" stacked=true {
-                pane name="source control" {
+                pane name="git" {
                     command "lazygit"
                 }
                 pane name="ai"{

@@ -2,6 +2,24 @@
 // KEYBINDING REFERENCE
 // ════════════════════════════════════════════════════════════════════════════
 //
+//  maybes:
+// Run the specified command
+//
+// Required arguments: The command to run, followed by optional arguments
+//
+// Possible arguments: cwd - current working directory, direction - the direction to open the new command pane
+//
+//     // will run "tail -f /tmp/foo" in a pane opened below the focused one
+//     bind "a" {
+//         Run "tail" "-f" "foo" {
+//             cwd "/tmp"
+//             direction "Down"
+//         }
+//     }
+//
+//
+//
+//
 // NORMAL MODE (always active except in locked mode)
 // ├─ Ctrl-g         → Enter locked mode
 // ├─ Ctrl-h         → Move focus/tab left
@@ -48,9 +66,9 @@
 // ├─ N              → New pane (stay in mode)
 // ├─ p              → Switch focus
 // ├─ r              → Rename pane
-// ├─ s              → New pane down (horizontal split)
-// ├─ S              → New pane stacked
-// ├─ v              → New pane right (vertical split)
+// ├─ -              → New pane down (horizontal split)
+// ├─ s              → New pane stacked
+// ├─ \              → New pane right (vertical split)
 // ├─ w              → Toggle floating panes
 // ├─ x              → Close focused pane
 // └─ z              → Toggle pane frames
@@ -228,9 +246,9 @@ keybinds clear-defaults=true {
         bind "p" { SwitchFocus; }
         bind "Ctrl p" { SwitchToMode "normal"; }
         bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
-        bind "s" { NewPane "down"; SwitchToMode "normal"; }
-        bind "S" { NewPane "stacked"; SwitchToMode "normal"; }
-        bind "v" { NewPane "right"; SwitchToMode "normal"; }
+        bind "-" { NewPane "down"; SwitchToMode "normal"; }
+        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
+        bind "\\" { NewPane "right"; SwitchToMode "normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "x" { CloseFocus; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
@@ -346,17 +364,23 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
-        bind "Ctrl h" { MoveFocusOrTab "left"; }
+        bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
         bind "Ctrl k" { MoveFocus "up"; }
-        bind "Ctrl l" { MoveFocusOrTab "right"; }
+        bind "Ctrl l" { MoveFocus "right"; }
+
         bind "Ctrl -" { Resize "Decrease"; }
         bind "Ctrl =" { Resize "Increase"; }
-        bind "Ctrl [" { PreviousSwapLayout; }
-        bind "Ctrl ]" { NextSwapLayout; }
+        
+        bind "Ctrl [" { GoToPreviousTab; }
+        bind "Ctrl ]" { GoToNextTab; }
+        
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Ctrl n" { NewPane; }
         bind "Ctrl q" { Quit; }
+        bind "Ctrl e" { EditScrollback;}
+
+        // Lists keybinds
         bind "Ctrl /" {
             LaunchOrFocusPlugin "zellij-forgot" {
                 floating true
