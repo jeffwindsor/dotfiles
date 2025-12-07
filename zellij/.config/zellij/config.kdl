@@ -1,101 +1,67 @@
+// mnemonic key binding approach
+//
 keybinds {
-    normal {
+    // mnemonic of 'm' for move
+    move {
+      unbind "Ctrl h"   //original switch to normal
+      bind "Ctrl m" { SwitchToMode "Normal"; }
+    }
+    shared_except "move" "locked" {
+        unbind "h"
+        bind "Ctrl m" { SwitchToMode "Move"; }
+    }
+
+    // prefer arrows for new panes, and r for rename
+    pane {
+        unbind "e" "c" "d" "r" "w" "Up" "Left"
+        bind "h" { MoveFocus "Left"; }
+        bind "Down" { NewPane "Down"; SwitchToMode "normal"; }
+        bind "Right" { NewPane "Right"; SwitchToMode "normal"; }
+        bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
+    }
+
+    // Everywhere - all unbinds above this please 
+    shared_except "locked" {
+        // reserving alt for toher applications
+        unbind  "Alt f" "Alt n" "Alt i" "Alt o" "Alt h" "Alt Left" "Alt l" "Alt Right" "Alt j" "Alt Down" "Alt k" "Alt Up" "Alt =" "Alt +" "Alt -" "Alt [" "Alt ]" "Alt p" "Alt Shift p"
+ 
+        bind "Ctrl -" { Resize "Decrease"; }
+        bind "Ctrl =" { Resize "Increase"; }
+
+        bind "Ctrl [" { GoToPreviousTab; }
+        bind "Ctrl ]" { GoToNextTab; }
+
+        bind "Ctrl e" { EditScrollback;}
+
+        bind "Ctrl f" { ToggleFloatingPanes; }
         bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
         bind "Ctrl k" { MoveFocus "up"; }
         bind "Ctrl l" { MoveFocus "right"; }
 
-        bind "Ctrl Up" { NewPane "stacked"; }
-        bind "Ctrl Right" { NewPane "Right"; }
-        bind "Ctrl Down" { NewPane "Down"; }
+        bind "Ctrl n" { NewPane "Right"; }
+        bind "Ctrl d" { NewPane "Down"; }
+    }
 
-        bind "Ctrl -" { Resize "Decrease"; }
-        bind "Ctrl =" { Resize "Increase"; }
-        
-        bind "Ctrl [" { GoToPreviousTab; }
-        bind "Ctrl ]" { GoToNextTab; }
-
-        bind "Ctrl n" { NewPane; }
-        bind "Ctrl e" { EditScrollback;}
-    }
-    pane {
-        bind "Down" { NewPane "Down"; SwitchToMode "normal"; }
-        bind "Right" { NewPane "Right"; SwitchToMode "normal"; }
-        bind "Up" { NewPane "stacked"; SwitchToMode "normal"; }
-    }
-    scroll {
-        bind "e" { EditScrollback; SwitchToMode "normal"; }
-        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
-    }
-    search {
-        bind "c" { SearchToggleOption "CaseSensitivity"; }
-        bind "n" { Search "down"; }
-        bind "o" { SearchToggleOption "WholeWord"; }
-        bind "p" { Search "up"; }
-        bind "w" { SearchToggleOption "Wrap"; }
-    }
 }
 
-// Plugin aliases - can be used to change the implementation of Zellij
-// changing these requires a restart to take effect
+plugins clear-defaults=true {
+    // status-bar location="zellij:status-bar"      // Disabled: replaced by compact-bar
+    // tab-bar location="zellij:tab-bar"            // Disabled: replaced by compact-bar
 
-plugins {
     about location="zellij:about"
     configuration location="zellij:configuration"
     filepicker location="zellij:strider"
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    // status-bar location="zellij:status-bar"      // Disabled: replaced by compact-bar
     strider location="zellij:strider"
-    // tab-bar location="zellij:tab-bar"            // Disabled: replaced by compact-bar
     welcome-screen location="zellij:session-manager"
-
     compact-bar location="zellij:compact-bar" {
       tooltip "Ctrl x"
     }
-    zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
-}
 
-// Plugins to load in the background when a new session starts
-// eg. "file:/path/to/my-plugin.wasm"
-// eg. "https://example.com/my-plugin.wasm"
-load_plugins { }
-
-web_client {
-    font "monospace"
+    // zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
 }
- 
-// Choose the theme that is specified in the themes section.
-// Default: default
-// ansi
-// ao
-// atelier-sulphurpool
-// ayu_mirage
-// ayu_dark
-// catppuccin-frappe
-// catppuccin-macchiato
-// cyber-noir
-// blade-runner
-// retro-wave
-// dracula
-// everforest-dark
-// gruvbox-dark
-// iceberg-dark
-// kanagawa
-// lucario
-// menace
-// molokai-dark
-// night-owl
-// nightfox
-// nord
-// one-half-dark
-// onedark
-// solarized-dark
-// tokyo-night-dark
-// tokyo-night-storm
-// tokyo-night
-// vesper
-//
 
 theme "nord"
 default_layout "default"
