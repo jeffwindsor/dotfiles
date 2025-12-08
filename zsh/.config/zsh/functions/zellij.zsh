@@ -1,9 +1,21 @@
 #!/usr/bin/env zsh
-# zellij.zsh - Zellij terminal multiplexer management
 
-# ═══════════════════════════════════════════════════
-# ZELLIJ
-# ═══════════════════════════════════════════════════
+
+# Name Zellij Panes after executable (ZSH Pre Exec hook)
+update_pane_title() {
+    local cmd="${1%% *}"
+    local title="$1"
+    case "$cmd" in
+        nvim|vim) title="edit" ;;
+        lazygit|gg|dg)  title="git"  ;;
+        claude-bedrock|claude)  title="ai"   ;;
+    esac
+    printf '\033]0;%s\007' "$title"
+}
+if [[ -n "$ZELLIJ" ]]; then
+    preexec() { update_pane_title "$1" }
+fi
+
 
 # Kill all zellij sessions except current
 zkill() {
@@ -20,6 +32,10 @@ zdelete() {
     awk '{print $1}' | \
     xargs -I {} zellij delete-session {}
 }
+
+# ═══════════════════════════════════════════════════
+# ZELLIJ Provided
+# ═══════════════════════════════════════════════════
 
 # Plugin list - add new plugins here as "owner/repo"
 _zellij_plugins=(
