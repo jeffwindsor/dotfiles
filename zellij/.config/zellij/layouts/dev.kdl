@@ -8,15 +8,20 @@ layout {
 
     tab name="Dev" {
         pane split_direction="vertical" {
-            pane size="60%" stacked=true {
-                pane name="git"
-                pane name="prompt" {
-                  focus true
+            pane size="50%" stacked=true {
+                pane name="editor" {
+                    command "nvim"
                 }
             }
-            pane size="40%" stacked=true {
-                pane name="tests"
-                pane name="ai"
+            pane size="50%" stacked=true {
+                pane name="ai"{
+                    focus true
+                }
+                pane name="git" {
+                    command "lazygit"
+                }
+                pane name="tests" { }
+                pane name="prompt" { }
             }
         }
     }

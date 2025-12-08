@@ -12,18 +12,18 @@ layout {
                 pane name="editor" {
                     command "nvim"
                 }
-                pane name="prompt" { }
             }
             pane size="50%" stacked=true {
-                pane name="git" {
-                    command "lazygit"
-                }
                 pane name="ai"{
                     command "zsh"
                     args "-i" "-c" "claude-bedrock"
                     close_on_exit true
                     focus true
                 }
+                pane name="git" {
+                    command "lazygit"
+                }
+                pane name="prompt" { }
             }
         }
     }
