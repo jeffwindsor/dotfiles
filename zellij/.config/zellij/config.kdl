@@ -13,7 +13,7 @@ keybinds {
 
     // prefer arrows for new panes, and r for rename
     pane {
-        unbind "e" "c" "d" "r" "w" "Up" "Left"
+        unbind "e" "c" "d" "w" "Up" "Left"
         bind "h" { MoveFocus "Left"; }
         bind "Down" { NewPane "Down"; SwitchToMode "normal"; }
         bind "Right" { NewPane "Right"; SwitchToMode "normal"; }
@@ -33,14 +33,15 @@ keybinds {
 
         bind "Ctrl e" { EditScrollback;}
 
-        bind "Ctrl f" { ToggleFloatingPanes; }
+        bind "Ctrl f" { ToggleFocusFullscreen; }
+        bind "Ctrl F" { ToggleFloatingPanes; }
         bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
         bind "Ctrl k" { MoveFocus "up"; }
         bind "Ctrl l" { MoveFocus "right"; }
 
         bind "Ctrl n" { NewPane "Right"; }
-        bind "Ctrl d" { NewPane "Down"; }
+        bind "Ctrl N" { NewPane "Down"; }
     }
 
 }
