@@ -1,14 +1,3 @@
- # general.import = ["./themes/doom_one.toml"]
-# general.import = ["./themes/duskfox.toml"]
-# general.import = ["./themes/marine_dark.toml"]
-# general.import = ["./themes/meliora.toml"]
-# general.import = ["./themes/palenight.toml"]
-# general.import = ["./themes/rigel.toml"]
-# general.import = ["./themes/tender.toml"]
-general.import = ["./themes/tomorrow_night.toml"]
-# general.import = ["./themes/tomorrow_night_bright.toml"]
-
-
 [env]
 TERM = "alacritty"
 
@@ -26,6 +15,4 @@ option_as_alt = "Both"
 # opacity = 0.94
 
 [keyboard]
-bindings = [
-    { key = "Return", mods = "Shift", chars = "\n" },
-]
+bindings = [{ key = "Return", mods = "Shift", chars = "\n" }]
