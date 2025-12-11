@@ -19,6 +19,8 @@ keybinds {
         bind "Right" { NewPane "Right"; SwitchToMode "normal"; }
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
+
+    // Resize (Ctrl R) not Ctrl n
     resize {
         unbind "Ctrl n"
         bind "Ctrl R" { SwitchToMode "Normal"; }
@@ -28,30 +30,49 @@ keybinds {
         bind "Ctrl R" { SwitchToMode "Resize"; }
     }
 
+
+    // Use [ ] for tab focus except when in tab where it is move
+    tab {
+        bind "Ctrl [" { MoveTab "Left"; }
+        bind "Ctrl ]" { MoveTab "Right"; }
+    }
+    shared_except "locked" "tab" {
+        bind "Ctrl [" { GoToPreviousTab; }
+        bind "Ctrl ]" { GoToNextTab; }
+    }
+
     // Everywhere - all unbinds above this please 
     shared_except "locked" {
-        // reserving alt for other applications
-        unbind  "Alt f" "Alt n" "Alt i" "Alt o" "Alt h" "Alt Left" "Alt l" "Alt Right" "Alt j" "Alt Down" "Alt k" "Alt Up" "Alt =" "Alt +" "Alt -" "Alt [" "Alt ]" "Alt p" "Alt Shift p"
+
+        // RESERVING alt for other applications
+        unbind "Alt f" "Alt n" "Alt i" "Alt o" "Alt h" "Alt Left" "Alt l" "Alt Right" 
+        unbind "Alt j" "Alt Down" "Alt k" "Alt Up" "Alt =" "Alt +" "Alt -" "Alt [" "Alt ]"
+        unbind "Alt p" "Alt Shift p"
  
+        // Direct Access to Actions
+        //  Resize (replacing Alt version) 
         bind "Ctrl -" { Resize "Decrease"; }
         bind "Ctrl =" { Resize "Increase"; }
 
-        bind "Ctrl [" { GoToPreviousTab; }
-        bind "Ctrl ]" { GoToNextTab; }
-        bind "Ctrl {" { MoveTab "Left"; }
-        bind "Ctrl }" { MoveTab "Right"; }
-
-        bind "Ctrl e" { EditScrollback;}
-
-        bind "Ctrl f" { ToggleFocusFullscreen; }
+        //  New Floating Pane (replacing Alt version) 
         bind "Ctrl F" { ToggleFloatingPanes; }
+
+        //  Pane Focus Change (replacing Alt version) 
         bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
         bind "Ctrl k" { MoveFocus "up"; }
         bind "Ctrl l" { MoveFocus "right"; }
 
+        //  New Pane (replacing Alt version)
         bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl N" { NewPane "Down"; }
+
+        //  Edit Pane's Text in $EDITOR
+        bind "Ctrl e" { EditScrollback;}
+
+        //  Full screen the pane
+        bind "Ctrl f" { ToggleFocusFullscreen; }
+        
     }
 
 }
