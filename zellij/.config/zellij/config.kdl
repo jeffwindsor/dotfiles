@@ -66,14 +66,14 @@ keybinds {
         //  New Pane (replacing Alt version)
         bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl N" { NewPane "Down"; }
-        bind "Ctrl s" { NewPane "stacked"; }
+        bind "Ctrl N" { NewPane "stacked"; }
 
         //  Edit Pane's Text in $EDITOR
         bind "Ctrl e" { EditScrollback;}
 
         //  Full screen the pane
         bind "Ctrl f" { ToggleFocusFullscreen; }
-        
+
     }
 
 }
@@ -96,8 +96,14 @@ plugins clear-defaults=true {
     // zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
 }
 
-theme "nord"
+theme "vesper"
 default_layout "default"
 session_serialization false
 show_startup_tips false
 show_release_notes false
+ui {
+  pane_frames false {
+        hide_session_name true
+        rounded_corners true
+    }
+}

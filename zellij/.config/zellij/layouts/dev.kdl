@@ -1,28 +1,22 @@
 layout {
-    default_tab_template {
-        pane size=2 borderless=true {
-            plugin location="compact-bar"
-        }
-        children
-    }
-
-    tab name="Dev" {
-        pane split_direction="vertical" {
-            pane size="50%" stacked=true {
-                pane name="editor" {
-                    command "nvim"
-                }
-            }
-            pane size="50%" stacked=true {
-                pane name="ai"{
-                    focus true
-                }
-                pane name="git" {
-                    command "lazygit"
-                }
-                pane name="tests" { }
-                pane name="prompt" { }
-            }
-        }
-    }
+  pane size=1 borderless=true {
+      plugin location="compact-bar"
+  }
+  pane split_direction="vertical" {
+      pane size="50%" stacked=true {
+          pane name="editor" {
+              command "nvim"
+          }
+      }
+      pane size="50%" stacked=true {
+          pane name="ai"{
+              focus true
+          }
+          pane name="git" {
+              command "lazygit"
+          }
+          pane name="tests" { }
+          pane name="prompt" { }
+      }
+  }
 }

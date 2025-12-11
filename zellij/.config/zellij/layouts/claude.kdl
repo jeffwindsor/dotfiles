@@ -1,30 +1,24 @@
 layout {
-    default_tab_template {
-        pane size=2 borderless=true {
-            plugin location="compact-bar"
-        }
-        children
-    }
-
-    tab name="Claude" {
-        pane split_direction="vertical" {
-            pane size="50%" stacked=true {
-                pane name="editor" {
-                    command "nvim"
-                }
-            }
-            pane size="50%" stacked=true {
-                pane name="ai"{
-                    command "zsh"
-                    args "-i" "-c" "claude-bedrock"
-                    close_on_exit true
-                    focus true
-                }
-                pane name="git" {
-                    command "lazygit"
-                }
-                pane name="prompt" { }
-            }
-        }
-    }
+  pane size=1 borderless=true {
+      plugin location="compact-bar"
+  }
+  pane split_direction="vertical" {
+      pane size="50%" stacked=true {
+          pane name="editor" {
+              command "nvim"
+          }
+      }
+      pane size="50%" stacked=true {
+          pane name="ai"{
+              command "zsh"
+              args "-i" "-c" "claude-bedrock"
+              close_on_exit true
+              focus true
+          }
+          pane name="git" {
+              command "lazygit"
+          }
+          pane name="prompt" { }
+      }
+  }
 }
