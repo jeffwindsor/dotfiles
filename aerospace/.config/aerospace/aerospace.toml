@@ -15,12 +15,12 @@ default-root-container-orientation = 'auto'
 '🙈' = 'secondary'  #t - teams
 
 [gaps]
-inner.horizontal = [{ monitor.secondary = 0 }, 4]
-inner.vertical = [{ monitor.secondary = 0 }, 4]
-outer.left = [{ monitor.secondary = 0 }, 4]
-outer.bottom = [{ monitor.secondary = 0 }, 4]
-outer.top = [{ monitor.secondary = 0 }, 4]
-outer.right = [{ monitor.secondary = 0 }, 4]
+inner.horizontal = [{ monitor.secondary = 0 }, 0]
+inner.vertical = [{ monitor.secondary = 0 }, 0]
+outer.left = [{ monitor.secondary = 0 }, 0]
+outer.bottom = [{ monitor.secondary = 0 }, 0]
+outer.top = [{ monitor.secondary = 0 }, 0]
+outer.right = [{ monitor.secondary = 0 }, 0]
 
 # https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # cmd, alt, ctrl, shift a - z, 0-9,  f1 - f20 
