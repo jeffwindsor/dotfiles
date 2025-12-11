@@ -28,9 +28,12 @@ outer.right = [{ monitor.secondary = 0 }, 4]
 # keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual, keypadMinus, keypadMultiply, keypadPlus, keypad0 - keypad9
 
 [mode.main.binding]
+
 # Launchers
-alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
-alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
+#   open -n /Applications/Alacritty.app --args --option "general.import=[\"$selected_theme\"]" -e zellij
+
+alt-ctrl-enter = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh zellij'
+alt-ctrl-shift-enter = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh'
 
 alt-ctrl-b = 'exec-and-forget open -n /Applications/Brave\ Browser.app/'
 alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
@@ -38,7 +41,6 @@ alt-ctrl-s = 'exec-and-forget open /Applications/Safari.app'
 
 alt-ctrl-a = 'exec-and-forget open /Applications/Claude.app'
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
-alt-ctrl-h = 'exec-and-forget open -n /Applications/Alacritty.app --args --title helix -e hx'
 alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
 alt-ctrl-k = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
@@ -47,8 +49,8 @@ alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
 # alt-ctrl-p = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-r = 'exec-and-forget open /System/Applications/Reminders.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
-alt-ctrl-v = 'exec-and-forget open -n /Applications/Alacritty.app --args --title nvim -e nvim'
-alt-ctrl-y = 'exec-and-forget open -n /Applications/Alacritty.app --args --title yazi -e yazi ~'
+alt-ctrl-v = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh nvim'
+alt-ctrl-y = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh yazi ~'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space = 'exec-and-forget open ~'
 
