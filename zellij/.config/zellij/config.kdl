@@ -66,6 +66,7 @@ keybinds {
         //  New Pane (replacing Alt version)
         bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl N" { NewPane "Down"; }
+        bind "Ctrl s" { NewPane "stacked"; }
 
         //  Edit Pane's Text in $EDITOR
         bind "Ctrl e" { EditScrollback;}
