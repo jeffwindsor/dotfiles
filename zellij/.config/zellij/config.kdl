@@ -96,7 +96,7 @@ plugins clear-defaults=true {
     // zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
 }
 
-theme "vesper"
+theme "tender"
 default_layout "default"
 session_serialization false
 show_startup_tips false
