@@ -5,6 +5,46 @@
 # GIT FUNCTIONS
 # ═══════════════════════════════════════════════════
 
+# Git rebase current branch to another
+git-rebase-feature-branch(){
+  #           Initial State    Final State
+  # main:     A---B---C        A---B---C
+  #                \                   \
+  # feature:        D---E---F           D---E---F
+
+  target="${1:-main}"
+  feature=$(git branch --show-current)
+
+  # Validate
+  if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "Error: Not a git repository"
+    return 1
+  fi
+
+  if ! git rev-parse --verify "$target" > /dev/null 2>&1; then
+    echo "Error: Branch '$target' does not exist"
+    return 1
+  fi
+
+  if ! git diff-index --quiet HEAD --; then
+    echo "Uncommitted changes detected"
+    git status --short
+    return 1
+  fi
+
+  # Confirm
+  echo "Rebase '$feature' onto '$target'?"
+  read -p "(y/n) " -n 1 -r
+  echo
+  [[ ! $REPLY =~ ^[Yy]$ ]] && return 0
+
+  # Execute
+  git checkout "$target" && \
+  git pull origin "$target" && \
+  git checkout "$feature" && \
+  git rebase "$target"
+}
+
 # Git pull for specific repo
 git-pull() {
   local path="$1"
