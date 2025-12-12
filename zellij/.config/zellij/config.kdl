@@ -62,6 +62,11 @@ keybinds {
         bind "Ctrl j" { MoveFocus "down"; }
         bind "Ctrl k" { MoveFocus "up"; }
         bind "Ctrl l" { MoveFocus "right"; }
+        bind "Ctrl Left" { MoveFocus "left"; }
+        bind "Ctrl Down" { MoveFocus "down"; }
+        bind "Ctrl Up" { MoveFocus "up"; }
+        bind "Ctrl Right" { MoveFocus "right"; }
+
 
         //  New Pane (replacing Alt version)
         bind "Ctrl n" { NewPane "Right"; }

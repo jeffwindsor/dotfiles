@@ -1,0 +1,121 @@
+// Translated from https://github.com/AlexvZyl/nordic.nvim
+themes {
+    nordic {
+        text_unselected {
+            base 216 222 233        // white bright
+            background 46 52 64     // base
+            emphasis_0 236 239 244  // white brightest
+            emphasis_1 216 222 233  // white bright
+            emphasis_2 192 200 216  // white medium
+            emphasis_3 187 195 212  // white dim
+        }
+        text_selected {
+            base 236 239 244        // white brightest
+            background 59 66 82     // surface
+            emphasis_0 255 255 255  // pure white
+            emphasis_1 136 192 208  // cyan base
+            emphasis_2 143 188 187  // cyan bright
+            emphasis_3 128 179 178  // cyan dim
+        }
+        ribbon_selected {
+            base 46 52 64           // base
+            background 136 192 208  // cyan base
+            emphasis_0 46 52 64     // base
+            emphasis_1 59 66 82     // surface
+            emphasis_2 76 86 106    // gray2
+            emphasis_3 96 103 115   // gray1
+        }
+        ribbon_unselected {
+            base 192 200 216        // white medium
+            background 59 66 82     // surface
+            emphasis_0 216 222 233  // white bright
+            emphasis_1 192 200 216  // white medium
+            emphasis_2 187 195 212  // white dim
+            emphasis_3 96 114 138   // gray0
+        }
+        table_title {
+            base 216 222 233        // white bright
+            background 46 52 64     // base
+            emphasis_0 136 192 208  // cyan base
+            emphasis_1 129 161 193  // blue base
+            emphasis_2 163 190 140  // green base
+            emphasis_3 235 203 139  // yellow base
+        }
+        table_cell_selected {
+            base 236 239 244        // white brightest
+            background 59 66 82     // surface
+            emphasis_0 136 192 208  // cyan base
+            emphasis_1 129 161 193  // blue base
+            emphasis_2 163 190 140  // green base
+            emphasis_3 235 203 139  // yellow base
+        }
+        table_cell_unselected {
+            base 192 200 216        // white medium
+            background 46 52 64     // base
+            emphasis_0 187 195 212  // white dim
+            emphasis_1 96 114 138   // gray0
+            emphasis_2 76 86 106    // gray2
+            emphasis_3 67 76 94     // gray3
+        }
+        list_selected {
+            base 236 239 244        // white brightest
+            background 59 66 82     // surface
+            emphasis_0 136 192 208  // cyan base
+            emphasis_1 180 142 173  // magenta base
+            emphasis_2 190 157 177  // magenta bright
+            emphasis_3 169 126 161  // magenta dim
+        }
+        list_unselected {
+            base 192 200 216        // white medium
+            background 46 52 64     // base
+            emphasis_0 216 222 233  // white bright
+            emphasis_1 192 200 216  // white medium
+            emphasis_2 187 195 212  // white dim
+            emphasis_3 96 114 138   // gray0
+        }
+        frame_selected {
+            base 136 192 208        // cyan base
+            background 59 66 82     // surface
+            emphasis_0 129 161 193  // blue base
+            emphasis_1 163 190 140  // green base
+            emphasis_2 235 203 139  // yellow base
+            emphasis_3 215 151 120  // orange base
+        }
+        frame_highlight {
+            base 235 203 139        // yellow base
+            background 59 66 82     // surface
+            emphasis_0 215 151 120  // orange base
+            emphasis_1 191 97 106   // red base
+            emphasis_2 197 114 122  // red bright
+            emphasis_3 183 94 103   // red dim
+        }
+        exit_code_success {
+            base 163 190 140        // green base
+            background 46 52 64     // base
+            emphasis_0 151 183 124  // green dim
+            emphasis_1 163 190 140  // green base
+            emphasis_2 177 200 157  // green bright
+            emphasis_3 136 192 208  // cyan base
+        }
+        exit_code_error {
+            base 191 97 106         // red base
+            background 46 52 64     // base
+            emphasis_0 183 94 103   // red dim
+            emphasis_1 191 97 106   // red base
+            emphasis_2 197 114 122  // red bright
+            emphasis_3 215 151 120  // orange base
+        }
+        multiplayer_user_colors {
+            user_0 136 192 208      // cyan base
+            user_1 163 190 140      // green base
+            user_2 129 161 193      // blue base
+            user_3 180 142 173      // magenta base
+            user_4 235 203 139      // yellow base
+            user_5 215 151 120      // orange base
+            user_6 190 157 177      // magenta bright
+            user_7 143 188 187      // cyan bright
+            user_8 191 97 106       // red base
+            user_9 94 129 172       // blue base alt
+        }
+    }
+}
