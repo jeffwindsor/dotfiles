@@ -1,3 +1,4 @@
+// Translated from https://github.com/jacoborus/tender.vim
 themes {
     tender {
         text_unselected {
