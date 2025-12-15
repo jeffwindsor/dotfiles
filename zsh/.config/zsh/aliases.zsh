@@ -88,7 +88,7 @@ alias zupdate='_zellij_process_plugins "Updating Zellij Plugins" _zupdate_action
 # ═══════════════════════════════════════════════════
 # YAZI (file manager)
 # ═══════════════════════════════════════════════════
-alias y='yazi'
+alias y='yazi-cwd'
 
 # ═══════════════════════════════════════════════════
 # OTHER TOOLS
