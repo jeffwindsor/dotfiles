@@ -3,17 +3,16 @@ layout {
       plugin location="compact-bar"
   }
   pane split_direction="vertical" {
-      pane size="50%" stacked=true {
+      pane size="60%" stacked=true {
           pane name="edit" {}
       }
-      pane size="50%" stacked=true {
+      pane size="40%" stacked=true {
           pane name="ai"{
               focus true
           }
           pane name="git" {
               command "lazygit"
           }
-          pane name="tests" { }
           pane name="prompt" { }
       }
   }
