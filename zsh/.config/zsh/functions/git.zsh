@@ -5,6 +5,53 @@
 # GIT FUNCTIONS
 # ═══════════════════════════════════════════════════
 
+git-ls-ignored(){
+  git ls-files --ignored --cached --exclude-standard
+}
+
+git-rm-piped(){
+  xargs git rm --cached
+}
+git-remove-from-history() {
+    # Read files from stdin into array
+    local files_to_remove=("${(@f)$(cat)}")
+
+    if [ ${#files_to_remove[@]} -eq 0 ]; then
+        echo "No files provided via stdin"
+        return 1
+    fi
+
+    echo "Files to remove (${#files_to_remove[@]} total):"
+    printf '   - %s\n' "${files_to_remove[@]}"
+    echo ""
+
+    # Check for git-filter-repo
+    if ! command -v git-filter-repo &> /dev/null; then
+        echo "git-filter-repo not installed"
+        echo "Install: brew install git-filter-repo"
+        return 1
+    fi
+
+    # Confirm
+    echo "⚠  WARNING: This rewrites git history!"
+    echo -n "Continue? (yes/no): " 
+    read confirm < /dev/tty
+    [[ "$confirm" != "yes" ]] && { echo "Aborted"; return 0; }
+
+    # Create temp file and remove from history
+    local temp_file=$(mktemp)
+    printf '%s\n' "${files_to_remove[@]}" > "$temp_file"
+
+    echo "<Removing files from git history..."
+    git filter-repo --paths-from-file "$temp_file" --invert-paths --force
+    rm "$temp_file"
+
+    echo ""
+    echo "Done! Next steps:"
+    echo "   git push origin --force --all"
+    echo "   git push origin --force --tags"
+}
+
 # Git rebase current branch to another
 git-rebase-feature-branch(){
   #           Initial State    Final State
