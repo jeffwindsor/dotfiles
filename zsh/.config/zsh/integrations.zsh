@@ -28,3 +28,6 @@ if command -v mise &> /dev/null; then
   }
 fi
 
+if command -v awsenv &> /dev/null; then 
+   source "/opt/homebrew/opt/awsenv/share/awsenv/shell-init.bash"
+fi
