@@ -43,41 +43,38 @@ keybinds {
 
     // Everywhere - all unbinds above this please 
     shared_except "locked" {
-
-        // RESERVING alt for other applications
-        unbind "Alt f" "Alt n" "Alt i" "Alt o" "Alt h" "Alt Left" "Alt l" "Alt Right" 
-        unbind "Alt j" "Alt Down" "Alt k" "Alt Up" "Alt =" "Alt +" "Alt -" "Alt [" "Alt ]"
-        unbind "Alt p" "Alt Shift p"
+        unbind "Alt i" "Alt o"  // tab movement 
+        // unbind "Alt p" "Alt Shift p"  // pane grouping
+        // unbind "Alt [" "Alt ]"   // swap layouts
  
-        // Direct Access to Actions
-        //  Resize (replacing Alt version) 
+        //  Resize (replacing Alt version)
+        unbind "Alt =" "Alt +" "Alt -"
         bind "Ctrl -" { Resize "Decrease"; }
         bind "Ctrl =" { Resize "Increase"; }
 
-        //  New Floating Pane (replacing Alt version) 
+        //  Full screen the pane
+        bind "Ctrl f" { ToggleFocusFullscreen; }
+
+        //  Floating Pane (replacing Alt version)
+        unbind "Alt f"
         bind "Ctrl F" { ToggleFloatingPanes; }
 
         //  Pane Focus Change (replacing Alt version) 
+        unbind "Alt h" "Alt Left" "Alt l" "Alt Right" "Alt j" "Alt Down" "Alt k" "Alt Up"
         bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
         bind "Ctrl k" { MoveFocus "up"; }
         bind "Ctrl l" { MoveFocus "right"; }
-        bind "Ctrl Left" { MoveFocus "left"; }
-        bind "Ctrl Down" { MoveFocus "down"; }
-        bind "Ctrl Up" { MoveFocus "up"; }
-        bind "Ctrl Right" { MoveFocus "right"; }
-
 
         //  New Pane (replacing Alt version)
+        unbind "Alt n" 
         bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl N" { NewPane "Down"; }
-        bind "Ctrl N" { NewPane "stacked"; }
+        bind "Ctrl s" { NewPane "stacked"; }
 
         //  Edit Pane's Text in $EDITOR
         bind "Ctrl e" { EditScrollback;}
 
-        //  Full screen the pane
-        bind "Ctrl f" { ToggleFocusFullscreen; }
 
     }
 
