@@ -10,6 +10,7 @@ $java\
 $nodejs\
 $gleam\
 $haskell\
+$aws\
 $line_break\
 $character"""
 

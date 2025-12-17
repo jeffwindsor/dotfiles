@@ -1,4 +1,5 @@
 tap "nikitabobko/tap"
+tap "cjdev/tap" "git@gitlab.cj.dev:cjdev/homebrew-tap.git"
 
 brew "bash"
 brew "bat"
@@ -27,6 +28,7 @@ cask "raycast"
 cask "zed"
 
 
+brew "awsenv"
 brew "colima", restart_service: :changed
 brew "docker-buildx"
 brew "docker"
