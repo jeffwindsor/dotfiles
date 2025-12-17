@@ -1,16 +1,5 @@
 #!/usr/bin/env zsh
-# dotfiles.zsh - Dotfiles synchronization system
-
-dots-pull() {
-  print_section "Pulling Dotfiles"
-  git -C "$DOTFILES" pull
-
-  # Reload zsh config
-  source ~/.zshrc
-
-  # Reload app configs
-  command -v aerospace &> /dev/null && aerospace reload-config 2>/dev/null
-}
+# stow.zsh - GNU Stow dotfiles management
 
 dots-sync() {
     local source="$DOTFILES"
@@ -46,4 +35,11 @@ dots-sync() {
         print_muted "$package"
       fi
     done
-  }
+}
+
+alias d='cdl $DOTFILES'
+alias de='cd $DOTFILES && nvim .'
+alias dv='zed $DOTFILES'
+alias dg='lazygit --path $DOTFILES'
+
+

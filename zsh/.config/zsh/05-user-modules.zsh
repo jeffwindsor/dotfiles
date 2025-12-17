@@ -1,11 +1,6 @@
 #!/usr/bin/env zsh
-# core.zsh - Core utilities, print functions, and query commands
 
-# ═══════════════════════════════════════════════════
-# MISC
-# ═══════════════════════════════════════════════════
-
-# Syncs machine with latest config and installs
+# sync everything
 sync() {
   dots-pull
   brew-sync
@@ -23,6 +18,8 @@ cdl() {
 
 # Measure Zsh startup time
 zsh-load-time() {
+  # zmodload zsh/zprof
+  # zprof
   time zsh -i -c exit
 }
 
@@ -56,7 +53,7 @@ print_header()  { _colorize "== $1 ==" "cyan_reverse" }
 print_section() { _colorize "== $1 ==" "cyan" }
 
 # ═══════════════════════════════════════════════════
-# QUERIES
+# QUERY user functions and alaises 
 # ═══════════════════════════════════════════════════
 
 # Query aliases
@@ -87,3 +84,62 @@ query-everything() {
   echo -e "\n=== Functions ==="
   query-commands "$query"
 }
+
+# ═══════════════════════════════════════════════════
+# DOTFILES
+# ═══════════════════════════════════════════════════
+dots-pull() {
+  print_section "Pulling Dotfiles"
+  git -C "$DOTFILES" pull
+
+  # Reload zsh config
+  source ~/.zshrc
+
+  # Reload app configs
+  command -v aerospace &> /dev/null && aerospace reload-config 2>/dev/null
+}
+
+# ═══════════════════════════════════════════════════
+# ALIASES
+# ═══════════════════════════════════════════════════
+alias p='pwd | pbcopy'
+alias cat='bat --plain'
+alias find='fd'
+alias grep='rg'
+
+# DIRECTORY NAVIGATION
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias c='clear'
+alias cc='cdl $HOME false'
+alias l='clear && eza -A'
+alias la='eza -A'
+alias ll='eza -l'
+alias lla='eza -lA'
+alias config='cdl $XDG_CONFIG_HOME'
+alias tree='eza --tree'
+alias treea='eza --tree --all'
+
+# DIRECTORY ALIASES
+alias src='cdl $SOURCE'
+alias hub='cdl $SOURCE_GITHUB'
+alias lab='cdl $SOURCE_GITCJ'
+alias empire='cdl $SOURCE_GITCJ/empire'
+alias jeff='cdl $SOURCE_JEFF'
+
+# QUERY ALIASES
+alias qa='query-aliases'
+alias qc='query-commands'
+alias qq='query-everything'
+
+
+# ═══════════════════════════════════════════════════
+# Load user modules only if command exists
+# ═══════════════════════════════════════════════════
+for func in "${ZSH_CONFIG_DIR}"/user-modules/*.zsh; do
+  local func_name=$(basename "$func" .zsh)
+  (( $+commands[$func_name] )) && source "$func"
+done
+

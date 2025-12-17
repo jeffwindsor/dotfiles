@@ -1,10 +1,8 @@
 #!/usr/bin/env zsh
-# sqlcl.zsh - Oracle SQL Command Line utilities
 
 # ═══════════════════════════════════════════════════
-# SQLCL (Oracle SQL Command Line)
+# FUNCTIONS
 # ═══════════════════════════════════════════════════
-
 sqlcl-connection() {
   local tns_name="$1"
 
@@ -38,3 +36,12 @@ sqlcl() {
   local connection_string=$(sqlcl-connection "$tns_name")
   "$HOME/bin/sqlcl/bin/sql" -S "$connection_string"
 }
+
+# ═══════════════════════════════════════════════════
+# ALIASES
+# ═══════════════════════════════════════════════════
+alias shopcart='sqlcl "SHOPCART"'
+alias t5='sqlcl "TCJOWEB5"'
+alias t1='sqlcl "TCJOWEB1"'
+
+

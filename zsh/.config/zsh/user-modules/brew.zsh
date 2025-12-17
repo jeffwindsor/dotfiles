@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
-# homebrew.zsh - Homebrew package management functions
+# brew.zsh - Homebrew package management functions
 
 # ═══════════════════════════════════════════════════
-# HOMEBREW
+# FUNCTIONS
 # ═══════════════════════════════════════════════════
 
 # List installed packages
@@ -96,3 +96,16 @@ brew-sync() {
   print_info "   List installed but not bundled packages"
   brew-diff "$brewfile"
 }
+
+# ═══════════════════════════════════════════════════
+# ALIASES
+# ═══════════════════════════════════════════════════
+alias bn='brew install'
+alias bi='brew info'
+alias br='brew remove'
+alias bs='brew search'
+alias bsd='brew search --desc'
+alias bd='brew-diff'
+alias bl='brew-list'
+
+

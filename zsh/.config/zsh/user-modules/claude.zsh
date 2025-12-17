@@ -1,20 +1,13 @@
 #!/usr/bin/env zsh
-# claude.zsh - Claude AI and development environment functions
 
 # ═══════════════════════════════════════════════════
-# CLAUDE / AI
+# FUNCTIONS
 # ═══════════════════════════════════════════════════
-
 # Open Dev Mux in a repo
 claude-dev() {
   local source=$(tv git-repos)
   cd "$source"
   zellij --layout claude
-}
-
-
-claude-bedrock() {
-  ~/bin/claudecode
 }
 
 # Claude Bedrock configuration
@@ -28,3 +21,12 @@ claude-bedrock-direct() {
   echo "setting models to $ANTHROPIC_MODEL : $ANTHROPIC_SMALL_FAST_MODEL"
   ~/.config/claude/bedrock.sh
 }
+
+# ═══════════════════════════════════════════════════
+# ALIASES
+# ═══════════════════════════════════════════════════
+alias aa='claude'
+alias a='claude-dev'
+alias cb='~/bin/claudecode'
+alias claude-bedrock='~/bin/claudecode'
+
