@@ -31,8 +31,12 @@ keybinds {
         bind "Ctrl R" { SwitchToMode "Resize"; }
     }
 
+    // Remove Session link since I do not use or load the plugins
+    shared_except "session" "locked" {
+        unbind "Ctrl o"
+    }
 
-    // Use [ ] for tab focus except when in tab where it is move
+    // Use [ ] for tab focus, except when in tab mode where it is tab move
     tab {
         bind "Ctrl [" { MoveTab "Left"; }
         bind "Ctrl ]" { MoveTab "Right"; }
@@ -42,11 +46,12 @@ keybinds {
         bind "Ctrl ]" { GoToNextTab; }
     }
 
-    // Everywhere - all unbinds above this please 
     shared_except "locked" {
-        unbind "Alt i" "Alt o"  // tab movement 
-        // unbind "Alt p" "Alt Shift p"  // pane grouping
-        // unbind "Alt [" "Alt ]"   // swap layouts
+        // REMOVE Alt keys conflicting with other programs
+        unbind "Alt i" "Alt o"        // tab movement 
+        unbind "Alt p" "Alt Shift p"  // pane grouping
+        // unbind "Alt [" "Alt ]"        // swap layouts
+        // bind "Ctrl D" { Detach; } // only in session
  
         //  Resize (replacing Alt version)
         unbind "Alt =" "Alt +" "Alt -"
@@ -70,13 +75,12 @@ keybinds {
         //  New Pane (replacing Alt version)
         unbind "Alt n" 
         bind "Ctrl n" { NewPane; }
-        bind "Ctrl Right" { NewPane "Right"; }
+        bind "Ctrl Up" { NewPane "Right"; }
         bind "Ctrl Down" { NewPane "Down"; }
         bind "Ctrl s" { NewPane "stacked"; }
 
         //  Edit Pane's Text in $EDITOR
-        bind "Ctrl e" { EditScrollback;}
-
+        // bind "Ctrl e" { EditScrollback;}
 
     }
 
@@ -85,14 +89,13 @@ keybinds {
 plugins clear-defaults=true {
     // status-bar location="zellij:status-bar"      // Disabled: replaced by compact-bar
     // tab-bar location="zellij:tab-bar"            // Disabled: replaced by compact-bar
-
-    about location="zellij:about"
-    configuration location="zellij:configuration"
-    filepicker location="zellij:strider"
-    plugin-manager location="zellij:plugin-manager"
-    session-manager location="zellij:session-manager"
-    strider location="zellij:strider"
-    welcome-screen location="zellij:session-manager"
+    // about location="zellij:about"  //do not use
+    // configuration location="zellij:configuration"  //do not use
+    // filepicker location="zellij:strider"  //do not use
+    // plugin-manager location="zellij:plugin-manager"  //do not use
+    // session-manager location="zellij:session-manager"
+    // strider location="zellij:strider"  //do not use
+    // welcome-screen location="zellij:session-manager"  //do not use
     compact-bar location="zellij:compact-bar" {
       tooltip "Ctrl x"
     }
