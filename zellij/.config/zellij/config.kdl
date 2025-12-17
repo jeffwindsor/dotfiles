@@ -17,6 +17,7 @@ keybinds {
         bind "h" { MoveFocus "Left"; }
         bind "Down" { NewPane "Down"; SwitchToMode "normal"; }
         bind "Right" { NewPane "Right"; SwitchToMode "normal"; }
+        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
 
@@ -68,8 +69,9 @@ keybinds {
 
         //  New Pane (replacing Alt version)
         unbind "Alt n" 
-        bind "Ctrl n" { NewPane "Right"; }
-        bind "Ctrl N" { NewPane "Down"; }
+        bind "Ctrl n" { NewPane; }
+        bind "Ctrl Right" { NewPane "Right"; }
+        bind "Ctrl Down" { NewPane "Down"; }
         bind "Ctrl s" { NewPane "stacked"; }
 
         //  Edit Pane's Text in $EDITOR
@@ -99,7 +101,7 @@ plugins clear-defaults=true {
 }
 
 theme "tender"
-default_layout "default"
+default_layout "compact-top-bar"
 session_serialization false
 show_startup_tips false
 show_release_notes false
