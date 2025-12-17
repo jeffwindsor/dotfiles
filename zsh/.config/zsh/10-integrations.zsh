@@ -28,6 +28,8 @@ if command -v mise &> /dev/null; then
   }
 fi
 
-if command -v awsenv &> /dev/null; then 
-   source "/opt/homebrew/opt/awsenv/share/awsenv/shell-init.bash"
+# CJ Engineering: awsenv
+if command -v awsenv >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
+    local awsenv_init="$(brew --prefix awsenv)/share/awsenv/shell-init.bash"
+    [ -f "$awsenv_init" ] && source "$awsenv_init"
 fi

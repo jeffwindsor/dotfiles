@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
-# git.zsh - Git workflow and repository management functions
 
 # ═══════════════════════════════════════════════════
-# GIT FUNCTIONS
+# FUNCTIONS
 # ═══════════════════════════════════════════════════
 
 git-ls-ignored(){
@@ -161,3 +160,20 @@ git-workon-repo() {
     zellij --layout claude
   fi
 }
+
+
+# ═══════════════════════════════════════════════════
+# ALIASES
+# ═══════════════════════════════════════════════════
+alias gb='git blame -w -C -C -C'
+alias gg='lazygit'
+alias gs='git status'
+alias gph='git push'
+alias gpl='git pull'
+
+alias gd='git-diff'
+alias gl='git-log'
+alias gr='git-reflog'
+
+alias srcs='git-goto-repo'
+alias srcx='git-workon-repo'
