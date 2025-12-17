@@ -1,5 +1,5 @@
 tap "nikitabobko/tap"
-tap "cjdev/tap" "git@gitlab.cj.dev:cjdev/homebrew-tap.git"
+tap "cjdev/tap", "git@gitlab.cj.dev:cjdev/homebrew-tap.git"
 
 brew "bash"
 brew "bat"
