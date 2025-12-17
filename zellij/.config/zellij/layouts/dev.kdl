@@ -2,18 +2,18 @@ layout {
   pane size=1 borderless=true {
       plugin location="compact-bar"
   }
-  pane split_direction="vertical" {
-      pane size="60%" stacked=true {
-          pane name="edit" {}
-      }
-      pane size="40%" stacked=true {
-          pane name="ai"{
-              focus true
-          }
-          pane name="git" {
-              command "lazygit"
-          }
-          pane name="prompt" { }
+  pane split_direction="vertical"{
+    // editor
+    pane size="55%" name="{ }"
+    pane size="45%" split_direction="horizontal" {
+        pane size="80%" stacked=true {
+          // ai
+          pane name="[┐∵]┘" focus=true
+          // git
+          pane name="" 
+        }
+        // prompt
+        pane size="20%" name=">_"
       }
   }
 }
