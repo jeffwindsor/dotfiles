@@ -8,8 +8,8 @@
 
 format = """
 $directory\
-$git_branch $git_state$git_status \
-$java$nodejs$gleam$haskell$python\
+$git_branch$git_state$git_status \
+$aws$gleam$golang$haskell$java$kotlin$lua$nodejs$python$rust$scala\
 $fill\
 $docker_context$shell$time\
 $line_break\
@@ -40,7 +40,7 @@ highlight2 = "bright-green"
 highlight3 = "bright-yellow"
 lowlight1 = "bright-black"
 lowlight2 = "purple"
-lowlight3 = "magenta"
+lowlight3 = "purple"
 error = "red"
 
 
@@ -50,7 +50,7 @@ truncation_length = 3
 truncation_symbol = "…/"
 
 [git_branch]
-symbol = "  "
+symbol = " "
 format = "[$symbol$branch](text2 dimmed)"
 
 [git_status]
@@ -73,7 +73,7 @@ number_threshold = 1
 
 [docker_context]
 symbol = ""
-format = "[[$symbol ($context) ]](lowlight1)"
+format = "[[$symbol$context ]](lowlight1)"
 
 [shell]
 disabled = false
@@ -83,7 +83,7 @@ bash_indicator = "bash"
 
 [time]
 disabled = false
-format = "[$time](lowlight1) "
+format = "[$time](lowlight1)"
 
 [sudo]
 disabled = false
@@ -98,194 +98,41 @@ vimcmd_symbol = "[❮](lowlight2)"
 
 # NERD FONT (copy)
 [aws]
-symbol = " "
-
-[buf]
-symbol = " "
-
-[bun]
-symbol = " "
-
-[c]
-symbol = " "
-
-[cpp]
-symbol = " "
-
-[cmake]
-symbol = " "
-
-[conda]
-symbol = " "
-
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
-
-[deno]
-symbol = " "
-
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fortran]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
-
-[gcloud]
-symbol = " "
-
-[git_commit]
-tag_symbol = '  '
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [golang]
-symbol = " "
-
-[gradle]
-symbol = " "
-
-[guix_shell]
-symbol = " "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [haskell]
-symbol = " "
-
-[haxe]
-symbol = " "
-
-[hg_branch]
-symbol = " "
-
-[hostname]
-ssh_symbol = " "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [java]
-symbol = " "
-
-[julia]
-symbol = " "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [kotlin]
-symbol = " "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [lua]
-symbol = " "
-
-[memory_usage]
-symbol = "󰍛 "
-
-[meson]
-symbol = "󰔷 "
-
-[nim]
-symbol = "󰆥 "
-
-[nix_shell]
-symbol = " "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [nodejs]
-symbol = " "
-
-[ocaml]
-symbol = " "
-
-[os.symbols]
-Alpaquita = " "
-Alpine = " "
-AlmaLinux = " "
-Amazon = " "
-Android = " "
-AOSC = " "
-Arch = " "
-Artix = " "
-CachyOS = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "󰛓 "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
-Kali = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-Nobara = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-RockyLinux = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Void = " "
-Windows = "󰍲 "
-
-[package]
-symbol = "󰏗 "
-
-[perl]
-symbol = " "
-
-[php]
-symbol = " "
-
-[pijul_channel]
-symbol = " "
-
-[pixi]
-symbol = "󰏗 "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [python]
-symbol = " "
-
-[rlang]
-symbol = "󰟔 "
-
-[ruby]
-symbol = " "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
 
 [rust]
-symbol = "󱘗 "
+symbol = "󱘗"
+format = '[${symbol}${version}](text3 dimmed)'
 
 [scala]
-symbol = " "
-
-[status]
-symbol = " "
-
-[swift]
-symbol = " "
-
-[xmake]
-symbol = " "
-
-[zig]
-symbol = " "
+symbol = ""
+format = '[${symbol}${version}](text3 dimmed)'
