@@ -1,22 +1,13 @@
 #!/usr/bin/env zsh
-# yazi.zsh - Yazi file manager integration
-
-# ═══════════════════════════════════════════════════
-# YAZI
-# ═══════════════════════════════════════════════════
 
 # Yazi with directory change support
-yazi-cwd() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  if local cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    cd -- "$cwd"
-  fi
-  rm -f -- "$tmp"
+function yazi-cwd() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
 }
 
-# ═══════════════════════════════════════════════════
-# YAZI (file manager)
-# ═══════════════════════════════════════════════════
 alias y='yazi-cwd'
 
