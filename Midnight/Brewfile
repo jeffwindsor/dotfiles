@@ -28,6 +28,7 @@ cask "zed"
 
 
 cask "balenaetcher"
+cask "bambu-studio"
 cask "iina"
 cask "spotify"
 cask "transmission"
