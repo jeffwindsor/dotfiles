@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-# ═══════════════════════════════════════════════════
-# FUNCTIONS
-# ═══════════════════════════════════════════════════
-
 git-ls-ignored(){
   git ls-files --ignored --cached --exclude-standard
 }
@@ -135,17 +131,17 @@ git-diff() {
 
 # Git log with tv
 git-log() {
-  tv git-log
+  tv my-git-log
 }
 
 # Git reflog with tv
 git-reflog() {
-  tv git-reflog
+  tv my-git-reflog
 }
 
 
 git-goto-repo() {
-  local repo=$(tv git-repos)
+  local repo=$(tv my-git-repos)
   if [[ -n "$repo" ]]; then 
     cd "$repo"
     eza -la
@@ -154,7 +150,7 @@ git-goto-repo() {
 
 # Select git repo with tv
 git-workon-repo() {
-  local repo=$(tv git-repos)
+  local repo=$(tv my-git-repos)
   if [[ -n "$repo" ]]; then 
     cd "$repo"
     zellij --layout claude
