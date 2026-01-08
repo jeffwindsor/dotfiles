@@ -17,7 +17,10 @@ if [[ ! -d "$THEMES_DIR" ]]; then
   exit 1
 fi
 
-echo "🔨 Generating theme-specific configs..."
+echo "Generate theme-specific configs for use by random script"
+
+echo " Removing old configs..."
+rm alacritty-*.toml
 
 # For each theme file
 for theme_file in "$THEMES_DIR"/*.toml; do
@@ -34,9 +37,8 @@ EOF
 
   # Append the base config content
   cat "$BASE_CONFIG" >>"$output_config"
-
-  echo "  ✅ Generated: alacritty-${theme_name}.toml"
+  echo " - Generated: alacritty-${theme_name}.toml"
 done
 
 echo ""
-echo "🎉 Done! Generated $(ls "$ALACRITTY_DIR"/alacritty-*.toml 2>/dev/null | wc -l | tr -d ' ') theme configs"
+echo "Done! Generated $(ls "$ALACRITTY_DIR"/alacritty-*.toml 2>/dev/null | wc -l | tr -d ' ') theme configs"
