@@ -1,4 +1,3 @@
-# UNTESTED
 [metadata]
 name = "docker-images"
 description = "A channel to select from Docker images"
@@ -10,4 +9,4 @@ output = "{split: :-1}"
 
 
 [preview]
-command = "docker image inspect {split: :-1} | jq -C"
+command = "docker image inspect '{split: :-1}' | jq -C"
