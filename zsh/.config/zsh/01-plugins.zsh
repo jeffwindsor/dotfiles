@@ -19,6 +19,8 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 
 # ═══════════════════════════════════════════════════
 # LOAD COMPLETIONS
