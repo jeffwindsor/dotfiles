@@ -89,8 +89,8 @@ symbol = "#"
 
 [character]
 success_symbol = "[❯](text1)"
-error_symbol = "[❯](dimmed error)"
-vimcmd_symbol = "[❮](dimmed special)"
+error_symbol = "[❯](error)"
+vimcmd_symbol = "[❮](special)"
 
 
 # NERD FONT (copy)
