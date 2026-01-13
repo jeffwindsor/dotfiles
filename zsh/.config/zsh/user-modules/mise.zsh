@@ -40,3 +40,8 @@ mise-sync() {
   mise install
   cd - > /dev/null
 }
+
+mise-find() {
+  echo "Find all mise visible files"
+  fd -H '\.(mise|asdf)(\.local)?\.toml$|^\.tool-versions$' .
+}
