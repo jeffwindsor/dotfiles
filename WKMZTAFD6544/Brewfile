@@ -42,3 +42,7 @@ brew "protobuf"
 cask "intellij-idea-ce"
 cask "slack"
 cask "tuple"
+
+brew "shellcheck"
+brew "tree-sitter-cli"
+brew "watchexec"
