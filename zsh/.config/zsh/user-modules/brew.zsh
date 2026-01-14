@@ -37,13 +37,13 @@ brew-diff() {
   # Function to show differences
   show_diff() {
     local title="$1"
-    shift
-    local -a installed=("$@")
+    local installed_count="$2"
+    shift 2
 
-    # Split arrays - first half is installed, second half is bundled
-    local split=$((($# + 1) / 2))
-    local -a inst=("${@:1:$split}")
-    local -a bund=("${@:$split+1}")
+    # First installed_count items are installed packages
+    local -a inst=("${@:1:$installed_count}")
+    # Remaining items are bundled packages
+    local -a bund=("${@:$((installed_count + 1))}")
 
     # Find extras (installed but not in Brewfile)
     local -a extra=()
@@ -68,8 +68,8 @@ brew-diff() {
     echo ""
   }
 
-  show_diff "Formulae" "${formulae_installed[@]}" "${formulae_bundled[@]}"
-  show_diff "Casks" "${casks_installed[@]}" "${casks_bundled[@]}"
+  show_diff "Formulae" "${#formulae_installed[@]}" "${formulae_installed[@]}" "${formulae_bundled[@]}"
+  show_diff "Casks" "${#casks_installed[@]}" "${casks_installed[@]}" "${casks_bundled[@]}"
 }
 
 # Brew sync - update and install from Brewfile

@@ -28,7 +28,7 @@ cask "raycast"
 cask "zed"
 
 
-brew "awsenv"
+brew "cjdev/tap/awsenv"
 brew "colima", restart_service: :changed
 brew "docker-buildx"
 brew "docker"
