@@ -17,15 +17,7 @@ fi
 
 # Mise - Runtime manager (hybrid: eager PATH, lazy hooks)
 if command -v mise &> /dev/null; then
-  # Eagerly add mise shims to PATH for immediate tool availability (fast, ~5ms)
-  eval "$(command mise activate zsh --shims)"
-
-  # Lazy-load full mise hook system (cd hooks, auto-install, etc.)
-  function mise() {
-    unset -f mise                        # Remove this wrapper function, exposing the real mise binary
-    eval "$(command mise activate zsh)"  # Run the real mise and install its full hook system
-    mise "$@"                            # Execute the real mise with original arguments
-  }
+  eval "$(mise activate zsh)"
 fi
 
 # CJ Engineering: awsenv
