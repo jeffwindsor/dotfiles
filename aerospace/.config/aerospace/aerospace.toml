@@ -53,12 +53,12 @@ alt-ctrl-space = 'exec-and-forget open ~'
 alt-c = 'workspace 📅'
 alt-o = 'workspace 📅'
 alt-shift-c = ['move-node-to-workspace 📅', 'workspace 📅']
+alt-k = 'workspace 💬'
 alt-m = 'workspace 💬'
 alt-t = 'workspace 💬'
 alt-shift-m = ['move-node-to-workspace 💬', 'workspace 💬']
 alt-n = 'workspace 📒'
 alt-shift-n = ['move-node-to-workspace 📒', 'workspace 📒']
-
 alt-1 = 'workspace 1'
 alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
 alt-2 = 'workspace 2'
