@@ -4,9 +4,8 @@ default-root-container-orientation = 'auto'
 
 [workspace-to-monitor-force-assignment]
 # spec workspaces
-'📅' = 'secondary' #c - calender
-'💬' = 'secondary' #m - messages
-'📒' = 'secondary' #n - notes
+'💼' = 'secondary' # work
+'📓' = 'secondary' # notes
 
 [gaps]
 inner.horizontal = [{ monitor.secondary = 0 }, 0]
@@ -50,15 +49,20 @@ alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app
 alt-ctrl-space = 'exec-and-forget open ~'
 
 # Workspaces
-alt-c = 'workspace 📅'
-alt-o = 'workspace 📅'
-alt-shift-c = ['move-node-to-workspace 📅', 'workspace 📅']
-alt-k = 'workspace 💬'
-alt-m = 'workspace 💬'
-alt-t = 'workspace 💬'
-alt-shift-m = ['move-node-to-workspace 💬', 'workspace 💬']
-alt-n = 'workspace 📒'
-alt-shift-n = ['move-node-to-workspace 📒', 'workspace 📒']
+alt-c = 'workspace 💼'
+alt-o = 'workspace 💼'
+alt-shift-o = ['move-node-to-workspace 💼', 'workspace 💼']
+alt-shift-c = ['move-node-to-workspace 💼', 'workspace 💼']
+alt-k = 'workspace 💼'
+alt-m = 'workspace 💼'
+alt-t = 'workspace 💼'
+alt-shift-k = ['move-node-to-workspace 💼', 'workspace 💼']
+alt-shift-m = ['move-node-to-workspace 💼', 'workspace 💼']
+alt-shift-l = ['move-node-to-workspace 💼', 'workspace 💼']
+alt-n = 'workspace 📓'
+alt-r = 'workspace 📓'
+alt-shift-n = ['move-node-to-workspace 📓', 'workspace 📓']
+alt-shift-r = ['move-node-to-workspace 📓', 'workspace 📓']
 alt-1 = 'workspace 1'
 alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
 alt-2 = 'workspace 2'
@@ -130,33 +134,33 @@ run = 'layout tiling'
 # Messages
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace 💬']
+run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
-run = ['move-node-to-workspace 💬']
+run = ['move-node-to-workspace 💼']
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['move-node-to-workspace 💬']
+run = ['move-node-to-workspace 💼']
 
 # Calendar
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = ['move-node-to-workspace 📅']
+run = ['move-node-to-workspace 💼']
 
 # Outlook
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = ['move-node-to-workspace 📅']
+run = ['move-node-to-workspace 💼']
 
 
 # Notes
 [[on-window-detected]]
 if.app-id = 'com.apple.Notes'
-run = ['move-node-to-workspace 📒']
+run = ['move-node-to-workspace 📓']
 
 # Reminders
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
-run = ['move-node-to-workspace 📒']
+run = ['move-node-to-workspace 📓']
