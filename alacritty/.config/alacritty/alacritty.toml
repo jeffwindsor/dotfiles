@@ -2,14 +2,14 @@
 TERM = "alacritty"
 
 [font]
-size = 14
+size = 16
 normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
 bold = { family = "JetBrainsMono Nerd Font Mono", style = "Bold" }
 italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
 
 [window]
-padding.x = 10
-padding.y = 10
+padding.x = 2
+padding.y = 2
 decorations = "None"
 option_as_alt = "Both"
 # opacity = 0.94
