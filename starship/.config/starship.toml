@@ -29,6 +29,7 @@ $line_break\
 $sudo$jobs$character\
 """
 
+# command_timeout = 50
 
 palette = "primary"
 
