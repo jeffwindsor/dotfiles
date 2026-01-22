@@ -4,7 +4,7 @@
 ALACRITTY_DIR="$HOME/.config/alacritty"
 
 # Get all generated theme configs
-configs=("$ALACRITTY_DIR"/alacritty*.toml)
+configs=("$ALACRITTY_DIR"/themes/*.toml)
 
 # Check if theme configs were found
 if [[ ${#configs[@]} -eq 0 ]]; then
