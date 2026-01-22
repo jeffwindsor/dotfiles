@@ -14,3 +14,5 @@ alias vm.='NVIM_APPNAME=nvim-mini nvim .'
 alias vv='nvim-by-appname'
 alias vv.='nvim-by-appname .'
 
+alias md='cd ~/markdown/'
+alias mde='cd ~/markdown/ && nvim'
