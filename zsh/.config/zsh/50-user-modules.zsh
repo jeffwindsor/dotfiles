@@ -145,4 +145,4 @@ for func in "${ZSH_CONFIG_DIR}"/user-modules/*.zsh; do
 done
 
 # TODO: hack for sqlcl special case, shich has a non standard install of sqlcl in the ~/bin directory
-[[ -f "$HOME/bin/sqlcl/bin/sql" && -f "./user-modules/sqlcl.zsh" ]] && source ./user-modules/sqlcl.zsh
+source $XDG_CONFIG_HOME/zsh/user-modules/sqlcl.zsh
