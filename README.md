@@ -28,7 +28,7 @@ Other options would be `chezmoi` or `yadm`, but for me `stow` + functions is fin
 * files
   * [yazi](https://yazi-rs.github.io/features) - file manager
   * [bat](https://github.com/sharkdp/bat) - colorful `cat` replacement (lots of extras)
-  * [eza](https://eza.rocks/) - colorful `ls` replacement (lots of extras)
+  * lsd - colorful `ls` replacement (lots of extras)
 * search 
   * [fd](https://github.com/sharkdp/fd) - faster replacement for find (used by `fzf` and others)
   * [fzf](https://github.com/junegunn/fzf) with [fzf-tab](https://github.com/Aloxaf/fzf-tab) - a better zsh completion menu

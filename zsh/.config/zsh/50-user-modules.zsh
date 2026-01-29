@@ -12,7 +12,7 @@ sync() {
 cdl() {
   cd "$1"
   clear
-  [[ "${2:-true}" == "true" ]] && eza -la
+  [[ "${2:-true}" == "true" ]] && lsd -la
   return 0
 }
 
@@ -114,13 +114,13 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias c='clear'
 alias cc='cdl $HOME false'
-alias l='clear && eza -A --git'
-alias la='eza -A --git'
-alias ll='eza -l'
-alias lla='eza -lA --git'
+alias l='clear && lsd -A --git'
+alias la='lsd -A --git'
+alias ll='lsd -l'
+alias lla='lsd -lA --git'
 alias config='cdl $XDG_CONFIG_HOME'
-alias tree='eza --tree --git'
-alias treea='eza --tree --all --git'
+alias tree='lsd --tree --git'
+alias treea='lsd --tree --all --git'
 
 # DIRECTORY ALIASES
 alias src='cdl $SOURCE'

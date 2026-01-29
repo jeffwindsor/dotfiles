@@ -3,7 +3,7 @@ tap "nikitabobko/tap"
 
 brew "bash"
 brew "bat"
-brew "eza"
+brew "lsd"
 brew "fd"
 brew "fzf"
 brew "git"
