@@ -12,7 +12,7 @@ sync() {
 cdl() {
   cd "$1"
   clear
-  [[ "${2:-true}" == "true" ]] && lsd -la
+  [[ "${2:-true}" == "true" ]] && lsd -lA
   return 0
 }
 
@@ -114,9 +114,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias c='clear'
 alias cc='cdl $HOME false'
-alias l='clear && lsd -A --git'
-alias la='lsd -A --git'
-alias ll='lsd -l'
+alias l='clear && lsd -1 --git'
+alias ll='lsd -l --git'
 alias lla='lsd -lA --git'
 alias config='cdl $XDG_CONFIG_HOME'
 alias tree='lsd --tree --git'
