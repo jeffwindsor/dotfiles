@@ -1,0 +1,15 @@
+
+#== Appearance ==
+background-opacity = 0.94
+confirm-close-surface = false
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+quit-after-last-window-closed = true
+theme = catppuccin-mocha
+# theme = tokyonight-storm		
+window-decoration = false
+
+
+#== Keybindings ==
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = shift+enter=text:\n
