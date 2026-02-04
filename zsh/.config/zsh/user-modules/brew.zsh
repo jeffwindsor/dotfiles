@@ -105,7 +105,6 @@ alias bi='brew info'
 alias br='brew remove'
 alias bs='brew search'
 alias bsd='brew search --desc'
-alias bd='brew-diff'
 alias bl='brew-list'
 
 
