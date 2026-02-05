@@ -12,6 +12,8 @@ dnf install stow
 dnf install yazi
 dnf install zsh
 
+dnf install alacritty
+
 # lazygit
 dnf copr enable dejan/lazygit
 dnf install lazygit
