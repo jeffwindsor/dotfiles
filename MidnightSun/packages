@@ -1,0 +1,21 @@
+
+sudo dnf install bat
+sudo dnf install lsd
+sudo dnf install fd
+sudo dnf install fzf
+sudo dnf install git
+sudo dnf install neovim
+sudo dnf install ripgrep
+sudo dnf install stow
+sudo dnf install yazi
+sudo dnf install zsh
+
+# lazy git
+sudo dnf copr enable atim/starship
+sudo dnf install starship
+
+lazygit
+mise
+starship
+television
+zellij
