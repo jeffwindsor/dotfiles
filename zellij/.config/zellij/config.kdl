@@ -59,11 +59,11 @@ keybinds {
         bind "Ctrl =" { Resize "Increase"; }
 
         //  Full screen the pane
-        bind "Ctrl f" { ToggleFocusFullscreen; }
+        bind "Ctrl F" { ToggleFocusFullscreen; }
 
         //  Floating Pane (replacing Alt version)
         unbind "Alt f"
-        bind "Ctrl F" { ToggleFloatingPanes; }
+        bind "Ctrl f" { ToggleFloatingPanes; }
 
         //  Pane Focus Change (replacing Alt version) 
         unbind "Alt h" "Alt Left" "Alt l" "Alt Right" "Alt j" "Alt Down" "Alt k" "Alt Up"
@@ -103,6 +103,9 @@ plugins clear-defaults=true {
     // zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
 }
 
+// 
+// DEFAULT LOOK AND FEEL
+//
 theme "tender"
 default_layout "compact-top-bar"
 session_serialization false
