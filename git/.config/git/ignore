@@ -9,5 +9,10 @@
 
 # Claude and SuperClaude
 CLAUDE.md
+
+# Super Claude
 .serena
 **/.claude/settings.local.json
+
+# Beads
+.beads/
