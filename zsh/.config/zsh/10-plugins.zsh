@@ -19,6 +19,15 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+
+# ═══════════════════════════════════════════════════
+# ZSH-VI-MODE CONFIGURATION
+# ═══════════════════════════════════════════════════
+# Disable mode cursor to prevent display issues
+# This prevents the plugin from manipulating cursor appearance
+# which can cause visual glitches (row deletion above prompt)
+ZVM_CURSOR_STYLE_ENABLED=false
+
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 
