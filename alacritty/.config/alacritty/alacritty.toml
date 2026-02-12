@@ -1,3 +1,6 @@
+# Import theme
+import = ["~/.config/alacritty/themes/tender.toml"]
+
 [env]
 TERM = "alacritty"
 
