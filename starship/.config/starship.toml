@@ -23,11 +23,11 @@ format = """
 $directory\
 $git_branch$git_state$git_status \
 $aws$gleam$golang$haskell$java$kotlin$lua$nodejs$python$rust$scala\
-$fill\
-[${shell} : ${time} ](lowlight)\
 $line_break\
 $sudo$jobs$character\
 """
+
+right_format = """[${shell} : ${time} ](lowlight)"""
 
 # command_timeout = 50
 
