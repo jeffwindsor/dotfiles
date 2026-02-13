@@ -12,7 +12,7 @@ sync() {
 cdl() {
   cd "$1"
   clear
-  [[ "${2:-true}" == "true" ]] && lsd -lA
+  [[ "${2:-true}" == "true" ]] && lsd -1A
   return 0
 }
 
