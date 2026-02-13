@@ -15,8 +15,8 @@ keybinds {
     pane {
         unbind "e" "c" "d" "w" "Up" "Left"
         bind "h" { MoveFocus "Left"; }
-        bind "Down" { NewPane "Down"; SwitchToMode "normal"; }
-        bind "Right" { NewPane "Right"; SwitchToMode "normal"; }
+        bind "N" { NewPane "Down"; SwitchToMode "normal"; }
+        bind "n" { NewPane "Right"; SwitchToMode "normal"; }
         bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
@@ -74,9 +74,8 @@ keybinds {
 
         //  New Pane (replacing Alt version)
         unbind "Alt n" 
-        bind "Ctrl n" { NewPane; }
-        bind "Ctrl Up" { NewPane "Right"; }
-        bind "Ctrl Down" { NewPane "Down"; }
+        bind "Ctrl N" { NewPane "Down"; }
+        bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl s" { NewPane "stacked"; }
 
         //  Edit Pane's Text in $EDITOR
