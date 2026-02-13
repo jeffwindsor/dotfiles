@@ -144,7 +144,7 @@ git-goto-repo() {
   local repo=$(tv my-git-repos)
   if [[ -n "$repo" ]]; then 
     cd "$repo"
-    lsd -lA
+    lsd -1A
   fi
 }
 
