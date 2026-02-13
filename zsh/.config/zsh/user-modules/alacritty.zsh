@@ -28,18 +28,40 @@ function alacritty-theme() {
 	fi
 
 	# Update the config file with the new theme
+	# In the new format, import line is under [general] section
 	local import_line="import = [\"~/.config/alacritty/themes/${selected_theme}.toml\"]"
 
-	if grep -q "^import = " "$config_file"; then
-		# Replace existing import line
-		sed -i.bak "s|^import = .*|$import_line|" "$config_file"
+	if grep -q "^import = \|^[[:space:]]*import = " "$config_file"; then
+		# Replace existing import line (preserves indentation if present)
+		sed -i.bak "s|^\([[:space:]]*\)import = .*|\1$import_line|" "$config_file"
 	else
-		# Add import line at the top after any existing comments
+		# Add import line under [general] section with proper indentation
+		# Create [general] section if it doesn't exist
 		local temp_file=$(mktemp)
 		awk -v import="$import_line" '
-			BEGIN { added=0 }
-			/^[^#]/ && !added { print "# Import theme"; print import; print ""; added=1 }
+			/^\[general\]/ {
+				print
+				in_general=1
+				next
+			}
+			in_general && !added {
+				# Add import as first line in [general] section
+				print import
+				added=1
+			}
+			/^\[/ && in_general {
+				# Hit next section, stop looking
+				in_general=0
+			}
 			{ print }
+			END {
+				# If we never found [general], add it at the end
+				if (!added) {
+					print ""
+					print "[general]"
+					print import
+				}
+			}
 		' "$config_file" > "$temp_file"
 		mv "$temp_file" "$config_file"
 	fi
