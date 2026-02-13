@@ -26,8 +26,8 @@ outer.right = [{ monitor.secondary = 0 }, 0]
 #   minus, period, quote, right, rightSquareBracket, semicolon, shift, slash, space, tab, up,
 
 [mode.main.binding]
-alt-ctrl-enter = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh zellij'
-alt-ctrl-shift-enter = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh'
+alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
 
 alt-ctrl-b = 'exec-and-forget open -n /Applications/Brave\ Browser.app/'
 alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
@@ -43,8 +43,8 @@ alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
 # alt-ctrl-p = 'exec-and-forget open /Applications/Spotify.app'
 alt-ctrl-r = 'exec-and-forget open /System/Applications/Reminders.app'
 alt-ctrl-t = 'exec-and-forget open /Applications/Microsoft\ Teams.app'
-alt-ctrl-v = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh nvim'
-alt-ctrl-y = 'exec-and-forget ~/.config/alacritty/launch-random-theme.sh yazi ~'
+alt-ctrl-v = 'exec-and-forget open -n /Applications/Alacritty.app --args -e nvim'
+alt-ctrl-y = 'exec-and-forget open -n /Applications/Alacritty.app --args -e yazi ~'
 alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app'
 alt-ctrl-space = 'exec-and-forget open ~'
 

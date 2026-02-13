@@ -1,14 +1,9 @@
-# Import theme
-import = ["~/.config/alacritty/themes/tender.toml"]
-
 [env]
 TERM = "alacritty"
 
 [font]
 size = 16
-# normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
-# bold = { family = "JetBrainsMono Nerd Font Mono", style = "Bold" }
-# italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
 
 [window]
 padding.x = 4
@@ -19,3 +14,6 @@ option_as_alt = "Both"
 
 [keyboard]
 bindings = [{ key = "Return", mods = "Shift", chars = "\n" }]
+
+[general]
+import = ["~/.config/alacritty/themes/tender.toml"]
