@@ -1,5 +1,16 @@
-// mnemonic key binding approach
+// ==============================================================================
+// KEYBINDING PHILOSOPHY
+// ==============================================================================
+// Mnemonic approach: Ctrl-<first-letter> for mode switches
+// - Ctrl-m: Move mode (reposition panes)
+// - Ctrl-R: Resize mode
+// - Ctrl-p: Pane mode
 //
+// Vim-style navigation: hjkl throughout for directional movement
+// Ctrl-based global actions: Avoids Alt conflicts with other programs
+// Tab navigation: Ctrl-[ and Ctrl-] for prev/next tab focus
+// ==============================================================================
+
 keybinds {
     // mnemonic of 'm' for move
     move {
@@ -48,22 +59,25 @@ keybinds {
 
     shared_except "locked" {
         // REMOVE Alt keys conflicting with other programs
-        unbind "Alt i" "Alt o"        // tab movement 
+        unbind "Alt i" "Alt o"        // tab movement
         unbind "Alt p" "Alt Shift p"  // pane grouping
         // unbind "Alt [" "Alt ]"        // swap layouts
         // bind "Ctrl D" { Detach; } // only in session
- 
+
         //  Resize (replacing Alt version)
         unbind "Alt =" "Alt +" "Alt -"
         bind "Ctrl -" { Resize "Decrease"; }
         bind "Ctrl =" { Resize "Increase"; }
 
-        //  Full screen the pane
-        bind "Ctrl F" { ToggleFocusFullscreen; }
+        //  Toggle pane frames (borders)
+        bind "Ctrl u" { TogglePaneFrames; }
 
-        //  Floating Pane (replacing Alt version)
+        //  Fullscreen toggle (replacing Alt version)
         unbind "Alt f"
-        bind "Ctrl f" { ToggleFloatingPanes; }
+        bind "Ctrl f" { ToggleFocusFullscreen; }
+
+        //  Floating Pane toggle
+        bind "Ctrl w" { ToggleFloatingPanes; }
 
         //  Pane Focus Change (replacing Alt version) 
         unbind "Alt h" "Alt Left" "Alt l" "Alt Right" "Alt j" "Alt Down" "Alt k" "Alt Up"
@@ -86,23 +100,12 @@ keybinds {
 }
 
 plugins clear-defaults=true {
-    // status-bar location="zellij:status-bar"      // Disabled: replaced by compact-bar
-    // tab-bar location="zellij:tab-bar"            // Disabled: replaced by compact-bar
-    // about location="zellij:about"  //do not use
-    // configuration location="zellij:configuration"  //do not use
-    // filepicker location="zellij:strider"  //do not use
-    // plugin-manager location="zellij:plugin-manager"  //do not use
-    // session-manager location="zellij:session-manager"
-    // strider location="zellij:strider"  //do not use
-    // welcome-screen location="zellij:session-manager"  //do not use
     compact-bar location="zellij:compact-bar" {
       tooltip "Ctrl x"
     }
-
-    // zellij-forgot location="file:~/.local/share/zellij/plugins/zellij-forgot.wasm"
 }
 
-// 
+//
 // DEFAULT LOOK AND FEEL
 //
 theme "tender"
@@ -110,9 +113,11 @@ default_layout "compact-top-bar"
 session_serialization false
 show_startup_tips false
 show_release_notes false
+pane_frames false
 ui {
-  pane_frames false {
+    pane_frames {
         hide_session_name true
         rounded_corners true
     }
 }
+

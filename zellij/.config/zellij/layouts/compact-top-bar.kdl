@@ -1,5 +1,15 @@
+// ==============================================================================
+// COMPACT TOP BAR LAYOUT
+// ==============================================================================
+// Features:
+// - Compact bar plugin in 1-line borderless top pane
+// - Swap layouts adapt to 2-11+ panes (vertical, horizontal, stacked)
+// - Floating pane layouts: staggered, enlarged, spread
+// - Use Alt-[ / Alt-] to cycle through swap layouts
+// ==============================================================================
+
 layout {
-    tab_template name="ui" {
+    tab_template name="compact-bar-tab" {
         pane size=1 borderless=true {
             plugin location="compact-bar"
         }
@@ -7,19 +17,19 @@ layout {
     }
 
     swap_tiled_layout name="vertical" {
-        ui max_panes=4 {
+        compact-bar-tab max_panes=4 {
             pane split_direction="vertical" {
                 pane
                 pane { children; }
             }
         }
-        ui max_panes=7 {
+        compact-bar-tab max_panes=7 {
             pane split_direction="vertical" {
                 pane { children; }
                 pane { pane; pane; pane; pane; }
             }
         }
-        ui max_panes=11 {
+        compact-bar-tab max_panes=11 {
             pane split_direction="vertical" {
                 pane { children; }
                 pane { pane; pane; pane; pane; }
@@ -29,17 +39,17 @@ layout {
     }
 
     swap_tiled_layout name="horizontal" {
-        ui max_panes=3 {
+        compact-bar-tab max_panes=3 {
             pane
             pane
         }
-        ui max_panes=7 {
+        compact-bar-tab max_panes=7 {
             pane {
                 pane split_direction="vertical" { children; }
                 pane split_direction="vertical" { pane; pane; pane; pane; }
             }
         }
-        ui max_panes=11 {
+        compact-bar-tab max_panes=11 {
             pane {
                 pane split_direction="vertical" { children; }
                 pane split_direction="vertical" { pane; pane; pane; pane; }
@@ -49,7 +59,7 @@ layout {
     }
 
     swap_tiled_layout name="stacked" {
-        ui min_panes=4 {
+        compact-bar-tab min_panes=4 {
             pane split_direction="vertical" {
                 pane
                 pane stacked=true { children; }
@@ -97,6 +107,6 @@ layout {
        }
     }
 
-    ui name="[┐∵]┘"
-    ui name="."
+    compact-bar-tab name="[┐∵]┘"
+    compact-bar-tab name="."
 }
