@@ -49,8 +49,8 @@ keybinds {
 
     // Use [ ] for tab focus, except when in tab mode where it is tab move
     tab {
-        bind "Ctrl [" { MoveTab "Left"; }
-        bind "Ctrl ]" { MoveTab "Right"; }
+        bind "[" { MoveTab "Left"; }
+        bind "]" { MoveTab "Right"; }
     }
     shared_except "locked" "tab" {
         bind "Ctrl [" { GoToPreviousTab; }
