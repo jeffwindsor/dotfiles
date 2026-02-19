@@ -51,6 +51,10 @@ keybinds {
     tab {
         bind "[" { MoveTab "Left"; }
         bind "]" { MoveTab "Right"; }
+        bind "n" { NewTab; SwitchToMode "RenameTab"; } // TabNameInput 0; }
+        bind "N" { NewTab; SwitchToMode "Normal"; }
+        bind "x" { CloseTab; SwitchToMode "Normal"; }
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
     }
     shared_except "locked" "tab" {
         bind "Ctrl [" { GoToPreviousTab; }
