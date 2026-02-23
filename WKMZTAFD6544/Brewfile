@@ -17,6 +17,7 @@ brew "stow"
 brew "television"
 brew "yazi"
 brew "zellij"
+brew "zoxide"
 brew "zsh"
 cask "aerospace"
 cask "alacritty"
@@ -27,6 +28,9 @@ cask "google-chrome"
 cask "raycast"
 cask "zed"
 
+brew "beads"
+brew "beads_viewer"
+brew "nginx"
 
 brew "cjdev/tap/awsenv"
 brew "colima", restart_service: :changed
