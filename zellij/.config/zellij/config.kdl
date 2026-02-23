@@ -16,6 +16,12 @@ keybinds {
     move {
       unbind "Ctrl h"   //original switch to normal
       bind "Ctrl m" { SwitchToMode "Normal"; }
+      bind "n" "Tab" { MovePane; }
+      bind "p" "Shift Tab" { MovePaneBackwards; }
+      bind "h" "Left" { MovePane "Left"; }
+      bind "j" "Down" { MovePane "Down"; }
+      bind "k" "Up" { MovePane "Up"; }
+      bind "l" "Right" { MovePane "Right"; }
     }
     shared_except "move" "locked" {
         unbind "h"
@@ -49,16 +55,21 @@ keybinds {
 
     // Use [ ] for tab focus, except when in tab mode where it is tab move
     tab {
-        bind "[" { MoveTab "Left"; }
-        bind "]" { MoveTab "Right"; }
-        bind "n" { NewTab; SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "[" { GoToPreviousTab; }
+        bind "]" { GoToNextTab; }
+        bind "{" { MoveTab "Left"; }
+        bind "}" { MoveTab "Right"; }
+        bind "n" {
+          LaunchOrFocusPlugin "https://github.com/AlexZasorin/zellij-newtab-plus/releases/download/v0.3.0/zellij-newtab-plus.wasm" {
+            floating true
+
+            use_zoxide false
+          };
+          SwitchToMode "Normal"
+        }
         bind "N" { NewTab; SwitchToMode "Normal"; }
         bind "x" { CloseTab; SwitchToMode "Normal"; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
-    }
-    shared_except "locked" "tab" {
-        bind "Ctrl [" { GoToPreviousTab; }
-        bind "Ctrl ]" { GoToNextTab; }
     }
 
     shared_except "locked" {
@@ -96,76 +107,26 @@ keybinds {
         bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl s" { NewPane "stacked"; }
 
-        //  Edit Pane's Text in $EDITOR
-        // bind "Ctrl e" { EditScrollback;}
+        bind "Ctrl T" {
+          LaunchOrFocusPlugin "https://github.com/AlexZasorin/zellij-newtab-plus/releases/download/v0.3.0/zellij-newtab-plus.wasm" {
+            floating true
 
+            use_zoxide false
+          };
+          SwitchToMode "Normal"
+        }
+
+        // duplicated in tab menu without ctrl
+        bind "Ctrl [" { GoToPreviousTab; }
+        bind "Ctrl ]" { GoToNextTab; }
+        bind "Ctrl {" { MoveTab "Left"; }
+        bind "Ctrl }" { MoveTab "Right"; }
     }
 
     // Tmux-mode trigger: Ctrl Space replaces the default Ctrl b
     shared_except "tmux" "locked" {
         unbind "Ctrl b"
-        bind "Ctrl Space" { SwitchToMode "Tmux"; }
     }
-
-    // Unified tmux-prefix key table — Ctrl Space + key is identical in tmux and zellij
-    // No SwitchToMode "Normal" anywhere: default_mode "tmux" keeps zellij in tmux mode
-    // Unbound keys pass through to the terminal so regular typing is unaffected
-    tmux {
-        // Pane navigation (vim hjkl)
-        bind "h" { MoveFocus "Left"; }
-        bind "j" { MoveFocus "Down"; }
-        bind "k" { MoveFocus "Up"; }
-        bind "l" { MoveFocus "Right"; }
-
-        // New pane: n=right (horizontal split), N=down (vertical split)
-        bind "n" { NewPane "Right"; }
-        bind "N" { NewPane "Down"; }
-
-        // Close: x=pane, X=tab/window
-        bind "x" { CloseFocus; }
-        bind "X" { CloseTab; }
-
-        // Fullscreen toggle
-        bind "f" { ToggleFocusFullscreen; }
-
-        // Rename tab
-        bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
-
-        // Tab navigation: [ = prev, ] = next
-        bind "[" { GoToPreviousTab; }
-        bind "]" { GoToNextTab; }
-
-        // Move tab: < = left, > = right
-        bind "<" { MoveTab "Left"; }
-        bind ">" { MoveTab "Right"; }
-
-        // New tab
-        bind "c" { NewTab; }
-
-        // Resize panes (H/J/K/L = directional, -/= = decrease/increase)
-        bind "H" { Resize "Left"; }
-        bind "J" { Resize "Down"; }
-        bind "K" { Resize "Up"; }
-        bind "L" { Resize "Right"; }
-        bind "-" { Resize "Decrease"; }
-        bind "=" { Resize "Increase"; }
-
-        // Detach
-        bind "d" { Detach; }
-
-        // Sync panes
-        bind "s" { ToggleActiveSyncTab; }
-
-        // Move/swap pane
-        bind "m" { MovePane; }
-
-        // Enter scroll/copy/search mode
-        bind "/" { SwitchToMode "Scroll"; }
-
-        // Send literal Ctrl b to terminal (escape hatch)
-        bind "Ctrl b" { Write 2; }
-    }
-
 }
 
 plugins clear-defaults=true {
@@ -173,6 +134,7 @@ plugins clear-defaults=true {
       tooltip "Ctrl x"
     }
 }
+
 
 //
 // LOOK AND FEEL
