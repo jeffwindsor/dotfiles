@@ -60,7 +60,7 @@ keybinds {
         bind "{" { MoveTab "Left"; }
         bind "}" { MoveTab "Right"; }
         bind "n" {
-          LaunchOrFocusPlugin "https://github.com/AlexZasorin/zellij-newtab-plus/releases/download/v0.3.0/zellij-newtab-plus.wasm" {
+          LaunchOrFocusPlugin "file:~/.local/bin/zellij-newtab-plus.wasm" {
             floating true
 
             use_zoxide false
@@ -107,13 +107,20 @@ keybinds {
         bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl s" { NewPane "stacked"; }
 
+        // New tab with name input
         bind "Ctrl T" {
-          LaunchOrFocusPlugin "https://github.com/AlexZasorin/zellij-newtab-plus/releases/download/v0.3.0/zellij-newtab-plus.wasm" {
+          LaunchOrFocusPlugin "file:~/.local/bin/zellij-newtab-plus.wasm" {
             floating true
-
             use_zoxide false
           };
           SwitchToMode "Normal"
+        }
+
+        // Foget name 
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "file:~/.local/bin/zellij_forgot.wasm" {
+                floating true
+            }
         }
 
         // duplicated in tab menu without ctrl
