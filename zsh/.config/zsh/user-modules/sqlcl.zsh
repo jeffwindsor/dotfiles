@@ -34,7 +34,7 @@ sqlcl() {
   fi
 
   local connection_string=$(sqlcl-connection "$tns_name")
-  "$HOME/bin/sqlcl/bin/sql" -S "$connection_string"
+  "$HOME/.local/bin/sqlcl/bin/sql" -S "$connection_string"
 }
 
 # ═══════════════════════════════════════════════════
