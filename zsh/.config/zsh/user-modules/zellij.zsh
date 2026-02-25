@@ -204,10 +204,6 @@ _zlist_plugins_action() {
 # ═══════════════════════════════════════════════════
 # ALIASES
 # ═══════════════════════════════════════════════════
-alias z='zellij'
-alias zc='zellij --layout claude'
-alias zd='zellij --layout dev'
-alias zl='zellij ls'
 alias zstatus='_zellij_process_plugins "Zellij Plugin Status" _zlist_plugins_action'
 alias zsync='_zellij_process_plugins "Syncing Zellij Plugins" _zsync_action'
 alias zupdate='_zellij_process_plugins "Updating Zellij Plugins" _zupdate_action'
