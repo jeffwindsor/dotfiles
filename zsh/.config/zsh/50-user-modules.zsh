@@ -12,8 +12,7 @@ sync() {
 cdl() {
   cd "$1"
   clear
-  [[ "${2:-true}" == "true" ]] && lsd -1A
-  return 0
+  lsd -A
 }
 
 # Measure Zsh startup time
@@ -114,8 +113,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias c='clear'
 alias cc='cdl $HOME false'
-alias l='clear && lsd -1 --git'
-alias la='clear && lsd -1A --git'
+alias l='clear && lsd --git'
+alias la='clear && lsd -A --git'
 alias ll='lsd -l --git'
 alias lla='lsd -lA --git'
 alias config='cdl $XDG_CONFIG_HOME'
