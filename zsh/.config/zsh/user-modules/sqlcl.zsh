@@ -43,5 +43,5 @@ sqlcl() {
 alias shopcart='sqlcl "SHOPCART"'
 alias t5='sqlcl "TCJOWEB5"'
 alias t1='sqlcl "TCJOWEB1"'
-
+alias sql="cd $SOURCE/gitlab.cj.dev/jwindsor/sql"
 
