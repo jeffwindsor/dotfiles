@@ -1,0 +1,234 @@
+                  ###################################
+                  #   Configuration File for Lira   #
+                  #       Clifm's File Opener       #
+                  ###################################
+
+#-----------------------------
+# Description
+#-----------------------------
+
+# This configuration file allows the user to define how different files are
+# opened by Lira, Clifm's file opener.
+
+# Commented and blank lines are ignored.
+# Lines starting with either '#' or ';' are comments.
+
+# The below settings cover the most common filetypes.
+# It is recommended to edit this file placing your prefered applications
+# at the beginning of the apps list to speed up the opening process.
+
+# The file is read top to bottom and left to right; the first existent
+# application found will be used.
+
+# Applications defined here are NOT desktop files, but commands (arguments
+# can be used as well). Bear in mind that these commands will be executed
+# directly without shell features (like pipes, conditions, loops, etc). For
+# more complex commands, create a script and place its path instead.
+# For example:
+#    X:^text/.*:~/scripts/my_cool_script.sh
+
+# Use 'X' to specify a GUI environment and '!X' for non-GUI environments:
+# X  = GUI only
+# !X = Non-GUI only (like the kernel console or a SSH session)
+#
+# If a line applies to both environments, simply omit the 'X'. For example:
+# 'text/plain=vi'
+
+# Use 'N' to match filenames instead of MIME types.
+# 'N:.*\.txt$=vi' to open all .txt files with vi (both GUI and non-GUI)
+# 'X:N:.*\.txt$=geany' (GUI only)
+# '!X:N:.*\.txt$=vi' (non-GUI only)
+
+# Regular expressions are supported for both MIME types and filenames.
+
+# Use the '%f' placeholder to specify the position of the filename to be
+# opened in the command. For example:
+#    'mpv %f --no-terminal' will expand to 'mpv FILE --no-terminal' 
+#
+# The '%u' placeholder is expanded to the file URI. For example, if the
+# filename is '/home/user/this is a test', 'cmd %u' is expanded to
+# 'cmd file:///home/user/this%20is%20a%20test'.
+#
+# If neither %f nor %u is specified, the filename will be appended to the
+# command. For example:
+#    'mpv --no-terminal' becomes 'mpv --no-terminal FILE'
+#
+# The '%m' placeholder expands to the file's MIME type.
+
+# To suppress STDERR and/or STDOUT use !E and !O respectively (they can be
+# combined). Examples:
+# Supress STDERR only and run in the foreground:
+#    mpv %f !E
+# Supress both (STDERR and STDOUT) and run in the background:
+#    mpv %f !EO &
+
+# The '%x' flag is a shorthand for "%f !EO &". For example:
+#    mpv %x
+#
+# This flag runs the application is in a new session, detached from the
+# running terminal (via setsid(3)).
+#
+# For Ranger users, the '%x' flag is equivalent to "flag f" in rifle.conf.
+
+# Running opening applications in the background:
+# For GUI applications:
+#    APP %x
+# For terminal applications:
+#    TERM -e APP %x
+# Replace 'TERM' and 'APP' with the corresponding values. The -e option
+# might vary depending on the terminal emulator used (TERM).
+#
+# Note: This will hide error messages. To display error messages use:
+#    cmd %f !O &
+# This will run 'cmd' in the background supressing STDOUT only.
+
+# Important: If the opening application is already running, the file will
+# typically open in a new tab, and Clifm will not wait for the file to be
+# closed (as the procecss already returned).
+# To ensure a new instance is created, use options like:
+# geany -i, gedit -s, kate -n, pluma --new-window, etc.
+
+# Environment variables can also be used. Example:
+#    X:text/plain=$EDITOR %f &;$VISUAL;nano;vi
+
+# Use Ranger's rifle (or your preferred opener) for all files
+#.*=rifle
+
+################################
+#  1. File names/extensions    #
+################################
+
+# Match a complete filename
+#X:N:some_filename=cmd
+
+# Match all filenames starting with 'str'
+#X:N:^str.*=cmd
+
+# Match filenames with extension '.ext'
+#X:N:.*\.ext$=cmd
+
+#-----------------------------
+# Clifm config files
+#-----------------------------
+
+X:N:(.*\.clifm$|clifmrc)=$EDITOR;$VISUAL;kak;micro;nvim;vim;vi;mg;emacs;nano;mili;leafpad;mousepad;featherpad;gedit -s;kate -n;pluma --new-window
+!X:N:(.*\.clifm$|clifmrc)=$EDITOR;$VISUAL;kak;micro;nvim;vim;vi;mg;emacs;nano
+
+#-----------------------------
+# Digital books
+#-----------------------------
+
+X:N:.*\.djvu$=djview %x;zathura %x;xreader %x;evince %x;atril %x
+X:N:.*\.(fb2|epub)$=mupdf %x;zathura %x;xreader %x;ebook-viewer %x;FBReader %x;foliate %x
+X:N:.*\.mobi$=mupdf %x;ebook-viewer %x;FBReader %x;foliate %x
+X:N:.*\.(cbr|cbz|cb7|cbt|cba)$=mcomix %x;xreader %x;YACReader %x;qcomicbook %x;zathura %x;foliate %x;atril %x
+X:N:.*\.chm$=xchm %x
+
+#-----------------------------
+# Misc
+#-----------------------------
+
+# ABW files are Abiword documents. These are basically XML, but you most
+# likely want to open them with a word processor.
+X:N:.*\.abw$=abiword %x;libreoffice %x;soffice %x;ooffice %x
+
+# KRA files are Krita image files. These are actually zip files, but you
+# most likely want to open them with Krita.
+X:N:.*\.kra$=krita %x
+
+# SLA files are Scribus files. These are actually XML files, but you
+# most likely want to open them with Scribus.
+X:N:.*\.sla$=scribus %x
+
+# ORA files are OpenRaster image files. These are actually ZIP files,
+# but you most likely want to open them with an image viewer.
+X:N:.*\.ora$=mypaint %x;krita %x;gimp %x;pinta %x;scribus %x;display %x
+
+################################
+# 2. MIME types                #
+################################
+
+#-----------------------------
+# Directories
+#-----------------------------
+# Only for the open-with command (ow) and the --open command line switch.
+# In graphical environments directories will be opened in a new window.
+
+X:inode/directory=xterm -e clifm %x;xterm -e vifm %x;pcmanfm %x;thunar %x;xterm -e ncdu %x
+!X:inode/directory=vifm;ranger;nnn;ncdu
+
+#-----------------------------
+# Web content
+#-----------------------------
+
+X:^text/html$=$BROWSER;surf %x;vimprobable %x;vimprobable2 %x;qutebrowser %x;dwb %x;jumanji %x;luakit %x;uzbl %x;uzbl-tabbed %x;uzbl-browser %x;uzbl-core %x;iceweasel %x;midori %x;opera %x;firefox %x;seamonkey %x;brave %x;chromium-browser %x;chromium %x;google-chrome %x;epiphany %x;konqueror %x;elinks;links2;links;lynx;w3m
+!X:^text/html$=$BROWSER;elinks;links2;links;lynx;w3m
+
+#-----------------------------
+# Text
+#-----------------------------
+
+X:^text/rtf$=libreoffice %x;soffice %x;ooffice %x
+X:(^text/.*|application/(json|javascript)|inode/x-empty)=$EDITOR;$VISUAL;kak;micro;dte;nvim;vim;vi;mg;emacs;nano;mili;leafpad %x;mousepad %x;featherpad %x;nedit %x;kate %x;gedit %x;pluma %x;io.elementary.code %x;liri-text %x;xed %x;atom %x;nota %x;gobby %x;kwrite %x;xedit %x
+!X:(^text/.*|application/(json|javascript)|inode/x-empty)=$EDITOR;$VISUAL;kak;micro;dte;nvim;vim;vi;mg;emacs;nano
+
+#-----------------------------
+# Office documents
+#-----------------------------
+
+!X:^application/.*(open|office)document\.spreadsheet.*=sc-im
+X:^application/(msword|vnd.ms-excel|vnd.ms-powerpoint|.*(open|office)document.*)=libreoffice %x;soffice %x;ooffice %x
+X:^application/(msword|.*(open|office)document\.wordprocessing.*)=abiword %x;calligrawords %x
+X:^application/(vnd.ms-excel|.*(open|office)document\.spreadsheet.*)=gnumeric %x;calligrasheets %x
+X:^application/(vnd.ms-powerpoint|.*(open|office)document\.presentation.*)=calligrastage %x
+
+#-----------------------------
+# Archives
+#-----------------------------
+# Note: 'ad' is Clifm's built-in archives utility (based on atool(1)). Remove it if you
+# prefer another application.
+
+X:^application/(gzip|java-archive|vnd.(debian.binary-package|ms-cab-compressed|rar)|x-(7z-compressed|arj|bzip*|compress|iso9660-image|lzip|lzma|lzop|rpm|tar|xz)|zip|zstd)=ad;xarchiver %x;lxqt-archiver %x;ark %x
+!X:^application/(gzip|java-archive|vnd.(debian.binary-package|ms-cab-compressed|rar)|x-(7z-compressed|arj|bzip*|compress|iso9660-image|lzip|lzma|lzop|rpm|tar|xz)|zip|zstd)=ad
+
+#-----------------------------
+# PDF
+#-----------------------------
+
+X:.*/pdf$=mupdf %x;sioyek %x;llpp %x;lpdf %x;zathura %x;mupdf-x11 %x;apvlv %x;xpdf %x;xreader %x;evince %x;atril %x;okular %x;epdfview %x;qpdfview %x
+
+#-----------------------------
+# Images
+#-----------------------------
+
+X:^image/gif$=animate %x;pqiv %x;sxiv -a %x;nsxiv -a %x;feh %x
+X:^image/svg$=display %x;inkscape %x
+X:^image/x-xcf$=gimp %x
+X:^image/.*=imv %x;nsxiv %x;sxiv %x;pqiv %x;qview %x;qimgv %x;viewnior %x;oculante %x;mirage %x;ristretto %x;xviewer %x;nomacs %x;geeqie %x;gpicview %x;gthumb %x;gwenview %x;shotwell %x;loupe %x;eog %x;eom %x;mcomix %x;feh %x;display %x;gimp %x;krita %x
+!X:^image/.*=fim;img2txt;cacaview;fbi;fbv
+
+#-----------------------------
+# Video and audio
+#-----------------------------
+
+X:^video/.*=ffplay %x;mplayer %x;mplayer2 %x;mpv %x;vlc %x;gmplayer %x;smplayer %x;celluloid %x;qmplayer2 %x;haruna %x;totem %x
+X:^audio/.*=gmplayer %x;smplayer %x;vlc %x;totem %x;ffplay %x;audacity %x;mpv --player-operation-mode=pseudo-gui %x;mplayer;mplayer2
+!X:^audio/.*=ffplay -nodisp -autoexit -hide_banner %f !EO;mplayer %f !EO;mpv --no-terminal
+
+#-----------------------------
+# Fonts
+#-----------------------------
+
+X:^font/.*|^application/(font.*|.*opentype)=fontforge %x;fontpreview
+
+#-----------------------------
+# Torrent
+#-----------------------------
+
+X:application/x-bittorrent=rtorrent;transimission-gtk %x;transmission-qt %x;deluge-gtk %x;ktorrent %x
+
+#-----------------------------
+# Fallback
+#-----------------------------
+# Let's fallback to an external opener as last resource
+.*=handlr open;mimeopen -n;rifle;mimeo;xdg-open;open;
