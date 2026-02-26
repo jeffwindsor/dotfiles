@@ -1,0 +1,325 @@
+edit
+#1771958748
+shopcart
+#1772046826
+d
+#1772046834
+cd dot
+#1772047011
+?
+#1772047043
+? | rg cd
+#1772047048
+?
+#1772047152
+cd
+#1772047195
+man clifm
+#1772047350
+cs preview
+#1772047356
+clear
+#1772047418
+prompt list
+#1772047426
+promtp git
+#1772047429
+prompt git
+#1772047439
+cd $DOTFILES
+#1772047445
+prompt list
+#1772047455
+prompt pez
+#1772047464
+prompt timer
+#1772047472
+fg
+#1772047484
+prompt curves
+#1772047491
+prompt firestarter
+#1772047497
+promtp spot
+#1772047501
+prompt spot
+#1772047515
+prompt artic-particles
+#1772047523
+prompt green-beret
+#1772047554
+prompt clifm-box-drawing
+#1772047562
+prompt clifm
+#1772047576
+prompt classic
+#1772047590
+prompt security-scanner
+#1772047603
+prompt counter
+#1772047612
+prompt info
+#1772048162
+cd
+#1772048166
+cd config
+#1772048169
+cd .config
+#1772048171
+la
+#1772048176
+lsd
+#1772048191
+clifm/
+#1772048228
+lla
+#1772048229
+lsd
+#1772048363
+fd clifmrc .
+#1772048386
+profiles/
+#1772048400
+v clifmrc
+#1772048405
+nvim clifmrc
+#1772050168
+cc
+#1772050169
+cd
+#1772050180
+cat .bashrc
+#1772052019
+j dotfil
+#1772061486
+prompt list
+#1772061494
+prompt counter
+#1772061504
+info
+#1772061510
+prompt info
+#1772061792
+ls
+#1772061924
+zellij delete-all-sessions
+#1772061941
+la  ~/Library/Caches/org.Zellij-Contributors.Zellij/
+#1772061945
+lsd  ~/Library/Caches/org.Zellij-Contributors.Zellij/
+#1772061959
+cd  ~/Library/Caches/org.Zellij-Contributors.Zellij/
+#1772061972
+rm -rf *
+#1772061975
+lsd
+#1772061979
+cd -
+#1772062049
+j source
+#1772062065
+bm
+#1772062166
+j dot
+#1772062182
+lsd integrations
+#1772062211
+.config/zsh/
+#1772062249
+ws2
+#1772062261
+ws1
+#1772062313
+cd integrations/
+#1772062403
+m 1 ws2
+#1772062407
+ws2
+#1772062428
+ws1
+#1772062439
+m ws2 awsenv.zsh
+#1772062459
+s 1-5
+#1772062467
+ws2
+#1772062488
+awsenv/.config/awsenv/
+#1772062545
+md zsh/integrations/
+#1772062560
+m s1 ./zsh/integrations/
+#1772062586
+m sel ./zsh/integrations/
+#1772062592
+zsh/integrations/
+#1772062601
+s2-5
+#1772062611
+c dot
+#1772062620
+j dot
+#1772062629
+cd -
+#1772062650
+bd
+#1772062674
+rm -rf lsd
+#1772062688
+m sel .
+#1772062726
+m 29 ./fzf/.config/zsh/integrations/
+#1772062739
+md ./fzf/.config/zsh/integrations/
+#1772062758
+md ./f[99;5u;5u``zf/.config/zsh/integrations/
+#1772062772
+m 31 ./fzf/.config/zsh/integrations/
+#1772062793
+md ./mise/.config/zsh/integrations/
+#1772062799
+m 32 ./mise/.config/zsh/integrations/
+#1772062810
+md ./starship/.config/zsh/integrations/
+#1772062816
+m 33 ./starship/.config/zsh/integrations/
+#1772062827
+md ./zoxide/.config/zsh/integrations/
+#1772062838
+m 34 ./zoxide/.config/zsh/integrations/
+#1772062856
+zsh/.config/zsh/user-modules/
+#1772062862
+pwd
+#1772062868
+pwd | pbcopy
+#1772062874
+ws1
+#1772062884
+ws2
+#1772062890
+s *
+#1772062904
+bd
+#1772062919
+bd Source
+#1772062922
+cd -
+#1772062932
+rm -rf f[99
+#1772062936
+rm -rf "f[99"
+#1772062984
+m sel
+#1772063017
+md ./alacritty/.config/zsh/user-modules/
+#1772063031
+m 31 ./alacritty/.config/zsh/user-modules/
+#1772063033
+ws1
+#1772063043
+ws2
+#1772063100
+export target="brew"
+#1772063111
+md ./$target/.config/zsh/user-modules/
+#1772063132
+m $target ./$target/.config/zsh/user-modules/
+#1772063143
+m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063155
+export target="awsenv"
+#1772063184
+md ./$target/.config/zsh/user-modules/ && m $target ./$target/.config/zsh/user-modules/
+#1772063195
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063208
+m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063213
+md help
+#1772063219
+rm help
+#1772063224
+r help
+#1772063238
+export target="claude"
+#1772063245
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063272
+target="git" | md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063287
+export target="git"
+#1772063294
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063306
+export target="hx"
+#1772063307
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063425
+export target="idea"
+#1772063447
+m idea-ce.zsh idea.zsh
+#1772063454
+mv idea-ce/ idea
+#1772063459
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063470
+t idea
+#1772063475
+treea idea
+#1772063495
+l idea/
+#1772063562
+export target="mise"
+#1772063565
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063572
+help
+#1772063634
+ih
+#1772063740
+target="sqlcl"
+#1772063745
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063755
+export target="sqlcl"
+#1772063756
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063765
+export target="nvim"
+#1772063766
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063781
+export target="python3"
+#1772063792
+mv python.zsh python3.zsh
+#1772063794
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063804
+export target="starship"
+#1772063805
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063812
+export target="stow"
+#1772063814
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063821
+export target="yazi"
+#1772063822
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772063828
+export target="zellij"
+#1772063830
+md ./$target/.config/zsh/user-modules/ && m $target.zsh ./$target/.config/zsh/user-modules/
+#1772064206
+echo $ZSH_CONFIG_DIR
+#1772064556
+prompt info
+#1772066396
+cat prompts.clifm
+#1772066402
+c
+#1772066405
+clear
+#1772066858
+nvim keybindings.clifm
