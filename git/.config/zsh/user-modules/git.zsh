@@ -131,12 +131,12 @@ git-diff() {
 
 # Git log with tv
 git-log() {
-  tv my-git-log
+  tv git-log
 }
 
 # Git reflog with tv
 git-reflog() {
-  tv my-git-reflog
+  tv git-reflog
 }
 
 
