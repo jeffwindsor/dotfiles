@@ -1,14 +1,13 @@
 
 #== Appearance ==
-background-opacity = 0.94
+#background-opacity = 0.94
 confirm-close-surface = false
 font-family = "JetBrainsMono Nerd Font Mono"
-font-size = 14
+font-size = 16
 quit-after-last-window-closed = true
-theme = catppuccin-mocha
-# theme = tokyonight-storm		
-window-decoration = false
-
+theme = tender
+# window-decoration = false
+macos-titlebar-style = hidden
 
 #== Keybindings ==
 keybind = global:cmd+grave_accent=toggle_quick_terminal
