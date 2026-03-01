@@ -7,4 +7,5 @@
 
 # The bookmarks syntax is: name:path
 # Example:
-clifm:/Users/jefwinds/.config/clifm/profiles/default
+clifm:~/.config/clifm/profiles/default
+dot:~/Source/github.com/jeffwindsor/dotfiles

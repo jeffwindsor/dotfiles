@@ -323,3 +323,29 @@ c
 clear
 #1772066858
 nvim keybindings.clifm
+#1772079513
+cd $DOTFILES
+#1772079525
+bm dots
+#1772079528
+bm
+#1772079538
+?
+#1772079568
+bm add . dot
+#1772079572
+bm
+#1772079692
+help
+#1772079713
+help basics
+#1772079724
+help
+#1772079735
+help basics
+#1772079741
+?
+#1772079852
+help file-filters
+#1772079866
+help commands
