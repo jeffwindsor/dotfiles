@@ -126,8 +126,6 @@ keybinds {
         // duplicated in tab menu without ctrl
         bind "Ctrl [" { GoToPreviousTab; }
         bind "Ctrl ]" { GoToNextTab; }
-        bind "Ctrl {" { MoveTab "Left"; }
-        bind "Ctrl }" { MoveTab "Right"; }
     }
 
     // Tmux-mode trigger: Ctrl Space replaces the default Ctrl b
