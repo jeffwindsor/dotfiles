@@ -26,3 +26,4 @@
 # ALIASES
 # ═══════════════════════════════════════════════════
 alias cb='~/.config/claude/bedrock.sh'
+alias cl='~/.config/claude/litellm.sh'
