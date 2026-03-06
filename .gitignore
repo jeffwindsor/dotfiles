@@ -6,3 +6,8 @@ nu/.config/nushell/history.txt
 ._*
 .Spotlight-V100
 .Trashes
+
+**/.last
+**/dirhist.clifm
+**/history.clifm
+**/jump.clifm
