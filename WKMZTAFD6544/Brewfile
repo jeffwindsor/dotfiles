@@ -27,6 +27,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "raycast"
 cask "zed"
+cask "bluesnooze"
 
 brew "nginx"
 
