@@ -74,7 +74,6 @@ brew-diff() {
 
 # Brew sync - update and install from Brewfile
 brew-sync() {
-  local machine=$(networksetup -getcomputername | tr -d '\n')
   local brewfile="${HOME}/Brewfile"
 
   print_section "Homebrew"
