@@ -1,45 +1,31 @@
-# Personal dotfiles (applied with GNU Stow)
+# dotfiles
 
-My [dotfiles](https://wiki.archlinux.org/title/Dotfiles) in this repo are separated by `command` named folder in the root (think `rg` not `ripgrep`).  This is a personal choice so I could easily script the syncing of only installed command dotfiles, not a necessity.
+Applied with [GNU Stow](https://www.gnu.org/software/stow/).
 
-Any files in the `command` folder will be synced to the target directory by relative location.  So for example files in `rg/.config/ripgrep` with a target of `$HOME` will sync to `~/.config/ripgrep`.  There are special "machine name" folders, but that is just a hack so I can have different files per machine. 
+## Usage
 
-Other options would be `chezmoi` or `yadm`, but for me `stow` + functions is fine.
+```sh
+brew install stow
+git clone https://github.com/jeffwindsor/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+stow zsh git nvim  # or any package folder
+```
 
----
+## How it works
+Stow creates symlinks in a `target` ($HOME in my case) pointing back into your local cloned copy of this repo.  Allowing for version control while allowing the programs to find the configs where they expect.
 
-## Some of my favorite packages...
+## How I use it
 
-* package manager (macos) - [homebrew](https://brew.sh/)
+* Each top-level folder represents a config `source`.
+* Each config `source`:
+  * Represents a single package
+  * Is named after the command not the package (rg, not ripgrep)
+  * Is linked only if the package is installed on the local machine.
+  * May add links to any sub folders in the `target`.  
+      * See how zsh aliases and functions are distributed among multiple sources.
+  * Will link all sub folders and files into the `target`, for example, source of `rg/.config/ripgrep/` links to target as `~/.config/ripgrep/`
+* Automation: See `dots-sync` function in `stow/.config/zsh/user-modules/stow.zsh`
+* Multiple hosts HACK: There are config `sources` named after hostnames (e.g. Midnight, MidnightSun) which hold per-machine overrides
 
-### GUI (macos)
-
-* terminal - [alacritty](https://alacritty.org/) or [ghostty](https://ghostty.org/docs)
-* tiling window "manager" - [aerospace](https://github.com/nikitabobko/AeroSpace)
-* spotlight replacement - [raycast](https://raycast.com/)
-* usb burner - [etcher](https://etcher.balena.io/)
-
-### Terminal based
-
-* terminal multiplexer - [zellij](https://zellij.dev/)
-* editor - [nvim](https://neovim.io/) with [lazyvim](https://www.lazyvim.org/) distro
-* shell - [zsh](http://zsh.org) with [zinit](https://github.com/zdharma-continuum/zinit), a fast zsh package manager
-* prompt - [starship](https://starship.rs/)
-* files
-  * [yazi](https://yazi-rs.github.io/features) - file manager
-  * [bat](https://github.com/sharkdp/bat) - colorful `cat` replacement (lots of extras)
-  * lsd - colorful `ls` replacement (lots of extras)
-* search 
-  * [fd](https://github.com/sharkdp/fd) - faster replacement for find (used by `fzf` and others)
-  * [fzf](https://github.com/junegunn/fzf) with [fzf-tab](https://github.com/Aloxaf/fzf-tab) - a better zsh completion menu
-  * [tv](https://github.com/alexpasmantier/television) - fuzzy search of git, docker, man, dotfiles, and many more + custom
-  * [rg](https://github.com/BurntSushi/ripgrep) - faster replacement for grep
-
-#### Dev centric packages
-
-* dev env package manager - [mise](https://github.com/jdx/mise), a faster asdf
-* source control - [git](https://git-scm.com/), [lazygit](https://github.com/jesseduffield/lazygit) - a great git TUI
-* containers - colima, docker, docker-buildx, lazydocker
-* kubernetes - k9s, kubernetes-cli, kustomize
-
-
+## Learn More about Dotfile Management:
+* [dotfile awesome list](https://github.com/webpro/awesome-dotfiles)
