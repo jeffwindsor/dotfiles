@@ -1,6 +1,5 @@
 tap "nikitabobko/tap"
 
-
 brew "bash"
 brew "bat"
 brew "lsd"
@@ -18,7 +17,6 @@ brew "television"
 brew "tmux"
 brew "yazi"
 brew "zellij"
-brew "zoxide"
 brew "zsh"
 cask "aerospace"
 cask "alacritty"
@@ -28,6 +26,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "raycast"
 cask "zed"
+cask "bluesnooze"
 
 
 cask "balenaetcher"
