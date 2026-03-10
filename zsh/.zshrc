@@ -7,5 +7,7 @@ for module in "${ZSH_CONFIG_DIR}"/*.zsh; do
   [[ -f "$module" ]] && source "$module"
 done
 
-source $HOME/.zshrc.local
-
+# Load any machine specific configs
+if [ -f $HOME/.zshrc.local ]; then
+  source $HOME/.zshrc.local
+fi
