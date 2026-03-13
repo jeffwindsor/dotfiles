@@ -16,4 +16,4 @@ option_as_alt = "Both"
 bindings = [{ key = "Return", mods = "Shift", chars = "\n" }]
 
 [general]
-import = ["~/.config/alacritty/themes/oceanic_next.toml"]
+import = ["~/.config/alacritty/themes/melange_dark.toml"]
