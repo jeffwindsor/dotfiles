@@ -1,6 +1,6 @@
 // Translated from alacritty/themes/0x96f.toml
 themes {
-    0x96f {
+    "0x96f" {
         text_unselected {
             base 252 252 250        // foreground
             background 38 36 39     // bg0
