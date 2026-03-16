@@ -1,0 +1,121 @@
+// Translated from alacritty/themes/0x96f.toml
+themes {
+    0x96f {
+        text_unselected {
+            base 252 252 250        // foreground
+            background 38 36 39     // bg0
+            emphasis_0 252 252 250  // white
+            emphasis_1 157 234 246  // cyan
+            emphasis_2 172 237 248  // cyan bright
+            emphasis_3 84 84 82     // bright black / dim
+        }
+        text_selected {
+            base 252 252 250        // foreground
+            background 48 46 50     // bg1
+            emphasis_0 255 255 255  // pure white
+            emphasis_1 157 234 246  // cyan
+            emphasis_2 172 237 248  // cyan bright
+            emphasis_3 84 84 82     // bright black
+        }
+        ribbon_selected {
+            base 38 36 39           // bg0 text on accent
+            background 157 234 246  // cyan as accent
+            emphasis_0 38 36 39     // bg0
+            emphasis_1 48 46 50     // bg1
+            emphasis_2 60 58 62     // bg2
+            emphasis_3 84 84 82     // bg3
+        }
+        ribbon_unselected {
+            base 172 237 248        // cyan bright
+            background 48 46 50     // bg1
+            emphasis_0 252 252 250  // white
+            emphasis_1 157 234 246  // cyan
+            emphasis_2 84 84 82     // bright black
+            emphasis_3 60 58 62     // bg2
+        }
+        table_title {
+            base 252 252 250        // white
+            background 38 36 39     // bg0
+            emphasis_0 157 234 246  // cyan
+            emphasis_1 0 205 232    // blue
+            emphasis_2 179 224 58   // green
+            emphasis_3 255 199 57   // yellow
+        }
+        table_cell_selected {
+            base 252 252 250        // white
+            background 48 46 50     // bg1
+            emphasis_0 157 234 246  // cyan
+            emphasis_1 0 205 232    // blue
+            emphasis_2 179 224 58   // green
+            emphasis_3 255 199 57   // yellow
+        }
+        table_cell_unselected {
+            base 172 237 248        // cyan bright
+            background 38 36 39     // bg0
+            emphasis_0 84 84 82     // bright black
+            emphasis_1 60 58 62     // bg2
+            emphasis_2 48 46 50     // bg1
+            emphasis_3 43 41 44     // mid bg0/bg1
+        }
+        list_selected {
+            base 252 252 250        // white
+            background 48 46 50     // bg1
+            emphasis_0 157 234 246  // cyan
+            emphasis_1 163 146 232  // magenta
+            emphasis_2 176 163 235  // magenta bright
+            emphasis_3 255 126 131  // red bright
+        }
+        list_unselected {
+            base 172 237 248        // cyan bright
+            background 38 36 39     // bg0
+            emphasis_0 252 252 250  // white
+            emphasis_1 157 234 246  // cyan
+            emphasis_2 84 84 82     // bright black
+            emphasis_3 60 58 62     // bg2
+        }
+        frame_selected {
+            base 157 234 246        // cyan
+            background 48 46 50     // bg1
+            emphasis_0 0 205 232    // blue
+            emphasis_1 179 224 58   // green
+            emphasis_2 255 199 57   // yellow
+            emphasis_3 255 102 109  // red
+        }
+        frame_highlight {
+            base 255 199 57         // yellow
+            background 48 46 50     // bg1
+            emphasis_0 255 102 109  // red
+            emphasis_1 255 126 131  // red bright
+            emphasis_2 176 163 235  // magenta bright
+            emphasis_3 163 146 232  // magenta
+        }
+        exit_code_success {
+            base 179 224 58         // green
+            background 38 36 39     // bg0
+            emphasis_0 140 175 30   // green dim
+            emphasis_1 179 224 58   // green normal
+            emphasis_2 190 229 94   // green bright
+            emphasis_3 157 234 246  // cyan
+        }
+        exit_code_error {
+            base 255 102 109        // red
+            background 38 36 39     // bg0
+            emphasis_0 180 60 65    // red dim
+            emphasis_1 255 102 109  // red normal
+            emphasis_2 255 126 131  // red bright
+            emphasis_3 255 199 57   // yellow
+        }
+        multiplayer_user_colors {
+            user_0 157 234 246      // cyan
+            user_1 179 224 58       // green
+            user_2 0 205 232        // blue
+            user_3 163 146 232      // magenta
+            user_4 255 199 57       // yellow
+            user_5 255 102 109      // red
+            user_6 176 163 235      // magenta bright
+            user_7 172 237 248      // cyan bright
+            user_8 255 126 131      // red bright
+            user_9 190 229 94       // green bright
+        }
+    }
+}
