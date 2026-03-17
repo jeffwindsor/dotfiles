@@ -28,7 +28,6 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 # CORE ENVIRONMENT VARIABLES
 # ═══════════════════════════════════════════════════
 export EDITOR="nvim"
-export VISUAL="zed"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # ═══════════════════════════════════════════════════
