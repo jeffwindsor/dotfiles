@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+export TERM=xterm-256color
 ZSH_CONFIG_DIR="${XDG_CONFIG_HOME}/zsh/"
 
 # Load all modules in numbered order
