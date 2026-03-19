@@ -53,19 +53,12 @@ export HOMEBREW_NO_INSTALL_CLEANUP="1"
 # ═══════════════════════════════════════════════════
 export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/.zcompdump"
 
-# ═══════════════════════════════════════════════════
-# AUTOCOMPLETION (ARGC)
-# ═══════════════════════════════════════════════════
-export ARGC_COMPLETIONS_ROOT="${SOURCE_GITHUB}/sigoden/argc-completions"
-export ARGC_COMPLETIONS_PATH="${ARGC_COMPLETIONS_ROOT}/completions/macos:${ARGC_COMPLETIONS_ROOT}/completions"
 
 # ═══════════════════════════════════════════════════
 # PATH CONFIGURATION
 # ═══════════════════════════════════════════════════
 path=(
   "/opt/homebrew/bin"
-  "${ARGC_COMPLETIONS_ROOT}"
-  "${ARGC_COMPLETIONS_ROOT}/bin"
   "${HOME}/.local/bin"
   $path
 )
