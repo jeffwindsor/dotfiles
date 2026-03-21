@@ -2,10 +2,16 @@
 # stow.zsh - GNU Stow dotfiles management
 
 dots-sync() {
-    local source="$DOTFILES"
+    # verify stow
+    if ! command -v stow &> /dev/null; then
+        echo "Error: stow not found. Install it via Homebrew (macOS) or your package manager (Linux)."
+        return 1
+    fi   
+
+    local source="${1:-$DOTFILES}"
     local target="$HOME"
-    local machine_name=$(networksetup -getcomputername | tr -d '\n')
-    local dirs=("$DOTFILES"/*/)
+    local machine_name="${HOSTNAME:-$(hostname -s)}"
+    local dirs=("$source"/*/)
 
     # print a header with useful information
     print_section "Syncing Dotfiles"
@@ -18,7 +24,7 @@ dots-sync() {
       [[ -d "$dir" ]] || continue
 
       # Make sure all installed packages (and machine) have dot files "installed" in home
-      local package=$(basename "$dir")
+      local package=$(basename "${dir,,}")  # Lowercase for consistency
       if command -v "$package" &> /dev/null; then
         # command installed: add/replace
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
@@ -35,6 +41,19 @@ dots-sync() {
         print_muted "$package"
       fi
     done
+}
+
+dots-sync-manual() {
+  local source="$DOTFILES"
+  local target="$HOME"
+
+  [[ -d "$source" ]] || { echo "Error: Source dir '$source' not found"; return 1; }
+
+  stow -S --dir "$source" --target "$target" "$@"
+
+  for arg in "$@"; do
+    print_info "$arg -> synced"
+  done
 }
 
 alias d='cdl $DOTFILES'
