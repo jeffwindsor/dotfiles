@@ -144,7 +144,7 @@ plugins clear-defaults=true {
 //
 // LOOK AND FEEL
 //
-theme "evergarden-spring"
+theme "tender"
 default_layout "compact-top-bar"
 // default_mode "tmux"
 session_serialization false
