@@ -6,5 +6,5 @@
 # ═══════════════════════════════════════════════════
 for func in "${ZSH_CONFIG_DIR}"/integrations/*.zsh; do
   local func_name=$(basename "$func" .zsh)
-  (( $+commands[$func_name] )) && source "$func"
+  source "$func"
 done
