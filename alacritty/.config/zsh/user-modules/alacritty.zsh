@@ -3,7 +3,7 @@
 # Alacritty theme switcher using fzf
 function alacritty-theme() {
 	local themes_dir="$HOME/.config/alacritty/themes"
-	local config_file="$HOME/.config/alacritty/alacritty.toml"
+	local config_file=$(realpath "$HOME/.config/alacritty/alacritty.toml")
 
 	# Get list of theme files using fd
 	local themes=($(fd --type f --extension toml --exec basename {} .toml \; . "$themes_dir" 2>/dev/null))
@@ -21,18 +21,9 @@ function alacritty-theme() {
 		return 0
 	fi
 
-	# Update the config file with the new theme
-	local import_line="import = [\"~/.config/alacritty/themes/${selected_theme}.toml\"]"
+	sed -i.bak 's|.*~/.config/alacritty/themes/[^"]*\.toml.*|'"import = [\"~/.config/alacritty/themes/${selected_theme}.toml\"]"'|' "$config_file"
 
-	# Replace or append import line (assumes it's always the last line)
-	if tail -1 "$config_file" | rg -q "^[[:space:]]*import = "; then
-		sed -i.bak '$ s|.*|'"$import_line"'|' "$config_file"
-	else
-		echo "$import_line" >> "$config_file"
-	fi
-
-	echo "✓ Switched Alacritty theme to: $selected_theme"
-	echo "  (Alacritty will automatically reload the config)"
+	echo "Alacritty theme: $selected_theme (Alacritty will automatically reload the config)"
 }
 
 alias theme='alacritty-theme'
