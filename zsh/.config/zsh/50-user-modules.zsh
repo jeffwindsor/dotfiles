@@ -138,9 +138,9 @@ alias qq='query-everything'
 # Load user modules only if command is reachable.  user-modules expected to be named by the cammand 
 # not the package name, for example `nvim.zsh` not `neovim.zsh`
 # ═══════════════════════════════════════════════════
-for func in "${ZSH_CONFIG_DIR}"/user-modules/*.zsh; do
+for func in "${ZSH_CONFIG_DIR}"user-modules/*.zsh; do
   local func_name=$(basename "$func" .zsh)
-  (( $+commands[$func_name] )) && source "$func"
+  source "$func"
 done
 
 # TODO: hack for sqlcl special case, shich has a non standard install of sqlcl in the ~/bin directory
