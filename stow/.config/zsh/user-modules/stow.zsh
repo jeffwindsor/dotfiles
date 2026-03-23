@@ -24,7 +24,7 @@ dots-sync() {
       [[ -d "$dir" ]] || continue
 
       # Make sure all installed packages (and machine) have dot files "installed" in home
-      local package=$(basename "${dir,,}")  # Lowercase for consistency
+      local package=$(basename "${dir:l}")  # Lowercase for consistency
       if command -v "$package" &> /dev/null; then
         # command installed: add/replace
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
