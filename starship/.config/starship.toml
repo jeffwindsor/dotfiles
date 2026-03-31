@@ -24,7 +24,7 @@ $directory\
 $git_branch$git_state$git_status \
 $aws$gleam$golang$haskell$java$kotlin$lua$nodejs$python$rust$scala\
 $line_break\
-$sudo$jobs$character\
+$shell$sudo$jobs$character\
 """
 
 right_format = """[${shell} : ${time} ](lowlight)"""
@@ -76,8 +76,8 @@ number_threshold = 1
 [shell]
 disabled = false
 format = '$indicator'
-zsh_indicator = 'zsh'
-bash_indicator = 'bash'
+zsh_indicator = ''
+bash_indicator = 'bash '
 
 [time]
 disabled = false
