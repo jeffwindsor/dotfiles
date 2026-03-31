@@ -16,8 +16,8 @@ brew "stow"
 brew "television"
 brew "tmux"
 brew "yazi"
-brew "zellij"
 brew "zsh"
+
 cask "aerospace"
 cask "alacritty"
 cask "brave-browser"
@@ -28,7 +28,6 @@ cask "raycast"
 cask "bluesnooze"
 
 brew "nginx"
-
 brew "cjdev/tap/awsenv"
 brew "colima", restart_service: :changed
 brew "docker-buildx"
