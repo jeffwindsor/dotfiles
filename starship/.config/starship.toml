@@ -20,14 +20,15 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-$directory\
+$shell$directory\
 $git_branch$git_state$git_status \
 $aws$gleam$golang$haskell$java$kotlin$lua$nodejs$python$rust$scala\
+[$time](lowlight)\
 $line_break\
 $shell$sudo$jobs$character\
 """
 
-right_format = """[${time} ](lowlight)"""
+#right_format = """[${shell} : ${time} ](lowlight)"""
 
 # command_timeout = 50
 
