@@ -12,10 +12,9 @@
 // ==============================================================================
 
 keybinds {
+
     // mnemonic of 'm' for move
     move {
-      unbind "Ctrl h"   //original switch to normal
-      bind "Ctrl m" { SwitchToMode "Normal"; }
       bind "n" "Tab" { MovePane; }
       bind "p" "Shift Tab" { MovePaneBackwards; }
       bind "h" "Left" { MovePane "Left"; }
@@ -23,78 +22,85 @@ keybinds {
       bind "k" "Up" { MovePane "Up"; }
       bind "l" "Right" { MovePane "Right"; }
     }
-    shared_except "move" "locked" {
-        unbind "h"
-        bind "Ctrl m" { SwitchToMode "Move"; }
+    shared_except "locked" {
+      unbind "Ctrl h"   //original switch from move to normal
+      bind "Ctrl m" { SwitchToMode "Normal"; }
     }
 
-    // prefer arrows for new panes, and r for rename
     pane {
-        unbind "e" "c" "d" "w" "Up" "Left"
-        bind "h" { MoveFocus "Left"; }
-        bind "N" { NewPane "Down"; SwitchToMode "normal"; }
-        bind "n" { NewPane "Right"; SwitchToMode "normal"; }
-        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
-        bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
+      // prefer arrows for new panes, and r for rename
+      unbind "e" "c" "d" "w" "Up" "Left"
+      bind "h" { MoveFocus "left"; }
+      bind "j" { MoveFocus "down"; }
+      bind "k" { MoveFocus "up"; }
+      bind "l" { MoveFocus "right"; }
+      bind "-" { NewPane "Down"; SwitchToMode "normal"; }
+      bind "_" { NewPane "Down"; SwitchToMode "normal"; }
+      bind "|" { NewPane "Down"; SwitchToMode "normal"; }   // tmux
+      bind "\\" { NewPane "Right"; SwitchToMode "normal"; }
+      bind "|" { NewPane "Right"; SwitchToMode "normal"; }
+      bind "%" { NewPane "Right"; SwitchToMode "normal"; }    // tmux
+      bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
+      bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
 
-    // Resize (Ctrl R) not Ctrl n
+    // Resize
     resize {
-        unbind "Ctrl n"
-        bind "Ctrl R" { SwitchToMode "Normal"; }
+        unbind "Ctrl n"  //original
+        bind "Ctrl R" { SwitchToMode "Normal"; }  // lowercase conflicts with nvim
     }
     shared_except "resize" "locked" {
         unbind "Ctrl n"
         bind "Ctrl R" { SwitchToMode "Resize"; }
     }
 
-    // Remove Session link since I do not use or load the plugins
-    shared_except "session" "locked" {
-        unbind "Ctrl o"
+    // Session
+    shared_except "locked" {
+        unbind "Ctrl o"  //remove link : I do not use or load the plugins
     }
 
-    // Use [ ] for tab focus, except when in tab mode where it is tab move
+    // Tab
     tab {
         bind "[" { GoToPreviousTab; }
         bind "]" { GoToNextTab; }
         bind "{" { MoveTab "Left"; }
         bind "}" { MoveTab "Right"; }
+        // new and ask name
         bind "n" {
           LaunchOrFocusPlugin "file:~/.local/bin/zellij-newtab-plus.wasm" {
             floating true
-
             use_zoxide false
           };
           SwitchToMode "Normal"
         }
+        // New, default name
         bind "N" { NewTab; SwitchToMode "Normal"; }
         bind "x" { CloseTab; SwitchToMode "Normal"; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
     }
 
+    // Shared
     shared_except "locked" {
         // REMOVE Alt keys conflicting with other programs
         unbind "Alt i" "Alt o"        // tab movement
         unbind "Alt p" "Alt Shift p"  // pane grouping
-        // unbind "Alt [" "Alt ]"        // swap layouts
-        // bind "Ctrl D" { Detach; } // only in session
 
-        //  Resize (replacing Alt version)
+        // Resize (replacing Alt version)
         unbind "Alt =" "Alt +" "Alt -"
         bind "Ctrl -" { Resize "Decrease"; }
         bind "Ctrl =" { Resize "Increase"; }
 
-        //  Toggle pane frames (borders)
+        // Toggle pane frames (borders)
         bind "Ctrl u" { TogglePaneFrames; }
 
-        //  Fullscreen toggle (replacing Alt version)
+        // Fullscreen toggle (replacing Alt version)
         unbind "Alt f"
         bind "Ctrl f" { ToggleFocusFullscreen; }
 
-        //  Floating Pane toggle
+        // Floating Pane toggle
         bind "Ctrl w" { ToggleFloatingPanes; }
 
-        //  Pane Focus Change (replacing Alt version)
+        // Pane Focus Change (replacing Alt version)
         unbind "Alt h" "Alt Left" "Alt l" "Alt Right" "Alt j" "Alt Down" "Alt k" "Alt Up"
         bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
@@ -127,11 +133,6 @@ keybinds {
         bind "Ctrl [" { GoToPreviousTab; }
         bind "Ctrl ]" { GoToNextTab; }
     }
-
-    // Tmux-mode trigger: Ctrl Space replaces the default Ctrl b
-    shared_except "tmux" "locked" {
-        unbind "Ctrl b"
-    }
 }
 
 plugins clear-defaults=true {
@@ -144,6 +145,7 @@ plugins clear-defaults=true {
 //
 // LOOK AND FEEL
 //
+theme_dir "/Users/jefwinds/.config/zellij/themes"
 theme "tender"
 default_layout "compact-top-bar"
 // default_mode "tmux"
