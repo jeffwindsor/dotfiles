@@ -13,7 +13,7 @@ brew "ripgrep"
 brew "starship"
 brew "stow"
 brew "television"
-brew "tmux"
+brew "zellij"
 brew "yazi"
 brew "zsh"
 
