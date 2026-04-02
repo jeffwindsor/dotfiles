@@ -23,7 +23,7 @@ format = """
 $shell$directory\
 $git_branch$git_state$git_status \
 $aws$gleam$golang$haskell$java$kotlin$lua$nodejs$python$rust$scala\
-[$time](lowlight)\
+[ $time](lowlight)\
 $line_break\
 $shell$sudo$jobs$character\
 """
