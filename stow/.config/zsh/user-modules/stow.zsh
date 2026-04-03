@@ -30,7 +30,7 @@ dots-sync() {
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
         print_success "$package"
 
-      elif  [[ "$package" == "$machine_name" ]]; then
+      elif  [[ "$package" == "${machine_name:l}" ]]; then
         # machine name matches: add/replace
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
         print_info "** $package **"
