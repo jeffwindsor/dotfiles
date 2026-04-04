@@ -36,10 +36,8 @@ keybinds {
       bind "l" { MoveFocus "right"; }
       bind "-" { NewPane "Down"; SwitchToMode "normal"; }
       bind "_" { NewPane "Down"; SwitchToMode "normal"; }
-      bind "|" { NewPane "Down"; SwitchToMode "normal"; }   // tmux
       bind "\\" { NewPane "Right"; SwitchToMode "normal"; }
       bind "|" { NewPane "Right"; SwitchToMode "normal"; }
-      bind "%" { NewPane "Right"; SwitchToMode "normal"; }    // tmux
       bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
       bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
@@ -110,6 +108,10 @@ keybinds {
         //  New Pane (replacing Alt version)
         unbind "Alt n"
         bind "Ctrl N" { NewPane "Down"; }
+        bind "Ctrl _" { NewPane "Down"; }
+        bind "Ctrl -" { NewPane "Down"; }
+        bind "Ctrl \\" { NewPane "Right"; }
+        bind "Ctrl |" { NewPane "Right"; }
         bind "Ctrl n" { NewPane "Right"; }
         bind "Ctrl s" { NewPane "stacked"; }
 
