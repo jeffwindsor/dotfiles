@@ -37,4 +37,4 @@ bindings = [
 ]
 
 [general]
-import = ["~/.config/alacritty/themes/doom_one.toml"]
+import = ["~/.config/alacritty/themes/tender.toml"]
