@@ -8,18 +8,20 @@ Requires [homebrew](https://brew.sh/) and [gnu stow](https://www.gnu.org/softwar
 
 ```sh
 git clone https://github.com/jeffwindsor/dotfiles <repo target path>
-cd <repo target path>
 ```
 
-### Sync option 1: by source 
+### Syncing Packages 
+
+#### Option 1: package by package (ie zsh, nvim, tmux, etc...)
 
 ```sh 
 stow -S --dir "<repo target path>" --target "$HOME" <package>
 ```
 
-### Sync option 2: all installed sources
+#### Option 2: all installed sources
 
-Defaults to source=$DOTFILES but you can override with first parameter,
+`dots-sync` is a function which manages your ~/.config links to the dotfiles repo.  It will link/unlink based on the install status of a program/package. Defaults to source=$DOTFILES but you can override with first parameter `dots-sync ~/some-location`.
+
 
 ```sh
 source ./stow/.config/zsh/user-modules/stow.zsh
@@ -27,10 +29,10 @@ dots-sync
 ```
 
 
-## How it works
+## How Syncing Works
 
-Stow creates symlinks in the `$HOME` dir pointing back into your local cloned copy of this repo.  
-Allowing for version control while allowing the programs to find the configs where they expect.
+Stow creates symlinks in the `$HOME` directory pointing back into your local cloned copy of this repo.
+Allowing for version control while allowing the programs to find the configs where they expect.  Setting `DOTFILES` env variable to the path of your local cloned copy will be used as default source path in most functions as a usage simplification. 
 
 ## How I use it
 
@@ -43,6 +45,12 @@ Allowing for version control while allowing the programs to find the configs whe
   * Will link all sub folders and files into the `$HOME`, for example, source of `rg/.config/ripgrep/` links to target as `~/.config/ripgrep/`
 * Multiple hosts HACK: There are config `sources` named after hostnames (e.g. Midnight, MidnightSun) which hold per-machine overrides
 
-## Learn More about Dotfile Management:
+## Packages of Note
+
+* [Tinty](https://github.com/tinted-theming/tinty) from [tinted-theming](https://github.com/tinted-theming)
+  * syncs all assigned terminal applications to the same color scheme (Base16 or Base24)
+  * `theme` function gives a meta picker (fzf) for theme choice and application 
+
+## Learn More about Dotfile Management
 
 * [dotfile awesome list](https://github.com/webpro/awesome-dotfiles)
