@@ -8,6 +8,7 @@ nu/.config/nushell/history.txt
 .Trashes
 
 # tinty - runtime-generated theme output (change with every theme switch)
+alacritty/.config/alacritty/colors.toml
 ghostty/.config/ghostty/themes/tinted-theming
 kitty/.config/kitty/tinted-theming.conf
 lsd/.config/lsd/colors.yaml
