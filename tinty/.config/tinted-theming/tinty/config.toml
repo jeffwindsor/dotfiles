@@ -31,12 +31,5 @@ hook = "tmux run 2>/dev/null && tmux source-file %f"
 path = "https://github.com/tinted-theming/tinted-shell"
 name = "tinted-shell"
 themes-dir = "scripts"
-hook = ". %f && env > /tmp/tinty-env-dump.txt && bash ~/.config/tinted-theming/tinty/hooks/zellij-theme.sh && bash ~/.config/tinted-theming/tinty/hooks/lsd-colors.sh && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh"
-
-[[items]]
-path = "https://git.sr.ht/~blueingreen/base16-lazygit"
-name = "base16-lazygit"
-themes-dir = "colors"
-hook = "bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh %f"
-supported-systems = ["base16"]
+hook = ". %f && env > /tmp/tinty-env-dump.txt && bash ~/.config/tinted-theming/tinty/hooks/zellij-theme.sh && bash ~/.config/tinted-theming/tinty/hooks/lsd-colors.sh && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh && bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh %f"
 
