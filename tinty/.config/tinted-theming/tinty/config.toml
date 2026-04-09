@@ -36,7 +36,7 @@ hook = ". %f && env > /tmp/tinty-env-dump.txt && bash ~/.config/tinted-theming/t
 [[items]]
 path = "https://git.sr.ht/~blueingreen/base16-lazygit"
 name = "base16-lazygit"
-themes-dir = "themes"
-hook = "mkdir -p ~/.config/lazygit && cp -f %f ~/.config/lazygit/theme.yml"
+themes-dir = "colors"
+hook = "bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh %f"
 supported-systems = ["base16"]
 
