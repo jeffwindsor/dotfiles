@@ -1,6 +1,12 @@
 # Tinty
 
-[Tinty](https://github.com/tinted-theming/tinty) is a Base16/Base24 theme manager. Running `tinty apply <theme>` (or the `theme` FZF wrapper in `.config/zsh/integrations/tinty.zsh`) propagates the selected theme across all configured applications.
+[Tinty](https://github.com/tinted-theming/tinty) is a Base16/Base24 theme manager. Three shell functions in `.config/zsh/integrations/tinty.zsh` cover all normal usage:
+
+| Function | Purpose |
+|----------|---------|
+| `tinty-setup` | First-time setup: syncs all theme repos then opens the theme picker |
+| `tinty-update` | After a config change: syncs new repos and re-applies the current theme |
+| `theme` | Switch themes interactively via FZF; prompts to run `tinty-setup` if not yet initialized |
 
 ## How it works
 
