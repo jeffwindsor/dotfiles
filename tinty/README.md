@@ -21,18 +21,18 @@ Tinty downloads theme repos and copies/sources files into place:
 | **Alacritty** | `~/.config/alacritty/colors.toml` | touches main config |
 | **Ghostty** | `~/.config/ghostty/themes/tinted-theming` | SIGUSR2 |
 | **Kitty** | `~/.config/kitty/tinted-theming.conf` | USR1 signal |
-| **Lazygit** | `~/.config/lazygit/theme.yml` | restart |
 | **Tmux** | *(sourced directly)* | source |
 
 ### Hook scripts
 
 Tinty exports Base16/Base24 palette env vars and triggers the Zsh shell item, which runs custom scripts to generate theme files in each app's native format:
 
-| Hook script | Output file |
-|-------------|-------------|
-| `hooks/lsd-colors.sh` | `~/.config/lsd/colors.yaml` |
-| `hooks/yazi-flavor.sh` | `~/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml` |
-| `hooks/zellij-theme.sh` | `~/.config/zellij/themes/tinted-theming.kdl` |
+| Hook script | Output file | Notes |
+|-------------|-------------|-------|
+| `hooks/lazygit-theme.sh` | `~/.config/lazygit/theme.yml` | falls back to base16 equivalent for base24 themes |
+| `hooks/lsd-colors.sh` | `~/.config/lsd/colors.yaml` | |
+| `hooks/yazi-flavor.sh` | `~/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml` | |
+| `hooks/zellij-theme.sh` | `~/.config/zellij/themes/tinted-theming.kdl` | |
 
 All generated output files are gitignored — they are created at runtime and change with every theme switch.
 
