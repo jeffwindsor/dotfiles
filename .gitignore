@@ -7,6 +7,13 @@ nu/.config/nushell/history.txt
 .Spotlight-V100
 .Trashes
 
+# tinty - runtime-generated theme output (change with every theme switch)
+ghostty/.config/ghostty/themes/tinted-theming
+kitty/.config/kitty/tinted-theming.conf
+lsd/.config/lsd/colors.yaml
+zellij/.config/zellij/themes/tinted-theming.kdl
+yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
+
 **/.last
 **/dirhist.clifm
 **/history.clifm

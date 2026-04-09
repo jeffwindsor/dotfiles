@@ -148,7 +148,7 @@ plugins clear-defaults=true {
 // LOOK AND FEEL
 //
 theme_dir "/Users/jefwinds/.config/zellij/themes"
-theme "tender"
+theme "tinted-theming"
 default_layout "compact-top-bar"
 // default_mode "tmux"
 session_serialization false

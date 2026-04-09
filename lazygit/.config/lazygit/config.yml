@@ -1,32 +1,6 @@
 gui:
   screenMode: 'full'
 
-  theme:
-    activeBorderColor:
-      - "#99FFE4"
-    inactiveBorderColor:
-      - "#505050"
-    searchingActiveBorderColor:
-      - "#99FFE4"
-    optionsTextColor:
-      - "#99FFE4"
-    selectedLineBgColor:
-      - "#505050"
-    inactiveViewSelectedLineBgColor:
-      - "#505050"
-    cherryPickedCommitFgColor:
-      - "#000000"
-    cherryPickedCommitBgColor:
-      - "#99FFE4"
-    markedBaseCommitFgColor:
-      - "#000000"
-    markedBaseCommitBgColor:
-      - "#99FFE4"
-    unstagedChangesColor:
-      - "#99FFE4"
-    defaultFgColor:
-      - "#FEFEFE"
-
   authorColors:
     '*': '#505050'
     'Jeff Windsor': '#babbf1'
@@ -37,8 +11,8 @@ gui:
 
 keybinding:
   universal:
-    optionMenu: '~' # show help menu
-    optionMenu-alt1: '?' # show help menu
+    optionMenu: '~'
+    optionMenu-alt1: '?'
     quit-alt1: <esc>
     commitChanges: 'C'
 
