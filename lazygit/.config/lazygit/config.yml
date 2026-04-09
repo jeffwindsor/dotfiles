@@ -1,3 +1,5 @@
+customThemeFilePath: ~/.config/lazygit/theme.yml
+
 gui:
   screenMode: 'full'
 
