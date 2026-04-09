@@ -1,15 +1,7 @@
 #!/usr/bin/env zsh
-# tinty — wrapper so 'tinty apply/init' propagates tinted-shell ANSI vars to the live shell
 if command -v tinty &>/dev/null; then
-  tinty() {
-    command tinty "$@"
-    if [[ "$1" == "apply" || "$1" == "init" ]]; then
-      local data_dir="${XDG_DATA_HOME:-$HOME/.local/share}/tinted-theming/tinty"
-      while IFS= read -r -d '' script; do
-        source "$script"
-      done < <(/usr/bin/find "$data_dir" -name "*.sh" -newer "$data_dir/current_scheme" -print0)
-    fi
-  }
+  tinty-setup()  { tinty sync && theme }
+  tinty-update() { tinty sync && tinty init }
 
   local -a _tinty_favorites=(
     base16-0x96f
@@ -33,6 +25,13 @@ if command -v tinty &>/dev/null; then
   )
 
   theme() {
+    local state_dir="${XDG_DATA_HOME:-$HOME/.local/share}/tinted-theming/tinty"
+    if [[ ! -f "$state_dir/current_scheme" ]]; then
+      echo "tinty is not initialized."
+      read "reply?Run tinty-setup now? [y/N] "
+      [[ "$reply" =~ ^[Yy]$ ]] && tinty-setup || return 0
+    fi
+
     local mode
     mode=$(printf 'Favorites\nAll Themes\n' | fzf --prompt="Theme source: " --height=15% --border)
     [[ -z "$mode" ]] && return 0
