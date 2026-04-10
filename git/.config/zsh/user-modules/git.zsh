@@ -172,5 +172,8 @@ alias gd='git-diff'
 alias gl='git-log'
 alias gr='git-reflog'
 
+alias s='cdl $SOURCE'
+alias ss='git-goto-repo'
 alias srcs='git-goto-repo'
+alias sx='git-workon-repo'
 alias srcx='git-workon-repo'
