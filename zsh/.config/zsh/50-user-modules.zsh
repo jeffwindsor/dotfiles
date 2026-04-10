@@ -55,33 +55,34 @@ print_section() { _colorize "== $1 ==" "cyan" }
 # QUERY user functions and alaises 
 # ═══════════════════════════════════════════════════
 
-# Query aliases
-query-aliases() {
-  local query="$1"
-  if [[ -z "$query" ]]; then
-    alias
-  else
-    alias | grep -i "$query"
-  fi
-}
+# Interactive picker for aliases and functions
+pick() {
+  local tmpdir selected
+  tmpdir=$(mktemp -d)
 
-# Query functions
-query-commands() {
-  local query="$1"
-  if [[ -z "$query" ]]; then
-    typeset -f | grep -E '^\S+ \(\)' | sed 's/ ()//'
-  else
-    typeset -f | grep -E "^${query}" -A 1 | grep -v "^--$"
-  fi
-}
+  # Write each function definition to its own file
+  typeset -f | awk -v dir="$tmpdir" '
+    /^[a-zA-Z_][a-zA-Z0-9_.-]* \(\)/ { name=$1; file=dir "/" name }
+    name { print > file }
+    /^\}$/ { name=""  }
+  '
 
-# Query everything
-query-everything() {
-  local query="$1"
-  echo "=== Aliases ==="
-  query-aliases "$query"
-  echo -e "\n=== Functions ==="
-  query-commands "$query"
+  selected=$(
+    {
+      alias | sed 's/=/\t/'
+      ls "$tmpdir" | grep -v '^_' | sed 's/.*/&\t/'
+    } | fzf \
+      --prompt="Pick: " \
+      --height=100% \
+      --border \
+      --delimiter='\t' \
+      --with-nth=1 \
+      --preview="if [[ -f $tmpdir/{1} ]]; then cat $tmpdir/{1}; else echo {2}; fi" \
+      --preview-window=right:60%:wrap
+  )
+  rm -rf "$tmpdir"
+  [[ -z "$selected" ]] && return 0
+  print -z "${selected%%	*}"
 }
 
 # ═══════════════════════════════════════════════════
@@ -101,7 +102,8 @@ dots-pull() {
 # ═══════════════════════════════════════════════════
 # ALIASES
 # ═══════════════════════════════════════════════════
-alias p='pwd | pbcopy'
+alias pp='pwd | pbcopy'
+alias p='pick'
 alias cat='bat --plain'
 alias find='fd'
 alias grep='rg'
@@ -128,10 +130,6 @@ alias lab='cdl $SOURCE_GITCJ'
 alias empire='cdl $SOURCE_GITCJ/empire'
 alias jeff='cdl $SOURCE_JEFF'
 
-# QUERY ALIASES
-alias qa='query-aliases'
-alias qc='query-commands'
-alias qq='query-everything'
 
 
 # ═══════════════════════════════════════════════════
