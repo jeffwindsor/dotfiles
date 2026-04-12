@@ -1,8 +1,12 @@
 #!/usr/bin/env zsh
 
+# sync zinit 
+zsh-sync='zinit update -a -n'
+
 # sync everything
 sync() {
   dots-pull
+  zsh-sync
   brew-sync
   mise-sync
   dots-sync
