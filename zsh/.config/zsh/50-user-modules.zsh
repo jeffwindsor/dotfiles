@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # sync zinit 
-zsh-sync='zinit update -a -n'
+alias zsh-sync='zinit update -a -n'
 
 # sync everything
 sync() {

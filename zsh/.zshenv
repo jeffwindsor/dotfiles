@@ -28,6 +28,7 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 # CORE ENVIRONMENT VARIABLES
 # ═══════════════════════════════════════════════════
 export EDITOR="nvim"
+export NVIM_APPNAME="nvim-lazyvim"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # ═══════════════════════════════════════════════════
