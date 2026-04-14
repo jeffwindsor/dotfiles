@@ -1,15 +1,42 @@
-customThemeFilePath: ~/.config/lazygit/theme.yml
+# customThemeFilePath: ~/.config/lazygit/theme.yml
 
 gui:
   screenMode: 'full'
 
   authorColors:
-    '*': '#505050'
-    'Jeff Windsor': '#babbf1'
-    'Windsor, Jeff': "#99FFE4"
+    '*': '#707070'
+    'Jeff Windsor': '#b4befe'
+    'Windsor, Jeff': "#89b4fa"
 
   branchColorPatterns:
     'CJPM-\d+': '#FFBF00'
+
+  theme:
+    activeBorderColor:
+      - '#f5e0dc'
+      - bold
+    inactiveBorderColor:
+      - '#a6adc8'
+    searchingActiveBorderColor:
+      - '#f9e2af'
+    optionsTextColor:
+      - '#89b4fa'
+    selectedLineBgColor:
+      - '#313244'
+    inactiveViewSelectedLineBgColor:
+      - '#6c7086'
+    cherryPickedCommitFgColor:
+      - '#f5e0dc'
+    cherryPickedCommitBgColor:
+      - '#45475a'
+    markedBaseCommitFgColor:
+      - '#89b4fa'
+    markedBaseCommitBgColor:
+      - '#f9e2af'
+    unstagedChangesColor:
+      - '#f38ba8'
+    defaultFgColor:
+      - '#cdd6f4'
 
 keybinding:
   universal:
