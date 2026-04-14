@@ -13,6 +13,21 @@ if command -v tinty &>/dev/null; then
       return 1
     fi
 
+    if [[ -n "$1" ]]; then
+      local all selected
+      all=$(tinty list)
+      if echo "$all" | grep -qx "base24-$1"; then
+        selected="base24-$1"
+      elif echo "$all" | grep -qx "base16-$1"; then
+        selected="base16-$1"
+      else
+        echo "Theme not found: base24-$1 or base16-$1"
+        return 1
+      fi
+      tinty apply "$selected"
+      return
+    fi
+
     local mode
     mode=$(printf 'Favorites\nAll Themes\n' | fzf --prompt="Theme source: " --height=15% --border)
     [[ -z "$mode" ]] && return 0

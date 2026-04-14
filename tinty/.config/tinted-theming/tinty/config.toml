@@ -1,35 +1,57 @@
 # ── Tinty-managed items ───────────────────────────────────────────────────────
 
+# -- Terminals
 [[items]]
 path = "https://github.com/tinted-theming/tinted-terminal"
-name = "tinted-terminal-alacritty"
+name = "alacritty"
 themes-dir = "themes/alacritty"
 hook = "cp -f %f ~/.config/alacritty/colors.toml && touch ~/.config/alacritty/alacritty.toml"
 supported-systems = ["base16", "base24"]
 
 [[items]]
 path = "https://github.com/tinted-theming/tinted-terminal"
-name = "tinted-terminal-ghostty"
-themes-dir = "themes/ghostty"
-hook = "mkdir -p ~/.config/ghostty/themes && cp -f $TINTY_THEME_FILE_PATH ~/.config/ghostty/themes/tinted-theming && killall -SIGUSR2 ghostty 2>/dev/null || true"
-supported-systems = ["base16", "base24"]
-
-[[items]]
-path = "https://github.com/tinted-theming/tinted-terminal"
-name = "tinted-terminal-kitty"
+name = "kitty"
 themes-dir = "themes/kitty"
 hook = "cp -f %f ~/.config/kitty/tinted-theming.conf && [ -n \"$KITTY_PID\" ] && kill -USR1 \"$KITTY_PID\""
 supported-systems = ["base16", "base24"]
 
 [[items]]
-path = "https://github.com/tinted-theming/tinted-tmux"
-name = "tinted-tmux"
-themes-dir = "colors"
-hook = "tmux run 2>/dev/null && tmux source-file %f"
+path = "https://github.com/tinted-theming/tinted-shell"
+name = "zellij"
+themes-dir = "scripts"
+hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/zellij-theme.sh"
+
+# -- Shell commands
+[[items]]
+path = "https://github.com/tinted-theming/tinted-shell"
+name = "lsd"
+themes-dir = "scripts"
+hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/lsd-colors.sh"
 
 [[items]]
 path = "https://github.com/tinted-theming/tinted-shell"
-name = "tinted-shell"
+name = "yazi"
 themes-dir = "scripts"
-hook = ". %f && env > /tmp/tinty-env-dump.txt && bash ~/.config/tinted-theming/tinty/hooks/zellij-theme.sh && bash ~/.config/tinted-theming/tinty/hooks/lsd-colors.sh && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh && bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh %f"
+hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh"
 
+
+# -- not used
+
+# [[items]]
+# path = "https://github.com/tinted-theming/tinted-shell"
+# name = "lazygit"
+# themes-dir = "scripts"
+# hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh %f"
+# [[items]]
+# path = "https://github.com/tinted-theming/tinted-terminal"
+# name = "ghostty"
+# themes-dir = "themes/ghostty"
+# hook = "mkdir -p ~/.config/ghostty/themes && cp -f $TINTY_THEME_FILE_PATH ~/.config/ghostty/themes/tinted-theming && killall -SIGUSR2 ghostty 2>/dev/null || true"
+# supported-systems = ["base16", "base24"]
+#
+# [[items]]
+# path = "https://github.com/tinted-theming/tinted-tmux"
+# name = "tmux"
+# themes-dir = "colors"
+# hook = "tmux run 2>/dev/null && tmux source-file %f"
+#
