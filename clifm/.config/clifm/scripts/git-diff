@@ -2,6 +2,9 @@
 # Generated function script: git-diff
 # Source: ~/.config/zsh/user-modules/
 
+# Source helper functions and utilities
+source /Users/jefwinds/.config/zsh/user-modules/zsh.zsh 2>/dev/null || true
+
 git-diff() {
   tv git-diff
 }

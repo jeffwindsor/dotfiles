@@ -8,6 +8,7 @@
 alias zsh-sync='zinit update -a -n'
 alias pp='pwd | pbcopy'
 alias p='pick'
+alias fm='clifm'
 alias cat='bat --plain'
 alias find='fd'
 alias grep='rg'
