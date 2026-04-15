@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+# Generated function script: git-repos
+# Source: ~/.config/zsh/user-modules/
+
+git-repos() {
+  local root_path="$1"
+  find "$root_path" -type d -name ".git" -exec dirname {} \;
+}
+
+git-repos "$@"

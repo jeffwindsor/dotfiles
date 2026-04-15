@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+# Generated function script: mise-install-version
+# Source: ~/.config/zsh/user-modules/
+
+mise-install-version() {
+  local plugin="$1"
+
+  if [[ -z "$plugin" ]]; then
+    return
+  fi
+
+  local versions=$(mise ls-remote "$plugin")
+  local version=$(echo -e "${versions}\nlatest" | sort -rV | tv --input-header "Select ${plugin} Version")
+
+  if [[ -n "$version" ]]; then
+    mise install "${plugin}@${version}"
+  fi
+}
+
+mise-install-version "$@"

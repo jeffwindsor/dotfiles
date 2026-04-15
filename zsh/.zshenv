@@ -54,6 +54,10 @@ export HOMEBREW_NO_INSTALL_CLEANUP="1"
 # ═══════════════════════════════════════════════════
 export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/.zcompdump"
 
+# ═══════════════════════════════════════════════════
+# CLIFM SHELL INTEGRATION
+# ═══════════════════════════════════════════════════
+export CLIFM_SHELL="${HOME}/.config/clifm/clifm-shell"
 
 # ═══════════════════════════════════════════════════
 # PATH CONFIGURATION

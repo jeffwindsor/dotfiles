@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# Generated function script: brew-list
+# Source: ~/.config/zsh/user-modules/
+
+brew-list() {
+  print_section "Brew Formulae"
+  brew leaves | sort
+  echo ""
+  print_section "Brew Casks"
+  brew list --cask | sort
+  echo ""
+  print_section "Mise Installed"
+  mise ls | tail -n +2 | awk 'NF'
+}
+
+brew-list "$@"

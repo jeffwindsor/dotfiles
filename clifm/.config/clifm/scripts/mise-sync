@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+# Generated function script: mise-sync
+# Source: ~/.config/zsh/user-modules/
+
+mise-sync() {
+  print_section "Mise: Syncing Global"
+  cd "$HOME"
+  mise trust
+  mise install
+  cd - > /dev/null
+}
+
+mise-sync "$@"

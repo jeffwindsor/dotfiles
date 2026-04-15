@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+# Generated function script: mise-install
+# Source: ~/.config/zsh/user-modules/
+
+mise-install() {
+  local plugin="$1"
+
+  if [[ -z "$plugin" ]]; then
+    local asdfs=$(mise registry --backend asdf --hide-aliased)
+    local cores=$(mise registry --backend core --hide-aliased)
+    plugin=$(printf "%s\n%s" "$asdfs" "$cores" | tv --input-header "Select Plugin")
+  fi
+
+  mise-install-version "$plugin"
+}
+
+mise-install "$@"

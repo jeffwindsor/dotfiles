@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+# Generated function script: zdelete
+# Source: ~/.config/zsh/user-modules/
+
+zdelete() {
+  zellij list-sessions --no-formatting 2>/dev/null | \
+    grep "EXITED" | \
+    awk '{print $1}' | \
+    xargs -I {} zellij delete-session {}
+}
+
+zdelete "$@"

@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+# Generated function script: git-reflog
+# Source: ~/.config/zsh/user-modules/
+
+git-reflog() {
+  tv git-reflog
+}
+
+git-reflog "$@"

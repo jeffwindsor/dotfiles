@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+# clifm shell wrapper — sources all stowed user-modules before executing commands
+
+for f in "$HOME/.config/zsh/user-modules"/*.zsh; do
+  [[ -f "$f" ]] && source "$f"
+done
+
+if [[ "$1" == "-c" ]]; then
+  eval "$2"
+else
+  exec zsh "$@"
+fi

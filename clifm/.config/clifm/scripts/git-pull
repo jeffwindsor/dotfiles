@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+# Generated function script: git-pull
+# Source: ~/.config/zsh/user-modules/
+
+git-pull() {
+  local path="$1"
+  git -C "$path" pull
+}
+
+git-pull "$@"

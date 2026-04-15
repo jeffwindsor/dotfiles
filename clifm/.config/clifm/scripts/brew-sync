@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+# Generated function script: brew-sync
+# Source: ~/.config/zsh/user-modules/
+
+brew-sync() {
+  local brewfile="${HOME}/Brewfile"
+
+  print_section "Homebrew"
+  print_info "   Updating Database (update)"
+  brew update
+
+  print_info "   Upgrading Packages (upgrade)"
+  brew upgrade
+
+  print_info "   Installing Bundle described in $brewfile"
+  brew bundle install --file="$brewfile"
+
+  print_info "   Removing Orphaned Packages (autoremove)"
+  brew autoremove
+
+  print_info "   Cleaning Up Package Cache (cleanup)"
+  brew cleanup
+
+  print_info "   List installed but not bundled packages"
+  brew-diff "$brewfile"
+}
+
+brew-sync "$@"

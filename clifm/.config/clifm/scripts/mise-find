@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+# Generated function script: mise-find
+# Source: ~/.config/zsh/user-modules/
+
+mise-find() {
+  echo "Find all mise visible files"
+  fd -H '\.(mise|asdf)(\.local)?\.toml$|^\.tool-versions$' .
+}
+
+mise-find "$@"

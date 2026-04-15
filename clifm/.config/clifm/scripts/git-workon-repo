@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+# Generated function script: git-workon-repo
+# Source: ~/.config/zsh/user-modules/
+
+git-workon-repo() {
+  local repo=$(tv my-git-repos)
+  if [[ -n "$repo" ]]; then 
+    cd "$repo"
+    zellij --layout claude
+  fi
+}
+
+git-workon-repo "$@"

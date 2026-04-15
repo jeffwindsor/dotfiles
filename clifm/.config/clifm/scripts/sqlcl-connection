@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+# Generated function script: sqlcl-connection
+# Source: ~/.config/zsh/user-modules/
+
+sqlcl-connection() {
+  local tns_name="$1"
+
+  local user="${SQLCL_USERNAME}"
+  if [[ -z "$user" ]]; then
+    read -r "user?Enter username: "
+  fi
+
+  local password="${SQLCL_PASSWORD}"
+  if [[ -z "$password" ]]; then
+    read -rs "password?Enter database password: "
+    echo ""  # New line after hidden input
+  fi
+
+  echo "${user}/\"${password}\"@${tns_name}"
+}
+
+sqlcl-connection "$@"

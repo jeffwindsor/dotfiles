@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+# Generated function script: zkill
+# Source: ~/.config/zsh/user-modules/
+
+zkill() {
+  zellij list-sessions --no-formatting 2>/dev/null | \
+    grep -v "current" | \
+    awk '{print $1}' | \
+    xargs -I {} zellij kill-session {}
+}
+
+zkill "$@"
