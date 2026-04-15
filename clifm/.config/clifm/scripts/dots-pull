@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# Generated function script: dots-pull
+# Source: ~/.config/zsh/user-modules/
+
+dots-pull() {
+  print_section "Pulling Dotfiles"
+  git -C "$DOTFILES" pull
+
+  # Reload zsh config
+  source ~/.zshrc
+
+  # Reload app configs
+  command -v aerospace &> /dev/null && aerospace reload-config 2>/dev/null
+}
+
+dots-pull "$@"

@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+# Generated function script: dots-sync-manual
+# Source: ~/.config/zsh/user-modules/
+
+dots-sync-manual() {
+  local source="$DOTFILES"
+  local target="$HOME"
+
+  [[ -d "$source" ]] || { echo "Error: Source dir '$source' not found"; return 1; }
+
+  stow -S --dir "$source" --target "$target" "$@"
+
+  for arg in "$@"; do
+    print_info "$arg -> synced"
+  done
+}
+
+dots-sync-manual "$@"

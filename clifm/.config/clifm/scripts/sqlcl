@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+# Generated function script: sqlcl
+# Source: ~/.config/zsh/user-modules/
+
+sqlcl() {
+  local tns_name="$1"
+
+  if [[ -z "$tns_name" ]]; then
+    local tnsnames=$(awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, "", $1); print $1}' ~/tnsnames.ora)
+    tns_name=$(echo "$tnsnames" | tv)
+  fi
+
+  if [[ -z "$tns_name" ]]; then
+    print_error "No TNS name selected"
+    return 1
+  fi
+
+  local connection_string=$(sqlcl-connection "$tns_name")
+  "$HOME/.local/bin/sqlcl/bin/sql" -S "$connection_string"
+}
+
+sqlcl "$@"

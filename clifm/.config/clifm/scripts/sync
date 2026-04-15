@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+# Generated function script: sync
+# Source: ~/.config/zsh/user-modules/
+
+sync() {
+  dots-pull
+  zsh-sync
+  brew-sync
+  mise-sync
+  dots-sync
+}
+
+sync "$@"
