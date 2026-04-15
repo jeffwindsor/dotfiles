@@ -323,4 +323,3 @@ zle -N tv-shell-history _tv_shell_history
 
 bindkey '^T' tv-smart-autocomplete
 bindkey '^R' tv-shell-history
-
