@@ -2,6 +2,9 @@
 # Generated function script: dots-sync
 # Source: ~/.config/zsh/user-modules/
 
+# Source helper functions and utilities
+source /Users/jefwinds/.config/zsh/user-modules/zsh.zsh 2>/dev/null || true
+
 dots-sync() {
     # verify stow
     if ! command -v stow &> /dev/null; then

@@ -2,6 +2,9 @@
 # Generated function script: git-repos
 # Source: ~/.config/zsh/user-modules/
 
+# Source helper functions and utilities
+source /Users/jefwinds/.config/zsh/user-modules/zsh.zsh 2>/dev/null || true
+
 git-repos() {
   local root_path="$1"
   find "$root_path" -type d -name ".git" -exec dirname {} \;
