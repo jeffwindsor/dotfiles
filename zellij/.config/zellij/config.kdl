@@ -153,7 +153,7 @@ default_layout "compact-top-bar"
 session_serialization false
 show_startup_tips false
 show_release_notes false
-pane_frames false
+// pane_frames false  // bug with this clears screen and moves cursor to bottom, so leave it default of true
 ui {
     pane_frames {
         hide_session_name true
