@@ -1,9 +1,10 @@
-tap "nikitabobko/tap"
-tap "tinted-theming/tinted"
-
+# shells
 brew "bash"
+brew "zsh"
+
+# clis
 brew "bat"
-brew "lsd"
+brew "clifm"
 brew "fd"
 brew "fzf"
 brew "git"
@@ -11,14 +12,21 @@ brew "lazygit"
 brew "mise"
 brew "neovim"
 brew "ripgrep"
-brew "starship"
 brew "stow"
 brew "television"
+tap "tinted-theming/tinted"
 brew "tinty"
 brew "zellij"
-brew "yazi"
-brew "zsh"
 
+# clifm should replace
+brew "lsd"
+brew "starship"
+brew "yazi"
+# brew "zoxide"
+
+# guis
+#
+tap "nikitabobko/tap"
 cask "aerospace"
 cask "alacritty"
 cask "brave-browser"
@@ -26,7 +34,6 @@ cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "raycast"
 cask "bluesnooze"
-
 cask "balenaetcher"
 cask "bambu-studio"
 cask "iina"
