@@ -26,9 +26,8 @@ outer.right = [{ monitor.secondary = 0 }, 0]
 #   minus, period, quote, right, rightSquareBracket, semicolon, shift, slash, space, tab, up,
 
 [mode.main.binding]
-# alt-ctrl-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e tmux'
-alt-ctrl-enter = 'exec-and-forget open -n /Applications/kitty.app --args zellij'
-alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/kitty.app'
+alt-ctrl-enter = 'exec-and-forget open -n /Applications/kitty.app'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/kitty.app --args zellij'
 
 alt-ctrl-b = 'exec-and-forget open -n /Applications/Brave\ Browser.app/'
 # alt-ctrl-g = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
