@@ -9,23 +9,17 @@ brew "fd"
 brew "fzf"
 brew "git"
 brew "lazygit"
+brew "lsd"
 brew "mise"
 brew "neovim"
 brew "ripgrep"
+brew "starship"
 brew "stow"
 brew "television"
 tap "tinted-theming/tinted"
 brew "tinty"
-brew "zellij"
-
-# clifm should replace
-brew "lsd"
-brew "starship"
-brew "yazi"
-# brew "zoxide"
 
 # guis
-#
 tap "nikitabobko/tap"
 cask "aerospace"
 cask "alacritty"
@@ -34,6 +28,8 @@ cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "raycast"
 cask "bluesnooze"
+
+# personal
 cask "balenaetcher"
 cask "bambu-studio"
 cask "iina"
