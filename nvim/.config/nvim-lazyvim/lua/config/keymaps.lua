@@ -8,10 +8,12 @@ vim.keymap.set("v", "<leader><Up>", ":sort!<cr>", { desc = "Sort Selection Rever
 
 -- Remove all default <leader>q keybindings
 vim.keymap.del("n", "<leader>qq")
-vim.keymap.del("n", "<leader>qs")
-vim.keymap.del("n", "<leader>qS")
-vim.keymap.del("n", "<leader>ql")
-vim.keymap.del("n", "<leader>qd")
+
+-- folke/persistence.nvim currently disabled
+-- vim.keymap.del("n", "<leader>qs")
+-- vim.keymap.del("n", "<leader>qS")
+-- vim.keymap.del("n", "<leader>ql")
+-- vim.keymap.del("n", "<leader>qd")
 
 -- Set <leader>q to quit all and <leader>Q to force quit all
 vim.keymap.set("n", "<leader>q", ":qa<cr>", { desc = "Quit All" })
