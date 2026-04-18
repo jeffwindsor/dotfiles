@@ -7,7 +7,7 @@
 #         ACTIVE OVERRIDES            #
 #=====================================#
 
-Prompt="info"
+Prompt="personal"
 
 
 ### How do we define colors?
@@ -331,7 +331,7 @@ DirIconColor="Y"
 # prompts. Enter 'prompt --help' for more information.
 # You can use here either prompt codes (see the prompts.clifm file for details)
 # or a prompt name defined in the prompts file.
-Prompt="clifm"
+# Prompt="clifm"
 # Override prompt values (as defined in the prompts file).
 #Prompt=""
 #Notifications=

@@ -223,6 +223,13 @@
 # NOTE: Since the below prompts are designed for Clifm's default color scheme, you may
 # want to edit the one you choose manually to make it fit your current color scheme.
 
+[personal]
+Notifications=false
+RegularPrompt="%{n:cyan}\[\e(0\]lq\[\e(B\]%{red}\#%{reset}\I%{red}\(%{yellow}\)%{green}\=%{cyan}\%%{green}\*%{reset}[\S%{reset}]\l %{cyan}\w%{reset}\n%{cyan}\[\e(0\]mq\[\e(B\]%{reset} \z%{reset}%{blue}:%{reset} "
+RightPrompt="%{reset}${m_git_prompt_status} %{brblack}<\bs> \t%{reset}"
+EnableWarningPrompt=true
+WarningPrompt="%{n:cyan}\[\e(0\]mq\[\e(B\]%{reset}<\z%{reset}> %{b:red}!%{n:dim} "
+
 [clifm]
 Notifications=true
 RegularPrompt="%{reset}\I[\S%{reset}]\l \A \u:\H %{cyan}\w%{reset}\n<\z%{reset}> %{blue}\$%{reset} "
