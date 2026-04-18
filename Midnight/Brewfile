@@ -17,17 +17,18 @@ brew "starship"
 brew "stow"
 brew "television"
 tap "tinted-theming/tinted"
-brew "tinty"
+brew "tinted-theming/tinted/tinty"
+brew "tree-sitter-cli"
+
 
 # guis
 tap "nikitabobko/tap"
 cask "aerospace"
-cask "alacritty"
 cask "brave-browser"
 cask "font-jetbrains-mono-nerd-font"
-cask "google-chrome"
 cask "raycast"
 cask "bluesnooze"
+cask "kitty"
 
 # personal
 cask "balenaetcher"

@@ -18,6 +18,7 @@ brew "stow"
 brew "television"
 tap "tinted-theming/tinted"
 brew "tinty"
+brew "tree-sitter-cli"
 
 # guis
 tap "nikitabobko/tap"
@@ -47,5 +48,4 @@ cask "intellij-idea"
 cask "slack"
 cask "tuple"
 brew "shellcheck"
-brew "tree-sitter-cli"
 brew "watchexec"
