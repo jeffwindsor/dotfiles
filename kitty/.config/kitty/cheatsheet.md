@@ -27,7 +27,7 @@
 | Next layout | control + shift + l |
 | Move tab forward | control + shift + period |
 | Move tab backward | control + shift + comma |
-| Set tab title | shift + cmd + i |
+| Rename            | shift + cmd + i |
 
 ### Windows management
 
