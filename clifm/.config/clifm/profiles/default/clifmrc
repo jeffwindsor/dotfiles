@@ -530,7 +530,7 @@ WelcomeMessage=false
 
 # Start Clifm in the last visited directory (and in the last used
 # workspace). This option is overriden by StartingPath (if set).
-;RestoreLastPath=true
+RestoreLastPath=false
 
 # Set the readline editing mode: 0 for vi and 1 for emacs (default).
 ;RlEditMode=1
