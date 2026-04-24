@@ -145,7 +145,7 @@ git-goto-repo() {
   if [[ -n "$repo" ]]; then 
     cd "$repo"
     clear
-    lsd -1A
+    lsd -A
   fi
 }
 
