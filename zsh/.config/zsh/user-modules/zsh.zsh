@@ -114,7 +114,6 @@ pick() {
       --height=100% \
       --border \
       --delimiter='\t' \
-      --with-nth=1 \
       --preview="if [[ -f $tmpdir/{1} ]]; then cat $tmpdir/{1}; else echo {2}; fi" \
       --preview-window=right:60%:wrap
   )
