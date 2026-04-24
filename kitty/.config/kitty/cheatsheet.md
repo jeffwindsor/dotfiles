@@ -1,73 +1,75 @@
+# Kitty shortcuts
+
 ## macOS shortcuts
+
+### Tabs
+
+| Action | Shortcut |
+| ------ | -------- |
+| Focus Next | ctrl + tab |
+| Focus Prev | ctrl + shift + tab |
+| Move Next | ctrl + shift + period |
+| Move Prev | ctrl + shift + comma |
+| New | cmd + t |
+| Close | cmd + w |
+| Rename | cmd + shift + i |
+
+
+### Windows
+
+| Action | Shortcut |
+| ------ | -------- |
+| New | cmd + return |
+| Cycle Layout     | ctrl + shift + l |
+| Close | cmd + shift + d |
+| Resize | cmd + r |
+| Focus Next | ctrl + shift + ] |
+| Focus Prev | ctrl + shift + [ |
+| Move Next | ctrl + shift + f |
+| Move Prev | ctrl + shift + b |
+| Focus specific | cmd + 1 ... cmd + 9 |
+
 
 ### Scrolling
 
 | Action | Shortcut |
 | ------ | -------- |
-| Scroll line up | option + cmd + page up / cmd + up arrow |
-| Scroll line down | option + cmd + page down / cmd + down arrow |
-| Scroll page up | cmd + page up |
-| Scroll page down | cmd + page down |
-| Scroll to top | cmd + home |
-| Scroll to bottom | cmd + end |
-| Previous shell prompt | control + shift + z |
-| Next shell prompt | control + shift + x |
-| Browse scrollback in pager | control + shift + h |
-| Browse last command output | control + shift + g |
+| line up | opt + cmd + page up / cmd + up arrow |
+| line down | opt + cmd + page down / cmd + down arrow |
+| page up | cmd + page up |
+| page down | cmd + page down |
+| to top | cmd + home |
+| to bottom | cmd + end |
+| Previous shell prompt | ctrl + shift + z |
+| Next shell prompt | ctrl + shift + x |
+| Browse scrollback in pager | ctrl + shift + h |
+| Browse last command output | ctrl + shift + g |
 | Search scrollback | cmd + f |
 
-### Tabs management
+
+### Other
 
 | Action | Shortcut |
 | ------ | -------- |
-| New tab | cmd + t |
-| Close tab | cmd + w |
-| Next tab | control + tab / shift + cmd + ] |
-| Previous tab | shift + control + tab / shift + cmd + [ |
-| Next layout | control + shift + l |
-| Move tab forward | control + shift + period |
-| Move tab backward | control + shift + comma |
-| Rename            | shift + cmd + i |
-
-### Windows management
-
-| Action | Shortcut |
-| ------ | -------- |
-| New window | cmd + return |
-| New OS window | cmd + n |
-| Close window | shift + cmd + d |
-| Resize window | cmd + r |
-| Next window | control + shift + ] |
-| Previous window | control + shift + [ |
-| Move window forward | control + shift + f |
-| Move window backward | control + shift + b |
-| Move window to top | control + shift + backtick |
-| Visually focus window | control + shift + f7 |
-| Visually swap window | control + shift + f8 |
-| Focus specific window | cmd + 1 ... cmd + 9 |
-
-### Other keyboard shortcuts
-
-| Action | Shortcut |
-| ------ | -------- |
-| Show help | control + shift + f1 |
+| Show help | ctrl + shift + f1 |
 | Copy to clipboard | cmd + c |
 | Paste from clipboard | cmd + v |
-| Paste from selection | control + shift + s |
-| Pass selection to program | control + shift + o |
+| Paste from selection | ctrl + shift + s |
+| Pass selection to program | ctrl + shift + o |
 | Increase font size | cmd + plus |
 | Decrease font size | cmd + minus |
 | Restore font size | cmd + 0 |
-| Toggle fullscreen | control + cmd + f |
-| Toggle maximized | control + shift + f10 |
-| Input unicode character | control + cmd + space |
-| Open URL | control + shift + e |
-| Reset terminal | control + shift + delete |
-| Edit kitty config | control + shift + f2 |
-| Reload kitty config | control + cmd + f5 |
-| Debug kitty config | cmd + option + f6 |
-| Open kitty shell | control + shift + escape |
-| Increase background opacity | control + shift + a then m |
-| Decrease background opacity | control + shift + a then l |
-| Full background opacity | control + shift + a then 1 |
-| Reset background opacity | control + shift + a then d |
+| Toggle fullscreen | ctrl + cmd + f |
+| Toggle maximized | ctrl + shift + f10 |
+| Input unicode character | ctrl + cmd + space |
+| Open URL | ctrl + shift + e |
+| Reset terminal | ctrl + shift + delete |
+| Edit kitty config | ctrl + shift + f2 |
+| Reload kitty config | ctrl + cmd + f5 |
+| Debug kitty config | opt + cmd + f6 |
+| Open kitty shell | ctrl + shift + escape |
+| Increase background opacity | ctrl + shift + a then m |
+| Decrease background opacity | ctrl + shift + a then l |
+| Full background opacity | ctrl + shift + a then 1 |
+| Reset background opacity | ctrl + shift + a then d |
+
