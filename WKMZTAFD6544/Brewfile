@@ -36,7 +36,7 @@ cask "megasync"
 brew "buf"
 brew "go"
 brew "vault"
-
+brew "bun"
 
 brew "nginx"
 tap "cjdev/tap", "git@gitlab.cj.dev:cjdev/homebrew-tap.git"
