@@ -6,10 +6,10 @@
 
 | Action | Shortcut |
 | ------ | -------- |
-| Focus Next | ctrl + tab |
-| Focus Prev | ctrl + shift + tab |
-| Move Next | ctrl + shift + period |
-| Move Prev | ctrl + shift + comma |
+| Focus Next | ctrl + tab , ctrl + ] |
+| Focus Prev | ctrl + shift + tab , ctrl + [ |
+| Move Next | ctrl + shift + period|
+| Move Prev | ctrl + shift + comma|
 | New | cmd + t |
 | Close | cmd + w |
 | Rename | cmd + shift + i |
