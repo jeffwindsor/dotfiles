@@ -26,9 +26,9 @@ brew-diff() {
     return 1
   fi
 
-  # Extract package names from Brewfile
-  local formulae_bundled=($(grep '^brew "' "$brewfile_path" | sed 's/.*"\([^"]*\)".*/\1/' | sort))
-  local casks_bundled=($(grep '^cask "' "$brewfile_path" | sed 's/.*"\([^"]*\)".*/\1/' | sort))
+  # Extract package names from Brewfile (extract last component after / for tap paths)
+  local formulae_bundled=($(grep '^brew "' "$brewfile_path" | sed 's/.*"\([^"]*\)".*/\1/' | sed 's|.*/||' | sort))
+  local casks_bundled=($(grep '^cask "' "$brewfile_path" | sed 's/.*"\([^"]*\)".*/\1/' | sed 's|.*/||' | sort))
 
   # Get installed packages
   local formulae_installed=($(brew leaves | sort))
@@ -48,7 +48,8 @@ brew-diff() {
     # Find extras (installed but not in Brewfile)
     local -a extra=()
     for pkg in "${inst[@]}"; do
-      if [[ ! " ${bund[@]} " =~ " ${pkg} " ]]; then
+      local pkg_name="${pkg##*/}"
+      if [[ ! " ${bund[@]} " =~ " ${pkg_name} " ]]; then
         extra+=("$pkg")
       fi
     done
