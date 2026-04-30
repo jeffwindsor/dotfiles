@@ -12,6 +12,9 @@ dots-sync() {
     local target="$HOME"
     local machine_name="${HOSTNAME:-$(hostname -s)}"
     local dirs=("$source"/*/)
+    local installed=()
+    # local machine=()
+    # local removed=()
 
     # print a header with useful information
     print_section "Syncing Dotfiles"
@@ -28,19 +31,24 @@ dots-sync() {
       if command -v "$package" &> /dev/null; then
         # command installed: add/replace
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
-        print_success "$package"
+        installed+=("$package")
 
       elif  [[ "$package" == "${machine_name:l}" ]]; then
         # machine name matches: add/replace
         stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
-        print_info "** $package **"
+        # machine+=("$package")
 
       else
         # otherwise: remove
         stow -D --dir "$source" --target "$target" "$package" 2>/dev/null
-        print_muted "$package"
+        # removed+=("$package")
+
       fi
     done
+
+    print_success "Installed: ${installed[*]}"
+    # print_info    "Machine:   ${machine[*]}"
+    # print_muted   "Removed:   ${removed[*]}"
 }
 
 dots-sync-manual() {
