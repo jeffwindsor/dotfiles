@@ -1,20 +1,32 @@
 {
   "plugins": {
+    "autosave.nvim": {
+      "rev": "348f72cf0241e3e736e3396c4834def2f8ef8d10",
+      "src": "https://github.com/0x00-ketsu/autosave.nvim"
+    },
     "gitsigns.nvim": {
       "rev": "8d82c240f190fc33723d48c308ccc1ed8baad69d",
-      "src": "https://github.com/lewis6991/gitsigns.nvim"
+      "src": "lewis6991/gitsigns.nvim"
     },
     "mini.hipatterns": {
       "rev": "add8d8abad602787377ec5d81f6b248605828e0f",
-      "src": "https://github.com/nvim-mini/mini.hipatterns"
+      "src": "echasnovski/mini.hipatterns"
+    },
+    "render-markdown.nvim": {
+      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
-      "src": "https://github.com/folke/snacks.nvim.git"
+      "src": "folke/snacks.nvim"
+    },
+    "tidy.nvim": {
+      "rev": "8b6921150b16f38f48a2459a844a0c2b4c916914",
+      "src": "http://github.com/mcauley-penney/tidy.nvim"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
-      "src": "https://github.com/folke/which-key.nvim"
+      "src": "folke/which-key.nvim"
     }
   }
 }
