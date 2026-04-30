@@ -31,3 +31,5 @@ vim.o.splitright = true -- Configure how new splits should be opened
 vim.o.timeoutlen = 300 -- Decrease mapped sequence wait time
 vim.o.undofile = true -- Enable undo/redo changes even after closing and reopening a file
 vim.o.updatetime = 250 -- Decrease update time
+vim.opt.fillchars = { eob = " " } --
+vim.opt.shortmess:append("I") -- do not show built in start screen
