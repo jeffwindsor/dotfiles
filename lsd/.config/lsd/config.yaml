@@ -1,12 +1,13 @@
 classic: false
 
 blocks:
-  - permission
-  - user
-  - group
+  - git
+  - name
   - size
   - date
-  - name
+  - permission
+
+date: '+%Y-%m-%d %H:%M:%S'
 
 color:
   when: auto
