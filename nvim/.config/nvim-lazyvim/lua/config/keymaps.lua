@@ -5,6 +5,7 @@
 -- Sort selection
 vim.keymap.set("v", "<leader><Down>", ":sort<cr>", { desc = "Sort Selection" })
 vim.keymap.set("v", "<leader><Up>", ":sort!<cr>", { desc = "Sort Selection Reversed" })
+vim.keymap.set("v", "<leader><Right>", ":%!column -t -s", { desc = "Align text by delimiter" })
 
 -- Remove all default <leader>q keybindings
 vim.keymap.del("n", "<leader>qq")
