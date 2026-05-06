@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # options.zsh - Zsh options and settings
 
+# removes the need to use `cd` any directory will auto cd
+setopt auto_cd
+
 # ═══════════════════════════════════════════════════
 # HISTORY CONFIGURATION
 # ═══════════════════════════════════════════════════
