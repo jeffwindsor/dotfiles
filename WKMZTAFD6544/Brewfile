@@ -1,4 +1,3 @@
-# shells
 brew "bash"
 brew "zsh"
 
@@ -16,14 +15,17 @@ brew "ripgrep"
 brew "starship"
 brew "stow"
 brew "television"
+
 tap "tinted-theming/tinted"
 brew "tinty"
+
 brew "tree-sitter-cli"
 brew "zellij"
 
 # guis
 tap "nikitabobko/tap"
 cask "aerospace"
+
 cask "alacritty"
 cask "brave-browser"
 cask "font-jetbrains-mono-nerd-font"
@@ -31,16 +33,20 @@ cask "google-chrome"
 cask "raycast"
 cask "bluesnooze"
 cask "megasync"
+cask "balenaetcher"
+cask "kitty"
 
 # cj
 brew "buf"
 brew "go"
 brew "vault"
 brew "bun"
-
+brew "coreutils"
 brew "nginx"
+
 tap "cjdev/tap", "git@gitlab.cj.dev:cjdev/homebrew-tap.git"
 brew "cjdev/tap/awsenv"
+
 brew "colima", restart_service: :changed
 brew "docker-buildx"
 brew "docker"
