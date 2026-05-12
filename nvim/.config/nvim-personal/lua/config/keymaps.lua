@@ -31,6 +31,9 @@ map("n", "<leader>|", "<cmd>vsplit<cr>", { desc = "Split Window Right" })
 map("n", "<leader>w", "", { desc = "window" })
 map("n", "<leader>wd", "<cmd>close<cr>", { desc = "Delete Window" })
 
+-- clipboard
+map("n", "<D-a>", 'gg"+yG', { desc = "Copy Buffer to Clipboard" })
+
 -- misc
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clears search highlights" })
 map("v", "<leader><Down>", ":sort i<cr>", { desc = "Sort Selection" })
