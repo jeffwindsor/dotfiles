@@ -6,5 +6,5 @@ alias vm.='NVIM_APPNAME=nvim-minimax nvim .'
 alias vp='NVIM_APPNAME=nvim-personal nvim'
 alias vp.='NVIM_APPNAME=nvim-personal nvim .'
 
-alias md='cd ~/markdown/projects/'
-alias mde='cd ~/markdown/projects/ && nvim'
+alias md='cd ~/markdown/'
+alias mde='cd ~/markdown/ && nvim'
