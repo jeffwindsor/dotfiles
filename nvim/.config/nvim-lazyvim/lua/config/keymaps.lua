@@ -20,6 +20,9 @@ vim.keymap.del("n", "<leader>qq")
 vim.keymap.set("n", "<leader>q", ":qa<cr>", { desc = "Quit All" })
 vim.keymap.set("n", "<leader>Q", ":qa!<cr>", { desc = "Force Quit All" })
 
+-- Copy entire buffer to clipboard
+vim.keymap.set("n", "<D-a>", 'gg"+yG', { desc = "Copy Buffer to Clipboard" })
+
 -- Set <leader>C to Colorschemes
 vim.keymap.set("n", "<leader>C", function()
 	Snacks.picker.colorschemes()
