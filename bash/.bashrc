@@ -15,7 +15,6 @@ export PATH="$PATH:/Users/jefwinds/.local/bin"
 # ═══════════════════════════════════════════════════
 
 # Basic utilities
-alias p='pwd | pbcopy'
 alias cat='bat --plain'
 alias find='fd'
 alias grep='rg'
