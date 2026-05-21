@@ -5,6 +5,10 @@
 # MISE (runtime manager)
 # ═══════════════════════════════════════════════════
 
+# tells mise to use the asdfformat for files
+export MISE_ASDF_COMPAT=1
+
+
 mise-install-version() {
   local plugin="$1"
 
