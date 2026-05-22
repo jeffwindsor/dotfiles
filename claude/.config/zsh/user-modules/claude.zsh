@@ -27,4 +27,4 @@
 # ═══════════════════════════════════════════════════
 alias cb='~/.config/claude/bedrock.sh'
 alias cl='~/.config/claude/litellm.sh'
-alias pl='~/.config/claude/pi.sh'
+
