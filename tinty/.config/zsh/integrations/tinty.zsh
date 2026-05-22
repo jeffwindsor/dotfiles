@@ -28,19 +28,14 @@ if command -v tinty &>/dev/null; then
       return
     fi
 
-    local mode
-    mode=$(printf 'Favorites\nAll Themes\n' | fzf --prompt="Theme source: " --height=15% --border)
-    [[ -z "$mode" ]] && return 0
-
     local selected
-    if [[ "$mode" == "Favorites" ]]; then
-      selected=$(cat "$THEME_FAVORITES_FILE" 2>/dev/null | fzf --prompt="Select theme: " --height=40% --border)
-    else
-      selected=$(tinty list | fzf --prompt="Select theme: " --height=40% --border)
-    fi
+    selected=$({
+      [[ -f "$THEME_FAVORITES_FILE" ]] && sed 's/^/★ /' "$THEME_FAVORITES_FILE"
+      tinty list | grep -vxF -f "${THEME_FAVORITES_FILE:-/dev/null}"
+    } | fzf --prompt="Select theme: " --height=100% --border --layout=reverse)
 
     [[ -z "$selected" ]] && return 0
-    tinty apply "$selected"
+    tinty apply "${selected#★ }"
   }
 
   theme-favorite() {
