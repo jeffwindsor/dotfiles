@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
-# plugins.zsh - Zinit plugin manager and plugins
-
 # ═══════════════════════════════════════════════════
-# ZINIT PLUGIN MANAGER
+# PLUGIN MANAGER
 # ═══════════════════════════════════════════════════
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -14,25 +12,14 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # ═══════════════════════════════════════════════════
-# ZSH PLUGINS
+# PLUGINS
 # ═══════════════════════════════════════════════════
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
 # ═══════════════════════════════════════════════════
-# ZSH-VI-MODE CONFIGURATION
-# ═══════════════════════════════════════════════════
-# Disable mode cursor to prevent display issues
-# This prevents the plugin from manipulating cursor appearance
-# which can cause visual glitches (row deletion above prompt)
-
-# ZVM_CURSOR_STYLE_ENABLED=false
-# zinit ice depth=1
-# zinit light jeffreytse/zsh-vi-mode
-
-# ═══════════════════════════════════════════════════
-# LOAD COMPLETIONS
+# COMPLETIONS
 # ═══════════════════════════════════════════════════
 # Only run expensive security check once per 24 hours
 autoload -Uz compinit                                    # Load the compinit function
@@ -41,8 +28,4 @@ if [[ -n ${ZSH_COMPDUMP}(#qN.mh+24) ]]; then             # If dump file is >24 h
 else                                                     # If dump file is fresh
   compinit -C -d "${ZSH_COMPDUMP}"                       # Skip security check (fast)
 fi
-
-# Load fzf-tab AFTER compinit (it needs to override the completion system)
-zinit light Aloxaf/fzf-tab
-
 zinit cdreplay -q
