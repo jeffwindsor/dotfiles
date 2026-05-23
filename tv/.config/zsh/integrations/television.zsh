@@ -270,7 +270,14 @@ _tv_smart_autocomplete() {
   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags
   tokens=(${(z)LBUFFER})
   if [ ${#tokens} -lt 1 ]; then
-    zle ${fzf_default_completion:-expand-or-complete}
+    local result
+    zle -I
+    result=$(tv files --inline --no-status-bar)
+    if [[ -n "$result" ]]; then
+      LBUFFER="$result"
+      zle reset-prompt
+    fi
+    _enable_bracketed_paste
     return
   fi
 
@@ -317,9 +324,26 @@ _tv_shell_history() {
 }
 
 
+_tv_cd() {
+    emulate -L zsh
+    zle -I
+
+    _disable_bracketed_paste
+
+    local dir
+    dir=$(tv dirs --no-status-bar --inline)
+
+    zle reset-prompt
+    [[ -n "$dir" ]] && cd "$dir"
+
+    _enable_bracketed_paste
+}
+
 zle -N tv-smart-autocomplete _tv_smart_autocomplete
 zle -N tv-shell-history _tv_shell_history
+zle -N tv-cd _tv_cd
 
 
 bindkey '^T' tv-smart-autocomplete
 bindkey '^R' tv-shell-history
+bindkey '^_' tv-cd
