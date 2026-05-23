@@ -6,8 +6,9 @@ if command -v tinty &>/dev/null; then
   THEME_CURRENT_SCHEME="$THEME_STATE_DIR/current_scheme"
 
   theme-sync()  { tinty sync }
+  alias theme=tinty-theme-tv
 
-  theme() {
+  tinty-theme-fzf() {
     if [[ ! -d "$THEME_STATE_DIR" ]]; then
       echo "$THEME_STATE_DIR does not exist. Run theme-sync first then try theme again."
       return 1
@@ -36,6 +37,41 @@ if command -v tinty &>/dev/null; then
 
     [[ -z "$selected" ]] && return 0
     tinty apply "${selected#★ }"
+  }
+
+  tinty-theme-tv() {
+    if [[ ! -d "$THEME_STATE_DIR" ]]; then
+      echo "$THEME_STATE_DIR does not exist. Run theme-sync first then try theme again."
+      return 1
+    fi
+
+    if [[ -n "$1" ]]; then
+      local all selected
+      all=$(tinty list)
+      if echo "$all" | grep -qx "base24-$1"; then
+        selected="base24-$1"
+      elif echo "$all" | grep -qx "base16-$1"; then
+        selected="base16-$1"
+      else
+        echo "Theme not found: base24-$1 or base16-$1"
+        return 1
+      fi
+      tinty apply "$selected"
+      return
+    fi
+
+    local tmplist selected
+    tmplist="$(mktemp)"
+    {
+      [[ -f "$THEME_FAVORITES_FILE" ]] && sed 's/^/* /' "$THEME_FAVORITES_FILE"
+      tinty list | grep -vxF -f "${THEME_FAVORITES_FILE:-/dev/null}"
+    } > "$tmplist"
+
+    selected=$(tv --no-sort --source-command="cat $tmplist" --input-prompt="Select theme: ")
+    rm -f "$tmplist"
+
+    [[ -z "$selected" ]] && return 0
+    tinty apply "${selected#* }"
   }
 
   theme-favorite() {
