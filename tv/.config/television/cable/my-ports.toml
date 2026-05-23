@@ -1,0 +1,19 @@
+[metadata]
+name = "my-ports"
+description = "List listening ports and associated processes"
+requirements = ["lsof", "awk"]
+
+[source]
+command = "lsof -i -P -n -sTCP:LISTEN 2>/dev/null | tail -n +2 | awk '{n=split($9,a,\":\"); print a[n], $1, $2}'"
+display = "{split: :0} ({split: :1})"
+
+[preview]
+command = "lsof -i -P -n -sTCP:LISTEN 2>/dev/null | grep ':{split: :0}$' | head -20"
+
+[ui.preview_panel]
+size = 40
+
+[actions.kill]
+description = "Kill the process listening on the selected port"
+command = "lsof -ti :{split: :0} | xargs kill -9"
+mode = "execute"
