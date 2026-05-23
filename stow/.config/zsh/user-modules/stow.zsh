@@ -30,17 +30,17 @@ dots-sync() {
       local package=$(basename "${dir:l}")  # Lowercase for consistency
       if command -v "$package" &> /dev/null; then
         # command installed: add/replace
-        stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
+        stow -S --dir "$source" --target "$target" "$package"
         installed+=("$package")
 
       elif  [[ "$package" == "${machine_name:l}" ]]; then
         # machine name matches: add/replace
-        stow -S --dir "$source" --target "$target" "$package" 2>/dev/null
+        stow -S --dir "$source" --target "$target" "$package"
         # machine+=("$package")
 
       else
         # otherwise: remove
-        stow -D --dir "$source" --target "$target" "$package" 2>/dev/null
+        stow -D --dir "$source" --target "$target" "$package"
         # removed+=("$package")
 
       fi
