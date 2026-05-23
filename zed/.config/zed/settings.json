@@ -7,12 +7,24 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false,
+    "agent_review": false,
+  },
+  "which_key": {
+    "delay_ms": 0,
+    "enabled": true,
+  },
+  "base_keymap": "VSCode",
+  "autosave": "on_focus_change",
   "ui_font_size": 16,
   "buffer_font_size": 16,
-  "helix_mode": true,
+  "vim_mode": true,
   "theme": {
-    "mode": "system",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha"
-  }
+    "mode": "dark",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
 }
