@@ -20,3 +20,4 @@ yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
 **/dirhist.clifm
 **/history.clifm
 **/jump.clifm
+/zed/.config/zed/prompts/
