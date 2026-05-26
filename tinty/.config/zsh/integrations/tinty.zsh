@@ -45,6 +45,13 @@ if command -v tinty &>/dev/null; then
 
   tinty-theme-tv() {
     [[ ! -d "$THEME_STATE_DIR" ]] && echo "$THEME_STATE_DIR does not exist. Run theme-sync first." && return 1
+
+    if [[ "$1" == "--favorites" ]]; then
+      [[ ! -f "$THEME_FAVORITES_FILE" ]] && echo "No favorites file found." && return 1
+      cat "$THEME_FAVORITES_FILE"
+      return
+    fi
+
     local all; all=$(tinty list)
 
     if [[ -n "$1" ]]; then
