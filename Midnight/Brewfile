@@ -26,7 +26,6 @@ cask "aerospace"
 cask "brave-browser"
 cask "font-jetbrains-mono-nerd-font"
 cask "raycast"
-cask "bluesnooze"
 cask "kitty"
 
 # personal
