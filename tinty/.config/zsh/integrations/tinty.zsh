@@ -8,70 +8,66 @@ if command -v tinty &>/dev/null; then
   theme-sync()  { tinty sync }
   alias theme=tinty-theme-tv
 
-  tinty-theme-fzf() {
-    if [[ ! -d "$THEME_STATE_DIR" ]]; then
-      echo "$THEME_STATE_DIR does not exist. Run theme-sync first then try theme again."
-      return 1
+  # Resolve a short theme name to its full tinty id: base24 preferred, then base16, then any other prefix
+  _tinty-resolve() {
+    local name="$1" all="$2"
+    if   echo "$all" | grep -qx "base24-$name"; then echo "base24-$name"
+    elif echo "$all" | grep -qx "base16-$name"; then echo "base16-$name"
+    else echo "$all" | grep -m1 "^[^-]*-${name}$"
     fi
+  }
+
+  tinty-theme-fzf() {
+    [[ ! -d "$THEME_STATE_DIR" ]] && echo "$THEME_STATE_DIR does not exist. Run theme-sync first." && return 1
+    local all; all=$(tinty list)
 
     if [[ -n "$1" ]]; then
-      local all selected
-      all=$(tinty list)
-      if echo "$all" | grep -qx "base24-$1"; then
-        selected="base24-$1"
-      elif echo "$all" | grep -qx "base16-$1"; then
-        selected="base16-$1"
-      else
-        echo "Theme not found: base24-$1 or base16-$1"
-        return 1
-      fi
-      tinty apply "$selected"
-      return
+      local resolved; resolved=$(_tinty-resolve "$1" "$all")
+      [[ -z "$resolved" ]] && echo "Theme not found: $1" && return 1
+      tinty apply "$resolved"; return
     fi
 
-    local selected
-    selected=$({
-      [[ -f "$THEME_FAVORITES_FILE" ]] && sed 's/^/★ /' "$THEME_FAVORITES_FILE"
-      tinty list | grep -vxF -f "${THEME_FAVORITES_FILE:-/dev/null}"
-    } | fzf --prompt="Select theme: " --height=100% --border --layout=reverse)
+    local unique fav_shorts selected resolved
+    unique=$(echo "$all" | sed 's/^[^-]*-//' | sort -u)
+    fav_shorts=$(sed 's/^[^-]*-//' "$THEME_FAVORITES_FILE" 2>/dev/null)
 
+    selected=$(
+      {
+        echo "$unique" | while IFS= read -r n; do echo "$fav_shorts" | grep -qx "$n" && echo "★ $n"; done
+        echo "$unique" | while IFS= read -r n; do echo "$fav_shorts" | grep -qx "$n" || echo "$n"; done
+      } | fzf --prompt="Select theme: " --height=100% --border --layout=reverse
+    )
     [[ -z "$selected" ]] && return 0
-    tinty apply "${selected#★ }"
+    resolved=$(_tinty-resolve "${selected#★ }" "$all")
+    [[ -z "$resolved" ]] && echo "Theme not found: ${selected#★ }" && return 1
+    tinty apply "$resolved"
   }
 
   tinty-theme-tv() {
-    if [[ ! -d "$THEME_STATE_DIR" ]]; then
-      echo "$THEME_STATE_DIR does not exist. Run theme-sync first then try theme again."
-      return 1
-    fi
+    [[ ! -d "$THEME_STATE_DIR" ]] && echo "$THEME_STATE_DIR does not exist. Run theme-sync first." && return 1
+    local all; all=$(tinty list)
 
     if [[ -n "$1" ]]; then
-      local all selected
-      all=$(tinty list)
-      if echo "$all" | grep -qx "base24-$1"; then
-        selected="base24-$1"
-      elif echo "$all" | grep -qx "base16-$1"; then
-        selected="base16-$1"
-      else
-        echo "Theme not found: base24-$1 or base16-$1"
-        return 1
-      fi
-      tinty apply "$selected"
-      return
+      local resolved; resolved=$(_tinty-resolve "$1" "$all")
+      [[ -z "$resolved" ]] && echo "Theme not found: $1" && return 1
+      tinty apply "$resolved"; return
     fi
 
-    local tmplist selected
-    tmplist="$(mktemp)"
+    local unique fav_shorts tmplist selected resolved
+    unique=$(echo "$all" | sed 's/^[^-]*-//' | sort -u)
+    fav_shorts=$(sed 's/^[^-]*-//' "$THEME_FAVORITES_FILE" 2>/dev/null)
+    tmplist=$(mktemp)
     {
-      [[ -f "$THEME_FAVORITES_FILE" ]] && sed 's/^/* /' "$THEME_FAVORITES_FILE"
-      tinty list | grep -vxF -f "${THEME_FAVORITES_FILE:-/dev/null}"
+      echo "$unique" | while IFS= read -r n; do echo "$fav_shorts" | grep -qx "$n" && echo "* $n"; done
+      echo "$unique" | while IFS= read -r n; do echo "$fav_shorts" | grep -qx "$n" || echo "$n"; done
     } > "$tmplist"
 
     selected=$(tv --no-sort --source-command="cat $tmplist" --input-prompt="Select theme: ")
     rm -f "$tmplist"
-
     [[ -z "$selected" ]] && return 0
-    tinty apply "${selected#* }"
+    resolved=$(_tinty-resolve "${selected#* }" "$all")
+    [[ -z "$resolved" ]] && echo "Theme not found: ${selected#* }" && return 1
+    tinty apply "$resolved"
   }
 
   theme-favorite() {
