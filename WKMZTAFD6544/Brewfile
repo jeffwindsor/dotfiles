@@ -36,7 +36,6 @@ cask "balenaetcher"
 cask "kitty"
 
 # cj
-brew "buf"
 brew "go"
 brew "vault"
 brew "bun"
