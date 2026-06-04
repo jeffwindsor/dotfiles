@@ -37,9 +37,6 @@ cat > "$DIR/flavor.toml" <<EOF
 [manager]
 cwd = { fg = "#${BASE0D}" }
 
-hovered         = { fg = "#${BASE00}", bg = "#${BASE0D}", bold = true }
-preview_hovered = { underline = true }
-
 find_keyword  = { fg = "#${BASE0A}", bold = true, italic = true, underline = true }
 find_position = { fg = "#${BASE09}", bold = true, italic = true }
 
@@ -48,10 +45,6 @@ marker_cut      = { fg = "#${BASE08}", bg = "#${BASE08}" }
 marker_marked   = { fg = "#${BASE0E}", bg = "#${BASE0E}" }
 marker_selected = { fg = "#${BASE0D}", bg = "#${BASE0D}" }
 
-tab_active   = { fg = "#${BASE05}", bg = "#${BASE02}", bold = true }
-tab_inactive = { fg = "#${BASE03}" }
-tab_width    = 1
-
 count_copied   = { fg = "#${BASE00}", bg = "#${BASE0A}" }
 count_cut      = { fg = "#${BASE00}", bg = "#${BASE08}" }
 count_selected = { fg = "#${BASE00}", bg = "#${BASE0D}" }
@@ -59,24 +52,32 @@ count_selected = { fg = "#${BASE00}", bg = "#${BASE0D}" }
 border_symbol = "│"
 border_style  = { fg = "#${BASE0D}" }
 
-[status]
-separator_open  = ""
-separator_close = ""
-separator_style = { fg = "#${BASE02}", bg = "#${BASE02}" }
+[tabs]
+active   = { fg = "#${BASE05}", bg = "#${BASE02}", bold = true }
+inactive = { fg = "#${BASE03}" }
 
-mode_normal = { fg = "#${BASE00}", bg = "#${BASE0D}", bold = true }
-mode_select = { fg = "#${BASE00}", bg = "#${BASE0B}", bold = true }
-mode_unset  = { fg = "#${BASE00}", bg = "#${BASE09}", bold = true }
+[mode]
+normal_main = { fg = "#${BASE00}", bg = "#${BASE0D}", bold = true }
+normal_alt  = { fg = "#${BASE00}", bg = "#${BASE0D}" }
+select_main = { fg = "#${BASE00}", bg = "#${BASE0B}", bold = true }
+select_alt  = { fg = "#${BASE00}", bg = "#${BASE0B}" }
+unset_main  = { fg = "#${BASE00}", bg = "#${BASE09}", bold = true }
+unset_alt   = { fg = "#${BASE00}", bg = "#${BASE09}" }
+
+[status]
+overall   = { fg = "#${BASE02}", bg = "#${BASE02}" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
 
 progress_label  = { bold = true }
 progress_normal = { fg = "#${BASE0D}", bg = "#${BASE02}" }
 progress_error  = { fg = "#${BASE08}", bg = "#${BASE02}" }
 
-permissions_t = { fg = "#${BASE03}" }
-permissions_r = { fg = "#${BASE0A}" }
-permissions_w = { fg = "#${BASE08}" }
-permissions_x = { fg = "#${BASE0B}" }
-permissions_s = { fg = "#${BASE02}" }
+perm_type  = { fg = "#${BASE03}" }
+perm_read  = { fg = "#${BASE0A}" }
+perm_write = { fg = "#${BASE08}" }
+perm_exec  = { fg = "#${BASE0B}" }
+perm_sep   = { fg = "#${BASE02}" }
 
 [input]
 border   = { fg = "#${BASE0D}" }
@@ -84,7 +85,7 @@ title    = {}
 value    = {}
 selected = { reversed = true }
 
-[completion]
+[cmp]
 border   = { fg = "#${BASE0D}" }
 active   = { bg = "#${BASE02}" }
 inactive = {}
@@ -116,25 +117,25 @@ title_error = { fg = "#${BASE08}" }
 
 [filetype]
 rules = [
-  { mime = "image/*",                  fg = "#${BASE0D}" },
-  { mime = "video/*",                  fg = "#${BASE0C}" },
-  { mime = "audio/*",                  fg = "#${BASE0C}" },
-  { mime = "application/zip",          fg = "#${BASE0A}" },
-  { mime = "application/gzip",         fg = "#${BASE0A}" },
-  { mime = "application/x-tar",        fg = "#${BASE0A}" },
-  { mime = "application/x-xz",         fg = "#${BASE0A}" },
-  { mime = "application/x-bzip2",      fg = "#${BASE0A}" },
+  { mime = "image/*",                     fg = "#${BASE0D}" },
+  { mime = "video/*",                     fg = "#${BASE0C}" },
+  { mime = "audio/*",                     fg = "#${BASE0C}" },
+  { mime = "application/zip",             fg = "#${BASE0A}" },
+  { mime = "application/gzip",            fg = "#${BASE0A}" },
+  { mime = "application/x-tar",           fg = "#${BASE0A}" },
+  { mime = "application/x-xz",            fg = "#${BASE0A}" },
+  { mime = "application/x-bzip2",         fg = "#${BASE0A}" },
   { mime = "application/x-7z-compressed", fg = "#${BASE0A}" },
-  { mime = "application/x-rar",        fg = "#${BASE0A}" },
-  { mime = "application/zstd",         fg = "#${BASE0A}" },
-  { mime = "application/x-executable", fg = "#${BASE0B}" },
-  { mime = "application/x-mach-binary",fg = "#${BASE0B}" },
-  { name = "*.toml",  fg = "#${BASE09}" },
-  { name = "*.yaml",  fg = "#${BASE09}" },
-  { name = "*.yml",   fg = "#${BASE09}" },
-  { name = "*.json",  fg = "#${BASE09}" },
-  { name = "*.md",    fg = "#${BASE0E}" },
-  { name = "*/",      fg = "#${BASE04}" },
-  { name = "*",       fg = "#${BASE05}" },
+  { mime = "application/x-rar",           fg = "#${BASE0A}" },
+  { mime = "application/zstd",            fg = "#${BASE0A}" },
+  { mime = "application/x-executable",    fg = "#${BASE0B}" },
+  { mime = "application/x-mach-binary",   fg = "#${BASE0B}" },
+  { url = "*.toml",  fg = "#${BASE09}" },
+  { url = "*.yaml",  fg = "#${BASE09}" },
+  { url = "*.yml",   fg = "#${BASE09}" },
+  { url = "*.json",  fg = "#${BASE09}" },
+  { url = "*.md",    fg = "#${BASE0E}" },
+  { url = "*/",      fg = "#${BASE04}" },
+  { url = "*",       fg = "#${BASE05}" },
 ]
 EOF
