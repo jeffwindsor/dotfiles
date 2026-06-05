@@ -27,20 +27,21 @@ dots-sync() {
       [[ -d "$dir" ]] || continue
 
       # Make sure all installed packages (and machine) have dot files "installed" in home
-      local package=$(basename "${dir:l}")  # Lowercase for consistency
+      local dir_name=$(basename "$dir")
+      local package="${dir_name:l}"  # Lowercase for comparisons only
       if command -v "$package" &> /dev/null; then
         # command installed: add/replace
-        stow -S --dir "$source" --target "$target" "$package"
+        stow -S --dir "$source" --target "$target" "$dir_name"
         installed+=("$package")
 
       elif  [[ "$package" == "${machine_name:l}" ]]; then
         # machine name matches: add/replace
-        stow -S --dir "$source" --target "$target" "$package"
+        stow -S --dir "$source" --target "$target" "$dir_name"
         # machine+=("$package")
 
       else
         # otherwise: remove
-        stow -D --dir "$source" --target "$target" "$package"
+        stow -D --dir "$source" --target "$target" "$dir_name"
         # removed+=("$package")
 
       fi
