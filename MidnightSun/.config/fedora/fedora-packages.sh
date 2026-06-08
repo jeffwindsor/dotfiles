@@ -1,33 +1,16 @@
-#!/bin/bash
+dnf install bat lsd fd git neovim ripgrep stow zsh kitty
 
-# Check if running on Fedora Atomic (Silverblue, Kinoite, etc.)
-if rpm -q rpm-ostree >/dev/null 2>&1; then
-  IS_ATOMIC=1
-else
-  IS_ATOMIC=0
-fi
+#dnf install lazygit mise starship television yazi
 
-# Check if terra-release is installed
-if rpm -q terra-release >/dev/null 2>&1; then
-  echo "Terra repository is already installed."
-  exit 0
-fi
+sudo dnf copr enable dejan/lazygit
+sudo dnf install lazygit
 
-echo "Terra repository not found. Installing..."
+dnf copr enable atim/starship
+dnf install starship
 
-if [[ $IS_ATOMIC -eq 1 ]]; then
-  # Fedora Atomic installation
-  echo "Detected Fedora Atomic. Installing via rpm-ostree..."
-  curl -fsSL https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo | pkexec tee /etc/yum.repos.d/terra.repo
-  sudo rpm-ostree install terra-release
-  echo "Installation complete. A reboot may be required."
-else
-  # Standard Fedora installation
-  echo "Detected standard Fedora. Installing via dnf..."
-  sudo dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
-  echo "Installation complete. Refreshing package store"
-  sudo dnf --refresh upgrade
-fi
+curl -fsSL https://alexpasmantier.github.io/television/install.sh | bash
 
-sudo dnf install bat lsd fd git neovim ripgrep stow zsh kitty
-sudo dnf install lazygit mise starship television yazi
+dnf copr enable lihaohong/yazi
+dnf install yazi
+
+curl https://mise.run | sh
