@@ -38,15 +38,6 @@ alias jeff='cdl $SOURCE_JEFF'
 # FUNCTIONS
 # ═══════════════════════════════════════════════════
 
-# Sync everything
-sync() {
-  dots-pull
-  zsh-sync
-  brew-sync
-  mise-sync
-  dots-sync
-}
-
 # Change directory with clear and list
 cdl() {
   cd "$1"
