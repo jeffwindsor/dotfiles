@@ -1,5 +1,3 @@
-# customThemeFilePath: ~/.config/lazygit/theme.yml
-
 gui:
   screenMode: 'full'
 
@@ -42,7 +40,7 @@ keybinding:
   universal:
     optionMenu: '~'
     optionMenu-alt1: '?'
-    quit-alt1: <esc>
+    # quit-alt1: <esc>
     commitChanges: 'C'
 
 update:
