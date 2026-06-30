@@ -35,6 +35,12 @@ themes-dir = "scripts"
 hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh"
 
 
+[[items]]
+path = "https://github.com/tinted-theming/tinted-shell"
+name = "cosmic"
+themes-dir = "scripts"
+hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/cosmic-color.sh"
+
 # -- not used
 
 # [[items]]
