@@ -1,3 +1,4 @@
+config-version = 2
 start-at-login = true
 default-root-container-layout = 'accordion'
 default-root-container-orientation = 'auto'
@@ -5,7 +6,7 @@ default-root-container-orientation = 'auto'
 [workspace-to-monitor-force-assignment]
 # spec workspaces
 'c' = 'secondary' # calendar
-'k' = 'secondary' # slack
+'s' = 'secondary' # slack
 'm' = 'secondary' # messages
 'o' = 'secondary' # office
 't' = 'secondary' # teams
@@ -35,7 +36,7 @@ outer.right = [{ monitor.secondary = 0 }, 0]
 alt-ctrl-b = 'exec-and-forget open -n /Applications/Brave\ Browser.app/'
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
 #alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
-alt-ctrl-k = 'exec-and-forget open /Applications/Slack.app'
+alt-ctrl-s = 'exec-and-forget open /Applications/Slack.app'
 alt-ctrl-m = 'exec-and-forget open /System/Applications/Messages.app'
 alt-ctrl-n = 'exec-and-forget open /System/Applications/Notes.app'
 alt-ctrl-o = 'exec-and-forget open /Applications/Microsoft\ Outlook.app'
@@ -51,8 +52,8 @@ alt-ctrl-enter = 'exec-and-forget open -n /Applications/kitty.app'
 # Workspaces
 alt-c = 'workspace c'   # Calendar
 alt-shift-c = ['move-node-to-workspace c', 'workspace c']
-alt-k = 'workspace k'   # slacK
-alt-shift-k = ['move-node-to-workspace k', 'workspace k']
+alt-s = 'workspace s'   # slacK
+alt-shift-s = ['move-node-to-workspace s', 'workspace s']
 alt-m = 'workspace m'   # Messages
 alt-shift-m = ['move-node-to-workspace m', 'workspace m']
 alt-o = 'workspace o'   # ms Office
