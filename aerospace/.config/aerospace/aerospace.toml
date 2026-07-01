@@ -137,7 +137,7 @@ run = 'layout tiling'
 # Messages
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace k']
+run = ['move-node-to-workspace s']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
