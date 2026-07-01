@@ -47,7 +47,7 @@ alt-ctrl-comma = 'exec-and-forget open /System/Applications/System\ Settings.app
 alt-ctrl-space = 'exec-and-forget open ~'
 
 alt-ctrl-enter = 'exec-and-forget open -n /Applications/kitty.app'
-# alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/kitty.app --args zellij'
+alt-ctrl-shift-enter = 'exec-and-forget open -n /Applications/Alacritty.app --args -e zellij'
 
 # Workspaces
 alt-c = 'workspace c'   # Calendar
