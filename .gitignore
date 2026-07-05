@@ -21,3 +21,6 @@ yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
 **/history.clifm
 **/jump.clifm
 /zed/.config/zed/prompts/
+/brew/.config/homebrew/trust.json
+/brew/.config/homebrew/trust.json.lock
+/yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
