@@ -24,3 +24,5 @@ yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
 /brew/.config/homebrew/trust.json
 /brew/.config/homebrew/trust.json.lock
 /yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
+/claude/.claude
+/docs/superpowers
