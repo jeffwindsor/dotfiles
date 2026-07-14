@@ -21,11 +21,13 @@ zinit light zsh-users/zsh-autosuggestions
 # ═══════════════════════════════════════════════════
 # COMPLETIONS
 # ═══════════════════════════════════════════════════
-# Only run expensive security check once per 24 hours
-autoload -Uz compinit                                    # Load the compinit function
-if [[ -n ${ZSH_COMPDUMP}(#qN.mh+24) ]]; then             # If dump file is >24 hours old
-  compinit -d "${ZSH_COMPDUMP}"                          # Full initialization (slow)
-else                                                     # If dump file is fresh
-  compinit -C -d "${ZSH_COMPDUMP}"                       # Skip security check (fast)
-fi
+autoload -Uz compinit
+() {
+  setopt local_options extended_glob
+  if [[ -n ${ZDOTDIR:-~}/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+  else
+    compinit -C
+  fi
+}
 zinit cdreplay -q

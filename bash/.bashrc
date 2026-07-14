@@ -53,5 +53,5 @@ fi
 
 # Mise - Runtime manager
 if command -v mise &>/dev/null; then
-  eval "$(mise activate bash)"
+  eval "$(mise activate bash --shims)"
 fi

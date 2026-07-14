@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+#== PROFILE ==
+# zmodload zsh/zprof
+#=============
+
 export TERM=xterm-256color
 ZSH_CONFIG_DIR="${XDG_CONFIG_HOME}/zsh/"
 
@@ -12,3 +16,7 @@ done
 if [ -f $HOME/.zshrc.local ]; then
   source $HOME/.zshrc.local
 fi
+
+#== PROFILE ==
+# zprof
+#=============
