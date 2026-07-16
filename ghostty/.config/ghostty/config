@@ -8,9 +8,6 @@ macos-titlebar-style = hidden
 window-padding-x = 4
 window-padding-y = 4
 
-#== Behavior ==
-audio-bell = false
-
 #== Keybindings ==
 # ghostty-specific
 keybind = global:cmd+grave_accent=toggle_quick_terminal
