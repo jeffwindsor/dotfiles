@@ -11,6 +11,7 @@ nu/.config/nushell/history.txt
 alacritty/.config/alacritty/colors.toml
 ghostty/.config/ghostty/themes/tinted-theming
 kitty/.config/kitty/tinted-theming.conf
+wezterm/.config/wezterm/colors/tinted-theming.toml
 lazygit/.config/lazygit/theme.yml
 lsd/.config/lsd/colors.yaml
 zellij/.config/zellij/themes/tinted-theming.kdl
