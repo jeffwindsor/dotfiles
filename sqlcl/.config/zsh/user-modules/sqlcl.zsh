@@ -1,34 +1,13 @@
 #!/usr/bin/env zsh
 
-SQLCL_SCHEMAS=(CJ CJ_PAYOUT FINANCIAL PARTNER_PAYMENT)
-
 # ═══════════════════════════════════════════════════
 # FUNCTIONS
 # ═══════════════════════════════════════════════════
-sqlcl-connection() {
-  local tns_name="$1"
-  local default_user="$2"
-
-  local user="${SQLCL_USERNAME:-$default_user}"
-  if [[ -z "$user" ]]; then
-    read -r "user?Enter username: "
-  else
-    local input
-    read -r "input?Enter username [$user]: "
-    user="${input:-$user}"
-  fi
-
-  local password="${SQLCL_PASSWORD}"
-  if [[ -z "$password" ]]; then
-    read -rs "password?Enter database password: "
-    echo ""
-  fi
-
-  echo "${user}/\"${password}\"@${tns_name}"
-}
+SQLCL_SCHEMAS=(CJ CJ_PAYOUT FINANCIAL PARTNER_PAYMENT)
 
 sqlcl() {
   local tns_name="$1"
+  local schema="$2"
 
   if [[ -z "$tns_name" ]]; then
     local tnsnames=$(awk -F'=' '/^[A-Za-z0-9_]+[[:space:]]*=/ {gsub(/[[:space:]]/, "", $1); print $1}' ~/tnsnames.ora)
@@ -40,19 +19,37 @@ sqlcl() {
     return 1
   fi
 
-  local db_user
-  local schema=$(print -l $SQLCL_SCHEMAS | tv)
-  if [[ -n "$schema" ]]; then
-    db_user=$(security find-generic-password -s "sqlcl-${schema}" -a "db_user" -w 2>/dev/null)
+  if [[ -z "$schema" ]]; then
+    schema=$(print -l $SQLCL_SCHEMAS | tv)
+  fi
+  if [[ -z "$schema" ]]; then
+    print_error "No schema selected"
+    return 1
   fi
 
-  local connection_string=$(sqlcl-connection "$tns_name" "$db_user")
+  local connection_string
+  connection_string=$(security find-generic-password -s "sqlcl-${tns_name}-${schema}" -a "connection" -w 2>/dev/null)
+
+  if [[ -z "$connection_string" ]]; then
+    print_error "No connection string stored for ${tns_name}/${schema}. Run: sqlcl-store ${tns_name} ${schema}"
+    return 1
+  fi
+
   "$HOME/.local/bin/sqlcl/bin/sql" -S "$connection_string"
 }
 
 sqlcl-store() {
-  local schema="$1"
-  local db_user="$2"
+  local tns_name="$1"
+  local schema="$2"
+  local connection_string="$3"
+
+  if [[ -z "$tns_name" ]]; then
+    read -r "tns_name?TNS name: "
+  fi
+  if [[ -z "$tns_name" ]]; then
+    echo "TNS name cannot be empty" >&2
+    return 1
+  fi
 
   if [[ -z "$schema" ]]; then
     read -r "schema?Schema: "
@@ -62,15 +59,15 @@ sqlcl-store() {
     return 1
   fi
 
-  if [[ -z "$db_user" ]]; then
-    read -r "db_user?DB user for ${schema}: "
+  if [[ -z "$connection_string" ]]; then
+    read -r "connection_string?Connection string for ${tns_name}/${schema} (user/\"password\"@tns): "
   fi
-  if [[ -z "$db_user" ]]; then
-    echo "DB user cannot be empty" >&2
+  if [[ -z "$connection_string" ]]; then
+    echo "Connection string cannot be empty" >&2
     return 1
   fi
 
-  security add-generic-password -s "sqlcl-${schema}" -a "db_user" -w "${db_user}" -U
+  security add-generic-password -s "sqlcl-${tns_name}-${schema}" -a "connection" -w "${connection_string}" -U
 }
 
 # ═══════════════════════════════════════════════════
