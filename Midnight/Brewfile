@@ -4,7 +4,6 @@ brew "zsh"
 
 # clis
 brew "bat"
-brew "clifm"
 brew "fd"
 brew "git"
 brew "lazygit"
