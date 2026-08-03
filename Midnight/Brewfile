@@ -1,8 +1,4 @@
-# shells
 brew "bash"
-brew "zsh"
-
-# clis
 brew "bat"
 brew "fd"
 brew "git"
@@ -14,22 +10,20 @@ brew "ripgrep"
 brew "starship"
 brew "stow"
 brew "television"
-tap "tinted-theming/tinted"
 brew "tinted-theming/tinted/tinty"
 brew "tree-sitter-cli"
 brew "yazi"
-
-
-# guis
-tap "nikitabobko/tap"
+brew "zsh"
 cask "aerospace"
 cask "brave-browser"
 cask "font-jetbrains-mono-nerd-font"
-cask "raycast"
 cask "kitty"
+cask "raycast"
+tap "nikitabobko/tap"
+tap "tinted-theming/tinted"
+cask "balenaetcher"
 
 # personal
-cask "balenaetcher"
 cask "bambu-studio"
 cask "iina"
 cask "spotify"
