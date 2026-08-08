@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # stow.zsh - GNU Stow dotfiles management
 
-dots-sync() {
+sync-dots() {
     # verify stow
     if ! command -v stow &> /dev/null; then
         echo "Error: stow not found. Install it via Homebrew (macOS) or your package manager (Linux)."
@@ -52,7 +52,7 @@ dots-sync() {
     # print_muted   "Removed:   ${removed[*]}"
 }
 
-dots-sync-manual() {
+manual-sync-dots() {
   local source="$DOTFILES"
   local target="$HOME"
 

@@ -5,7 +5,7 @@ if command -v tinty &>/dev/null; then
   THEME_FAVORITES_FILE="$THEME_CONFIG_DIR/favorites"
   THEME_CURRENT_SCHEME="$THEME_STATE_DIR/current_scheme"
 
-  theme-sync()  { tinty sync }
+  sync-tinty()  { tinty sync }
   alias theme=tinty-theme-tv
 
   # Resolve a short theme name to its full tinty id: base24 preferred, then base16, then any other prefix

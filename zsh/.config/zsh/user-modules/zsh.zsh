@@ -5,7 +5,7 @@
 # ALIASES
 # ═══════════════════════════════════════════════════
 
-alias zsh-sync='zinit update -a -n'
+alias sync-zinit='zinit update -a -n'
 alias pp='pwd | pbcopy'
 alias fm='clifm'
 alias cat='bat --plain'

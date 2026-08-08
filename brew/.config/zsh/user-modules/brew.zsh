@@ -74,7 +74,7 @@ brew-diff() {
 }
 
 # Brew sync - update and install from Brewfile
-brew-sync() {
+sync-brew() {
   local brewfile="${HOME}/Brewfile"
 
   print_section "Homebrew"
