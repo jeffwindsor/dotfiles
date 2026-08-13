@@ -5,7 +5,12 @@
 # ALIASES
 # ═══════════════════════════════════════════════════
 
-alias sync-zinit='zinit update -a -n'
+sync-zinit() {
+  zinit update -a -n
+  rm -f "${ZDOTDIR:-~}/.zcompdump"
+  compinit
+  print_success "zinit updated and completions rebuilt"
+}
 alias pp='pwd | pbcopy'
 alias fm='clifm'
 alias cat='bat --plain'
