@@ -20,24 +20,5 @@ fi
 #== PROFILE ==
 # zprof
 #=============
-_ghost_colors=($'\e[91m' $'\e[93m' $'\e[96m' $'\e[95m')
-_gc=${_ghost_colors[$((RANDOM % 4 + 1))]}
-_wc=$'\e[97m'
-_rc=$'\e[0m'
-printf '\n'
-printf '%s           ░░░░░░░░%s\n'                                "$_gc" "$_rc"
-printf '%s       ░░░░░░░░░░░░░░░░%s\n'                            "$_gc" "$_rc"
-printf '%s     ░░░░░░░░░░░░░░░░░░░░%s\n'                          "$_gc" "$_rc"
-printf '%s   ░░░░░░    ░░░░░░░░    ░░%s\n'                        "$_gc" "$_rc"
-printf '%s   ░░░░        ░░░░        %s\n'                        "$_gc" "$_rc"
-printf '%s   ░░░░    %s▒▒▒▒%s░░░░    %s▒▒▒▒%s\n'                 "$_gc" "$_wc" "$_gc" "$_wc" "$_rc"
-printf '%s ░░░░░░    %s▒▒▒▒%s░░░░    %s▒▒▒▒%s░░%s\n'             "$_gc" "$_wc" "$_gc" "$_wc" "$_gc" "$_rc"
-printf '%s ░░░░░░░░    ░░░░░░░░    ░░░░%s\n'                      "$_gc" "$_rc"
-printf '%s ░░░░░░░░░░░░░░░░░░░░░░░░░░░░%s\n'                      "$_gc" "$_rc"
-printf '%s ░░░░░░░░░░░░░░░░░░░░░░░░░░░░%s\n'                      "$_gc" "$_rc"
-printf '%s ░░░░░░░░░░░░░░░░░░░░░░░░░░░░%s\n'                      "$_gc" "$_rc"
-printf '%s ░░░░  ░░░░░░    ░░░░░░  ░░░░%s\n'                      "$_gc" "$_rc"
-printf '%s ░░      ░░░░    ░░░░      ░░%s\n'                      "$_gc" "$_rc"
-printf '\n'
-unset _ghost_colors _gc _wc _rc
+ghost
 
