@@ -33,8 +33,8 @@ outer.right = [{ monitor.secondary = 0 }, 0]
 
 [mode.main.binding]
 
-alt-ctrl-b = 'exec-and-forget open -n /Applications/Zen.app'
-# alt-ctrl-b = 'exec-and-forget open -n /Applications/Brave\ Browser.app/ --args --disable-brave-update'
+# alt-ctrl-b = 'exec-and-forget open -n /Applications/Zen.app'
+alt-ctrl-b = 'exec-and-forget open -n /Applications/Brave\ Browser.app/ --args --disable-brave-update'
 alt-ctrl-c = 'exec-and-forget open /System/Applications/Calendar.app'
 # alt-ctrl-i = 'exec-and-forget open -n /Applications/IntelliJ\ IDEA.app || open -n /Applications/IntelliJ\ IDEA\ CE.app'
 alt-ctrl-s = 'exec-and-forget open /Applications/Slack.app'
