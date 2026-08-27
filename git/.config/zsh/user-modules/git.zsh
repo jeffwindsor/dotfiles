@@ -1,5 +1,26 @@
 #!/usr/bin/env zsh
 
+forall-git-repos() {
+  local failed=()
+  # IFS= preserves whitespace in paths; -r prevents backslash interpretation
+  while IFS= read -r gitdir; do
+    # Strip trailing /.git to get the repo root
+    local repo="${gitdir%/.git}"
+    echo "=== $repo ==="
+    # Subshell so cd doesn't change our working directory
+    (cd "$repo" && "$@") || failed+=("$repo")
+  done < <(
+    # command find bypasses the fd alias
+    # -name .git -type d: find .git directories at any depth
+    # -prune: don't descend into them (stops at each repo root; no nested repos assumed)
+    command find . -name .git -type d -prune
+  )
+  if (( ${#failed[@]} > 0 )); then
+    echo "\n\e[1;31m=== FAILED ===\e[0m"
+    printf '  \e[31m%s\e[0m\n' "${failed[@]}"
+  fi
+}
+
 git-ls-ignored(){
   git ls-files --ignored --cached --exclude-standard
 }
@@ -162,6 +183,8 @@ git-workon-repo() {
 # ═══════════════════════════════════════════════════
 # ALIASES
 # ═══════════════════════════════════════════════════
+
+alias gall='forall-git-repos'
 alias gb='git blame -w -C -C -C'
 alias gg='lazygit'
 alias gs='git status'
