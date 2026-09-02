@@ -24,6 +24,7 @@ tap "tinted-theming/tinted"
 cask "balenaetcher"
 
 # cj
+cask "alacritty"
 brew "go"
 brew "vault"
 brew "bun"
@@ -36,6 +37,7 @@ brew "cjdev/tap/awsenv"
 brew "colima", restart_service: :changed
 brew "docker-buildx"
 brew "docker"
+brew "lima-additional-guestagents"
 brew "grpcurl"
 brew "k9s"
 brew "kubernetes-cli"
