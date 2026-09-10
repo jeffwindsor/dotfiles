@@ -45,3 +45,7 @@ keybinding:
 
 update:
   method: never
+
+os:
+  editPreset: 'nvim-remote'
+  open: "nvim {{filename}}"
