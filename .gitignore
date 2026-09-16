@@ -17,6 +17,9 @@ lsd/.config/lsd/colors.yaml
 zellij/.config/zellij/themes/tinted-theming.kdl
 yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
 
+# docker - runtime-generated, tracks active colima context
+docker/.docker/config.json
+
 **/.last
 **/dirhist.clifm
 **/history.clifm
