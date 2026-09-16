@@ -47,5 +47,12 @@ update:
   method: never
 
 os:
-  editPreset: 'nvim-remote'
+  editPreset: 'nvim'
   open: "nvim {{filename}}"
+
+customCommands:
+  - key: '<c-e>'
+    context: 'commits'
+    description: 'Open changed files in Neovim'
+    command: 'nvim $(git diff-tree --no-commit-id --name-only --diff-filter=ACMR -r {{.SelectedLocalCommit.Sha}})'
+    output: terminal
