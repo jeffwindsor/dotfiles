@@ -7,53 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "toolbar": {
-    "breadcrumbs": false,
-    "quick_actions": false,
-    "selections_menu": false,
-    "agent_review": false,
-  },
-  "which_key": {
-    "delay_ms": 0,
-    "enabled": true,
-  },
-  "base_keymap": "VSCode",
+  "agent": { "dock": "right", "favorite_models": [], "model_parameters": [] },
   "autosave": "on_focus_change",
-  "ui_font_size": 16,
+  "base_keymap": "VSCode",
   "buffer_font_size": 16,
-  "vim_mode": true,
-  "theme": {
-    "mode": "dark",
-    "light": "Ayu Light",
-    "dark": "Tokyo Night",
-  },
-  "icon_theme": {
-    "mode": "dark",
-    "light": "Material Icon Theme",
-    "dark": "Colored Zed Icons Theme Light"
-  },
-  "project_panel": {
-    "dock": "left"
-  },
-  "outline_panel": {
-    "dock": "left"
-  },
-  "collaboration_panel": {
-    "dock": "left"
-  },
-  "agent": {
-    "dock": "right",
-    "favorite_models": [],
-    "model_parameters": []
-  },
-  "git_panel": {
-    "dock": "left"
-  },
+  "collaboration_panel": { "dock": "left" },
+  "git_panel": { "dock": "left" },
+  "icon_theme": { "mode": "dark", "light": "Material Icon Theme", "dark": "Colored Zed Icons Theme Light" },
+  "lsp": { "bash-language-server": { "settings": { "bashIde": { "shellcheckArguments": ["--shell=bash"] } } } },
+  "outline_panel": { "dock": "left" },
+  "project_panel": { "dock": "left" },
+  "terminal": { "font_family": "JetBrainsMono Nerd Font", "font_size": 13, "line_height": "comfortable" },
+  "theme": { "mode": "dark", "light": "Ayu Light", "dark": "Catppuccin Macchiato - No Italics", },
+  "toolbar": { "breadcrumbs": false, "quick_actions": false, "selections_menu": false, "agent_review": false, },
   "ui_font_size": 16,
-  "buffer_font_size": 15,
-  "theme": {
-    "mode": "dark",
-    "light": "Everforest Light Medium (material)",
-    "dark": "Nord Darker",
-  },
+  "vim_mode": true,
+  "which_key": { "delay_ms": 0, "enabled": true, },
 }
