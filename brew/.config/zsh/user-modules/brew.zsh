@@ -78,23 +78,20 @@ sync-brew() {
   local brewfile="${HOME}/Brewfile"
 
   print_section "Homebrew"
-  print_info "   Updating Database (update)"
+  print_info "Homebrew: Updating Database (update)"
   brew update
 
-  print_info "   Upgrading Packages (upgrade)"
+  print_info "Homebrew: Upgrading Packages (upgrade)"
   brew upgrade
 
-  print_info "   Installing Bundle described in $brewfile"
+  print_info "Homebrew: Installing Bundle described in $brewfile"
   brew bundle install --file="$brewfile"
 
-  print_info "   Removing Orphaned Packages (autoremove)"
+  print_info "Homebrew: Removing Orphaned Packages (autoremove)"
   brew autoremove
 
-  print_info "   Cleaning Up Package Cache (cleanup)"
+  print_info "Homebrew: Cleaning Up Package Cache (cleanup)"
   brew cleanup
-
-  print_info "   List installed but not bundled packages"
-  brew-diff "$brewfile"
 }
 
 # ═══════════════════════════════════════════════════

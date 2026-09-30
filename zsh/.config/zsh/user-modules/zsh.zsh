@@ -82,7 +82,7 @@ print_warning() { _colorize "$1" "yellow" }
 print_info()    { _colorize "$1" "blue" }
 print_muted()   { _colorize "$1" "dark_gray" }
 print_header()  { _colorize "== $1 ==" "cyan_reverse" }
-print_section() { _colorize "== $1 ==" "cyan" }
+print_section() { echo; _colorize "$1" "cyan" }
 
 # ═══════════════════════════════════════════════════
 # DOTFILES
@@ -91,9 +91,6 @@ print_section() { _colorize "== $1 ==" "cyan" }
 dots-pull() {
   print_section "Pulling Dotfiles"
   git -C "$DOTFILES" pull
-
-  # Reload zsh config
-  source ~/.zshrc
 
   # Reload app configs
   command -v aerospace &> /dev/null && aerospace reload-config 2>/dev/null

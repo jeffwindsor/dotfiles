@@ -11,16 +11,16 @@ sync-dots() {
     local source="${1:-$DOTFILES}"
     local target="$HOME"
     local machine_name="${HOSTNAME:-$(hostname -s)}"
-    local dirs=("$source"/*/)
+    local dir dirs=("$source"/*/)
     local installed=()
     # local machine=()
     # local removed=()
 
     # print a header with useful information
     print_section "Syncing Dotfiles"
+    print_info  "$machine_name"
     print_muted "from: $source"
     print_muted "  to: $target"
-    print_info  "  on: $machine_name"
 
     # dotfiles separated by command name (or machine name)
     for dir in "${dirs[@]}"; do
@@ -47,7 +47,8 @@ sync-dots() {
       fi
     done
 
-    print_success "Installed: ${installed[*]}"
+    print_success "Installed:"
+    print -c -- "${installed[@]}"
     # print_info    "Machine:   ${machine[*]}"
     # print_muted   "Removed:   ${removed[*]}"
 }
