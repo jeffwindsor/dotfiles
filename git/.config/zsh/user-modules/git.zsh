@@ -161,24 +161,16 @@ git-reflog() {
 }
 
 
+# Select git repo with tv, cd into it, clear, then run "$@"
 git-goto-repo() {
   local repo=$(tv my-git-repos)
-  if [[ -n "$repo" ]]; then 
-    cd "$repo"
-    clear
-    lsd -A
-  fi
+  [[ -n "$repo" ]] || return 1
+  cd "$repo" || return
+  clear
+  # execute args if given
+  (( $# )) || return 0
+  "$@"
 }
-
-# Select git repo with tv
-git-workon-repo() {
-  local repo=$(tv my-git-repos)
-  if [[ -n "$repo" ]]; then 
-    cd "$repo"
-    zellij --layout claude
-  fi
-}
-
 
 # ═══════════════════════════════════════════════════
 # ALIASES
@@ -196,7 +188,6 @@ alias gl='git-log'
 alias gr='git-reflog'
 
 alias s='cdl $SOURCE'
-alias ss='git-goto-repo'
-alias srcs='git-goto-repo'
-alias sx='git-workon-repo'
-alias srcx='git-workon-repo'
+alias ss='git-goto-repo lsd -A'
+alias srcs='git-goto-repo lsd -A'
+alias srcsz='git-goto-repo zed .'
