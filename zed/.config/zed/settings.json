@@ -19,7 +19,7 @@
   "outline_panel": { "dock": "left" },
   "project_panel": { "dock": "left" },
   "terminal": { "font_family": "JetBrainsMono Nerd Font", "font_size": 13, "line_height": "comfortable" },
-  "theme": { "mode": "dark", "light": "Ayu Light", "dark": "Catppuccin Macchiato - No Italics", },
+  "theme": { "mode": "dark", "light": "Ayu Light", "dark": "0x96f Theme Darker", },
   "toolbar": { "breadcrumbs": false, "quick_actions": false, "selections_menu": false, "agent_review": false, },
   "ui_font_size": 16,
   "vim_mode": true,
