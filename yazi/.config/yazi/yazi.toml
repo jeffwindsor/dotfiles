@@ -4,13 +4,13 @@ show_hidden = true
 
 [opener]
 edit = [
-    { run = '$EDITOR "$@"', desc = "Edit in $EDITOR", block = true }
+    { run = '$EDITOR %s', desc = "Edit in $EDITOR", block = true }
 ]
 text = [
-    { run = '$EDITOR "$@"', desc = "Edit in $EDITOR", block = true }
+    { run = '$EDITOR %s', desc = "Edit in $EDITOR", block = true }
 ]
 default = [
-    { run = 'open "$@"', desc = "Open with default app", block = false }
+    { run = 'open %s', desc = "Open with default app", block = false }
 ]
 
 [open]
