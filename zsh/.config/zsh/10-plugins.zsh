@@ -1,33 +1,29 @@
 #!/usr/bin/env zsh
-# ═══════════════════════════════════════════════════
-# PLUGIN MANAGER
-# ═══════════════════════════════════════════════════
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# ZINIT
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
 
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+if [[ ! -d "$ZINIT_HOME" ]]; then
+    mkdir -p "${ZINIT_HOME:h}"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-source "${ZINIT_HOME}/zinit.zsh"
+source "$ZINIT_HOME/zinit.zsh"
 
-# ═══════════════════════════════════════════════════
-# PLUGINS
-# ═══════════════════════════════════════════════════
-zinit light zsh-users/zsh-syntax-highlighting
+# COMPLETIONS: Must be loaded before compinit so its completion functions are added to $fpath.
 zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-
-# ═══════════════════════════════════════════════════
-# COMPLETIONS
-# ═══════════════════════════════════════════════════
+ZCOMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
 autoload -Uz compinit
 () {
-  setopt local_options extended_glob
-  if [[ -n ${ZDOTDIR:-~}/.zcompdump(#qN.mh+24) ]]; then
-    compinit
-  else
-    compinit -C
-  fi
+    setopt local_options extended_glob
+
+    if [[ -n ${ZCOMPDUMP}(#qN.mh+24) ]]; then
+        compinit -d "$ZCOMPDUMP"
+    else
+        compinit -C -d "$ZCOMPDUMP"
+    fi
 }
-zinit cdreplay -q
+
+# INTERACTIVE PLUGINS
+zinit wait lucid for \
+    zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-syntax-highlighting
