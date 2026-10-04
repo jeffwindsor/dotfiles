@@ -75,23 +75,9 @@ brew-diff() {
 
 # Brew sync - update and install from Brewfile
 sync-brew() {
-  local brewfile="${HOME}/Brewfile"
-
-  print_section "Homebrew"
-  print_info "Homebrew: Updating Database (update)"
-  brew update
-
-  print_info "Homebrew: Upgrading Packages (upgrade)"
-  brew upgrade
-
-  print_info "Homebrew: Installing Bundle described in $brewfile"
-  brew bundle install --file="$brewfile"
-
-  print_info "Homebrew: Removing Orphaned Packages (autoremove)"
-  brew autoremove
-
-  print_info "Homebrew: Cleaning Up Package Cache (cleanup)"
-  brew cleanup
+  brew upgrade --yes 
+  #brew bundle install --file="${HOME}/Brewfile"
+  brew cleanup --prune=all
 }
 
 # ═══════════════════════════════════════════════════
