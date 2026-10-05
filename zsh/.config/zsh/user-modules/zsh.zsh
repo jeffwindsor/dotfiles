@@ -6,10 +6,7 @@
 # ═══════════════════════════════════════════════════
 
 sync-zinit() {
-  zinit update -a -n
-  rm -f "${ZDOTDIR:-~}/.zcompdump"
-  compinit
-  print_success "zinit updated and completions rebuilt"
+  zinit update -a -n && rm -f "$ZCOMPDUMP"
 }
 alias pp='pwd | pbcopy'
 alias fm='clifm'
