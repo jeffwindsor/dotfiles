@@ -25,6 +25,7 @@ function sync(){
   (( $+functions[sync-fedora] )) && { ( sync-fedora &>"$dir/fedora.log"; print $? >"$dir/fedora.rc" ) & names+=(fedora) pids+=($!) }
   (( $+functions[sync-mise] ))   && { ( sync-mise   &>"$dir/mise.log";   print $? >"$dir/mise.rc" )   & names+=(mise)   pids+=($!) }
   (( $+functions[sync-zinit] ))  && { ( sync-zinit  &>"$dir/zinit.log";  print $? >"$dir/zinit.rc" )  & names+=(zinit)  pids+=($!) }
+  (( $+functions[sync-tinty] ))  && { ( sync-tinty  &>"$dir/tinty.log";  print $? >"$dir/tinty.rc" )  & names+=(tinty)  pids+=($!) }
 
   {
     (( tty )) && printf '\e[?25l'

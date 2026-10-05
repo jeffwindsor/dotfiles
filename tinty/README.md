@@ -4,18 +4,14 @@
 
 ## Quick Reference
 
-Three shell functions in `.config/zsh/integrations/tinty.zsh` cover all normal usage:
+Shell functions in `.config/zsh/user-modules/tinty.zsh`:
 
 | Function | Purpose |
 |----------|---------|
-| `tinty-setup` | First-time setup: syncs all theme repos then opens the theme picker |
-| `tinty-update` | After a config change: syncs new repos and re-applies the current theme |
-| `theme` | Switch themes interactively via FZF; prompts to run `tinty-setup` if not yet initialized |
-
-Additional functions:
-- `theme-sync` — run `tinty sync` to pull upstream repos
-- `theme-list` — print all favorited schemes
-- `theme-favorite` / `theme-unfavorite` — manage the favorites list
+| `theme` | Switch themes interactively (television picker, favorites first); `theme <name>` applies directly |
+| `sync-tinty` | Run `tinty sync` to install missing templates and update existing ones; also run in parallel by `sync` |
+| `theme-list` | Print all favorited schemes |
+| `theme-favorite` / `theme-unfavorite` | Manage the favorites list |
 
 ---
 
@@ -37,7 +33,7 @@ The ecosystem provides pre-generated theme files in each application's native fo
 
 ### Configuration Structure
 
-**`config.toml`** defines eight `[[items]]` — each is a theme source + hook pair:
+**`config.toml`** defines six active `[[items]]` — each is a theme source + hook pair:
 
 | Item | Source Repository | Hook action |
 |------|-------------------|-------------|
@@ -46,9 +42,9 @@ The ecosystem provides pre-generated theme files in each application's native fo
 | `zellij` | `tinted-shell` | Source palette, generate Zellij theme |
 | `lsd` | `tinted-shell` | Source palette, generate lsd colors |
 | `yazi` | `tinted-shell` | Source palette, generate Yazi flavor |
-| `lazygit` | `tinted-shell` | Source palette, copy/generate lazygit theme |
+| `cosmic` | `tinted-shell` | Source palette, set COSMIC accent color (no-op if COSMIC is absent) |
 
-(Commented: `ghostty`, `tmux`)
+(Commented out: `lazygit`, `tmux`. Ghostty and WezTerm were removed from tinty; their stowed configs no longer receive theme updates.)
 
 When you run `tinty apply base16-nord`, tinty:
 1. Resolves `<repo>/<themes-dir>/<scheme>.*` for each item
@@ -62,27 +58,15 @@ hook = "cp -f %f ~/.config/alacritty/colors.toml && touch ~/.config/alacritty/al
 ```
 Tinty copies the pre-generated Base16 theme into `colors.toml`. Alacritty watches its config file for modifications via inotify, so `touch alacritty.toml` (which includes `colors.toml`) triggers an immediate live reload without restarting.
 
-#### Ghostty
-```toml
-hook = "mkdir -p ~/.config/ghostty/themes && cp -f $TINTY_THEME_FILE_PATH ~/.config/ghostty/themes/tinted-theming && killall -SIGUSR2 ghostty 2>/dev/null || true"
-```
-Copies the theme file to a fixed location. Your `ghostty/config` has `theme = tinted-theming`, so Ghostty always looks in that directory. The `SIGUSR2` signal tells all running Ghostty processes to reload their config live.
-
 #### Kitty
 ```toml
 hook = "cp -f %f ~/.config/kitty/tinted-theming.conf && [ -n \"$KITTY_PID\" ] && kill -USR1 \"$KITTY_PID\""
 ```
 Copies the theme to `tinted-theming.conf`, which `kitty.conf` includes via `include ./tinted-theming.conf`. Sends `USR1` to the Kitty process ID in `$KITTY_PID` to reload the config live.
 
-#### Tmux
-```toml
-hook = "tmux run 2>/dev/null && tmux source-file %f"
-```
-Directly sources the theme file into the running tmux server via `source-file`. No intermediate file needed — tmux applies it to all active sessions immediately.
-
 #### Shell + App-Specific Themes
 
-Four separate items handle palette loading and app-specific theme generation. Each is self-contained:
+Four active items handle palette loading and app-specific theme generation. Each is self-contained:
 
 **`zellij`:**
 ```toml
@@ -102,11 +86,11 @@ hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh"
 ```
 Sources the palette, then reads 13 slots and generates `~/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml`.
 
-**`lazygit`:**
+**`cosmic`:**
 ```toml
-hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh %f"
+hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/cosmic-color.sh"
 ```
-Sources the palette, then derives a lazygit path and copies/generates `~/.config/lazygit/theme.yml`, falling back to base16 for base24 themes.
+Sources the palette, then converts `base0D` into the COSMIC desktop accent color. Exits without changes when `~/.config/cosmic` does not exist.
 
 ### Static Configuration References
 
@@ -115,7 +99,6 @@ Each app's stowed config contains a single fixed reference to its tinty-managed 
 | App | Config reference |
 |-----|---|
 | **Kitty** | `kitty/config` → `include ./tinted-theming.conf` |
-| **Ghostty** | `ghostty/config` → `theme = tinted-theming` |
 | **Zellij** | `zellij/config.kdl` → `theme "tinted-theming"` |
 
 ### Runtime-Generated Files (All Gitignored)
@@ -124,9 +107,7 @@ These files are created on every `tinty apply` and change with every theme switc
 
 ```
 alacritty/.config/alacritty/colors.toml
-ghostty/.config/ghostty/themes/tinted-theming
 kitty/.config/kitty/tinted-theming.conf
-lazygit/.config/lazygit/theme.yml
 lsd/.config/lsd/colors.yaml
 zellij/.config/zellij/themes/tinted-theming.kdl
 yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
@@ -169,13 +150,13 @@ yazi:
   │  └─ Generates ~/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
   └─ ✓ Updates
 
-lazygit:
+cosmic:
   ├─ . <repo>/scripts/base16-nord.sh
-  ├─ bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh
-  │  └─ Generates ~/.config/lazygit/theme.yml
+  ├─ bash ~/.config/tinted-theming/tinty/hooks/cosmic-color.sh
+  │  └─ Sets the COSMIC accent color (skipped if COSMIC is absent)
   └─ ✓ Updates
 
-Total time: < 200ms. All 6 active applications themed without any restarts.
+Total time: < 200ms. All 6 active items applied without any restarts.
 ```
 
 ---
@@ -198,4 +179,4 @@ brew tap tinted-theming/tinted
 brew install tinty
 ```
 
-On first run, initialize with `tinty-setup` (or just `theme`, which will prompt if not initialized).
+On first run, initialize with `sync-tinty` (`theme` reports when the tinty data directory is missing).

@@ -76,7 +76,7 @@ brew-diff() {
 # Brew sync - update and install from Brewfile
 sync-brew() {
   brew upgrade --yes 
-  #brew bundle install --file="${HOME}/Brewfile"
+  brew bundle install --file="${HOME}/Brewfile"
   brew cleanup --prune=all
 }
 
