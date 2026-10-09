@@ -179,7 +179,9 @@ git-goto-repo() {
 alias gall='forall-git-repos'
 alias gb='git blame -w -C -C -C'
 alias gg='lazygit'
-alias gs='git status'
+alias gs='git status --short'
+alias gstash = 'git stash push --keep-index --include-untracked'
+alias gpop = 'git statsh pop'
 alias gph='git push'
 alias gpl='git pull'
 
