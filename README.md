@@ -22,7 +22,7 @@ Stow symlinks files from this repo into `$HOME`, so the repo is version controll
 * A package is linked only if its command is installed. Otherwise `sync-dots` unlinks it.
 * Folder contents mirror `$HOME`: `rg/.config/ripgrep/ripgreprc` links to `~/.config/ripgrep/ripgreprc`.
 * Packages can share a target folder. Aliases and functions from many packages land in `~/.config/zsh/user-modules/`.
-* Folders named after a host (e.g. `Midnight`, `WKMZTAFD6544`) hold per-machine overrides such as the `Brewfile`. They are linked when the name matches `hostname -s`, case-insensitive.
+* Folders named after a host (e.g. `Midnight`, `WKMZTAFD6544`) hold per-machine overrides such as the `Brewfile`. They are linked when the name matches the machine's short hostname (`scutil --get LocalHostName` on macOS, otherwise zsh's `$HOST` up to the first dot), case-insensitive. `sync-dots` warns when no host folder matches. On Linux, give each machine a unique name with `hostnamectl set-hostname <name>`.
 
 ## Notes
 

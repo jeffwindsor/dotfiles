@@ -10,9 +10,16 @@ sync-dots() {
 
     local source="${1:-$DOTFILES}"
     local target="$HOME"
-    local machine_name="${HOSTNAME:-$(hostname -s)}"
+    local machine_name
+    if (( $+commands[scutil] )); then
+      # macOS: LocalHostName is stable across networks, unlike hostname
+      machine_name="$(scutil --get LocalHostName)"
+    else
+      machine_name="${HOST%%.*}"
+    fi
     local dir dirs=("$source"/*/)
     local installed=()
+    local machine_matched=0
     # local machine=()
     # local removed=()
 
@@ -37,7 +44,7 @@ sync-dots() {
       elif  [[ "$package" == "${machine_name:l}" ]]; then
         # machine name matches: add/replace
         stow -S --dir "$source" --target "$target" "$dir_name"
-        # machine+=("$package")
+        machine_matched=1
 
       else
         # otherwise: remove
@@ -49,6 +56,7 @@ sync-dots() {
 
     print_success "Installed:"
     print -c -- "${installed[@]}"
+    (( machine_matched )) || print_muted "No host folder matches '$machine_name' (no per-machine overrides linked)"
     # print_info    "Machine:   ${machine[*]}"
     # print_muted   "Removed:   ${removed[*]}"
 }
