@@ -1,5 +1,3 @@
-# nushell - dont save the current history file
-nu/.config/nushell/history.txt
 .serena
 
 **/.DS_Store
@@ -27,6 +25,15 @@ docker/.docker/config.json
 /zed/.config/zed/prompts/
 /brew/.config/homebrew/trust.json
 /brew/.config/homebrew/trust.json.lock
-/yazi/.config/yazi/flavors/tinted-scheme.yazi/flavor.toml
 /.claude
 /docs/superpowers
+
+# pi - credentials written on login
+pi/.pi/agent/auth.json
+
+# lazygit - runtime state written when launched with --path
+/state.yml
+/config.yml
+
+# disabled/parked configs
+*.off
