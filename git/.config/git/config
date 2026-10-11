@@ -4,18 +4,8 @@
 [core]
   excludesFile = ~/.config/git/ignore
 
-; [credential]
-	; helper = osxkeychain
-
-[delta]
-  navigate = true    # use n and N to move between diff sections
-  ; side-by-side = true
-
 [diff]
   colorMoved = default
-
-[gpg]
-  format = ssh
 
 [include]
   path = ~/.gitconfig.local
@@ -38,9 +28,6 @@
 
 [rerere]
   enabled = true
-
-; [url "git@github.com:"]
-	; insteadOf = https://github.com/
 
 [safe]
 	directory = /workspace
