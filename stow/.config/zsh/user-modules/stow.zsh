@@ -60,7 +60,7 @@ manual-sync-dots() {
   [[ -d "$source" ]] || { echo "Error: Source dir '$source' not found"; return 1; }
 
   stow -S --dir "$source" --target "$target" "$@"
-  print_info "$arg -> synced"
+  print_info "$* -> synced"
 }
 
 alias d='cdl $DOTFILES'
