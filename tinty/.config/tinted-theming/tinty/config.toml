@@ -3,51 +3,46 @@
 # -- Terminals
 [[items]]
 path = "https://github.com/tinted-theming/tinted-terminal"
-name = "alacritty"
-themes-dir = "themes/alacritty"
-hook = "cp -f %f ~/.config/alacritty/colors.toml && touch ~/.config/alacritty/alacritty.toml"
-supported-systems = ["base16", "base24"]
-
-[[items]]
-path = "https://github.com/tinted-theming/tinted-terminal"
 name = "kitty"
 themes-dir = "themes/kitty"
-hook = "cp -f %f ~/.config/kitty/tinted-theming.conf && [ -n \"$KITTY_PID\" ] && kill -USR1 \"$KITTY_PID\""
+hook = "cp -f %f ~/.config/kitty/tinted-theming.conf && { [ -z \"$KITTY_PID\" ] || kill -USR1 \"$KITTY_PID\"; }"
 supported-systems = ["base16", "base24"]
 
+# -- Shell commands (sources the tinted-shell script to recolor the terminal, then generates lsd and yazi themes)
 [[items]]
 path = "https://github.com/tinted-theming/tinted-shell"
-name = "zellij"
+name = "shell"
 themes-dir = "scripts"
-hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/zellij-theme.sh"
+hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/lsd-colors.sh && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh"
 
-# -- Shell commands
-[[items]]
-path = "https://github.com/tinted-theming/tinted-shell"
-name = "lsd"
-themes-dir = "scripts"
-hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/lsd-colors.sh"
-
-[[items]]
-path = "https://github.com/tinted-theming/tinted-shell"
-name = "yazi"
-themes-dir = "scripts"
-hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/yazi-flavor.sh"
-
-
-[[items]]
-path = "https://github.com/tinted-theming/tinted-shell"
-name = "cosmic"
-themes-dir = "scripts"
-hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/cosmic-color.sh"
 
 # -- not used
+
+# [[items]]
+# path = "https://github.com/tinted-theming/tinted-terminal"
+# name = "alacritty"
+# themes-dir = "themes/alacritty"
+# hook = "cp -f %f ~/.config/alacritty/colors.toml && touch ~/.config/alacritty/alacritty.toml"
+# supported-systems = ["base16", "base24"]
+
+# [[items]]
+# path = "https://github.com/tinted-theming/tinted-shell"
+# name = "zellij"
+# themes-dir = "scripts"
+# hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/zellij-theme.sh"
+
+# [[items]]
+# path = "https://github.com/tinted-theming/tinted-shell"
+# name = "cosmic"
+# themes-dir = "scripts"
+# hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/cosmic-color.sh"
 
 # [[items]]
 # path = "https://github.com/tinted-theming/tinted-shell"
 # name = "lazygit"
 # themes-dir = "scripts"
 # hook = ". %f && bash ~/.config/tinted-theming/tinty/hooks/lazygit-theme.sh %f"
+
 # [[items]]
 # path = "https://github.com/tinted-theming/tinted-tmux"
 # name = "tmux"

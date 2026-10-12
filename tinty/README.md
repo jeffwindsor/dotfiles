@@ -9,7 +9,7 @@ Shell functions in `.config/zsh/user-modules/tinty.zsh`:
 | Function | Purpose |
 |----------|---------|
 | `theme` | Switch themes interactively (television picker, favorites first); `theme <name>` applies directly |
-| `sync-tinty` | Run `tinty sync` to install missing templates and update existing ones; also run in parallel by `sync` |
+| `sync-tinty` | Run `tinty sync` to install missing templates and update existing ones; run it by hand, it is not part of `sync` |
 | `theme-list` | Print all favorited schemes |
 | `theme-favorite` / `theme-unfavorite` | Manage the favorites list |
 

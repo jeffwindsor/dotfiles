@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Writes ~/.config/lsd/colors.yaml using Base24 palette env vars.
+# Writes ~/.config/lsd/colors.yaml using Base16 palette env vars.
 # This file is NOT stowed — created fresh by tinty on each apply.
 
 set -euo pipefail

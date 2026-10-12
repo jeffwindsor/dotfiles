@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════
 
 sync-zinit() {
-  zinit update -a -n && rm -f "$ZCOMPDUMP"
+  zinit self-update && zinit update -a -n && rm -f "$ZCOMPDUMP"
 }
 alias pp='pwd | pbcopy'
 alias fm='clifm'
