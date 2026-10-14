@@ -1,13 +1,5 @@
 #!/usr/bin/env zsh
-# Core zsh aliases and functions
 
-# ═══════════════════════════════════════════════════
-# ALIASES
-# ═══════════════════════════════════════════════════
-
-sync-zinit() {
-  zinit self-update && zinit update -a -n && rm -f "$ZCOMPDUMP"
-}
 alias pp='pwd | pbcopy'
 alias fm='clifm'
 alias cat='bat --plain'
@@ -36,10 +28,6 @@ alias lab='cdl $SOURCE_GITCJ'
 alias empire='cdl $SOURCE_GITCJ/empire'
 alias jeff='cdl $SOURCE_JEFF'
 
-# ═══════════════════════════════════════════════════
-# FUNCTIONS
-# ═══════════════════════════════════════════════════
-
 # Change directory with clear and list
 cdl() {
   cd "$1"
@@ -55,7 +43,6 @@ zsh-load-time() {
 # ═══════════════════════════════════════════════════
 # PRINT FUNCTIONS
 # ═══════════════════════════════════════════════════
-
 # Internal colorize helper (private)
 _colorize() {
   local text="$1"
@@ -84,7 +71,6 @@ print_section() { echo; _colorize "$1" "cyan" }
 # ═══════════════════════════════════════════════════
 # DOTFILES
 # ═══════════════════════════════════════════════════
-
 dots-pull() {
   print_section "Pulling Dotfiles"
   git -C "$DOTFILES" pull
@@ -92,3 +78,23 @@ dots-pull() {
   # Reload app configs
   command -v aerospace &> /dev/null && aerospace reload-config 2>/dev/null
 }
+
+# ═══════════════════════════════════════════════════
+# ZINIT
+# ═══════════════════════════════════════════════════
+sync-zinit() {
+  # update zinit itself
+  zinit self-update
+  # Updates all installed plugins and snippets non-interactively.
+  zinit update -a -n 
+}
+
+doctor-zinit() {
+  # clear completion cache
+  zinit cclear
+  # rebuild compinit to capture anything new 
+  [[ -n "$ZCOMPDUMP" ]] && rm -f -- "$ZCOMPDUMP"
+  compinit
+}
+
+
