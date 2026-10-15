@@ -168,3 +168,8 @@ run = ['move-node-to-workspace n']
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
 run = ['move-node-to-workspace r']
+
+# Browser
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+run = ['move-node-to-workspace 2']
