@@ -1,4 +1,10 @@
 gui:
+  commitAuthorShortLength: 2   # Initials in normal view
+  commitAuthorLongLength: 2   # Name in expanded view, up to 20 characters
+  timeFormat: "01/02"
+  # shortTimeFormat: "15:04"
+  # commitHashLength: 0
+
   screenMode: 'full'
 
   authorColors:
