@@ -12,18 +12,14 @@ Effective macOS bindings for Kitty 0.49.2: Kitty defaults plus the overrides in 
 
 | Action | Shortcut | Source |
 | ------ | -------- | ------ |
-| New window (same cwd) | `cmd+enter` | override |
-| New window | `ctrl+shift+enter` | default |
+| New window (same cwd) | `ctrl+shift+enter` | override |
 | New OS window | `cmd+n`, `ctrl+shift+n` | default |
 | Close window | `cmd+shift+d`, `ctrl+shift+w` | default |
-| Focus neighbor left / right / up / down | `cmd+left` / `right` / `up` / `down` | override |
-| Focus next window | `ctrl+shift+]` | default |
-| Focus previous window | `ctrl+shift+[` | default |
+| Focus neighbor left / right / up / down | `ctrl+shift+left` / `right` / `up` / `down` | override |
 | Focus Nth window (1-9) | `cmd+1` ... `cmd+9`, `ctrl+shift+1` ... `ctrl+shift+9` | default |
 | Focus 10th window | `ctrl+shift+0` | default |
 | Focus window by hint | `ctrl+shift+f7` | default |
-| Move window left / right / up / down | `cmd+shift+left` / `right` / `up` / `down` | override |
-| Move window forward in order | `ctrl+shift+f` | default |
+| Move window left / right / up / down | `ctrl+shift+alt+left` / `right` / `up` / `down` | override |
 | Move window backward in order | `ctrl+shift+b` | default |
 | Move window to top (main slot) | ``ctrl+shift+` `` | default |
 | Swap with a window picked by hint | `ctrl+shift+f8` | default |
@@ -40,7 +36,7 @@ Enabled layouts (cycle order): `tall`, `horizontal`, `vertical`, `stack`.
 | Action | Shortcut | Source |
 | ------ | -------- | ------ |
 | Cycle to next layout | `ctrl+shift+l` | default |
-| Toggle full-size (`stack`) and back | `cmd+shift+f` | override |
+| Toggle full-size (`stack`) and back | `ctrl+shift+f` | override |
 
 Layout behavior:
 - `tall`: one main window on the left, the rest stacked on the right.
@@ -52,25 +48,25 @@ Layout behavior:
 
 | Action | Shortcut | Source |
 | ------ | -------- | ------ |
-| New tab (blank title) | `cmd+t` | override |
-| New tab | `ctrl+shift+t` | default |
+| New tab (blank title) | `ctrl+shift+t` | override |
+| New tab | `cmd+t` | default |
 | Close tab | `cmd+w`, `ctrl+shift+q` | default |
 | Close OS window | `cmd+shift+w` | default |
-| Next tab | `cmd+]` | override |
-| Next tab | `shift+cmd+]`, `ctrl+tab`, `ctrl+shift+right` | default |
-| Previous tab | `cmd+[` | override |
-| Previous tab | `shift+cmd+[`, `ctrl+shift+tab`, `ctrl+shift+left` | default |
+| Next tab | `ctrl+shift+]` | override |
+| Next tab | `shift+cmd+]`, `ctrl+tab` | default |
+| Previous tab | `ctrl+shift+[` | override |
+| Previous tab | `shift+cmd+[`, `ctrl+shift+tab` | default |
 | Move tab forward | `ctrl+shift+.` | default |
 | Move tab backward | `ctrl+shift+,` | default |
-| Rename tab (clears the current name first) | `cmd+shift+i` | override |
-| Rename tab (prompt) | `ctrl+shift+alt+t` | default |
+| Rename tab (clears the current name first) | `ctrl+shift+i` | override |
+| Rename tab (prompt) | `shift+cmd+i`, `ctrl+shift+alt+t` | default |
 
 ## Scrolling and search
 
 | Action | Shortcut | Source |
 | ------ | -------- | ------ |
-| Scroll line up | `ctrl+shift+up`, `ctrl+shift+k`, `opt+cmd+page_up` | default |
-| Scroll line down | `ctrl+shift+down`, `ctrl+shift+j`, `opt+cmd+page_down` | default |
+| Scroll line up | `ctrl+shift+k`, `cmd+up`, `opt+cmd+page_up` | default |
+| Scroll line down | `ctrl+shift+j`, `cmd+down`, `opt+cmd+page_down` | default |
 | Scroll page up | `ctrl+shift+page_up`, `cmd+page_up` | default |
 | Scroll page down | `ctrl+shift+page_down`, `cmd+page_down` | default |
 | Scroll to top | `ctrl+shift+home`, `cmd+home` | default |
@@ -81,7 +77,7 @@ Layout behavior:
 | Browse last command output | `ctrl+shift+g` | default |
 | Search scrollback | `cmd+f`, `ctrl+shift+/` | default |
 
-`cmd+up` and `cmd+down` are Kitty's default line-scroll keys. The window-focus overrides replace them, so use `opt+cmd+page_up` and `opt+cmd+page_down` to scroll by line.
+`ctrl+shift+up` and `ctrl+shift+down` are Kitty's default line-scroll keys. The window-focus overrides replace them, so use `ctrl+shift+k` and `ctrl+shift+j` (or the `cmd+` keys) to scroll by line.
 
 ## Clipboard
 
@@ -150,7 +146,6 @@ Layout behavior:
 | Open Kitty shell | `ctrl+shift+escape` | default |
 | Input unicode character | `ctrl+cmd+space`, `ctrl+shift+u` | default |
 | Open Kitty website | `shift+cmd+/` | default |
-| Send "Hello World" (demo binding) | `ctrl+shift+alt+h` | default |
 
 ## macOS application
 
