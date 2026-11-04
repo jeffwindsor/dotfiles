@@ -5,6 +5,8 @@ gui:
   # shortTimeFormat: "15:04"
   # commitHashLength: 0
 
+  spinner:
+    rate: 5000   
   screenMode: 'full'
 
   authorColors:
@@ -41,6 +43,9 @@ gui:
       - '#f38ba8'
     defaultFgColor:
       - '#cdd6f4'
+
+refresher:
+  fetchInterval: 180   
 
 keybinding:
   universal:
