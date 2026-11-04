@@ -34,6 +34,8 @@ sqlcl() {
     return 1
   fi
 
+  echo "$connection_string"
+
   "$HOME/.local/bin/sqlcl/bin/sql" -S "$connection_string"
 }
 
