@@ -1,22 +1,13 @@
 gui:
-  commitAuthorShortLength: 2   # Initials in normal view
-  commitAuthorLongLength: 2   # Name in expanded view, up to 20 characters
+  commitAuthorShortLength: 2 # Initials in normal view
+  commitAuthorLongLength: 2 # Name in expanded view, up to 20 characters
   timeFormat: "01/02"
   # shortTimeFormat: "15:04"
   # commitHashLength: 0
 
   spinner:
-    rate: 5000   
+    rate: 5000
   screenMode: 'full'
-
-  authorColors:
-    '*': '#707070'
-    'Jeff Windsor': '#b4befe'
-    'Windsor, Jeff': "#89b4fa"
-
-  branchColorPatterns:
-    'CJPM-\d+': '#FFBF00'
-
   theme:
     activeBorderColor:
       - '#f5e0dc'
@@ -43,24 +34,25 @@ gui:
       - '#f38ba8'
     defaultFgColor:
       - '#cdd6f4'
-
+    authorColors:
+      '*': '#707070'
+      'Jeff Windsor': '#b4befe'
+      'Windsor, Jeff': "#89b4fa"
+    branchColorPatterns:
+      'CJPM-\d+': '#FFBF00'
 refresher:
-  fetchInterval: 180   
-
+  fetchInterval: 180
 keybinding:
   universal:
     optionMenu: '~'
     optionMenu-alt1: '?'
     # quit-alt1: <esc>
     commitChanges: 'C'
-
 update:
   method: never
-
 os:
   editPreset: 'nvim'
   open: "nvim {{filename}}"
-
 customCommands:
   - key: '<c-e>'
     context: 'commits'
