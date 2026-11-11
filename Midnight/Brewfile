@@ -26,5 +26,6 @@ cask "balenaetcher"
 # personal
 cask "bambu-studio"
 cask "iina"
+cask "purge"
 cask "spotify"
 cask "transmission"
